@@ -10,14 +10,11 @@ export const transporter = nodemailer.createTransport({
     pass: env.smtpPassword
   },
   tls: {
-    rejectUnauthorized: true,
-    minVersion: 'TLSv1.2'
+    rejectUnauthorized: false
   },
-  pool: true,
-  maxConnections: 5,
-  maxMessages: 100,
-  rateDelta: 1000,
-  rateLimit: 5
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 });
 
 transporter.verify((error, success) => {
