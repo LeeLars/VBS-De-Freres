@@ -66,7 +66,7 @@ export const sendContactEmail = async ({ name, email, phone, message }) => {
       from: 'VBS De Frères <noreply@grafixstudio.io>',
       to: [env.contactEmail],
       replyTo: email,
-      subject: `Nieuw contactbericht van ${name}`,
+      subject: 'Nieuwe formulier aanmelding VBS De Frères',
       html: htmlContent
     });
 
