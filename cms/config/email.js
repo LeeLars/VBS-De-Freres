@@ -63,7 +63,7 @@ export const sendContactEmail = async ({ name, email, phone, message }) => {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'VBS De Frères <onboarding@resend.dev>',
+      from: 'VBS De Frères <noreply@grafixstudio.io>',
       to: [env.contactEmail],
       replyTo: email,
       subject: `Nieuw contactbericht van ${name}`,
