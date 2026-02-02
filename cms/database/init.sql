@@ -39,6 +39,20 @@ CREATE TABLE IF NOT EXISTS contact_messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Media Library Table
+CREATE TABLE IF NOT EXISTS media (
+    id SERIAL PRIMARY KEY,
+    filename VARCHAR(255) NOT NULL,
+    url TEXT NOT NULL,
+    public_id VARCHAR(255),
+    width INTEGER,
+    height INTEGER,
+    format VARCHAR(50),
+    size_bytes INTEGER,
+    alt_text VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Team Members Table
 CREATE TABLE IF NOT EXISTS team_members (
     id SERIAL PRIMARY KEY,
