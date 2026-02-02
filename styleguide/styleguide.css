@@ -1,5 +1,20 @@
 /* Styleguide Specific Styles */
 
+.internal-notice {
+    background: #ff6b6b;
+    color: #fff;
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.internal-notice p {
+    margin: 0;
+}
+
 .styleguide-container {
     max-width: 1200px;
     margin: 0 auto;

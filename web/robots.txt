@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Styleguide is not in web folder, so not accessible via GitHub Pages

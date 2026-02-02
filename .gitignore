@@ -1,5 +1,8 @@
-node_modules
+node_modules/
 .env
 .DS_Store
+*.log
+
+# Styleguide is tracked but not deployed to GitHub Pages (outside web/ folder)
 /cms/node_modules
 /cms/.env
