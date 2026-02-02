@@ -17,18 +17,32 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Bezig met verzenden...';
             
-            // Collect form data
-            const formData = {
-                parentFirstName: document.getElementById('parentFirstName').value,
-                parentLastName: document.getElementById('parentLastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                childFirstName: document.getElementById('childFirstName').value,
-                childLastName: document.getElementById('childLastName').value,
-                childBirthdate: document.getElementById('childBirthdate').value,
-                startYear: document.getElementById('startYear').value,
-                message: document.getElementById('message').value
-            };
+            // Collect form data using FormData
+            const formDataObj = new FormData(enrollmentForm);
+            const formData = Object.fromEntries(formDataObj.entries());
+            
+            // Split names if possible to populate LastName fields (backend requires them)
+            // The form has 'parentFirstName' as the main input for "Naam Ouder"
+            if (formData.parentFirstName) {
+                const nameParts = formData.parentFirstName.trim().split(' ');
+                if (nameParts.length > 1) {
+                    formData.parentFirstName = nameParts.shift(); // First part
+                    formData.parentLastName = nameParts.join(' '); // Rest
+                } else {
+                    formData.parentLastName = '.'; // Fallback to satisfy validation
+                }
+            }
+
+            // Same for child name
+            if (formData.childFirstName) {
+                const nameParts = formData.childFirstName.trim().split(' ');
+                if (nameParts.length > 1) {
+                    formData.childFirstName = nameParts.shift();
+                    formData.childLastName = nameParts.join(' ');
+                } else {
+                    formData.childLastName = '.'; // Fallback
+                }
+            }
             
             try {
                 const apiUrl = window.API_BASE_URL || '';
