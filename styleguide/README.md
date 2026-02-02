@@ -1,6 +1,6 @@
 # VBS De Frères Styleguide
 
-**⚠️ INTERNAL ONLY - NOT FOR PUBLIC ACCESS**
+**INTERNAL ONLY - NOT FOR PUBLIC ACCESS**
 
 Deze styleguide is alleen bedoeld voor intern gebruik door het ontwikkel- en designteam.
 

@@ -4,9 +4,9 @@ import { env } from './env.js';
 const resend = env.resendApiKey ? new Resend(env.resendApiKey) : null;
 
 if (resend) {
-  console.log('✅ Resend email service initialized');
+  console.log('Resend email service initialized');
 } else {
-  console.warn('⚠️ RESEND_API_KEY not set - email sending disabled');
+  console.warn('RESEND_API_KEY not set - email sending disabled');
 }
 
 const escapeHtml = (text) => {
@@ -75,10 +75,10 @@ export const sendContactEmail = async ({ name, email, phone, message }) => {
       throw new Error(error.message);
     }
 
-    console.log('✅ Email sent successfully:', data.id);
+    console.log('Email sent successfully:', data.id);
     return { messageId: data.id };
   } catch (error) {
-    console.error('❌ Failed to send email:', error);
+    console.error('Failed to send email:', error);
     throw error;
   }
 };

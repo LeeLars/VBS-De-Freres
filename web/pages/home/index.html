@@ -3,17 +3,142 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home – VBS De Frères</title>
+    <title>VBS De Frères - Vrije Basisschool</title>
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
     <main>
-        <section class="hero">
-            <h1>Welkom bij VBS De Frères</h1>
-            <p>Vervang deze starterinhoud door het design van de klant.</p>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 data-cms="home-hero-title">Welkom bij VBS De Frères</h1>
+                <p data-cms="home-hero-text">Een warme school waar elk kind centraal staat. Wij bieden kwaliteitsonderwijs in een veilige en stimulerende omgeving.</p>
+                <a href="#aanmelden" class="hero-cta">Meld uw kind aan</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <h2 class="section-title" data-cms="home-features-title">Waarom kiezen voor VBS De Frères?</h2>
+            <p class="section-subtitle" data-cms="home-features-subtitle">Ontdek wat onze school uniek maakt</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 data-cms="home-feature1-title">Persoonlijke aandacht</h3>
+                    <p data-cms="home-feature1-text">Elk kind is uniek. Onze leerkrachten kennen elk kind bij naam en zorgen voor een persoonlijke aanpak die past bij de noden van uw kind.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 data-cms="home-feature2-title">Kwaliteitsonderwijs</h3>
+                    <p data-cms="home-feature2-text">Wij streven naar excellentie in onderwijs met moderne leermethodes en een team van gedreven, gekwalificeerde leerkrachten.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 data-cms="home-feature3-title">Warme schoolgemeenschap</h3>
+                    <p data-cms="home-feature3-text">Bij ons voelt iedereen zich thuis. Ouders, kinderen en leerkrachten vormen samen een hechte gemeenschap.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section-dark">
+            <div class="section-inner">
+                <h2 class="section-title">Onze school in cijfers</h2>
+                <p class="section-subtitle">Al jaren een vertrouwde keuze voor ouders</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 data-cms="home-stat1-number">250+</h3>
+                        <p data-cms="home-stat1-label">Leerlingen</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 data-cms="home-stat2-number">25</h3>
+                        <p data-cms="home-stat2-label">Leerkrachten</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 data-cms="home-stat3-number">50+</h3>
+                        <p data-cms="home-stat3-label">Jaren ervaring</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 data-cms="home-stat4-number">98%</h3>
+                        <p data-cms="home-stat4-label">Tevredenheid</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enrollment Form Section -->
+        <section class="enrollment-section" id="aanmelden">
+            <div class="enrollment-inner">
+                <h2>Schrijf uw kind in</h2>
+                <p class="form-intro">Vul onderstaand formulier in en wij nemen zo snel mogelijk contact met u op om een afspraak te maken.</p>
+                
+                <form id="enrollmentForm" class="enrollment-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parentFirstName">Voornaam ouder/voogd *</label>
+                            <input type="text" id="parentFirstName" name="parentFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="parentLastName">Achternaam ouder/voogd *</label>
+                            <input type="text" id="parentLastName" name="parentLastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-mailadres *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefoonnummer *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="childFirstName">Voornaam kind *</label>
+                            <input type="text" id="childFirstName" name="childFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="childLastName">Achternaam kind *</label>
+                            <input type="text" id="childLastName" name="childLastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="childBirthdate">Geboortedatum kind *</label>
+                            <input type="date" id="childBirthdate" name="childBirthdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="startYear">Gewenst startjaar *</label>
+                            <select id="startYear" name="startYear" required>
+                                <option value="">Selecteer...</option>
+                                <option value="2025-2026">Schooljaar 2025-2026</option>
+                                <option value="2026-2027">Schooljaar 2026-2027</option>
+                                <option value="2027-2028">Schooljaar 2027-2028</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="message">Bijkomende informatie of vragen</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Heeft u nog vragen of wilt u iets meegeven?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Verstuur aanmelding</button>
+                    
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
         </section>
     </main>
 
+    <script>
+        window.API_BASE_URL = 'https://vbs-de-freres-production.up.railway.app';
+    </script>
     <script src="../../assets/js/components/header.js"></script>
     <script src="../../assets/js/components/footer.js"></script>
     <script src="../../assets/js/main.js"></script>
