@@ -1,0 +1,39 @@
+// Footer component - automatically adds footer to all pages
+document.addEventListener('DOMContentLoaded', () => {
+    const footer = document.createElement('footer');
+    footer.className = 'site-footer';
+    footer.innerHTML = `
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>VBS De Frères</h3>
+                <p>Vrije Basisschool De Frères<br>
+                Kwaliteitsonderwijs in een warme omgeving</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>
+                    Email: info@vbsdefreres.be<br>
+                    Telefoon: 050 XX XX XX<br>
+                    Adres: Straatnaam 123, 8000 Brugge
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Snelle Links</h3>
+                <p>
+                    <a href="../home/">Home</a><br>
+                    <a href="../visie/">Visie</a><br>
+                    <a href="../contact/">Contact</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; ${new Date().getFullYear()} VBS De Frères. Alle rechten voorbehouden.</p>
+            <a href="https://vbs-de-freres-production.up.railway.app/cms" class="cms-link" target="_blank">CMS Login</a>
+        </div>
+    `;
+    
+    document.body.appendChild(footer);
+});
