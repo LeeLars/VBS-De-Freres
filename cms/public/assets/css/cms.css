@@ -1,0 +1,487 @@
+/* VBS De Frères CMS Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'ABeeZee', system-ui, sans-serif;
+    background: #f5f5f5;
+    color: #000;
+}
+
+.cms-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.cms-sidebar {
+    width: 260px;
+    background: #000;
+    color: #fffffb;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.cms-logo {
+    padding: 24px 20px;
+    border-bottom: 1px solid #333;
+}
+
+.cms-logo h2 {
+    color: #a8cf8c;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.cms-logo p {
+    font-size: 12px;
+    color: #999;
+}
+
+.cms-nav {
+    flex: 1;
+    padding: 16px 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #fffffb;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    background: #1a1a1a;
+    border-left-color: #a8cf8c;
+}
+
+.nav-item.active {
+    background: #1a1a1a;
+    border-left-color: #a8cf8c;
+    color: #a8cf8c;
+}
+
+.nav-item .icon {
+    font-size: 20px;
+}
+
+.cms-user {
+    padding: 20px;
+    border-top: 1px solid #333;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #a8cf8c;
+}
+
+.btn-logout-small {
+    background: transparent;
+    border: 1px solid #a8cf8c;
+    color: #a8cf8c;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-logout-small:hover {
+    background: #a8cf8c;
+    color: #000;
+}
+
+/* Main Content */
+.cms-main {
+    margin-left: 260px;
+    flex: 1;
+    padding: 32px;
+    max-width: calc(100% - 260px);
+}
+
+.cms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.cms-header h1 {
+    font-size: 32px;
+    color: #000;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #a8cf8c;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #96bb7a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 207, 140, 0.4);
+}
+
+.btn-edit {
+    background: #a8cf8c;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+    background: #96bb7a;
+}
+
+.btn-view {
+    background: transparent;
+    color: #a8cf8c;
+    border: 1px solid #a8cf8c;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-view:hover {
+    background: #a8cf8c;
+    color: #000;
+}
+
+.btn-delete {
+    background: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: #ff5252;
+}
+
+.btn-small {
+    background: #e0e0e0;
+    color: #000;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-delete-small {
+    background: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Sections */
+.cms-section {
+    display: none;
+}
+
+.cms-section.active {
+    display: block;
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.content-card {
+    background: #fffffb;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.content-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.content-card p {
+    color: #666;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Team Grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.team-card {
+    background: #fffffb;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.team-image-placeholder {
+    width: 120px;
+    height: 120px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 48px;
+}
+
+.team-card h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: #000;
+}
+
+.team-role {
+    color: #a8cf8c;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.team-contact {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* Media Section */
+.media-upload-area {
+    margin-bottom: 32px;
+}
+
+.upload-box {
+    background: #fffffb;
+    border: 2px dashed #a8cf8c;
+    border-radius: 12px;
+    padding: 48px;
+    text-align: center;
+}
+
+.upload-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.upload-box h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.upload-box p {
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.media-item {
+    background: #fffffb;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.media-thumbnail {
+    width: 100%;
+    height: 120px;
+    background: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 32px;
+}
+
+.media-name {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.media-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+/* Messages */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.message-card {
+    background: #fffffb;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.message-header h3 {
+    font-size: 18px;
+    color: #000;
+}
+
+.message-date {
+    font-size: 13px;
+    color: #999;
+}
+
+.message-body {
+    margin-bottom: 16px;
+}
+
+.message-body p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.message-body strong {
+    color: #000;
+}
+
+.message-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Settings Form */
+.settings-form {
+    background: #fffffb;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.settings-form h2 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #a8cf8c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cms-sidebar {
+        width: 200px;
+    }
+    
+    .cms-main {
+        margin-left: 200px;
+        padding: 16px;
+    }
+    
+    .content-grid,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VBS De Frères CMS – Dashboard</title>
+    <link rel="stylesheet" href="/cms/assets/css/cms.css" />
+</head>
+<body>
+    <div class="cms-container">
+        <!-- Sidebar Navigation -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>VBS De Frères</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav class="cms-nav">
+                <a href="#paginas" class="nav-item active" data-section="paginas">
+                    <span class="icon">📄</span>
+                    <span>Pagina's</span>
+                </a>
+                <a href="#team" class="nav-item" data-section="team">
+                    <span class="icon">👥</span>
+                    <span>Team</span>
+                </a>
+                <a href="#media" class="nav-item" data-section="media">
+                    <span class="icon">🖼️</span>
+                    <span>Media</span>
+                </a>
+                <a href="#berichten" class="nav-item" data-section="berichten">
+                    <span class="icon">📧</span>
+                    <span>Berichten</span>
+                </a>
+                <a href="#instellingen" class="nav-item" data-section="instellingen">
+                    <span class="icon">⚙️</span>
+                    <span>Instellingen</span>
+                </a>
+            </nav>
+            
+            <div class="cms-user">
+                <div class="user-info">
+                    <span class="user-name">admin</span>
+                    <button onclick="handleLogout()" class="btn-logout-small">Uitloggen</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1 id="sectionTitle">Pagina's Beheren</h1>
+                <button class="btn-primary" id="addNewBtn">+ Nieuw Item</button>
+            </div>
+
+            <!-- Paginas Section -->
+            <section id="paginas-section" class="cms-section active">
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Home</h3>
+                        <p>Hoofdpagina van de website</p>
+                        <div class="card-actions">
+                            <button class="btn-edit">Bewerken</button>
+                            <button class="btn-view">Bekijken</button>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Visie</h3>
+                        <p>Onze visie en missie</p>
+                        <div class="card-actions">
+                            <button class="btn-edit">Bewerken</button>
+                            <button class="btn-view">Bekijken</button>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Klassen</h3>
+                        <p>Overzicht van alle klassen</p>
+                        <div class="card-actions">
+                            <button class="btn-edit">Bewerken</button>
+                            <button class="btn-view">Bekijken</button>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Team</h3>
+                        <p>Ons onderwijsteam</p>
+                        <div class="card-actions">
+                            <button class="btn-edit">Bewerken</button>
+                            <button class="btn-view">Bekijken</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section id="team-section" class="cms-section">
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image-placeholder">
+                            <span>📷</span>
+                        </div>
+                        <h3>Teamlid Naam</h3>
+                        <p class="team-role">Functie</p>
+                        <p class="team-contact">📧 email@vbsdefreres.be</p>
+                        <div class="card-actions">
+                            <button class="btn-edit">Bewerken</button>
+                            <button class="btn-delete">Verwijderen</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Section -->
+            <section id="media-section" class="cms-section">
+                <div class="media-upload-area">
+                    <div class="upload-box">
+                        <span class="upload-icon">📤</span>
+                        <h3>Upload Afbeeldingen</h3>
+                        <p>Sleep bestanden hierheen of klik om te uploaden</p>
+                        <input type="file" id="mediaUpload" accept="image/*" multiple hidden>
+                        <button onclick="document.getElementById('mediaUpload').click()" class="btn-primary">
+                            Selecteer Bestanden
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="media-grid">
+                    <div class="media-item">
+                        <div class="media-thumbnail">
+                            <span>🖼️</span>
+                        </div>
+                        <p class="media-name">voorbeeld.jpg</p>
+                        <div class="media-actions">
+                            <button class="btn-small">Kopieer URL</button>
+                            <button class="btn-delete-small">×</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Berichten Section -->
+            <section id="berichten-section" class="cms-section">
+                <div class="messages-list">
+                    <div class="message-card">
+                        <div class="message-header">
+                            <h3>Contact Bericht</h3>
+                            <span class="message-date">2 feb 2026</span>
+                        </div>
+                        <div class="message-body">
+                            <p><strong>Van:</strong> Naam Persoon</p>
+                            <p><strong>Email:</strong> email@example.com</p>
+                            <p><strong>Telefoon:</strong> 0470 XX XX XX</p>
+                            <p><strong>Bericht:</strong></p>
+                            <p>Dit is een voorbeeld contactbericht...</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="btn-primary">Beantwoorden</button>
+                            <button class="btn-delete">Verwijderen</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instellingen Section -->
+            <section id="instellingen-section" class="cms-section">
+                <div class="settings-form">
+                    <h2>Website Instellingen</h2>
+                    
+                    <div class="form-group">
+                        <label>Website Naam</label>
+                        <input type="text" value="VBS De Frères" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Contact Email</label>
+                        <input type="email" value="info@vbsdefreres.be" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Telefoon</label>
+                        <input type="tel" value="050 XX XX XX" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Adres</label>
+                        <textarea class="form-input" rows="3">Straatnaam 123, 8000 Brugge</textarea>
+                    </div>
+                    
+                    <button class="btn-primary">Opslaan</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/cms/assets/js/cms.js"></script>
+</body>
+</html>
