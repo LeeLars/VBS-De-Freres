@@ -21,7 +21,8 @@ contactForm.addEventListener('submit', async (e) => {
   formMessage.className = 'form-message';
   
   try {
-    const response = await fetch('/api/contact', {
+    const apiUrl = window.API_BASE_URL ? `${window.API_BASE_URL}/api/contact` : '/api/contact';
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
