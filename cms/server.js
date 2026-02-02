@@ -6,11 +6,33 @@ import { env } from './config/env.js';
 import { requestLogger } from './middleware/logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import apiRoutes from './routes/api/index.js';
+import pool from './config/database.js';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+// Initialize database on startup
+async function initDatabase() {
+  if (!env.databaseUrl) {
+    console.log('DATABASE_URL not set, skipping database initialization');
+    return;
+  }
+  
+  try {
+    console.log('Initializing database...');
+    const sqlPath = path.join(__dirname, 'database', 'init.sql');
+    const sql = fs.readFileSync(sqlPath, 'utf8');
+    await pool.query(sql);
+    console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Database initialization error:', error.message);
+  }
+}
+
+initDatabase();
 
 // CORS configuratie - sta alle origins toe voor development
 app.use((req, res, next) => {
