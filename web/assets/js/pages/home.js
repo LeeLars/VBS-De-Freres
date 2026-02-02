@@ -32,17 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formData.parentLastName = '.'; // Fallback to satisfy validation
                 }
             }
-
-            // Same for child name
-            if (formData.childFirstName) {
-                const nameParts = formData.childFirstName.trim().split(' ');
-                if (nameParts.length > 1) {
-                    formData.childFirstName = nameParts.shift();
-                    formData.childLastName = nameParts.join(' ');
-                } else {
-                    formData.childLastName = '.'; // Fallback
-                }
-            }
             
             try {
                 const apiUrl = window.API_BASE_URL || '';

@@ -15,9 +15,9 @@
                     <h1 data-cms="home-hero-title">Basisschool De Frères Brugge</h1>
                     <p class="hero-lead" data-cms="home-hero-text">Een warme school waar elk kind centraal staat. Wij bieden kwaliteitsonderwijs in een veilige en stimulerende omgeving. Wees welkom!</p>
                     <div class="hero-trust-badges">
-                        <span class="trust-badge">❤️ Kindvriendelijk</span>
-                        <span class="trust-badge">🏫 Kwaliteitsonderwijs</span>
-                        <span class="trust-badge">🤗 Open sfeer</span>
+                        <span class="trust-badge">Kindvriendelijk</span>
+                        <span class="trust-badge">Kwaliteitsonderwijs</span>
+                        <span class="trust-badge">Open sfeer</span>
                     </div>
                 </div>
                 
@@ -43,32 +43,12 @@
                                 </div>
                             </div>
 
-                            <div class="form-divider">
-                                <span>Gegevens Kind</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="childName">Naam Kind *</label>
-                                <input type="text" id="childName" name="childFirstName" placeholder="Naam van uw kind" required>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="childBirthdate">Geboortedatum *</label>
-                                    <input type="date" id="childBirthdate" name="childBirthdate" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="startYear">Startjaar *</label>
-                                    <select id="startYear" name="startYear" required>
-                                        <option value="2025-2026">2025-2026</option>
-                                        <option value="2026-2027">2026-2027</option>
-                                        <option value="2027-2028">2027-2028</option>
-                                    </select>
-                                </div>
+                            <div class="form-group full-width">
+                                <label for="message">Bericht</label>
+                                <textarea id="message" name="message" rows="3" placeholder="Ik heb een vraag over..."></textarea>
                             </div>
                             
                             <input type="hidden" name="parentLastName" value=".">
-                            <input type="hidden" name="childLastName" value=".">
 
                             <button type="submit" class="btn-submit btn-hero">Verstuur Aanmelding</button>
                             <div id="formMessage" class="form-message"></div>

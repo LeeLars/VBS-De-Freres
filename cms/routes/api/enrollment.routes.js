@@ -22,12 +22,11 @@ router.post('/', async (req, res) => {
       message 
     } = req.body;
 
-    // Validation
-    if (!parentFirstName || !parentLastName || !email || !phone || 
-        !childFirstName || !childLastName || !childBirthdate || !startYear) {
+    // Validation - Simplified for lead capture
+    if (!parentFirstName || !email || !phone) {
       console.log('Validation failed: Missing required fields');
       return res.status(400).json({ 
-        error: 'Alle verplichte velden moeten ingevuld zijn' 
+        error: 'Naam, e-mail en telefoon zijn verplicht' 
       });
     }
 
@@ -52,26 +51,28 @@ router.post('/', async (req, res) => {
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="background-color: #a8cf8c; color: #000; padding: 20px; border-radius: 8px 8px 0 0;">
-              <h2 style="margin: 0;">Nieuwe Schoolaanmelding</h2>
+              <h2 style="margin: 0;">Nieuwe Aanmelding / Contact</h2>
             </div>
             <div style="background-color: #fffffb; padding: 30px; border: 1px solid #e0e0e0;">
               <h3 style="color: #a8cf8c; margin-top: 0;">Gegevens Ouder/Voogd</h3>
-              <p><strong>Naam:</strong> ${parentFirstName} ${parentLastName}</p>
+              <p><strong>Naam:</strong> ${parentFirstName} ${parentLastName || ''}</p>
               <p><strong>E-mail:</strong> <a href="mailto:${email}">${email}</a></p>
               <p><strong>Telefoon:</strong> ${phone}</p>
               
-              <h3 style="color: #a8cf8c;">Gegevens Kind</h3>
-              <p><strong>Naam:</strong> ${childFirstName} ${childLastName}</p>
-              <p><strong>Geboortedatum:</strong> ${childBirthdate}</p>
-              <p><strong>Gewenst startjaar:</strong> ${startYear}</p>
+              ${childFirstName ? `
+              <h3 style="color: #a8cf8c;">Gegevens Kind (indien ingevuld)</h3>
+              <p><strong>Naam:</strong> ${childFirstName} ${childLastName || ''}</p>
+              <p><strong>Geboortedatum:</strong> ${childBirthdate || 'Niet opgegeven'}</p>
+              <p><strong>Gewenst startjaar:</strong> ${startYear || 'Niet opgegeven'}</p>
+              ` : ''}
               
               ${message ? `
-              <h3 style="color: #a8cf8c;">Bijkomende informatie</h3>
+              <h3 style="color: #a8cf8c;">Bericht / Bijkomende informatie</h3>
               <p style="background: #f5f5f5; padding: 15px; border-radius: 8px;">${message}</p>
               ` : ''}
             </div>
             <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
-              <p>Dit bericht is verzonden via het aanmeldingsformulier op de VBS De Freres website</p>
+              <p>Dit bericht is verzonden via het formulier op de VBS De Freres website</p>
             </div>
           </div>
         </body>
@@ -82,7 +83,7 @@ router.post('/', async (req, res) => {
         from: 'VBS De Freres <noreply@grafixstudio.io>',
         to: [env.contactEmail],
         replyTo: email,
-        subject: `Nieuwe schoolaanmelding: ${childFirstName} ${childLastName}`,
+        subject: `Nieuwe aanmelding/contact: ${parentFirstName} ${parentLastName || ''}`,
         html: htmlContent
       });
 
