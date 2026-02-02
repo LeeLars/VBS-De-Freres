@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = ["cd cms && npm ci --prefer-offline --no-audit"]
+
+[start]
+cmd = "cd cms && npm start"

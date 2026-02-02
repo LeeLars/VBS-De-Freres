@@ -1,8 +1,9 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd cms && npm install"
+watchPatterns = ["cms/**"]
 
 [deploy]
-startCommand = "cd cms && npm start"
+workingDirectory = "cms"
+startCommand = "npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
