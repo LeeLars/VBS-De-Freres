@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import healthRoutes from './health.routes.js';
+import contactRoutes from './contact.routes.js';
 
 const router = Router();
 
 router.use(healthRoutes);
+router.use('/contact', contactRoutes);
 
 // Voeg hier later extra API routes toe, bv:
 // import locationsRoutes from './locations.routes.js';
