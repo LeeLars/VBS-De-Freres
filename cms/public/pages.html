@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VBS De Frères CMS - Pagina's Bewerken</title>
+    <link rel="stylesheet" href="/cms/assets/css/cms.css" />
+    <style>
+        .page-editor {
+            background: #fffffb;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .editor-header {
+            background: #a8cf8c;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .editor-header h2 {
+            margin: 0;
+            color: #000;
+            font-size: 24px;
+        }
+        
+        .editor-tabs {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+            background: #f5f5f5;
+        }
+        
+        .editor-tab {
+            padding: 16px 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'ABeeZee', sans-serif;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .editor-tab:hover {
+            color: #000;
+            background: #fff;
+        }
+        
+        .editor-tab.active {
+            color: #000;
+            background: #fff;
+            border-bottom-color: #a8cf8c;
+        }
+        
+        .editor-content {
+            padding: 32px;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .content-group {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .content-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .content-group h3 {
+            font-size: 18px;
+            color: #a8cf8c;
+            margin-bottom: 16px;
+        }
+        
+        .content-field {
+            margin-bottom: 20px;
+        }
+        
+        .content-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #000;
+            font-size: 14px;
+        }
+        
+        .content-field input,
+        .content-field textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'ABeeZee', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+        
+        .content-field input:focus,
+        .content-field textarea:focus {
+            outline: none;
+            border-color: #a8cf8c;
+        }
+        
+        .content-field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .save-bar {
+            background: #f5f5f5;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .save-status {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .save-status.saved {
+            color: #a8cf8c;
+        }
+        
+        .save-status.saving {
+            color: #666;
+        }
+        
+        .save-status.error {
+            color: #ff6b6b;
+        }
+        
+        .btn-save {
+            background: #a8cf8c;
+            color: #000;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-save:hover {
+            background: #96bb7a;
+        }
+        
+        .btn-save:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 48px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="cms-container">
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>VBS De Freres</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav class="cms-nav">
+                <a href="/cms/dashboard.html" class="nav-item">
+                    <span>Dashboard</span>
+                </a>
+                <a href="/cms/pages.html" class="nav-item active">
+                    <span>Pagina's</span>
+                </a>
+                <a href="/cms/dashboard.html#team" class="nav-item">
+                    <span>Team</span>
+                </a>
+                <a href="/cms/dashboard.html#media" class="nav-item">
+                    <span>Media</span>
+                </a>
+                <a href="/cms/dashboard.html#berichten" class="nav-item">
+                    <span>Berichten</span>
+                </a>
+                <a href="/cms/dashboard.html#instellingen" class="nav-item">
+                    <span>Instellingen</span>
+                </a>
+            </nav>
+            
+            <div class="cms-user">
+                <div class="user-info">
+                    <span class="user-name">admin</span>
+                    <button onclick="handleLogout()" class="btn-logout-small">Uitloggen</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Pagina Content Bewerken</h1>
+            </div>
+
+            <div class="page-editor">
+                <div class="editor-header">
+                    <h2 id="currentPageTitle">Home</h2>
+                </div>
+                
+                <div class="editor-tabs">
+                    <button class="editor-tab active" data-page="home">Home</button>
+                    <button class="editor-tab" data-page="visie">Visie</button>
+                    <button class="editor-tab" data-page="klassen">Klassen</button>
+                    <button class="editor-tab" data-page="team">Team</button>
+                    <button class="editor-tab" data-page="opvang">Opvang</button>
+                </div>
+                
+                <div class="editor-content" id="editorContent">
+                    <div class="loading">Content laden...</div>
+                </div>
+                
+                <div class="save-bar">
+                    <span class="save-status" id="saveStatus">Geen wijzigingen</span>
+                    <button class="btn-save" id="saveBtn" onclick="saveContent()">Opslaan</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Check login
+        if (!sessionStorage.getItem('cmsLoggedIn')) {
+            window.location.href = '/cms';
+        }
+        
+        let currentPage = 'home';
+        let contentData = {};
+        let hasChanges = false;
+        
+        // Logout
+        function handleLogout() {
+            sessionStorage.removeItem('cmsLoggedIn');
+            window.location.href = '/cms';
+        }
+        
+        // Tab switching
+        document.querySelectorAll('.editor-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (hasChanges) {
+                    if (!confirm('Je hebt onopgeslagen wijzigingen. Wil je doorgaan zonder op te slaan?')) {
+                        return;
+                    }
+                }
+                
+                document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                currentPage = tab.dataset.page;
+                document.getElementById('currentPageTitle').textContent = tab.textContent;
+                loadContent(currentPage);
+            });
+        });
+        
+        // Load content
+        async function loadContent(pageSlug) {
+            const editorContent = document.getElementById('editorContent');
+            editorContent.innerHTML = '<div class="loading">Content laden...</div>';
+            
+            try {
+                const response = await fetch(`/api/content/${pageSlug}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    contentData = result.content;
+                    renderEditor(pageSlug, contentData);
+                } else {
+                    editorContent.innerHTML = '<div class="loading">Geen content gevonden voor deze pagina.</div>';
+                }
+            } catch (error) {
+                console.error('Error loading content:', error);
+                editorContent.innerHTML = '<div class="loading">Fout bij laden van content.</div>';
+            }
+            
+            hasChanges = false;
+            updateSaveStatus();
+        }
+        
+        // Render editor fields
+        function renderEditor(pageSlug, content) {
+            const editorContent = document.getElementById('editorContent');
+            
+            // Group content by section
+            const sections = {
+                'Hero': ['hero-title', 'hero-text'],
+                'Features': ['features-title', 'features-subtitle', 'feature1-title', 'feature1-text', 'feature2-title', 'feature2-text', 'feature3-title', 'feature3-text'],
+                'Statistieken': ['stat1-number', 'stat1-label', 'stat2-number', 'stat2-label', 'stat3-number', 'stat3-label', 'stat4-number', 'stat4-label']
+            };
+            
+            const labels = {
+                'hero-title': 'Hero Titel',
+                'hero-text': 'Hero Tekst',
+                'features-title': 'Sectie Titel',
+                'features-subtitle': 'Sectie Ondertitel',
+                'feature1-title': 'Feature 1 Titel',
+                'feature1-text': 'Feature 1 Tekst',
+                'feature2-title': 'Feature 2 Titel',
+                'feature2-text': 'Feature 2 Tekst',
+                'feature3-title': 'Feature 3 Titel',
+                'feature3-text': 'Feature 3 Tekst',
+                'stat1-number': 'Statistiek 1 Nummer',
+                'stat1-label': 'Statistiek 1 Label',
+                'stat2-number': 'Statistiek 2 Nummer',
+                'stat2-label': 'Statistiek 2 Label',
+                'stat3-number': 'Statistiek 3 Nummer',
+                'stat3-label': 'Statistiek 3 Label',
+                'stat4-number': 'Statistiek 4 Nummer',
+                'stat4-label': 'Statistiek 4 Label'
+            };
+            
+            let html = '';
+            
+            for (const [sectionName, keys] of Object.entries(sections)) {
+                html += `<div class="content-group"><h3>${sectionName}</h3>`;
+                
+                for (const key of keys) {
+                    const value = content[key]?.value || '';
+                    const isTextarea = key.includes('text');
+                    const label = labels[key] || key;
+                    
+                    html += `
+                        <div class="content-field">
+                            <label for="${key}">${label}</label>
+                            ${isTextarea 
+                                ? `<textarea id="${key}" data-key="${key}" onchange="markChanged()">${value}</textarea>`
+                                : `<input type="text" id="${key}" data-key="${key}" value="${value}" onchange="markChanged()">`
+                            }
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+            }
+            
+            editorContent.innerHTML = html;
+        }
+        
+        // Mark as changed
+        function markChanged() {
+            hasChanges = true;
+            updateSaveStatus();
+        }
+        
+        // Update save status
+        function updateSaveStatus() {
+            const status = document.getElementById('saveStatus');
+            const btn = document.getElementById('saveBtn');
+            
+            if (hasChanges) {
+                status.textContent = 'Niet opgeslagen wijzigingen';
+                status.className = 'save-status';
+                btn.disabled = false;
+            } else {
+                status.textContent = 'Alle wijzigingen opgeslagen';
+                status.className = 'save-status saved';
+                btn.disabled = true;
+            }
+        }
+        
+        // Save content
+        async function saveContent() {
+            const status = document.getElementById('saveStatus');
+            const btn = document.getElementById('saveBtn');
+            
+            status.textContent = 'Opslaan...';
+            status.className = 'save-status saving';
+            btn.disabled = true;
+            
+            // Collect all field values
+            const content = {};
+            document.querySelectorAll('[data-key]').forEach(field => {
+                content[field.dataset.key] = field.value;
+            });
+            
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    hasChanges = false;
+                    status.textContent = 'Opgeslagen!';
+                    status.className = 'save-status saved';
+                    
+                    setTimeout(() => {
+                        updateSaveStatus();
+                    }, 2000);
+                } else {
+                    status.textContent = 'Fout bij opslaan';
+                    status.className = 'save-status error';
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error saving content:', error);
+                status.textContent = 'Fout bij opslaan';
+                status.className = 'save-status error';
+                btn.disabled = false;
+            }
+        }
+        
+        // Initial load
+        loadContent('home');
+    </script>
+</body>
+</html>

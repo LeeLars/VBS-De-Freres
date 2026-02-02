@@ -3,11 +3,14 @@ import { env } from './env.js';
 
 const { Pool } = pkg;
 
-export const pool = new Pool({
-  connectionString: env.databaseUrl
+const pool = new Pool({
+  connectionString: env.databaseUrl,
+  ssl: env.databaseUrl?.includes('localhost') ? false : { rejectUnauthorized: false }
 });
 
 pool.on('error', (err) => {
   console.error('Unexpected PG pool error', err);
-  process.exit(-1);
 });
+
+export { pool };
+export default pool;

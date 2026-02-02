@@ -3,6 +3,7 @@ import healthRoutes from './health.routes.js';
 import contactRoutes from './contact.routes.js';
 import debugRoutes from './debug.routes.js';
 import enrollmentRoutes from './enrollment.routes.js';
+import contentRoutes from './content.routes.js';
 
 const router = Router();
 
@@ -10,6 +11,7 @@ router.use(healthRoutes);
 router.use('/contact', contactRoutes);
 router.use('/debug', debugRoutes);
 router.use('/enrollment', enrollmentRoutes);
+router.use('/content', contentRoutes);
 
 // Voeg hier later extra API routes toe, bv:
 // import locationsRoutes from './locations.routes.js';
