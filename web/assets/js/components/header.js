@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     header.className = 'site-header';
     header.innerHTML = `
         <nav class="nav">
-            <a href="../home/" class="logo">VBS De Frères</a>
+            <a href="../home/" class="logo-link">
+                <img src="../../assets/images/static/Logo_de_freres_website600_x_180_px.png" alt="VBS De Frères Logo" class="logo-img">
+            </a>
             
             <button class="mobile-toggle" aria-label="Menu openen">
                 <span class="hamburger"></span>

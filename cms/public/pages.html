@@ -303,32 +303,75 @@
         function renderEditor(pageSlug, content) {
             const editorContent = document.getElementById('editorContent');
             
-            // Group content by section
-            const sections = {
-                'Hero': ['hero-title', 'hero-text'],
-                'Features': ['features-title', 'features-subtitle', 'feature1-title', 'feature1-text', 'feature2-title', 'feature2-text', 'feature3-title', 'feature3-text'],
-                'Statistieken': ['stat1-number', 'stat1-label', 'stat2-number', 'stat2-label', 'stat3-number', 'stat3-label', 'stat4-number', 'stat4-label']
-            };
+            // Define sections based on page
+            let sections = {};
+            
+            if (pageSlug === 'home') {
+                sections = {
+                    'Hero Sectie': ['hero-title', 'hero-text'],
+                    'Aanmeldformulier': ['form-title', 'form-subtitle'],
+                    'Klassen: Titels': ['classes-title', 'classes-preschool-title', 'classes-primary-title', 'classes-extra-title'],
+                    'Klassen: Kleuter': ['class-toddler', 'class-k1', 'class-k2', 'class-k3'],
+                    'Klassen: Lager': ['class-1a', 'class-2a', 'class-3a', 'class-3b', 'class-4a', 'class-4b', 'class-5a', 'class-6a'],
+                    'Klassen: Extra': ['class-languages', 'class-sport', 'class-care'],
+                    'Spotlight / Verhaal': ['spotlight-title', 'spotlight-subtitle', 'spotlight-text-1', 'spotlight-text-2', 'spotlight-text-3'],
+                    'Galerij Afbeeldingen': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
+                    'Contact Footer': ['contact-title', 'contact-school-name', 'contact-address', 'contact-phone', 'contact-email', 'contact-director-name', 'contact-director-phone']
+                };
+            } else {
+                // Generic fallback for other pages (can be customized later)
+                sections = {
+                    'Content': Object.keys(content).sort()
+                };
+            }
             
             const labels = {
-                'hero-title': 'Hero Titel',
-                'hero-text': 'Hero Tekst',
-                'features-title': 'Sectie Titel',
-                'features-subtitle': 'Sectie Ondertitel',
-                'feature1-title': 'Feature 1 Titel',
-                'feature1-text': 'Feature 1 Tekst',
-                'feature2-title': 'Feature 2 Titel',
-                'feature2-text': 'Feature 2 Tekst',
-                'feature3-title': 'Feature 3 Titel',
-                'feature3-text': 'Feature 3 Tekst',
-                'stat1-number': 'Statistiek 1 Nummer',
-                'stat1-label': 'Statistiek 1 Label',
-                'stat2-number': 'Statistiek 2 Nummer',
-                'stat2-label': 'Statistiek 2 Label',
-                'stat3-number': 'Statistiek 3 Nummer',
-                'stat3-label': 'Statistiek 3 Label',
-                'stat4-number': 'Statistiek 4 Nummer',
-                'stat4-label': 'Statistiek 4 Label'
+                'hero-title': 'Hoofdtitel',
+                'hero-text': 'Introductie tekst',
+                'form-title': 'Formulier Titel',
+                'form-subtitle': 'Formulier Ondertitel',
+                
+                'classes-title': 'Hoofdtitel Klassen',
+                'classes-preschool-title': 'Titel Kleuter',
+                'classes-primary-title': 'Titel Lager',
+                'classes-extra-title': 'Titel Extra',
+                
+                'class-toddler': 'Peuterklas',
+                'class-k1': 'Kleuterklas 1',
+                'class-k2': 'Kleuterklas 2',
+                'class-k3': 'Kleuterklas 3',
+                
+                'class-1a': 'Klas 1A',
+                'class-2a': 'Klas 2A',
+                'class-3a': 'Klas 3A',
+                'class-3b': 'Klas 3B',
+                'class-4a': 'Klas 4A',
+                'class-4b': 'Klas 4B',
+                'class-5a': 'Klas 5A',
+                'class-6a': 'Klas 6A',
+                
+                'class-languages': 'Talenklas',
+                'class-sport': 'Sport',
+                'class-care': 'Zorg',
+                
+                'spotlight-title': 'Spotlight Titel',
+                'spotlight-subtitle': 'Spotlight Ondertitel',
+                'spotlight-text-1': 'Paragraaf 1',
+                'spotlight-text-2': 'Paragraaf 2',
+                'spotlight-text-3': 'Paragraaf 3',
+                
+                'gallery-1': 'Afbeelding 1 URL',
+                'gallery-2': 'Afbeelding 2 URL',
+                'gallery-3': 'Afbeelding 3 URL',
+                'gallery-4': 'Afbeelding 4 URL',
+                
+                'contact-title': 'Contact Titel',
+                'contact-school-name': 'School Naam',
+                'contact-address': 'Adres',
+                'contact-phone': 'Telefoon',
+                'contact-email': 'E-mail',
+                'contact-director-name': 'Naam Directeur',
+                'contact-director-phone': 'Tel Directeur'
             };
             
             let html = '';
@@ -337,19 +380,30 @@
                 html += `<div class="content-group"><h3>${sectionName}</h3>`;
                 
                 for (const key of keys) {
-                    const value = content[key]?.value || '';
-                    const isTextarea = key.includes('text');
+                    const item = content[key] || { value: '', type: 'text' };
+                    const value = item.value || '';
                     const label = labels[key] || key;
+                    const isTextarea = key.includes('text') || key.includes('message');
+                    const isImage = key.includes('gallery') || item.type === 'image';
                     
-                    html += `
-                        <div class="content-field">
-                            <label for="${key}">${label}</label>
-                            ${isTextarea 
-                                ? `<textarea id="${key}" data-key="${key}" onchange="markChanged()">${value}</textarea>`
-                                : `<input type="text" id="${key}" data-key="${key}" value="${value}" onchange="markChanged()">`
-                            }
-                        </div>
-                    `;
+                    html += `<div class="content-field">
+                        <label for="${key}">${label}</label>`;
+                        
+                    if (isImage) {
+                         html += `
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="${key}" data-key="${key}" value="${value}" onchange="markChanged()" placeholder="https://...">
+                                <a href="/cms/media.html" target="_blank" class="btn-save" style="padding: 8px 12px; text-decoration: none; font-size: 14px;">Media</a>
+                            </div>
+                            ${value ? `<img src="${value}" style="height: 60px; margin-top: 8px; border-radius: 4px; border: 1px solid #ddd;">` : ''}
+                         `;
+                    } else if (isTextarea) {
+                        html += `<textarea id="${key}" data-key="${key}" onchange="markChanged()">${value}</textarea>`;
+                    } else {
+                        html += `<input type="text" id="${key}" data-key="${key}" value="${value}" onchange="markChanged()">`;
+                    }
+                    
+                    html += `</div>`;
                 }
                 
                 html += '</div>';

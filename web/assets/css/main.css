@@ -35,13 +35,15 @@ body {
     margin: 0 auto;
 }
 
-.logo {
-    font-weight: 700;
+.logo-link {
+    display: block;
     text-decoration: none;
-    color: #000;
-    font-size: 1.5rem;
-    position: relative;
-    z-index: 1002;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    display: block;
 }
 
 .nav-menu {
@@ -335,237 +337,329 @@ body {
     color: #000;
 }
 
-/* Homepage Hero */
-.hero-section {
+/* Homepage Hero - Split Layout */
+.hero-split-section {
     background: linear-gradient(135deg, #a8cf8c 0%, #96bb7a 100%);
-    padding: 80px 24px;
+    padding: 64px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.hero-text-col {
+    color: #000;
+}
+
+.hero-text-col h1 {
+    font-size: 48px;
+    margin-bottom: 24px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.hero-lead {
+    font-size: 20px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.hero-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.trust-badge {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+/* Hero Form Card */
+.hero-form-card {
+    background: #fffffb;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hero-form-card h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.hero-form-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.compact-form .form-group {
+    margin-bottom: 16px;
+}
+
+.compact-form label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.compact-form input,
+.compact-form select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.compact-form input:focus,
+.compact-form select:focus {
+    background: #fff;
+    border-color: #a8cf8c;
+}
+
+.compact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.form-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #999;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-divider::before,
+.form-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.form-divider span {
+    padding: 0 10px;
+}
+
+.btn-hero {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Classes Section */
+.classes-section {
+    background: #fffffb;
+}
+
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 48px;
+    margin-top: 48px;
+}
+
+.class-group h3 {
+    font-size: 24px;
+    color: #a8cf8c;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.class-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.class-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 16px;
+    color: #333;
+    transition: padding-left 0.2s;
+}
+
+.class-list li:last-child {
+    border-bottom: none;
+}
+
+.class-list li:hover {
+    padding-left: 8px;
+    color: #000;
+    border-left: 3px solid #a8cf8c;
+}
+
+/* Spotlight Section */
+.spotlight-section {
+    background: #111;
+    color: #fffffb;
+    padding: 100px 24px;
     text-align: center;
 }
 
-.hero-content {
+.spotlight-inner {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.hero-section h1 {
-    font-size: 48px;
-    color: #000;
-    margin-bottom: 24px;
-    line-height: 1.2;
+.spotlight-content h2 {
+    color: #a8cf8c;
+    font-size: 32px;
+    margin-bottom: 8px;
 }
 
-.hero-section p {
-    font-size: 20px;
-    color: #000;
+.spotlight-content h3 {
+    font-size: 24px;
+    color: #fff;
     margin-bottom: 32px;
-    opacity: 0.9;
+    font-weight: 400;
 }
 
-.hero-cta {
-    display: inline-block;
-    background: #000;
-    color: #fffffb;
-    padding: 16px 40px;
-    border-radius: 8px;
-    text-decoration: none;
+.spotlight-text p {
     font-size: 18px;
-    font-weight: 500;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    color: #ddd;
+}
+
+.btn-outline {
+    display: inline-block;
+    border: 2px solid #a8cf8c;
+    color: #a8cf8c;
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 32px;
     transition: all 0.3s ease;
 }
 
-.hero-cta:hover {
-    background: #333;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Section Styles */
-.section {
-    padding: 64px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-dark {
-    background: #000;
-    color: #fffffb;
-    max-width: 100%;
-    padding: 64px 24px;
-}
-
-.section-dark .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-title {
-    font-size: 36px;
-    margin-bottom: 16px;
+.btn-outline:hover {
+    background: #a8cf8c;
     color: #000;
 }
 
-.section-dark .section-title {
-    color: #a8cf8c;
+/* Image Gallery Grid */
+.image-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.section-subtitle {
-    font-size: 18px;
-    color: #666;
+.gallery-item {
+    aspect-ratio: 4/3;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+}
+
+.placeholder-img {
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22600%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23eeeeee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%23cccccc%22%3EImage%3C%2Ftext%3E%3C%2Fsvg%3E');
+}
+
+/* Contact Footer Section */
+.contact-footer-section {
+    background: #f9f9f9;
+    padding: 80px 24px;
+    border-top: 1px solid #eee;
+}
+
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-info-block h2 {
+    font-size: 36px;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.contact-info-block h3 {
+    font-size: 24px;
+    color: #a8cf8c;
     margin-bottom: 48px;
 }
 
-.section-dark .section-subtitle {
-    color: #ccc;
-}
-
-/* Features Grid */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-    margin-top: 48px;
-}
-
-.feature-card {
-    background: #fffffb;
-    padding: 32px;
-    border-radius: 12px;
-    border: 2px solid #e0e0e0;
-    transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-    border-color: #a8cf8c;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.feature-card h3 {
-    font-size: 22px;
-    margin-bottom: 12px;
-    color: #000;
-}
-
-.feature-card p {
-    font-size: 16px;
-    color: #666;
-    line-height: 1.6;
-}
-
-/* Enrollment Form Section */
-.enrollment-section {
-    background: #a8cf8c;
-    padding: 80px 24px;
-}
-
-.enrollment-inner {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fffffb;
-    padding: 48px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-}
-
-.enrollment-inner h2 {
-    font-size: 32px;
-    margin-bottom: 16px;
-    color: #000;
-    text-align: center;
-}
-
-.enrollment-inner .form-intro {
-    text-align: center;
-    color: #666;
-    margin-bottom: 32px;
-}
-
-.enrollment-form .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.enrollment-form .form-group {
-    margin-bottom: 20px;
-}
-
-.enrollment-form .form-group.full-width {
-    grid-column: 1 / -1;
-}
-
-.enrollment-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #000;
-    font-size: 14px;
-}
-
-.enrollment-form input,
-.enrollment-form select,
-.enrollment-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: 'ABeeZee', sans-serif;
-    transition: border-color 0.3s ease;
-}
-
-.enrollment-form input:focus,
-.enrollment-form select:focus,
-.enrollment-form textarea:focus {
-    outline: none;
-    border-color: #a8cf8c;
-}
-
-.enrollment-form .btn-submit {
-    width: 100%;
-    padding: 16px;
-    font-size: 18px;
-    margin-top: 16px;
-}
-
-/* Stats Section */
-.stats-grid {
+.contact-details {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    text-align: center;
+    gap: 40px;
+    text-align: left;
 }
 
-.stat-item h3 {
-    font-size: 48px;
-    color: #a8cf8c;
-    margin-bottom: 8px;
+.contact-group h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    margin-bottom: 12px;
 }
 
-.stat-item p {
+.contact-group p {
     font-size: 16px;
-    color: #fffffb;
+    color: #333;
+    margin: 4px 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-section h1 {
-        font-size: 32px;
-    }
-    
-    .hero-section p {
-        font-size: 16px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-    }
-    
-    .enrollment-inner {
-        padding: 32px 24px;
-    }
-    
-    .enrollment-form .form-row {
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hero-container {
         grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .hero-text-col {
+        text-align: center;
+    }
+
+    .hero-trust-badges {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text-col h1 {
+        font-size: 36px;
+    }
+    
+    .classes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-details {
+        text-align: center;
     }
 }

@@ -8,130 +8,169 @@
 </head>
 <body>
     <main>
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 data-cms="home-hero-title">Welkom bij VBS De Frères</h1>
-                <p data-cms="home-hero-text">Een warme school waar elk kind centraal staat. Wij bieden kwaliteitsonderwijs in een veilige en stimulerende omgeving.</p>
-                <a href="#aanmelden" class="hero-cta">Meld uw kind aan</a>
+        <!-- Hero Section with Form -->
+        <section class="hero-split-section">
+            <div class="hero-container">
+                <div class="hero-text-col">
+                    <h1 data-cms="home-hero-title">Basisschool De Frères Brugge</h1>
+                    <p class="hero-lead" data-cms="home-hero-text">Een warme school waar elk kind centraal staat. Wij bieden kwaliteitsonderwijs in een veilige en stimulerende omgeving. Wees welkom!</p>
+                    <div class="hero-trust-badges">
+                        <span class="trust-badge">❤️ Kindvriendelijk</span>
+                        <span class="trust-badge">🏫 Kwaliteitsonderwijs</span>
+                        <span class="trust-badge">🤗 Open sfeer</span>
+                    </div>
+                </div>
+                
+                <div class="hero-form-col">
+                    <div class="hero-form-card">
+                        <h2 data-cms="home-form-title">Schrijf uw kind in</h2>
+                        <p data-cms="home-form-subtitle">Laat uw gegevens achter voor een kennismaking</p>
+                        
+                        <form id="enrollmentForm" class="compact-form">
+                            <div class="form-group">
+                                <label for="parentName">Naam Ouder *</label>
+                                <input type="text" id="parentName" name="parentFirstName" placeholder="Uw volledige naam" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">E-mail *</label>
+                                    <input type="email" id="email" name="email" placeholder="uw@email.be" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Tel *</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="04xx..." required>
+                                </div>
+                            </div>
+
+                            <div class="form-divider">
+                                <span>Gegevens Kind</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="childName">Naam Kind *</label>
+                                <input type="text" id="childName" name="childFirstName" placeholder="Naam van uw kind" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="childBirthdate">Geboortedatum *</label>
+                                    <input type="date" id="childBirthdate" name="childBirthdate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="startYear">Startjaar *</label>
+                                    <select id="startYear" name="startYear" required>
+                                        <option value="2025-2026">2025-2026</option>
+                                        <option value="2026-2027">2026-2027</option>
+                                        <option value="2027-2028">2027-2028</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="parentLastName" value=".">
+                            <input type="hidden" name="childLastName" value=".">
+
+                            <button type="submit" class="btn-submit btn-hero">Verstuur Aanmelding</button>
+                            <div id="formMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Features Section -->
+        <!-- Classes List Section -->
+        <section class="section classes-section">
+            <h2 class="section-title text-center" data-cms="home-classes-title">Alle klassen</h2>
+            <div class="classes-grid">
+                <div class="class-group">
+                    <h3 data-cms="home-classes-preschool-title">Kleuteronderwijs</h3>
+                    <ul class="class-list">
+                        <li data-cms="class-toddler">Peuterklas</li>
+                        <li data-cms="class-k1">Kleuterklas 1 - juf Nele</li>
+                        <li data-cms="class-k2">Kleuterklas 2 - juf Anaïs</li>
+                        <li data-cms="class-k3">Kleuterklas 3 - juf Evy</li>
+                    </ul>
+                </div>
+                <div class="class-group">
+                    <h3 data-cms="home-classes-primary-title">Lager Onderwijs</h3>
+                    <ul class="class-list">
+                        <li data-cms="class-1a">Klas 1A - juf Lies/ meester Simon</li>
+                        <li data-cms="class-2a">Klas 2A - juf Stefanie</li>
+                        <li data-cms="class-3a">Klas 3A - juf Melissa</li>
+                        <li data-cms="class-3b">Klas 3B - juf Aurelie</li>
+                        <li data-cms="class-4a">Klas 4A - juf Emma</li>
+                        <li data-cms="class-4b">Klas 4B - juf Tine</li>
+                        <li data-cms="class-5a">Klas 5A - juf Anneke</li>
+                        <li data-cms="class-6a">Klas 6A - juf Kelly</li>
+                    </ul>
+                </div>
+                <div class="class-group">
+                    <h3 data-cms="home-classes-extra-title">Extra Zorg & Sport</h3>
+                    <ul class="class-list">
+                        <li data-cms="class-languages">Talenklas - uitbreiding/meertaligheid</li>
+                        <li data-cms="class-sport">Sport op school</li>
+                        <li data-cms="class-care">Hand in hand</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spotlight / Story Section -->
+        <section class="section-dark spotlight-section">
+            <div class="spotlight-inner">
+                <div class="spotlight-content">
+                    <h2 data-cms="home-spotlight-title">Eerste kleuter - juf Nele</h2>
+                    <h3 data-cms="home-spotlight-subtitle">Hand in hand</h3>
+                    <div class="spotlight-text">
+                        <p data-cms="home-spotlight-text-1">Met onze peuters en eerste kleuters zetten we de eerste stapjes in school.</p>
+                        <p data-cms="home-spotlight-text-2">Gaan jullie mee op bezoek in onze klas? Knutselen, spelen, turnen, zingen, dansen, ... te veel om op te noemen.</p>
+                        <p data-cms="home-spotlight-text-3">Klik gerust verder en geniet mee van onze ontdekkingen, belevenissen en avonturen.</p>
+                    </div>
+                    <a href="../klassen/" class="btn-outline">Lees meer over onze klassen</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Grid -->
         <section class="section">
-            <h2 class="section-title" data-cms="home-features-title">Waarom kiezen voor VBS De Frères?</h2>
-            <p class="section-subtitle" data-cms="home-features-subtitle">Ontdek wat onze school uniek maakt</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3 data-cms="home-feature1-title">Persoonlijke aandacht</h3>
-                    <p data-cms="home-feature1-text">Elk kind is uniek. Onze leerkrachten kennen elk kind bij naam en zorgen voor een persoonlijke aanpak die past bij de noden van uw kind.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3 data-cms="home-feature2-title">Kwaliteitsonderwijs</h3>
-                    <p data-cms="home-feature2-text">Wij streven naar excellentie in onderwijs met moderne leermethodes en een team van gedreven, gekwalificeerde leerkrachten.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3 data-cms="home-feature3-title">Warme schoolgemeenschap</h3>
-                    <p data-cms="home-feature3-text">Bij ons voelt iedereen zich thuis. Ouders, kinderen en leerkrachten vormen samen een hechte gemeenschap.</p>
-                </div>
+            <div class="image-gallery-grid">
+                <div class="gallery-item placeholder-img" data-cms="home-gallery-1"></div>
+                <div class="gallery-item placeholder-img" data-cms="home-gallery-2"></div>
+                <div class="gallery-item placeholder-img" data-cms="home-gallery-3"></div>
+                <div class="gallery-item placeholder-img" data-cms="home-gallery-4"></div>
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="section-dark">
-            <div class="section-inner">
-                <h2 class="section-title">Onze school in cijfers</h2>
-                <p class="section-subtitle">Al jaren een vertrouwde keuze voor ouders</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3 data-cms="home-stat1-number">250+</h3>
-                        <p data-cms="home-stat1-label">Leerlingen</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 data-cms="home-stat2-number">25</h3>
-                        <p data-cms="home-stat2-label">Leerkrachten</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 data-cms="home-stat3-number">50+</h3>
-                        <p data-cms="home-stat3-label">Jaren ervaring</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 data-cms="home-stat4-number">98%</h3>
-                        <p data-cms="home-stat4-label">Tevredenheid</p>
+        <!-- Contact Section -->
+        <section class="contact-footer-section">
+            <div class="contact-container">
+                <div class="contact-info-block">
+                    <h2 data-cms="contact-title">Contacteer ons</h2>
+                    <h3 data-cms="contact-school-name">Basisschool De Frères</h3>
+                    
+                    <div class="contact-details">
+                        <div class="contact-group">
+                            <h4>Ingang:</h4>
+                            <p data-cms="contact-address">Nieuwstraat 2 | 8000 Brugge</p>
+                        </div>
+                        
+                        <div class="contact-group">
+                            <h4>Tel.:</h4>
+                            <p data-cms="contact-phone">050 33 63 47</p>
+                        </div>
+                        
+                        <div class="contact-group">
+                            <h4>Emailadres:</h4>
+                            <p data-cms="contact-email">info@vbsdefreres.be</p>
+                        </div>
+                        
+                        <div class="contact-group">
+                            <h4>Directeur:</h4>
+                            <p data-cms="contact-director-name">Inge Versavel</p>
+                            <p data-cms="contact-director-phone">Gsm: 0476 90 81 23</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Enrollment Form Section -->
-        <section class="enrollment-section" id="aanmelden">
-            <div class="enrollment-inner">
-                <h2>Schrijf uw kind in</h2>
-                <p class="form-intro">Vul onderstaand formulier in en wij nemen zo snel mogelijk contact met u op om een afspraak te maken.</p>
-                
-                <form id="enrollmentForm" class="enrollment-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="parentFirstName">Voornaam ouder/voogd *</label>
-                            <input type="text" id="parentFirstName" name="parentFirstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="parentLastName">Achternaam ouder/voogd *</label>
-                            <input type="text" id="parentLastName" name="parentLastName" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">E-mailadres *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefoonnummer *</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="childFirstName">Voornaam kind *</label>
-                            <input type="text" id="childFirstName" name="childFirstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="childLastName">Achternaam kind *</label>
-                            <input type="text" id="childLastName" name="childLastName" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="childBirthdate">Geboortedatum kind *</label>
-                            <input type="date" id="childBirthdate" name="childBirthdate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="startYear">Gewenst startjaar *</label>
-                            <select id="startYear" name="startYear" required>
-                                <option value="">Selecteer...</option>
-                                <option value="2025-2026">Schooljaar 2025-2026</option>
-                                <option value="2026-2027">Schooljaar 2026-2027</option>
-                                <option value="2027-2028">Schooljaar 2027-2028</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group full-width">
-                        <label for="message">Bijkomende informatie of vragen</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Heeft u nog vragen of wilt u iets meegeven?"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-submit">Verstuur aanmelding</button>
-                    
-                    <div id="formMessage" class="form-message"></div>
-                </form>
             </div>
         </section>
     </main>
