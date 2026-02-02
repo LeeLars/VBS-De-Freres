@@ -16,12 +16,14 @@ body {
     line-height: 1.6;
 }
 
+/* Header & Navigation */
 .site-header {
     background: #fffffb;
     border-bottom: 2px solid #a8cf8c;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .nav {
@@ -37,7 +39,15 @@ body {
     font-weight: 700;
     text-decoration: none;
     color: #000;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 1002;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .nav-links {
@@ -52,11 +62,125 @@ body {
     text-decoration: none;
     color: #000;
     font-size: 1rem;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #a8cf8c;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
     color: #a8cf8c;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-cta {
+    background-color: #a8cf8c;
+    color: #000;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(168, 207, 140, 0.3);
+}
+
+.nav-cta:hover {
+    background-color: #96bb7a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(168, 207, 140, 0.4);
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002;
+}
+
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #000;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #000;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before { top: -8px; }
+.hamburger::after { top: 8px; }
+
+/* Mobile Menu Active State (Hamburger Animation) */
+.mobile-toggle.active .hamburger { background: transparent; }
+.mobile-toggle.active .hamburger::before { top: 0; transform: rotate(45deg); }
+.mobile-toggle.active .hamburger::after { top: 0; transform: rotate(-45deg); }
+
+/* Responsive Header */
+@media (max-width: 992px) {
+    .mobile-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: #fffffb;
+        flex-direction: column;
+        justify-content: center;
+        transition: right 0.4s ease-in-out;
+        z-index: 1001;
+        padding: 2rem;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+    }
+
+    .nav-cta {
+        width: 100%;
+        text-align: center;
+        padding: 16px;
+        font-size: 1.2rem;
+    }
 }
 
 .hero,
@@ -443,9 +567,5 @@ body {
     
     .enrollment-form .form-row {
         grid-template-columns: 1fr;
-    }
-    
-    .nav-links {
-        display: none;
     }
 }
