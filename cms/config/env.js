@@ -15,5 +15,6 @@ export const env = {
   smtpSecure: process.env.SMTP_SECURE === 'true',
   smtpUser: process.env.SMTP_USER,
   smtpPassword: process.env.SMTP_PASSWORD,
-  contactEmail: process.env.CONTACT_EMAIL
+  contactEmail: process.env.CONTACT_EMAIL,
+  resendApiKey: process.env.RESEND_API_KEY
 };
