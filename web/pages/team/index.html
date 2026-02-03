@@ -7,15 +7,194 @@
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
+    <script src="../../assets/js/components/header.js"></script>
+
     <main>
-        <section class="page-section">
-            <h1>Ons Team</h1>
-            <p>Hier komt informatie over het team.</p>
+        <!-- Hero Section -->
+        <section class="hero-playful" style="padding: 120px 24px 80px;">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Ons Team</span>
+                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="team-hero-title">
+                    Ontmoet de mensen achter <span class="hero-highlight">De Frères</span>
+                </h1>
+                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="team-hero-text">
+                    Ons gepassioneerd team van leerkrachten en begeleiders zorgt elke dag voor een warme en inspirerende leeromgeving.
+                </p>
+            </div>
+
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
         </section>
+
+        <!-- Director Spotlight -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="quote-card">
+                    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 32px; align-items: center;">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
+                            <img data-cms="contact-director-photo" src="" alt="Directeur" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div>
+                            <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">DIRECTEUR</span>
+                            <h2 style="font-size: 28px; margin: 12px 0 8px 0;" data-cms="contact-director-name">Directeur Naam</h2>
+                            <p style="color: #666; font-size: 16px; line-height: 1.7; margin: 0;" data-cms="team-director-bio">
+                                Met jarenlange ervaring in het onderwijs, leid ik met passie ons team. Samen bouwen we aan een school waar elk kind zich thuis voelt en kan groeien.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Members Grid -->
+        <section class="values-section">
+            <div class="section-header">
+                <span class="tag-pill">Leerkrachten</span>
+                <h2 data-cms="team-teachers-title">Onze leerkrachten</h2>
+                <p style="color: #666;" data-cms="team-teachers-subtitle">Gedreven professionals die elke dag het beste uit uw kind halen</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+                <!-- Team Member 1 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; margin: 0 auto 20px; overflow: hidden;">
+                        <img data-cms="team-member-1-photo" src="" alt="Team lid" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 4px;" data-cms="team-member-1-name">Naam Leerkracht</h3>
+                    <p style="color: #a8cf8c; font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-cms="team-member-1-role">Klas 1A</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-member-1-bio">Korte beschrijving over de leerkracht en hun specialisatie.</p>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; margin: 0 auto 20px; overflow: hidden;">
+                        <img data-cms="team-member-2-photo" src="" alt="Team lid" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 4px;" data-cms="team-member-2-name">Naam Leerkracht</h3>
+                    <p style="color: #a8cf8c; font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-cms="team-member-2-role">Klas 2A</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-member-2-bio">Korte beschrijving over de leerkracht en hun specialisatie.</p>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; margin: 0 auto 20px; overflow: hidden;">
+                        <img data-cms="team-member-3-photo" src="" alt="Team lid" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 4px;" data-cms="team-member-3-name">Naam Leerkracht</h3>
+                    <p style="color: #a8cf8c; font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-cms="team-member-3-role">Klas 3A</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-member-3-bio">Korte beschrijving over de leerkracht en hun specialisatie.</p>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; margin: 0 auto 20px; overflow: hidden;">
+                        <img data-cms="team-member-4-photo" src="" alt="Team lid" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 4px;" data-cms="team-member-4-name">Naam Leerkracht</h3>
+                    <p style="color: #a8cf8c; font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-cms="team-member-4-role">Klas 4A</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-member-4-bio">Korte beschrijving over de leerkracht en hun specialisatie.</p>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; margin: 0 auto 20px; overflow: hidden;">
+                        <img data-cms="team-member-5-photo" src="" alt="Team lid" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 4px;" data-cms="team-member-5-name">Naam Leerkracht</h3>
+                    <p style="color: #a8cf8c; font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-cms="team-member-5-role">Klas 5A</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-member-5-bio">Korte beschrijving over de leerkracht en hun specialisatie.</p>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; margin: 0 auto 20px; overflow: hidden;">
+                        <img data-cms="team-member-6-photo" src="" alt="Team lid" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 4px;" data-cms="team-member-6-name">Naam Leerkracht</h3>
+                    <p style="color: #a8cf8c; font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-cms="team-member-6-role">Klas 6A</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-member-6-bio">Korte beschrijving over de leerkracht en hun specialisatie.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Staff -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Ondersteunend Team</span>
+                    <h2 data-cms="team-support-title">Zorgteam & Begeleiding</h2>
+                    <p style="color: #666;" data-cms="team-support-subtitle">Extra ondersteuning voor elk kind</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 48px;">
+                    <!-- Support Member 1 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <div style="width: 60px; height: 60px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="team-support-1-name">Zorgcoördinator</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-support-1-bio">Begeleiding voor kinderen met extra noden en ondersteuning van leerkrachten.</p>
+                    </div>
+
+                    <!-- Support Member 2 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <div style="width: 60px; height: 60px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="team-support-2-name">Kleuterbegeleidster</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-support-2-bio">Extra handen in de kleuterklas voor optimale begeleiding van de allerkleinsten.</p>
+                    </div>
+
+                    <!-- Support Member 3 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <div style="width: 60px; height: 60px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="team-support-3-name">Administratie</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="team-support-3-bio">Uw eerste contactpunt voor praktische vragen en administratieve zaken.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-pattern"></div>
+                <div class="cta-content">
+                    <h2 data-cms="team-cta-title">Wil je ons team persoonlijk ontmoeten?</h2>
+                    <p data-cms="team-cta-text">Kom langs tijdens een opendeurdag of maak een afspraak voor een rondleiding. We stellen ons graag aan je voor.</p>
+                    <div class="cta-buttons">
+                        <a href="../contact/" class="btn-cta-primary">Neem Contact Op</a>
+                        <a href="../visie/" class="btn-cta-secondary">Onze Visie</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../assets/js/components/footer.js"></script>
     </main>
 
-    <script src="../../assets/js/components/header.js"></script>
-    <script src="../../assets/js/components/footer.js"></script>
+    <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 </html>
