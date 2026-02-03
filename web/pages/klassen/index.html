@@ -7,15 +7,236 @@
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
+    <script src="../../assets/js/components/header.js"></script>
+
     <main>
-        <section class="page-section">
-            <h1>Onze Klassen</h1>
-            <p>Hier komt informatie over de klassen.</p>
+        <!-- Hero Section -->
+        <section class="hero-playful" style="padding: 120px 24px 80px;">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Onze Klassen</span>
+                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="klassen-hero-title">
+                    Van kleuter tot <span class="hero-highlight">zesde leerjaar</span>
+                </h1>
+                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="klassen-hero-text">
+                    Ontdek wat uw kind leert en beleeft in elke klas. Van de eerste stapjes in de kleuterklas tot de voorbereiding op het secundair onderwijs.
+                </p>
+            </div>
+
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
         </section>
+
+        <!-- Kleuterklas Section -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">2.5 - 6 jaar</span>
+                    <h2 data-cms="klassen-kleuter-title">Kleuterklas</h2>
+                    <p style="color: #666;" data-cms="klassen-kleuter-subtitle">Spelen, ontdekken en groeien in een veilige omgeving</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; align-items: center;">
+                    <div>
+                        <div style="background: #f9fcf7; padding: 32px; border-radius: 24px; margin-bottom: 24px;">
+                            <h3 style="font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+                                <span style="width: 40px; height: 40px; background: #a8cf8c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px;">1</span>
+                                Instapklas
+                            </h3>
+                            <p style="color: #666; line-height: 1.6; margin-left: 52px;" data-cms="klassen-kleuter-1-text">Voor de allerkleinsten. Wennen aan school, spelen en sociale vaardigheden ontwikkelen.</p>
+                        </div>
+
+                        <div style="background: #f9fcf7; padding: 32px; border-radius: 24px; margin-bottom: 24px;">
+                            <h3 style="font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+                                <span style="width: 40px; height: 40px; background: #a8cf8c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px;">2</span>
+                                Middenklas
+                            </h3>
+                            <p style="color: #666; line-height: 1.6; margin-left: 52px;" data-cms="klassen-kleuter-2-text">Meer structuur en eerste kennismaking met letters, cijfers en creatieve activiteiten.</p>
+                        </div>
+
+                        <div style="background: #f9fcf7; padding: 32px; border-radius: 24px;">
+                            <h3 style="font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+                                <span style="width: 40px; height: 40px; background: #a8cf8c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px;">3</span>
+                                Topperklas
+                            </h3>
+                            <p style="color: #666; line-height: 1.6; margin-left: 52px;" data-cms="klassen-kleuter-3-text">Voorbereiding op het eerste leerjaar met focus op zelfstandigheid en schoolse vaardigheden.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #f5f5f5; border-radius: 24px; height: 500px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <img data-cms="klassen-kleuter-photo" src="" alt="Kleuterklas" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                        <span style="font-size: 80px; color: #ddd; position: relative; z-index: 0;">K</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lagere School Section -->
+        <section class="values-section">
+            <div class="section-header">
+                <span class="tag-pill">6 - 12 jaar</span>
+                <h2 data-cms="klassen-lager-title">Lagere School</h2>
+                <p style="color: #666;" data-cms="klassen-lager-subtitle">Zes jaar vol groei, kennis en nieuwe uitdagingen</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+                <!-- Eerste Leerjaar -->
+                <div class="card-loose">
+                    <div style="background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 24px; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 24px; color: #fff; margin: 0;">1ste Leerjaar</h3>
+                            <span style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 24px;">1</span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">6-7 jaar</p>
+                    </div>
+                    <div style="padding: 24px;">
+                        <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Wat leren ze?</h4>
+                        <ul style="color: #666; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                            <li data-cms="klassen-1-item-1">Lezen en schrijven</li>
+                            <li data-cms="klassen-1-item-2">Rekenen tot 100</li>
+                            <li data-cms="klassen-1-item-3">Wereldoriëntatie</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tweede Leerjaar -->
+                <div class="card-loose">
+                    <div style="background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 24px; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 24px; color: #fff; margin: 0;">2de Leerjaar</h3>
+                            <span style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 24px;">2</span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">7-8 jaar</p>
+                    </div>
+                    <div style="padding: 24px;">
+                        <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Wat leren ze?</h4>
+                        <ul style="color: #666; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                            <li data-cms="klassen-2-item-1">Vlot lezen</li>
+                            <li data-cms="klassen-2-item-2">Tafels van vermenigvuldiging</li>
+                            <li data-cms="klassen-2-item-3">Creatieve projecten</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Derde Leerjaar -->
+                <div class="card-loose">
+                    <div style="background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 24px; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 24px; color: #fff; margin: 0;">3de Leerjaar</h3>
+                            <span style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 24px;">3</span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">8-9 jaar</p>
+                    </div>
+                    <div style="padding: 24px;">
+                        <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Wat leren ze?</h4>
+                        <ul style="color: #666; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                            <li data-cms="klassen-3-item-1">Begrijpend lezen</li>
+                            <li data-cms="klassen-3-item-2">Breuken en metingen</li>
+                            <li data-cms="klassen-3-item-3">Geschiedenis en aardrijkskunde</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Vierde Leerjaar -->
+                <div class="card-loose">
+                    <div style="background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 24px; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 24px; color: #fff; margin: 0;">4de Leerjaar</h3>
+                            <span style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 24px;">4</span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">9-10 jaar</p>
+                    </div>
+                    <div style="padding: 24px;">
+                        <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Wat leren ze?</h4>
+                        <ul style="color: #666; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                            <li data-cms="klassen-4-item-1">Complexere teksten</li>
+                            <li data-cms="klassen-4-item-2">Delingen en kommagetallen</li>
+                            <li data-cms="klassen-4-item-3">Wetenschappelijk denken</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Vijfde Leerjaar -->
+                <div class="card-loose">
+                    <div style="background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 24px; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 24px; color: #fff; margin: 0;">5de Leerjaar</h3>
+                            <span style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 24px;">5</span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">10-11 jaar</p>
+                    </div>
+                    <div style="padding: 24px;">
+                        <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Wat leren ze?</h4>
+                        <ul style="color: #666; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                            <li data-cms="klassen-5-item-1">Kritisch lezen en schrijven</li>
+                            <li data-cms="klassen-5-item-2">Verhoudingen en procenten</li>
+                            <li data-cms="klassen-5-item-3">Zelfstandig werken</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Zesde Leerjaar -->
+                <div class="card-loose">
+                    <div style="background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 24px; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 24px; color: #fff; margin: 0;">6de Leerjaar</h3>
+                            <span style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 24px;">6</span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">11-12 jaar</p>
+                    </div>
+                    <div style="padding: 24px;">
+                        <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Wat leren ze?</h4>
+                        <ul style="color: #666; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                            <li data-cms="klassen-6-item-1">Voorbereiding secundair</li>
+                            <li data-cms="klassen-6-item-2">Complexe vraagstukken</li>
+                            <li data-cms="klassen-6-item-3">Studievaardigheden</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extra Info Section -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="quote-card">
+                    <div style="text-align: center;">
+                        <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">EXTRA INFO</span>
+                    </div>
+                    <h2 style="font-size: 32px; line-height: 1.4; margin: 24px 0; text-align: center;" data-cms="klassen-extra-title">
+                        Meer dan alleen lessen
+                    </h2>
+                    <p style="font-size: 18px; color: #666; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;" data-cms="klassen-extra-text">
+                        Naast de reguliere lessen bieden we uitstappen, projectweken, sportdagen en culturele activiteiten. Zo maken we leren een avontuur waar kinderen met plezier aan deelnemen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-pattern"></div>
+                <div class="cta-content">
+                    <h2 data-cms="klassen-cta-title">Wil je meer weten over een specifieke klas?</h2>
+                    <p data-cms="klassen-cta-text">Neem contact op voor meer informatie of kom langs tijdens een opendeurdag om de klassen te bezoeken.</p>
+                    <div class="cta-buttons">
+                        <a href="../contact/" class="btn-cta-primary">Neem Contact Op</a>
+                        <a href="../visie/" class="btn-cta-secondary">Onze Visie</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../assets/js/components/footer.js"></script>
     </main>
 
-    <script src="../../assets/js/components/header.js"></script>
-    <script src="../../assets/js/components/footer.js"></script>
+    <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 </html>
