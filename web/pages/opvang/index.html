@@ -7,15 +7,253 @@
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
+    <script src="../../assets/js/components/header.js"></script>
+
     <main>
-        <section class="page-section">
-            <h1>Opvang</h1>
-            <p>Hier komt informatie over de opvang.</p>
+        <!-- Hero Section -->
+        <section class="hero-playful" style="padding: 120px 24px 80px;">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Voor- en Naschoolse Opvang</span>
+                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="opvang-hero-title">
+                    Veilige opvang van <span class="hero-highlight">7u tot 18u</span>
+                </h1>
+                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="opvang-hero-text">
+                    Uw kind is in goede handen voor en na de schooluren. Met leuke activiteiten, begeleiding bij huiswerk en een warme sfeer.
+                </p>
+            </div>
+
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
         </section>
+
+        <!-- Schedule Overview -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Tijdschema</span>
+                    <h2 data-cms="opvang-schedule-title">Wanneer zijn we open?</h2>
+                    <p style="color: #666;" data-cms="opvang-schedule-subtitle">Flexibele opvang aangepast aan uw gezinsritme</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;">
+                    <!-- Voorschoolse Opvang -->
+                    <div class="card-loose" style="padding: 40px;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                            <div style="width: 60px; height: 60px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                    <path d="M6 2v6M18 2v6M3 8h18M5 8h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 24px; margin: 0;">Voorschoolse Opvang</h3>
+                                <p style="color: #a8cf8c; font-weight: 600; margin: 4px 0 0 0;" data-cms="opvang-morning-time">7:00 - 8:30</p>
+                            </div>
+                        </div>
+                        <p style="color: #666; line-height: 1.7; margin: 0;" data-cms="opvang-morning-text">
+                            Start de dag rustig met een ontspannen sfeer. Kinderen kunnen spelen, lezen of rustig ontwaken voor de schooldag begint.
+                        </p>
+                    </div>
+
+                    <!-- Naschoolse Opvang -->
+                    <div class="card-loose" style="padding: 40px;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                            <div style="width: 60px; height: 60px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 24px; margin: 0;">Naschoolse Opvang</h3>
+                                <p style="color: #a8cf8c; font-weight: 600; margin: 4px 0 0 0;" data-cms="opvang-afternoon-time">15:30 - 18:00</p>
+                            </div>
+                        </div>
+                        <p style="color: #666; line-height: 1.7; margin: 0;" data-cms="opvang-afternoon-text">
+                            Na school kunnen kinderen huiswerk maken, spelen en deelnemen aan leuke activiteiten tot u ze komt ophalen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities -->
+        <section class="values-section">
+            <div class="section-header">
+                <span class="tag-pill">Activiteiten</span>
+                <h2 data-cms="opvang-activities-title">Wat doen we tijdens de opvang?</h2>
+                <p style="color: #666;" data-cms="opvang-activities-subtitle">Een gevarieerd aanbod voor elk kind</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+                <!-- Activity 1 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="opvang-activity-1-title">Huiswerkbegeleiding</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="opvang-activity-1-text">Rustige ruimte waar kinderen hun huiswerk kunnen maken met begeleiding indien nodig.</p>
+                </div>
+
+                <!-- Activity 2 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="opvang-activity-2-title">Vrij Spel</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="opvang-activity-2-text">Kinderen kunnen vrij spelen met speelgoed, gezelschapsspellen of buiten ravotten.</p>
+                </div>
+
+                <!-- Activity 3 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="opvang-activity-3-title">Creatieve Workshops</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="opvang-activity-3-text">Knutselen, tekenen en andere creatieve activiteiten om de fantasie te prikkelen.</p>
+                </div>
+
+                <!-- Activity 4 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="opvang-activity-4-title">Sport & Beweging</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="opvang-activity-4-text">Actieve spelletjes en sportactiviteiten op de speelplaats of in de turnzaal.</p>
+                </div>
+
+                <!-- Activity 5 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="opvang-activity-5-title">Muziek & Dans</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="opvang-activity-5-text">Zingen, dansen en muziek maken voor kinderen die van ritme houden.</p>
+                </div>
+
+                <!-- Activity 6 -->
+                <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                    <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="opvang-activity-6-title">Voorlezen</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="opvang-activity-6-text">Gezellige voorleesmomenten om de dag rustig af te sluiten.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Info -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Praktisch</span>
+                    <h2 data-cms="opvang-practical-title">Goed om te weten</h2>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;">
+                    <!-- Pricing -->
+                    <div style="background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                        <h3 style="font-size: 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            Tarieven
+                        </h3>
+                        <div style="color: #666; line-height: 2;">
+                            <p style="margin: 0 0 12px 0;" data-cms="opvang-price-1">Voorschoolse opvang: €2,50 per ochtend</p>
+                            <p style="margin: 0 0 12px 0;" data-cms="opvang-price-2">Naschoolse opvang: €3,50 per namiddag</p>
+                            <p style="margin: 0 0 12px 0;" data-cms="opvang-price-3">Abonnement maand: €60</p>
+                            <p style="margin: 0;" data-cms="opvang-price-note">Sociale tarieven mogelijk op basis van inkomen</p>
+                        </div>
+                    </div>
+
+                    <!-- Registration -->
+                    <div style="background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                        <h3 style="font-size: 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Inschrijven
+                        </h3>
+                        <div style="color: #666; line-height: 2;">
+                            <p style="margin: 0 0 12px 0;" data-cms="opvang-register-1">Inschrijven kan via het secretariaat</p>
+                            <p style="margin: 0 0 12px 0;" data-cms="opvang-register-2">Flexibel: per dag of vast abonnement</p>
+                            <p style="margin: 0 0 12px 0;" data-cms="opvang-register-3">Annuleren tot 8u 's ochtends mogelijk</p>
+                            <p style="margin: 0;" data-cms="opvang-register-note">Betaling via domiciliëring of overschrijving</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="quote-card">
+                    <div style="text-align: center;">
+                        <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">ONS TEAM</span>
+                    </div>
+                    <h2 style="font-size: 32px; line-height: 1.4; margin: 24px 0; text-align: center;" data-cms="opvang-team-title">
+                        Ervaren begeleiders
+                    </h2>
+                    <p style="font-size: 18px; color: #666; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;" data-cms="opvang-team-text">
+                        Ons opvangteam bestaat uit gediplomeerde begeleiders die zorgen voor een veilige en gezellige sfeer. Ze kennen de kinderen goed en zorgen voor een warme opvang.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-pattern"></div>
+                <div class="cta-content">
+                    <h2 data-cms="opvang-cta-title">Interesse in onze opvang?</h2>
+                    <p data-cms="opvang-cta-text">Neem contact op voor meer informatie of om uw kind in te schrijven voor de voor- of naschoolse opvang.</p>
+                    <div class="cta-buttons">
+                        <a href="../contact/" class="btn-cta-primary">Neem Contact Op</a>
+                        <a href="../" class="btn-cta-secondary">Terug naar Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../assets/js/components/footer.js"></script>
     </main>
 
-    <script src="../../assets/js/components/header.js"></script>
-    <script src="../../assets/js/components/footer.js"></script>
+    <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 </html>
