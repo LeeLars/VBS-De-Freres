@@ -722,6 +722,38 @@
             </div>
         </section>
 
+        <!-- Creative Corner - Drawing Canvas -->
+        <section style="padding: 80px 24px; background: #fff;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Creatieve Hoek</span>
+                    <h2 style="font-size: 36px; margin-top: 16px; margin-bottom: 8px;">Teken & Kleur!</h2>
+                    <p style="color: #666; font-size: 16px;">Laat je creativiteit de vrije loop - teken iets leuks!</p>
+                </div>
+                
+                <div style="background: #f9fcf7; border-radius: 24px; padding: 32px; border: 2px solid #e8f5e0;">
+                    <!-- Color palette -->
+                    <div id="colorPalette" style="display: flex; gap: 12px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 14px; color: #666; font-weight: 600;">Kies een kleur:</span>
+                        <button class="color-btn active" data-color="#000000" style="width: 36px; height: 36px; border-radius: 50%; background: #000000; border: 3px solid #000; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#a8cf8c" style="width: 36px; height: 36px; border-radius: 50%; background: #a8cf8c; border: 2px solid #a8cf8c; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#ff6b6b" style="width: 36px; height: 36px; border-radius: 50%; background: #ff6b6b; border: 2px solid #ff6b6b; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#4ecdc4" style="width: 36px; height: 36px; border-radius: 50%; background: #4ecdc4; border: 2px solid #4ecdc4; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#ffe66d" style="width: 36px; height: 36px; border-radius: 50%; background: #ffe66d; border: 2px solid #ffe66d; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#ff8b94" style="width: 36px; height: 36px; border-radius: 50%; background: #ff8b94; border: 2px solid #ff8b94; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#c7ceea" style="width: 36px; height: 36px; border-radius: 50%; background: #c7ceea; border: 2px solid #c7ceea; cursor: pointer; transition: transform 0.2s;"></button>
+                        <button class="color-btn" data-color="#ffffff" style="width: 36px; height: 36px; border-radius: 50%; background: #ffffff; border: 2px solid #ddd; cursor: pointer; transition: transform 0.2s;" title="Gum"></button>
+                        <button id="clearCanvas" style="padding: 8px 20px; border-radius: 50px; background: #fff; border: 2px solid #a8cf8c; cursor: pointer; font-size: 14px; font-weight: 600; color: #166534; transition: all 0.2s; margin-left: 8px;">Wissen</button>
+                    </div>
+                    
+                    <!-- Drawing canvas -->
+                    <canvas id="heroCanvas" width="736" height="400" style="width: 100%; height: auto; border: 3px solid #a8cf8c; border-radius: 16px; background: white; cursor: crosshair; touch-action: none; display: block;"></canvas>
+                    
+                    <p style="margin: 16px 0 0 0; font-size: 13px; color: #999; text-align: center;">Teken met je muis of vinger en deel je kunstwerk met je ouders!</p>
+                </div>
+            </div>
+        </section>
+
         <!-- CTA Section -->
         <section style="padding: 80px 24px; background: linear-gradient(135deg, #f5f9f2 0%, #e8f5e0 100%); position: relative; overflow: hidden;">
             <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: #a8cf8c; opacity: 0.1; border-radius: 50%;"></div>
@@ -744,5 +776,6 @@
 
     <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/playful-interactions.js"></script>
 </body>
 </html>

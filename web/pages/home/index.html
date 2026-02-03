@@ -37,31 +37,51 @@
                 </div>
                 
                 <div class="hero-form-col">
-                    <div class="hero-form-card card-loose" style="padding: 24px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <div class="hero-form-card card-loose">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px;">
                             <div>
-                                <h3 style="margin: 0; font-size: 20px; color: #000;">Teken & Kleur!</h3>
-                                <p style="margin: 4px 0 0 0; font-size: 13px; color: #666;">Laat je creativiteit de vrije loop</p>
+                                <h2 data-cms="home-form-title" style="margin: 0; font-size: 24px;">Info en Inschrijven</h2>
+                                <p data-cms="home-form-subtitle" style="margin: 4px 0 0 0; font-size: 14px; color: #666;">Kom langs voor een warme rondleiding</p>
                             </div>
-                            <button id="clearCanvas" style="padding: 8px 16px; border-radius: 50px; background: #f5f5f5; border: 1px solid #ddd; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">
-                                Wissen
-                            </button>
+                            <div style="width: 40px; height: 40px; background: #e8f5e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #a8cf8c;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
                         </div>
                         
-                        <!-- Color palette -->
-                        <div id="colorPalette" style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-                            <button class="color-btn active" data-color="#000000" style="width: 32px; height: 32px; border-radius: 50%; background: #000000; border: 3px solid #000; cursor: pointer; transition: transform 0.2s;"></button>
-                            <button class="color-btn" data-color="#a8cf8c" style="width: 32px; height: 32px; border-radius: 50%; background: #a8cf8c; border: 2px solid #a8cf8c; cursor: pointer; transition: transform 0.2s;"></button>
-                            <button class="color-btn" data-color="#ff6b6b" style="width: 32px; height: 32px; border-radius: 50%; background: #ff6b6b; border: 2px solid #ff6b6b; cursor: pointer; transition: transform 0.2s;"></button>
-                            <button class="color-btn" data-color="#4ecdc4" style="width: 32px; height: 32px; border-radius: 50%; background: #4ecdc4; border: 2px solid #4ecdc4; cursor: pointer; transition: transform 0.2s;"></button>
-                            <button class="color-btn" data-color="#ffe66d" style="width: 32px; height: 32px; border-radius: 50%; background: #ffe66d; border: 2px solid #ffe66d; cursor: pointer; transition: transform 0.2s;"></button>
-                            <button class="color-btn" data-color="#ff8b94" style="width: 32px; height: 32px; border-radius: 50%; background: #ff8b94; border: 2px solid #ff8b94; cursor: pointer; transition: transform 0.2s;"></button>
-                        </div>
-                        
-                        <!-- Drawing canvas -->
-                        <canvas id="heroCanvas" width="400" height="300" style="width: 100%; height: auto; border: 3px solid #a8cf8c; border-radius: 12px; background: white; cursor: crosshair; touch-action: none;"></canvas>
-                        
-                        <p style="margin: 12px 0 0 0; font-size: 12px; color: #999; text-align: center;">Teken iets leuks en deel het met je ouders!</p>
+                        <form id="enrollmentForm" class="compact-form">
+                            <div class="form-group">
+                                <input type="text" id="parentName" name="parentFirstName" placeholder="Naam ouder" required style="background: #f9fafb;">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" placeholder="Email" required style="background: #f9fafb;">
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" placeholder="Telefoon" required style="background: #f9fafb;">
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <select name="childAge" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e0e0e0; background: #f9fafb; margin-bottom: 12px;">
+                                    <option value="" disabled selected>Geboortejaar kind...</option>
+                                    <option value="2022">2022 (Instap)</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="older">Ouder</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <textarea name="message" rows="2" placeholder="Uw bericht of vraag..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e0e0e0; background: #f9fafb; resize: vertical;"></textarea>
+                            </div>
+                            
+                            <input type="hidden" name="parentLastName" value=".">
+
+                            <button type="submit" class="btn-submit btn-playful" style="width: 100%; background: #000; color: #fff; border-radius: 50px;">Vraag Info Aan</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -257,6 +277,5 @@
     <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/pages/home.js"></script>
-    <script src="../../assets/js/playful-interactions.js"></script>
 </body>
 </html>
