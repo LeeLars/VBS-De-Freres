@@ -7,15 +7,240 @@
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
+    <script src="../../assets/js/components/header.js"></script>
+
     <main>
-        <section class="page-section">
-            <h1>Projecten</h1>
-            <p>Hier komen de schoolprojecten.</p>
+        <!-- Hero Section -->
+        <section class="hero-playful" style="padding: 120px 24px 80px;">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Schoolprojecten</span>
+                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="projecten-hero-title">
+                    Leren door <span class="hero-highlight">te beleven</span>
+                </h1>
+                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="projecten-hero-text">
+                    Ontdek onze boeiende projecten en thema's die het schooljaar extra leuk en leerzaam maken voor alle kinderen.
+                </p>
+            </div>
+
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
         </section>
+
+        <!-- Current Projects -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Dit Schooljaar</span>
+                    <h2 data-cms="projecten-current-title">Lopende Projecten</h2>
+                    <p style="color: #666;" data-cms="projecten-current-subtitle">Waar we momenteel mee bezig zijn</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;">
+                    <!-- Project 1 -->
+                    <div class="card-loose" style="overflow: hidden; padding: 0;">
+                        <div style="height: 250px; background: #f5f5f5; position: relative; overflow: hidden;">
+                            <img data-cms="projecten-current-1-photo" src="" alt="Project" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                            <div style="position: relative; z-index: 0; display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; font-size: 60px;">P</div>
+                        </div>
+                        <div style="padding: 32px;">
+                            <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;" data-cms="projecten-current-1-period">SEPTEMBER - OKTOBER</span>
+                            <h3 style="font-size: 24px; margin: 16px 0 12px 0;" data-cms="projecten-current-1-title">Herfstproject</h3>
+                            <p style="color: #666; line-height: 1.7; margin: 0;" data-cms="projecten-current-1-text">
+                                Kinderen ontdekken de natuur in de herfst. Van bladeren verzamelen tot kastanjes zoeken en leren over de seizoenen.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="card-loose" style="overflow: hidden; padding: 0;">
+                        <div style="height: 250px; background: #f5f5f5; position: relative; overflow: hidden;">
+                            <img data-cms="projecten-current-2-photo" src="" alt="Project" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                            <div style="position: relative; z-index: 0; display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; font-size: 60px;">P</div>
+                        </div>
+                        <div style="padding: 32px;">
+                            <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;" data-cms="projecten-current-2-period">NOVEMBER - DECEMBER</span>
+                            <h3 style="font-size: 24px; margin: 16px 0 12px 0;" data-cms="projecten-current-2-title">Sinterklaas & Kerst</h3>
+                            <p style="color: #666; line-height: 1.7; margin: 0;" data-cms="projecten-current-2-text">
+                                Feestelijke projecten rond tradities, samen knutselen, zingen en genieten van de gezellige sfeer.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Annual Projects -->
+        <section class="values-section">
+            <div class="section-header">
+                <span class="tag-pill">Jaarlijkse Projecten</span>
+                <h2 data-cms="projecten-annual-title">Vaste Waarden</h2>
+                <p style="color: #666;" data-cms="projecten-annual-subtitle">Projecten die elk jaar terugkeren</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+                <!-- Annual Project 1 -->
+                <div class="card-loose" style="padding: 32px;">
+                    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="projecten-annual-1-title">Schoolreizen</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.7;" data-cms="projecten-annual-1-text">Elk jaar gaan we op uitstap. Van het museum tot de boerderij, kinderen leren buiten de klas.</p>
+                </div>
+
+                <!-- Annual Project 2 -->
+                <div class="card-loose" style="padding: 32px;">
+                    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="projecten-annual-2-title">Sportdag</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.7;" data-cms="projecten-annual-2-text">Een dag vol beweging en plezier met sportieve uitdagingen en teamspelen voor alle leeftijden.</p>
+                </div>
+
+                <!-- Annual Project 3 -->
+                <div class="card-loose" style="padding: 32px;">
+                    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="projecten-annual-3-title">Muziekvoorstelling</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.7;" data-cms="projecten-annual-3-text">Kinderen werken samen aan een muzikale voorstelling voor ouders en familie. Een hoogtepunt!</p>
+                </div>
+
+                <!-- Annual Project 4 -->
+                <div class="card-loose" style="padding: 32px;">
+                    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="projecten-annual-4-title">Boekenweek</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.7;" data-cms="projecten-annual-4-text">Een week vol verhalen, voorlezen en activiteiten om de liefde voor lezen te stimuleren.</p>
+                </div>
+
+                <!-- Annual Project 5 -->
+                <div class="card-loose" style="padding: 32px;">
+                    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M2 12h20"></path>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="projecten-annual-5-title">Duurzaamheid</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.7;" data-cms="projecten-annual-5-text">Projecten rond natuur, milieu en duurzaamheid. Kinderen leren zorgen voor onze planeet.</p>
+                </div>
+
+                <!-- Annual Project 6 -->
+                <div class="card-loose" style="padding: 32px;">
+                    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="projecten-annual-6-title">Kunstproject</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.7;" data-cms="projecten-annual-6-text">Creatieve projecten waarin kinderen hun artistieke talenten kunnen ontdekken en ontwikkelen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Approach -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="quote-card">
+                    <div style="text-align: center;">
+                        <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">ONZE AANPAK</span>
+                    </div>
+                    <h2 style="font-size: 32px; line-height: 1.4; margin: 24px 0; text-align: center;" data-cms="projecten-approach-title">
+                        Leren door ervaring
+                    </h2>
+                    <p style="font-size: 18px; color: #666; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;" data-cms="projecten-approach-text">
+                        Onze projecten zijn hands-on en interactief. Kinderen leren door te doen, te ontdekken en samen te werken. Zo blijft kennis beter hangen en wordt leren een avontuur.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Themes Timeline -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Jaaroverzicht</span>
+                    <h2 data-cms="projecten-timeline-title">Thema's doorheen het jaar</h2>
+                    <p style="color: #666;" data-cms="projecten-timeline-subtitle">Een gevarieerd programma voor elk seizoen</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 48px;">
+                    <!-- Season 1 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="projecten-season-1-period">SEPTEMBER - NOVEMBER</h4>
+                        <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="projecten-season-1-title">Herfst</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="projecten-season-1-text">Natuur, seizoenen, oogst</p>
+                    </div>
+
+                    <!-- Season 2 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="projecten-season-2-period">DECEMBER - JANUARI</h4>
+                        <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="projecten-season-2-title">Winter</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="projecten-season-2-text">Feesten, tradities, warmte</p>
+                    </div>
+
+                    <!-- Season 3 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="projecten-season-3-period">FEBRUARI - APRIL</h4>
+                        <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="projecten-season-3-title">Lente</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="projecten-season-3-text">Groei, bloemen, nieuw leven</p>
+                    </div>
+
+                    <!-- Season 4 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="projecten-season-4-period">MEI - JUNI</h4>
+                        <h3 style="font-size: 20px; margin-bottom: 12px;" data-cms="projecten-season-4-title">Zomer</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="projecten-season-4-text">Buitenactiviteiten, afsluiting</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-pattern"></div>
+                <div class="cta-content">
+                    <h2 data-cms="projecten-cta-title">Nieuwsgierig naar onze projecten?</h2>
+                    <p data-cms="projecten-cta-text">Volg ons op sociale media of neem contact op voor meer informatie over onze lopende en toekomstige projecten.</p>
+                    <div class="cta-buttons">
+                        <a href="../contact/" class="btn-cta-primary">Neem Contact Op</a>
+                        <a href="../fotos/" class="btn-cta-secondary">Bekijk Foto's</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../assets/js/components/footer.js"></script>
     </main>
 
-    <script src="../../assets/js/components/header.js"></script>
-    <script src="../../assets/js/components/footer.js"></script>
+    <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 </html>
