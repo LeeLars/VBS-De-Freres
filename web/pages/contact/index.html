@@ -7,44 +7,201 @@
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
+    <script src="../../assets/js/components/header.js"></script>
+
     <main>
-        <section class="page-section">
-            <h1>Contact</h1>
-            <p>Neem contact met ons op via onderstaand formulier.</p>
-            
-            <form id="contactForm" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Naam *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Telefoon</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Bericht *</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-                
-                <button type="submit" class="btn-submit">Verstuur</button>
-                
-                <div id="formMessage" class="form-message"></div>
-            </form>
+        <!-- Hero Section -->
+        <section class="hero-playful" style="padding: 120px 24px 80px;">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Contact</span>
+                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="contact-hero-title">
+                    Neem <span class="hero-highlight">contact</span> met ons op
+                </h1>
+                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="contact-hero-text">
+                    Vragen over inschrijvingen, een rondleiding of gewoon meer informatie? We helpen je graag verder.
+                </p>
+            </div>
+
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
         </section>
+
+        <!-- Contact Info Cards -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-bottom: 64px;">
+                    <!-- Phone Card -->
+                    <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                        <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 20px; margin-bottom: 8px;">Telefoon</h3>
+                        <a href="tel:+32123456789" style="color: #666; text-decoration: none; font-size: 16px;" data-cms="contact-phone">+32 12 34 56 789</a>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                        <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 20px; margin-bottom: 8px;">Email</h3>
+                        <a href="mailto:info@vbsdefreres.be" style="color: #666; text-decoration: none; font-size: 16px;" data-cms="contact-email">info@vbsdefreres.be</a>
+                    </div>
+
+                    <!-- Address Card -->
+                    <div class="card-loose" style="text-align: center; padding: 32px 24px;">
+                        <div style="width: 80px; height: 80px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 20px; margin-bottom: 8px;">Adres</h3>
+                        <p style="color: #666; font-size: 16px; line-height: 1.6; margin: 0;" data-cms="contact-address">Schoolstraat 123<br>1000 Brussel</p>
+                    </div>
+                </div>
+
+                <!-- Director Info -->
+                <div class="quote-card" style="margin-bottom: 64px;">
+                    <div style="display: grid; grid-template-columns: 100px 1fr; gap: 24px; align-items: center;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
+                            <img data-cms="contact-director-photo" src="" alt="Directeur" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div>
+                            <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">DIRECTEUR</span>
+                            <h3 style="font-size: 24px; margin: 8px 0 4px 0;" data-cms="contact-director-name">Directeur Naam</h3>
+                            <p style="color: #666; font-size: 14px; margin: 0;" data-cms="contact-director-email">directeur@vbsdefreres.be</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="values-section">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill">Stuur een bericht</span>
+                    <h2 data-cms="contact-form-title">Contactformulier</h2>
+                    <p style="color: #666;" data-cms="contact-form-subtitle">Vul onderstaand formulier in en we nemen zo snel mogelijk contact met je op</p>
+                </div>
+
+                <div class="card-loose" style="padding: 48px; margin-top: 48px;">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Naam *</label>
+                            <input type="text" id="name" name="name" required style="background: #f9fafb;">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required style="background: #f9fafb;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Telefoon</label>
+                                <input type="tel" id="phone" name="phone" style="background: #f9fafb;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Bericht *</label>
+                            <textarea id="message" name="message" rows="6" required style="background: #f9fafb;"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit" style="width: 100%; background: #a8cf8c; color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Verstuur Bericht</button>
+                        
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Opening Hours & Location -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+                    <!-- Opening Hours -->
+                    <div>
+                        <div class="section-header" style="text-align: left; margin-bottom: 32px;">
+                            <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Openingsuren</span>
+                            <h2 data-cms="contact-hours-title">Bereikbaarheid</h2>
+                        </div>
+                        
+                        <div style="background: #fff; padding: 32px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                            <div style="margin-bottom: 24px;">
+                                <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Schooluren</h4>
+                                <p style="color: #666; font-size: 14px; line-height: 1.8; margin: 0;" data-cms="contact-school-hours">Maandag - Vrijdag: 8:30 - 15:30</p>
+                            </div>
+                            
+                            <div style="margin-bottom: 24px;">
+                                <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Secretariaat</h4>
+                                <p style="color: #666; font-size: 14px; line-height: 1.8; margin: 0;" data-cms="contact-office-hours">Maandag - Vrijdag: 8:00 - 16:00</p>
+                            </div>
+                            
+                            <div>
+                                <h4 style="font-size: 16px; margin-bottom: 12px; color: #a8cf8c;">Voor- en naschoolse opvang</h4>
+                                <p style="color: #666; font-size: 14px; line-height: 1.8; margin: 0;" data-cms="contact-care-hours">Maandag - Vrijdag: 7:00 - 18:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Placeholder -->
+                    <div>
+                        <div class="section-header" style="text-align: left; margin-bottom: 32px;">
+                            <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Locatie</span>
+                            <h2 data-cms="contact-location-title">Vind ons hier</h2>
+                        </div>
+                        
+                        <div style="background: #f5f5f5; border-radius: 16px; height: 350px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <iframe data-cms="contact-map-embed" src="" style="width: 100%; height: 100%; border: 0; position: absolute; top: 0; left: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div style="position: relative; z-index: 0; text-align: center; color: #999;">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <p style="margin-top: 12px;">Kaart wordt geladen...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-pattern"></div>
+                <div class="cta-content">
+                    <h2 data-cms="contact-cta-title">Kom langs voor een rondleiding</h2>
+                    <p data-cms="contact-cta-text">Ontdek onze school en ontmoet ons team tijdens een persoonlijke rondleiding. We tonen je graag rond.</p>
+                    <div class="cta-buttons">
+                        <a href="../" class="btn-cta-primary">Terug naar Home</a>
+                        <a href="../team/" class="btn-cta-secondary">Ontmoet Ons Team</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../assets/js/components/footer.js"></script>
     </main>
 
     <script>
         window.API_BASE_URL = 'https://vbs-de-freres-production.up.railway.app';
     </script>
-    <script src="../../assets/js/components/header.js"></script>
-    <script src="../../assets/js/components/footer.js"></script>
+    <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/pages/contact.js"></script>
 </body>
