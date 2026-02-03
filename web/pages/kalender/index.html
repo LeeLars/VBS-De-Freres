@@ -7,15 +7,262 @@
     <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 <body>
+    <script src="../../assets/js/components/header.js"></script>
+
     <main>
-        <section class="page-section">
-            <h1>Kalender</h1>
-            <p>Hier komt de schoolkalender.</p>
+        <!-- Hero Section -->
+        <section class="hero-playful" style="padding: 120px 24px 80px;">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Schoolkalender</span>
+                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="kalender-hero-title">
+                    Blijf op de <span class="hero-highlight">hoogte</span>
+                </h1>
+                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="kalender-hero-text">
+                    Alle belangrijke data, evenementen en vakanties op een rij. Zo mis je nooit meer iets.
+                </p>
+            </div>
+
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
         </section>
+
+        <!-- Upcoming Events -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Binnenkort</span>
+                    <h2 data-cms="kalender-upcoming-title">Aankomende Evenementen</h2>
+                    <p style="color: #666;" data-cms="kalender-upcoming-subtitle">Wat staat er op de planning?</p>
+                </div>
+
+                <div style="display: grid; gap: 24px; margin-top: 48px;">
+                    <!-- Event 1 -->
+                    <div class="card-loose" style="padding: 32px; display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: center;">
+                        <div style="text-align: center; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 20px; border-radius: 16px; color: #fff;">
+                            <div style="font-size: 32px; font-weight: bold; line-height: 1;" data-cms="kalender-event-1-day">17</div>
+                            <div style="font-size: 14px; margin-top: 4px; text-transform: uppercase;" data-cms="kalender-event-1-month">Maart</div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; margin-bottom: 8px;" data-cms="kalender-event-1-title">Opendeurdag</h3>
+                            <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="kalender-event-1-text">Kom kennismaken met onze school. Rondleidingen van 10:00 tot 16:00 uur.</p>
+                        </div>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="card-loose" style="padding: 32px; display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: center;">
+                        <div style="text-align: center; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 20px; border-radius: 16px; color: #fff;">
+                            <div style="font-size: 32px; font-weight: bold; line-height: 1;" data-cms="kalender-event-2-day">25</div>
+                            <div style="font-size: 14px; margin-top: 4px; text-transform: uppercase;" data-cms="kalender-event-2-month">Maart</div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; margin-bottom: 8px;" data-cms="kalender-event-2-title">Ouderavond</h3>
+                            <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="kalender-event-2-text">Gesprekken met de leerkrachten over de voortgang van uw kind. 18:00 - 21:00 uur.</p>
+                        </div>
+                    </div>
+
+                    <!-- Event 3 -->
+                    <div class="card-loose" style="padding: 32px; display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: center;">
+                        <div style="text-align: center; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 20px; border-radius: 16px; color: #fff;">
+                            <div style="font-size: 32px; font-weight: bold; line-height: 1;" data-cms="kalender-event-3-day">5</div>
+                            <div style="font-size: 14px; margin-top: 4px; text-transform: uppercase;" data-cms="kalender-event-3-month">April</div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; margin-bottom: 8px;" data-cms="kalender-event-3-title">Sportdag</h3>
+                            <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="kalender-event-3-text">Een dag vol beweging en plezier voor alle leerlingen. Sportkleding meebrengen!</p>
+                        </div>
+                    </div>
+
+                    <!-- Event 4 -->
+                    <div class="card-loose" style="padding: 32px; display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: center;">
+                        <div style="text-align: center; background: linear-gradient(135deg, #a8cf8c 0%, #8bb973 100%); padding: 20px; border-radius: 16px; color: #fff;">
+                            <div style="font-size: 32px; font-weight: bold; line-height: 1;" data-cms="kalender-event-4-day">20</div>
+                            <div style="font-size: 14px; margin-top: 4px; text-transform: uppercase;" data-cms="kalender-event-4-month">April</div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 24px; margin-bottom: 8px;" data-cms="kalender-event-4-title">Lentefeest</h3>
+                            <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="kalender-event-4-text">Gezellig schoolfeest met optredens, kraampjes en lekkere hapjes. Iedereen welkom!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- School Holidays -->
+        <section class="values-section">
+            <div class="section-header">
+                <span class="tag-pill">Schoolvakanties</span>
+                <h2 data-cms="kalender-holidays-title">Vrije Dagen</h2>
+                <p style="color: #666;" data-cms="kalender-holidays-subtitle">Wanneer is de school gesloten?</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+                <!-- Holiday 1 -->
+                <div class="card-loose" style="padding: 32px; text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 8px;" data-cms="kalender-holiday-1-title">Krokusvakantie</h3>
+                    <p style="color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-holiday-1-dates">24 feb - 28 feb 2025</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="kalender-holiday-1-text">Een week rust in de winter</p>
+                </div>
+
+                <!-- Holiday 2 -->
+                <div class="card-loose" style="padding: 32px; text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 8px;" data-cms="kalender-holiday-2-title">Paasvakantie</h3>
+                    <p style="color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-holiday-2-dates">7 apr - 21 apr 2025</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="kalender-holiday-2-text">Twee weken lentefeest</p>
+                </div>
+
+                <!-- Holiday 3 -->
+                <div class="card-loose" style="padding: 32px; text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 8px;" data-cms="kalender-holiday-3-title">Zomervakantie</h3>
+                    <p style="color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-holiday-3-dates">1 jul - 31 aug 2025</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="kalender-holiday-3-text">Twee maanden zomerplezier</p>
+                </div>
+
+                <!-- Holiday 4 -->
+                <div class="card-loose" style="padding: 32px; text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 8px;" data-cms="kalender-holiday-4-title">Herfstvakantie</h3>
+                    <p style="color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-holiday-4-dates">27 okt - 31 okt 2025</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="kalender-holiday-4-text">Een week herfstrust</p>
+                </div>
+
+                <!-- Holiday 5 -->
+                <div class="card-loose" style="padding: 32px; text-align: center;">
+                    <div style="width: 70px; height: 70px; background: #f5f9f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 20px; margin-bottom: 8px;" data-cms="kalender-holiday-5-title">Kerstvakantie</h3>
+                    <p style="color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-holiday-5-dates">22 dec - 5 jan 2026</p>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;" data-cms="kalender-holiday-5-text">Feestelijke wintervakantie</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Dates -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="section-header">
+                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Belangrijk</span>
+                    <h2 data-cms="kalender-important-title">Niet te Missen</h2>
+                    <p style="color: #666;" data-cms="kalender-important-subtitle">Markeer deze data in je agenda</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;">
+                    <!-- Important Date 1 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-important-1-date">15 SEPTEMBER</h4>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="kalender-important-1-title">Start Schooljaar</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="kalender-important-1-text">Eerste schooldag na de zomervakantie</p>
+                    </div>
+
+                    <!-- Important Date 2 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-important-2-date">30 NOVEMBER</h4>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="kalender-important-2-title">Rapporten</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="kalender-important-2-text">Uitreiking eerste rapport</p>
+                    </div>
+
+                    <!-- Important Date 3 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-important-3-date">15 MAART</h4>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="kalender-important-3-title">Inschrijvingen</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="kalender-important-3-text">Start inschrijvingen volgend schooljaar</p>
+                    </div>
+
+                    <!-- Important Date 4 -->
+                    <div style="background: #fff; padding: 24px; border-radius: 16px; border-left: 4px solid #a8cf8c; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <h4 style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 8px;" data-cms="kalender-important-4-date">30 JUNI</h4>
+                        <h3 style="font-size: 18px; margin-bottom: 8px;" data-cms="kalender-important-4-title">Eindfeest</h3>
+                        <p style="color: #666; font-size: 14px; line-height: 1.6; margin: 0;" data-cms="kalender-important-4-text">Afsluiting schooljaar met groot feest</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Calendar -->
+        <section style="padding: 80px 24px; background: #fffffb;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="quote-card">
+                    <div style="text-align: center;">
+                        <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">DOWNLOAD</span>
+                    </div>
+                    <h2 style="font-size: 32px; line-height: 1.4; margin: 24px 0; text-align: center;" data-cms="kalender-download-title">
+                        Volledige Kalender
+                    </h2>
+                    <p style="font-size: 18px; color: #666; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto 32px auto;" data-cms="kalender-download-text">
+                        Download de volledige schoolkalender als PDF en hang hem op de koelkast. Zo mis je nooit meer een belangrijke datum.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="#" class="btn-cta-primary" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download Kalender PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-wrapper">
+            <div class="cta-card">
+                <div class="cta-pattern"></div>
+                <div class="cta-content">
+                    <h2 data-cms="kalender-cta-title">Vragen over een evenement?</h2>
+                    <p data-cms="kalender-cta-text">Neem contact op voor meer informatie over specifieke activiteiten of evenementen.</p>
+                    <div class="cta-buttons">
+                        <a href="../contact/" class="btn-cta-primary">Neem Contact Op</a>
+                        <a href="../projecten/" class="btn-cta-secondary">Bekijk Projecten</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../assets/js/components/footer.js"></script>
     </main>
 
-    <script src="../../assets/js/components/header.js"></script>
-    <script src="../../assets/js/components/footer.js"></script>
+    <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 </html>
