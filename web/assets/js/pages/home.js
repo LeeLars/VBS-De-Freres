@@ -9,33 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
         enrollmentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const formMessage = document.getElementById('formMessage');
+            const formMessage = document.getElementById('heroFormMessage');
             const submitBtn = enrollmentForm.querySelector('.btn-submit');
             const originalBtnText = submitBtn.textContent;
             
             // Disable button and show loading state
             submitBtn.disabled = true;
             submitBtn.textContent = 'Bezig met verzenden...';
-            
-            // Collect form data using FormData
-            const formDataObj = new FormData(enrollmentForm);
-            const formData = Object.fromEntries(formDataObj.entries());
-            
-            // Split names if possible to populate LastName fields (backend requires them)
-            // The form has 'parentFirstName' as the main input for "Naam Ouder"
-            if (formData.parentFirstName) {
-                const nameParts = formData.parentFirstName.trim().split(' ');
-                if (nameParts.length > 1) {
-                    formData.parentFirstName = nameParts.shift(); // First part
-                    formData.parentLastName = nameParts.join(' '); // Rest
-                } else {
-                    formData.parentLastName = '.'; // Fallback to satisfy validation
-                }
+            if (formMessage) {
+                formMessage.style.display = 'none';
+                formMessage.className = 'form-message';
             }
             
+            // Collect form data
+            const formData = {
+                parentName: document.getElementById('heroParentName').value,
+                childBirthYear: document.getElementById('heroChildBirthYear').value,
+                email: document.getElementById('heroEmail').value,
+                phone: document.getElementById('heroPhone').value,
+                message: document.getElementById('heroMessage').value,
+                type: 'visit'
+            };
+            
             try {
-                const apiUrl = window.API_BASE_URL || '';
-                const response = await fetch(`${apiUrl}/api/enrollment`, {
+                const apiUrl = window.API_BASE_URL ? `${window.API_BASE_URL}/api/contact` : '/api/contact';
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -46,17 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 
                 if (response.ok) {
-                    formMessage.textContent = 'Bedankt voor uw aanmelding! Wij nemen zo snel mogelijk contact met u op.';
-                    formMessage.className = 'form-message success';
+                    if (formMessage) {
+                        formMessage.textContent = result.message || 'Bedankt voor uw aanmelding! Wij nemen zo snel mogelijk contact met u op.';
+                        formMessage.classList.add('success');
+                        formMessage.style.display = 'block';
+                    }
                     enrollmentForm.reset();
                 } else {
-                    formMessage.textContent = result.error || 'Er is een fout opgetreden. Probeer het opnieuw.';
-                    formMessage.className = 'form-message error';
+                    if (formMessage) {
+                        formMessage.textContent = result.error || 'Er is een fout opgetreden. Probeer het opnieuw.';
+                        formMessage.classList.add('error');
+                        formMessage.style.display = 'block';
+                    }
                 }
             } catch (error) {
                 console.error('Enrollment form error:', error);
-                formMessage.textContent = 'Er is een fout opgetreden bij het verzenden. Probeer het later opnieuw.';
-                formMessage.className = 'form-message error';
+                if (formMessage) {
+                    formMessage.textContent = 'Er is een fout opgetreden bij het verzenden. Probeer het later opnieuw.';
+                    formMessage.classList.add('error');
+                    formMessage.style.display = 'block';
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalBtnText;

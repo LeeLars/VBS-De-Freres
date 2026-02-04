@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VBS De Frères - Vrije Basisschool</title>
     <link rel="stylesheet" href="../../assets/css/main.css" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     <script src="../../assets/js/components/header.js"></script>
@@ -32,7 +37,7 @@
                             </svg>
                             Bekijk Video
                         </a>
-                        <a href="../klassen/" class="btn-outline-playful" style="transition: all 0.3s ease;" onmouseover="this.style.background='#a8cf8c'; this.style.color='#000'" onmouseout="this.style.background='transparent'; this.style.color='#000'">Ontdek onze klassen</a>
+                        <a href="../klassen/" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #000; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 16px; text-decoration: none; transition: all 0.3s ease; border: 2px solid #a8cf8c; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" onmouseover="this.style.background='#a8cf8c'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(168, 207, 140, 0.3)'" onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)'">Ontdek onze klassen</a>
                     </div>
                 </div>
                 
@@ -52,35 +57,44 @@
                         
                         <form id="enrollmentForm" class="compact-form">
                             <div class="form-group">
-                                <input type="text" id="parentName" name="parentFirstName" placeholder="Naam ouder" required style="background: #f9fafb;">
+                                <input type="text" id="heroParentName" name="parentName" placeholder="Naam ouder(s)" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
+                            </div>
+
+                            <div class="form-group">
+                                <select id="heroChildBirthYear" name="childBirthYear" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                                    <option value="">Geboortejaar kind</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                </select>
                             </div>
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="email" id="email" name="email" placeholder="Email" required style="background: #f9fafb;">
+                                    <input type="email" id="heroEmail" name="email" placeholder="Email" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" id="phone" name="phone" placeholder="Telefoon" required style="background: #f9fafb;">
+                                    <input type="tel" id="heroPhone" name="phone" placeholder="Telefoon" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
                                 </div>
                             </div>
 
-                            <div class="form-group full-width">
-                                <select name="childAge" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e0e0e0; background: #f9fafb; margin-bottom: 12px;">
-                                    <option value="" disabled selected>Geboortejaar kind...</option>
-                                    <option value="2022">2022 (Instap)</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                    <option value="older">Ouder</option>
-                                </select>
+                            <div class="form-group">
+                                <textarea id="heroMessage" name="message" rows="2" placeholder="Bericht (optioneel)" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
                             </div>
 
-                            <div class="form-group full-width">
-                                <textarea name="message" rows="2" placeholder="Uw bericht of vraag..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e0e0e0; background: #f9fafb; resize: vertical;"></textarea>
-                            </div>
+                            <button type="submit" class="btn-submit btn-playful" style="width: 100%; background: #a8cf8c; color: #000; padding: 12px; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(168, 207, 140, 0.3);">Plan een Bezoek</button>
                             
-                            <input type="hidden" name="parentLastName" value=".">
-
-                            <button type="submit" class="btn-submit btn-playful" style="width: 100%; background: #000; color: #fff; border-radius: 50px;">Vraag Info Aan</button>
+                            <div id="heroFormMessage" class="form-message" style="margin-top: 12px;"></div>
                         </form>
                     </div>
                 </div>
@@ -152,7 +166,7 @@
         </script>
 
         <!-- Quote Section -->
-        <section class="quote-section">
+        <section class="quote-section" style="display: none;">
             <div class="quote-card">
                 <div class="quote-mark">”</div>
                 <div style="margin-bottom: 24px;">
