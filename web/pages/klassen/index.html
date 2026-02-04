@@ -15,14 +15,72 @@
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
 
-            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
-                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Onze Klassen</span>
-                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="klassen-hero-title">
-                    Van kleuter tot <span class="hero-highlight">zesde leerjaar</span>
-                </h1>
-                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="klassen-hero-text">
-                    Ontdek wat uw kind leert en beleeft in elke klas. Van de eerste stapjes in de kleuterklas tot de voorbereiding op het secundair onderwijs.
-                </p>
+            <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+                <div style="text-align: center; margin-bottom: 64px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000;">Ons Aanbod</span>
+                    <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="klassen-hero-title">
+                        Van <span class="hero-highlight">kleuter</span> tot <span class="hero-highlight">middelbaar</span>
+                    </h1>
+                    <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="klassen-hero-text">
+                        Ontdek ons volledige onderwijsaanbod. Een doorlopende leerlijn van 2,5 tot 18 jaar op onze groene campus.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+                    <!-- Kleuter -->
+                    <a href="#kleuter" onclick="document.querySelector('.class-filter-btn[data-class=peuterklas]').click(); return true;" style="text-decoration: none; color: inherit;">
+                        <div class="card-loose" style="padding: 32px; text-align: center; height: 100%; transition: transform 0.3s; background: #fff;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="height: 200px; background: #f9fcf7; border-radius: 16px; margin-bottom: 24px; overflow: hidden; position: relative;">
+                                <img src="../../assets/images/static/kleuter.jpg" alt="Kleuteronderwijs" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(168, 207, 140, 0.1);">
+                                    <span style="font-size: 64px;">🎨</span>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 24px; margin-bottom: 12px;">Kleuter</h3>
+                            <p style="color: #666; margin-bottom: 16px;">2,5 tot 6 jaar</p>
+                            <span style="color: #166534; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                                Ontdekken
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Lager -->
+                    <a href="#lager" onclick="document.querySelector('.class-filter-btn[data-class=1a]').click(); return true;" style="text-decoration: none; color: inherit;">
+                        <div class="card-loose" style="padding: 32px; text-align: center; height: 100%; transition: transform 0.3s; background: #fff;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="height: 200px; background: #f0f9ff; border-radius: 16px; margin-bottom: 24px; overflow: hidden; position: relative;">
+                                <img src="../../assets/images/static/lager.jpg" alt="Lager onderwijs" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.1);">
+                                    <span style="font-size: 64px;">📚</span>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 24px; margin-bottom: 12px;">Lager</h3>
+                            <p style="color: #666; margin-bottom: 16px;">6 tot 12 jaar</p>
+                            <span style="color: #166534; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                                Ontdekken
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Middelbaar -->
+                    <a href="https://sfxbrugge.be/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+                        <div class="card-loose" style="padding: 32px; text-align: center; height: 100%; transition: transform 0.3s; background: #fff;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="height: 200px; background: #fff7ed; border-radius: 16px; margin-bottom: 24px; overflow: hidden; position: relative;">
+                                <img src="../../assets/images/static/middelbaar.jpg" alt="Middelbaar onderwijs" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(249, 115, 22, 0.1);">
+                                    <span style="font-size: 64px;">🎓</span>
+                                </div>
+                            </div>
+                            <h3 style="font-size: 24px; margin-bottom: 12px;">Middelbaar</h3>
+                            <p style="color: #666; margin-bottom: 16px;">12 tot 18 jaar</p>
+                            <span style="color: #166534; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                                Naar website
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
             </div>
 
             <div class="wave-divider">
