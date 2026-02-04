@@ -36,4 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     
     document.body.appendChild(footer);
+    
+    // Add scroll-to-top button
+    const scrollBtn = document.createElement('button');
+    scrollBtn.className = 'scroll-to-top';
+    scrollBtn.setAttribute('aria-label', 'Scroll naar boven');
+    scrollBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    `;
+    
+    document.body.appendChild(scrollBtn);
 });
