@@ -90,35 +90,59 @@
             </div>
         </section>
 
-        <!-- Class Blogs Filter System -->
-        <section style="padding: 80px 24px; background: linear-gradient(135deg, #f5f9f2 0%, #e8f5e0 100%);">
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <div class="section-header">
+        <!-- Class Blogs with Sidebar Navigation -->
+        <section style="padding: 80px 24px; background: #fff;">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div class="section-header" style="text-align: center; margin-bottom: 48px;">
                     <span class="tag-pill" style="background: #a8cf8c; color: #000;">Klasblogs</span>
                     <h2>Ontdek onze klassen</h2>
                     <p style="color: #666;">Selecteer een klas om meer te weten te komen</p>
                 </div>
 
-                <!-- Class Filter Buttons -->
-                <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 48px;">
-                    <button class="class-filter-btn active" data-class="peuterklas" style="background: #a8cf8c; color: #000; border: 2px solid #a8cf8c; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Peuterklas</button>
-                    <button class="class-filter-btn" data-class="k1" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Kleuterklas 1</button>
-                    <button class="class-filter-btn" data-class="k2" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Kleuterklas 2</button>
-                    <button class="class-filter-btn" data-class="k3" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Kleuterklas 3</button>
-                    <button class="class-filter-btn" data-class="1a" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 1A</button>
-                    <button class="class-filter-btn" data-class="2a" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 2A</button>
-                    <button class="class-filter-btn" data-class="3a" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 3A</button>
-                    <button class="class-filter-btn" data-class="3b" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 3B</button>
-                    <button class="class-filter-btn" data-class="4a" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 4A</button>
-                    <button class="class-filter-btn" data-class="4b" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 4B</button>
-                    <button class="class-filter-btn" data-class="5a" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 5A</button>
-                    <button class="class-filter-btn" data-class="6a" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Klas 6A</button>
-                    <button class="class-filter-btn" data-class="talen" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Talenklas</button>
-                    <button class="class-filter-btn" data-class="sport" style="background: #fff; color: #000; border: 2px solid #e8f5e0; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">Sport</button>
-                </div>
+                <!-- Sidebar + Content Layout -->
+                <div style="display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start;">
+                    <!-- Sidebar Navigation -->
+                    <aside style="background: #f9fcf7; border-radius: 24px; padding: 32px; position: sticky; top: 100px;">
+                        <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 24px 0; color: #166534;">Alle klassen</h3>
+                        
+                        <!-- Peuter & Kleuter -->
+                        <div style="margin-bottom: 32px;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #666; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">Peuter & Kleuter</h4>
+                            <ul class="class-nav-list" style="list-style: none; margin: 0; padding: 0;">
+                                <li><a href="#" class="class-nav-link active" data-class="peuterklas" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px; background: #a8cf8c;">Peuterklas</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="k1" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Kleuterklas 1 - juf Nele</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="k2" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Kleuterklas 2 - juf Anaïs</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="k3" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Kleuterklas 3 - juf Evy</a></li>
+                            </ul>
+                        </div>
 
-                <!-- Class Details Container -->
-                <div id="classDetails" style="margin-top: 64px;">
+                        <!-- Lager Onderwijs -->
+                        <div style="margin-bottom: 32px;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #666; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">Lager Onderwijs</h4>
+                            <ul class="class-nav-list" style="list-style: none; margin: 0; padding: 0;">
+                                <li><a href="#" class="class-nav-link" data-class="1a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 1A - juf Lies / meester Simon</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="2a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 2A - juf Stefanie</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="3a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 3A - juf Melissa</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="3b" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 3B - juf Aurelie</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="4a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 4A - juf Emma</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="4b" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 4B - juf Tine</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="5a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 5A - juf Anneke</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="6a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 6A - juf Kelly</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Extra -->
+                        <div>
+                            <h4 style="font-size: 14px; font-weight: 600; color: #666; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">Extra</h4>
+                            <ul class="class-nav-list" style="list-style: none; margin: 0; padding: 0;">
+                                <li><a href="#" class="class-nav-link" data-class="talen" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Talenklas</a></li>
+                                <li><a href="#" class="class-nav-link" data-class="sport" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Sport</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Class Details Container -->
+                    <div id="classDetails" style="min-height: 500px;">
                     <!-- Peuterklas Details -->
                     <div class="class-detail active" data-class="peuterklas">
                         <div class="card-loose" style="padding: 48px;">
@@ -556,28 +580,28 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
         </section>
 
         <script>
-        // Class filter functionality
+        // Sidebar navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const filterBtns = document.querySelectorAll('.class-filter-btn');
+            const navLinks = document.querySelectorAll('.class-nav-link');
             const classDetails = document.querySelectorAll('.class-detail');
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
                     const targetClass = this.getAttribute('data-class');
                     
-                    // Update button styles
-                    filterBtns.forEach(b => {
-                        b.classList.remove('active');
-                        b.style.background = '#fff';
-                        b.style.borderColor = '#e8f5e0';
+                    // Update link styles
+                    navLinks.forEach(l => {
+                        l.classList.remove('active');
+                        l.style.background = 'transparent';
                     });
                     this.classList.add('active');
                     this.style.background = '#a8cf8c';
-                    this.style.borderColor = '#a8cf8c';
                     
                     // Show/hide class details
                     classDetails.forEach(detail => {
@@ -589,10 +613,36 @@
                             detail.classList.remove('active');
                         }
                     });
+
+                    // Smooth scroll to content
+                    document.getElementById('classDetails').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
                 });
             });
         });
         </script>
+
+        <style>
+        .class-nav-link:hover {
+            background: #e8f5e0 !important;
+        }
+        .class-nav-link.active {
+            background: #a8cf8c !important;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 992px) {
+            aside {
+                position: relative !important;
+                top: 0 !important;
+            }
+            section > div > div[style*="grid-template-columns: 280px 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        </style>
 
         <!-- Kleuterklas Section -->
         <section style="padding: 80px 24px; background: #fffffb;">
