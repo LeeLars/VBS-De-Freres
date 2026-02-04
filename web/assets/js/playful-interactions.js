@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Add floating decorative elements (subtle playful accents)
-    addFloatingElements();
+    // addFloatingElements(); // Disabled - no emojis needed
 });
 
 // Add subtle floating decorative elements
