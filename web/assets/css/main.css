@@ -1178,6 +1178,26 @@ body {
     }
 }
 
+/* Play Button Pulse Animation */
+@keyframes pulse-green {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(168, 207, 140, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(168, 207, 140, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(168, 207, 140, 0);
+    }
+}
+
+.btn-pulse {
+    animation: pulse-green 2s infinite;
+}
+
 /* Scroll to Top Button */
 .scroll-to-top {
     position: fixed;
