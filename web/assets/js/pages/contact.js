@@ -12,8 +12,7 @@ if (visitForm) {
     const submitBtn = visitForm.querySelector('.btn-submit');
     const formData = {
       parentName: document.getElementById('parentName').value,
-      childName: document.getElementById('childName').value,
-      childAge: document.getElementById('childAge').value,
+      childBirthYear: document.getElementById('childBirthYear').value,
       email: document.getElementById('visitEmail').value,
       phone: document.getElementById('visitPhone').value,
       message: document.getElementById('visitMessage').value,
