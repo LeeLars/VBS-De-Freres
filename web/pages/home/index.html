@@ -94,35 +94,62 @@
             </div>
         </section>
 
-        <!-- USP Strip -->
-        <section class="usp-strip">
-            <div class="usp-container">
-                <div class="usp-item">
-                    <div class="usp-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    </div>
-                    <span class="usp-text">Gezonde<br>Levensstijl</span>
+        <!-- Video Section -->
+        <section style="padding: 80px 24px; background: linear-gradient(135deg, #f5f9f2 0%, #e8f5e0 100%);">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000;">Ontdek onze school</span>
+                    <h2 style="font-size: 36px; margin-top: 16px; margin-bottom: 8px;">Beleef VBS De Frères</h2>
+                    <p style="color: #666; font-size: 16px;">Maak kennis met onze school in deze video</p>
                 </div>
-                <div class="usp-item">
-                    <div class="usp-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+
+                <div id="videoContainer" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.1); background: #000;">
+                    <div id="videoThumbnail" style="position: relative; cursor: pointer; aspect-ratio: 16/9;">
+                        <img src="https://img.youtube.com/vi/--xPHlwwYwo/maxresdefault.jpg" alt="VBS De Frères Video" style="width: 100%; height: 100%; object-fit: cover;">
+                        
+                        <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)); display: flex; align-items: center; justify-content: center;">
+                            <div id="playButton" style="width: 100px; height: 100px; background: #a8cf8c; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 8px 24px rgba(168, 207, 140, 0.4);">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#000" style="margin-left: 4px;">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-                    <span class="usp-text">Deelname<br>Projecten</span>
-                </div>
-                <div class="usp-item">
-                    <div class="usp-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    
+                    <div id="videoPlayer" style="display: none; aspect-ratio: 16/9;">
+                        <iframe id="youtubeIframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display: block;"></iframe>
                     </div>
-                    <span class="usp-text">Gelukkige<br>Leerlingen</span>
-                </div>
-                <div class="usp-item">
-                    <div class="usp-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                    </div>
-                    <span class="usp-text">Boeiende<br>Leerstof</span>
                 </div>
             </div>
         </section>
+
+        <style>
+            #playButton:hover {
+                transform: scale(1.1);
+                background: #96bb7a;
+                box-shadow: 0 12px 32px rgba(168, 207, 140, 0.6);
+            }
+            
+            #videoThumbnail:hover #playButton {
+                transform: scale(1.05);
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const videoThumbnail = document.getElementById('videoThumbnail');
+                const videoPlayer = document.getElementById('videoPlayer');
+                const youtubeIframe = document.getElementById('youtubeIframe');
+                
+                if (videoThumbnail) {
+                    videoThumbnail.addEventListener('click', function() {
+                        videoThumbnail.style.display = 'none';
+                        videoPlayer.style.display = 'block';
+                        youtubeIframe.src = 'https://www.youtube.com/embed/--xPHlwwYwo?autoplay=1&rel=0';
+                    });
+                }
+            });
+        </script>
 
         <!-- Quote Section -->
         <section class="quote-section">

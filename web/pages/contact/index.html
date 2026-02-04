@@ -5,24 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact – VBS De Frères</title>
     <link rel="stylesheet" href="../../assets/css/main.css" />
+    <style>
+        @media (max-width: 768px) {
+            .hero-split-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        .form-message {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: #e8f5e0;
+            color: #166534;
+            border: 2px solid #a8cf8c;
+        }
+        
+        .form-message.error {
+            background: #fee;
+            color: #c00;
+            border: 2px solid #fcc;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .btn-submit:hover {
+            background: #96bb7a !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(168, 207, 140, 0.4) !important;
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <script src="../../assets/js/components/header.js"></script>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero-playful" style="padding: 120px 24px 80px;">
+        <!-- Interactive Hero Section - Drawing & Form -->
+        <section style="padding: 120px 24px 80px; background: linear-gradient(135deg, #f5f9f2 0%, #e8f5e0 100%); position: relative; overflow: hidden;">
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
 
-            <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
-                <span class="tag-pill" style="background: #a8cf8c; color: #000;">Contact</span>
-                <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="contact-hero-title">
-                    Neem <span class="hero-highlight">contact</span> met ons op
-                </h1>
-                <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="contact-hero-text">
-                    Vragen over inschrijvingen, een rondleiding of gewoon meer informatie? We helpen je graag verder.
-                </p>
+            <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+                <!-- Header -->
+                <div style="text-align: center; margin-bottom: 48px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000;">Kom kennismaken!</span>
+                    <h1 style="font-size: 48px; margin: 24px 0 16px; line-height: 1.2;" data-cms="contact-hero-title">
+                        Laat ons <span class="hero-highlight">kennismaken</span>
+                    </h1>
+                    <p style="font-size: 20px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;" data-cms="contact-hero-subtitle">
+                        Teken hoe graag jij onze school wil bezoeken, terwijl je ouders jullie gegevens achterlaten
+                    </p>
+                </div>
+
+                <!-- 50/50 Split Layout -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;" class="hero-split-layout">
+                    <!-- Left Side: Drawing Canvas -->
+                    <div class="card-loose" style="padding: 32px; background: #fff;">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <h2 style="font-size: 28px; margin-bottom: 8px; color: #000;">Voor de kinderen</h2>
+                            <p style="color: #666; font-size: 16px;">Teken hoe blij je bent om onze school te ontdekken!</p>
+                        </div>
+                        
+                        <div style="background: #f9fcf7; border-radius: 16px; padding: 24px; border: 2px solid #e8f5e0;">
+                            <!-- Color palette -->
+                            <div id="colorPalette" style="display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; flex-wrap: wrap; align-items: center;">
+                                <span style="font-size: 13px; color: #666; font-weight: 600;">Kies een kleur:</span>
+                                <button class="color-btn active" data-color="#000000" style="width: 32px; height: 32px; border-radius: 50%; background: #000000; border: 3px solid #000; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#a8cf8c" style="width: 32px; height: 32px; border-radius: 50%; background: #a8cf8c; border: 2px solid #a8cf8c; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#ff6b6b" style="width: 32px; height: 32px; border-radius: 50%; background: #ff6b6b; border: 2px solid #ff6b6b; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#4ecdc4" style="width: 32px; height: 32px; border-radius: 50%; background: #4ecdc4; border: 2px solid #4ecdc4; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#ffe66d" style="width: 32px; height: 32px; border-radius: 50%; background: #ffe66d; border: 2px solid #ffe66d; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#ff8b94" style="width: 32px; height: 32px; border-radius: 50%; background: #ff8b94; border: 2px solid #ff8b94; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#c7ceea" style="width: 32px; height: 32px; border-radius: 50%; background: #c7ceea; border: 2px solid #c7ceea; cursor: pointer; transition: transform 0.2s;"></button>
+                                <button class="color-btn" data-color="#ffffff" style="width: 32px; height: 32px; border-radius: 50%; background: #ffffff; border: 2px solid #ddd; cursor: pointer; transition: transform 0.2s;" title="Gum"></button>
+                                <button id="clearCanvas" style="padding: 6px 16px; border-radius: 50px; background: #fff; border: 2px solid #a8cf8c; cursor: pointer; font-size: 13px; font-weight: 600; color: #166534; transition: all 0.2s;">Wissen</button>
+                            </div>
+                            
+                            <!-- Drawing canvas -->
+                            <canvas id="heroCanvas" width="520" height="350" style="width: 100%; height: auto; border: 3px solid #a8cf8c; border-radius: 12px; background: white; cursor: crosshair; touch-action: none; display: block;"></canvas>
+                            
+                            <p style="margin: 12px 0 0 0; font-size: 12px; color: #999; text-align: center;">Teken met je muis of vinger!</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Registration Form -->
+                    <div class="card-loose" style="padding: 32px; background: #fff;">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <h2 style="font-size: 28px; margin-bottom: 8px; color: #000;">Voor de ouders</h2>
+                            <p style="color: #666; font-size: 16px;">Laat jullie gegevens achter voor een kennismaking</p>
+                        </div>
+
+                        <form id="visitForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="parentName">Naam ouder(s) *</label>
+                                <input type="text" id="parentName" name="parentName" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="childName">Naam kind *</label>
+                                <input type="text" id="childName" name="childName" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="childAge">Leeftijd kind *</label>
+                                <input type="text" id="childAge" name="childAge" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitEmail">Email *</label>
+                                <input type="email" id="visitEmail" name="visitEmail" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitPhone">Telefoon *</label>
+                                <input type="tel" id="visitPhone" name="visitPhone" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitMessage">Bericht (optioneel)</label>
+                                <textarea id="visitMessage" name="visitMessage" rows="3" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s; resize: vertical;"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit" style="width: 100%; background: #a8cf8c; color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(168, 207, 140, 0.3);">Plan een Bezoek</button>
+                            
+                            <div id="visitFormMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Bottom Text -->
+                <div style="text-align: center; margin-top: 32px; padding: 24px; background: rgba(255,255,255,0.6); border-radius: 16px; backdrop-filter: blur(10px);">
+                    <p style="font-size: 16px; color: #666; line-height: 1.6; margin: 0;">
+                        Terwijl jullie kind zijn creativiteit de vrije loop laat, kunnen jullie als ouders alvast kennismaken. 
+                        Samen maken we de eerste stap naar een mooie schooltijd!
+                    </p>
+                </div>
             </div>
 
             <div class="wave-divider">
@@ -323,6 +460,7 @@
     </script>
     <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/playful-interactions.js"></script>
     <script src="../../assets/js/pages/contact.js"></script>
 </body>
 </html>
