@@ -11,11 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             
             <div class="footer-section">
-                <h3>Contact</h3>
+                <h3>Contacteer ons</h3>
                 <p>
-                    Email: info@vbsdefreres.be<br>
-                    Telefoon: 050 XX XX XX<br>
-                    Adres: Straatnaam 123, 8000 Brugge
+                    <strong>Basisschool De Frères</strong><br><br>
+                    <strong>Ingang:</strong><br>
+                    Nieuwstraat 2 | 8000 Brugge<br><br>
+                    <strong>Tel.:</strong> 050 33 63 47<br><br>
+                    <strong>Email:</strong><br>
+                    <a href="mailto:info@vbsdefreres.be" style="color: #a8cf8c; text-decoration: none;">info@vbsdefreres.be</a><br><br>
+                    <strong>Directeur:</strong><br>
+                    Inge Versavel<br>
+                    Gsm: 0476 90 81 23
                 </p>
             </div>
             
