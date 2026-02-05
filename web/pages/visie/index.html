@@ -10,54 +10,6 @@
     <script src="../../assets/js/components/header.js"></script>
 
     <main>
-        <style>
-            .sticky-sub-nav {
-                position: sticky;
-                top: 0;
-                z-index: 99;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-                box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            }
-            .sub-nav-container {
-                max-width: 1000px;
-                margin: 0 auto;
-                padding: 0 24px;
-                display: flex;
-                justify-content: center;
-                gap: 8px;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; /* Firefox */
-            }
-            .sub-nav-container::-webkit-scrollbar {
-                display: none; /* Chrome/Safari */
-            }
-            .sub-nav-link {
-                display: inline-block;
-                padding: 16px 20px;
-                color: #666;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 15px;
-                border-bottom: 3px solid transparent;
-                transition: all 0.3s ease;
-                white-space: nowrap;
-            }
-            .sub-nav-link:hover {
-                color: #a8cf8c;
-            }
-            .sub-nav-link.active {
-                color: #166534;
-                border-bottom-color: #a8cf8c;
-            }
-            @media (max-width: 768px) {
-                .sub-nav-container {
-                    justify-content: flex-start;
-                }
-            }
-        </style>
         <!-- Hero Section -->
         <section class="hero-playful" style="padding: 120px 24px 80px;">
             <div class="blob blob-1"></div>
@@ -80,16 +32,6 @@
             </div>
         </section>
 
-        <!-- Sticky Sub-Navigation -->
-        <div class="sticky-sub-nav">
-            <div class="sub-nav-container">
-                <a href="#visie" class="sub-nav-link active">Onze Visie</a>
-                <a href="#aanpak" class="sub-nav-link">Onze Aanpak</a>
-                <a href="#reglement" class="sub-nav-link">Schoolreglement</a>
-                <a href="#downloads" class="sub-nav-link">Downloads</a>
-            </div>
-        </div>
-
         <!-- Mission Statement -->
         <section style="padding: 80px 24px; background: #fffffb;">
             <div style="max-width: 1000px; margin: 0 auto;">
@@ -108,113 +50,113 @@
         </section>
 
         <!-- Vision Points -->
-        <section id="visie" style="padding: 80px 24px; background: #fff; scroll-margin-top: 80px;">
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <div class="section-header">
-                    <span class="tag-pill">Visie van de school</span>
-                    <h2>Waar wij voor staan</h2>
-                    <p style="color: #666;">Een school met een duidelijk leerklimaat en doelen</p>
+        <section id="visie" style="padding: 100px 24px; background: #fff;">
+            <div style="max-width: 1100px; margin: 0 auto;">
+                <div class="section-header" style="margin-bottom: 64px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">VISIE VAN DE SCHOOL</span>
+                    <h2 style="font-size: 42px; margin: 20px 0 16px; font-weight: 700;">Waar wij voor staan</h2>
+                    <p style="color: #666; font-size: 18px; max-width: 700px; margin: 0 auto;">Onze 10 kernpunten die de basis vormen van ons onderwijs</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; margin-top: 48px;">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 900px; margin: 0 auto;">
                     <!-- Vision Point 1 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We zijn een school waar <strong>zorg en aandacht voor elk kind centraal</strong> staat.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We zijn een school waar <strong style="color: #166534;">zorg en aandacht voor elk kind centraal</strong> staat.</p>
                     </div>
 
                     <!-- Vision Point 2 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">De leraren zetten hun <strong>'zesde zintuig'</strong> aan en gaan actief op zoek naar wat het kind (nog) niet weet over zijn talenten en valkuilen.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">De leraren zetten hun <strong style="color: #166534;">'zesde zintuig'</strong> aan en gaan actief op zoek naar wat het kind (nog) niet weet over zijn talenten en valkuilen.</p>
                     </div>
 
                     <!-- Vision Point 3 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We leggen <strong>de lat hoog voor elk kind</strong>, met oog voor de individuele verschillen.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We leggen <strong style="color: #166534;">de lat hoog voor elk kind</strong>, met oog voor de individuele verschillen.</p>
                     </div>
 
                     <!-- Vision Point 4 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We zetten in op een <strong>actieve leescultuur</strong> en willen dit gebruiken als motor voor het leren.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We zetten in op een <strong style="color: #166534;">actieve leescultuur</strong> en willen dit gebruiken als motor voor het leren.</p>
                     </div>
 
                     <!-- Vision Point 5 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We spelen de troeven van onze <strong>stedelijke context</strong> ten volle uit om kinderen een brede blik op het leven te geven! We stellen ons op als meedenkende partner van het Brugse cultuurcentrum, bibliotheken, concertgebouw, Brugge Plus, theater, musea, ...</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We spelen de troeven van onze <strong style="color: #166534;">stedelijke context</strong> ten volle uit om kinderen een brede blik op het leven te geven! We stellen ons op als meedenkende partner van het Brugse cultuurcentrum, bibliotheken, concertgebouw, Brugge Plus, theater, musea, ...</p>
                     </div>
 
                     <!-- Vision Point 6 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We erkennen de <strong>diversiteit in onze maatschappij</strong> en nemen onze rol als school op om elk kind goed onderwijs aan te bieden.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We erkennen de <strong style="color: #166534;">diversiteit in onze maatschappij</strong> en nemen onze rol als school op om elk kind goed onderwijs aan te bieden.</p>
                     </div>
 
                     <!-- Vision Point 7 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We zien <strong>meertaligheid als een meerwaarde</strong> voor het leren voor elk kind.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We zien <strong style="color: #166534;">meertaligheid als een meerwaarde</strong> voor het leren voor elk kind.</p>
                     </div>
 
                     <!-- Vision Point 8 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We brengen kinderen de <strong>christelijke identiteit</strong> bij, met respect voor de eigen thuiscultuur en -religie.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We brengen kinderen de <strong style="color: #166534;">christelijke identiteit</strong> bij, met respect voor de eigen thuiscultuur en -religie.</p>
                     </div>
 
                     <!-- Vision Point 9 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We zijn trots op het <strong>rijke verleden van de school</strong> en de link met de secundaire afdeling De Frères.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We zijn trots op het <strong style="color: #166534;">rijke verleden van de school</strong> en de link met de secundaire afdeling De Frères.</p>
                     </div>
 
                     <!-- Vision Point 10 -->
-                    <div style="display: flex; gap: 16px; padding: 24px; background: #f9fcf7; border-radius: 16px; border-left: 4px solid #a8cf8c;">
-                        <div style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2.5">
+                    <div style="display: flex; gap: 20px; padding: 28px 32px; background: #f9fcf7; border-radius: 12px; border-left: 5px solid #a8cf8c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f8ec'; this.style.transform='translateX(8px)'" onmouseout="this.style.backgroundColor='#f9fcf7'; this.style.transform='translateX(0)'">
+                        <div style="flex-shrink: 0; width: 28px; height: 28px; margin-top: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <p style="color: #333; line-height: 1.7; margin: 0;">We zetten ons met een <strong>vast en stabiel team</strong> in om actief na te denken over wat beter kan en streven dit elke dag na.</p>
+                        <p style="color: #333; line-height: 1.8; margin: 0; font-size: 16px;">We zetten ons met een <strong style="color: #166534;">vast en stabiel team</strong> in om actief na te denken over wat beter kan en streven dit elke dag na.</p>
                     </div>
                 </div>
             </div>
@@ -229,11 +171,12 @@
         </section>
 
         <!-- Educational Approach -->
-        <section id="aanpak" style="padding: 80px 24px; background: #f9fcf7; scroll-margin-top: 80px;">
+        <section id="aanpak" style="padding: 100px 24px; background: #f9fcf7;">
             <div style="max-width: 1200px; margin: 0 auto;">
-                <div class="section-header">
-                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Onze Aanpak</span>
-                    <h2 data-cms="visie-approach-title">Hoe we werken</h2>
+                <div class="section-header" style="margin-bottom: 64px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">ONZE AANPAK</span>
+                    <h2 data-cms="visie-approach-title" style="font-size: 42px; margin: 20px 0 16px; font-weight: 700;">Hoe we werken</h2>
+                    <p style="color: #666; font-size: 18px; max-width: 700px; margin: 0 auto;">Drie pijlers die onze onderwijsvisie vormgeven</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; margin-top: 48px;">
@@ -276,11 +219,12 @@
         </section>
 
         <!-- School Regulations -->
-        <section id="reglement" style="padding: 80px 24px; background: #fff; scroll-margin-top: 80px;">
+        <section id="reglement" style="padding: 100px 24px; background: #fff;">
             <div style="max-width: 1000px; margin: 0 auto;">
-                <div class="section-header">
-                    <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Schoolreglement</span>
-                    <h2>Ons Schoolreglement</h2>
+                <div class="section-header" style="margin-bottom: 64px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">SCHOOLREGLEMENT</span>
+                    <h2 style="font-size: 42px; margin: 20px 0 16px; font-weight: 700;">Ons Schoolreglement</h2>
+                    <p style="color: #666; font-size: 18px; max-width: 700px; margin: 0 auto;">Duidelijke afspraken voor een goede samenwerking</p>
                 </div>
 
                 <div style="background: #f9fcf7; border-radius: 24px; padding: 48px; margin-top: 48px; border: 2px solid #e8f5e0;">
@@ -339,12 +283,12 @@
         </section>
 
         <!-- Documents & Downloads -->
-        <section id="downloads" style="padding: 80px 24px; background: #f9fcf7; scroll-margin-top: 80px;">
+        <section id="downloads" style="padding: 100px 24px; background: #f9fcf7;">
             <div style="max-width: 1200px; margin: 0 auto;">
-                <div class="section-header">
-                    <span class="tag-pill" style="background: #a8cf8c; color: #000;">Documenten</span>
-                    <h2>Downloads</h2>
-                    <p style="color: #666;">Belangrijke documenten en informatie</p>
+                <div class="section-header" style="margin-bottom: 64px;">
+                    <span class="tag-pill" style="background: #a8cf8c; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">DOCUMENTEN</span>
+                    <h2 style="font-size: 42px; margin: 20px 0 16px; font-weight: 700;">Downloads</h2>
+                    <p style="color: #666; font-size: 18px; max-width: 700px; margin: 0 auto;">Belangrijke documenten en informatie</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px;">
@@ -485,33 +429,5 @@
 
     <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.sub-nav-link');
-
-            function highlightNavigation() {
-                let scrollPosition = window.scrollY + 120; // Offset for sticky header
-
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    const sectionId = section.getAttribute('id');
-
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === '#' + sectionId) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', highlightNavigation);
-        });
-    </script>
 </body>
 </html>
