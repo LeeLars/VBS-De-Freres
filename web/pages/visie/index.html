@@ -10,6 +10,54 @@
     <script src="../../assets/js/components/header.js"></script>
 
     <main>
+        <style>
+            .sticky-sub-nav {
+                position: sticky;
+                top: 0;
+                z-index: 99;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            }
+            .sub-nav-container {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 0 24px;
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
+            .sub-nav-container::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+            .sub-nav-link {
+                display: inline-block;
+                padding: 16px 20px;
+                color: #666;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 15px;
+                border-bottom: 3px solid transparent;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+            .sub-nav-link:hover {
+                color: #a8cf8c;
+            }
+            .sub-nav-link.active {
+                color: #166534;
+                border-bottom-color: #a8cf8c;
+            }
+            @media (max-width: 768px) {
+                .sub-nav-container {
+                    justify-content: flex-start;
+                }
+            }
+        </style>
         <!-- Hero Section -->
         <section class="hero-playful" style="padding: 120px 24px 80px;">
             <div class="blob blob-1"></div>
@@ -32,6 +80,16 @@
             </div>
         </section>
 
+        <!-- Sticky Sub-Navigation -->
+        <div class="sticky-sub-nav">
+            <div class="sub-nav-container">
+                <a href="#visie" class="sub-nav-link active">Onze Visie</a>
+                <a href="#aanpak" class="sub-nav-link">Onze Aanpak</a>
+                <a href="#reglement" class="sub-nav-link">Schoolreglement</a>
+                <a href="#downloads" class="sub-nav-link">Downloads</a>
+            </div>
+        </div>
+
         <!-- Mission Statement -->
         <section style="padding: 80px 24px; background: #fffffb;">
             <div style="max-width: 1000px; margin: 0 auto;">
@@ -50,7 +108,7 @@
         </section>
 
         <!-- Vision Points -->
-        <section style="padding: 80px 24px; background: #fff;">
+        <section id="visie" style="padding: 80px 24px; background: #fff; scroll-margin-top: 80px;">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div class="section-header">
                     <span class="tag-pill">Visie van de school</span>
@@ -171,7 +229,7 @@
         </section>
 
         <!-- Educational Approach -->
-        <section style="padding: 80px 24px; background: #f9fcf7;">
+        <section id="aanpak" style="padding: 80px 24px; background: #f9fcf7; scroll-margin-top: 80px;">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div class="section-header">
                     <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Onze Aanpak</span>
@@ -218,7 +276,7 @@
         </section>
 
         <!-- School Regulations -->
-        <section style="padding: 80px 24px; background: #fff;">
+        <section id="reglement" style="padding: 80px 24px; background: #fff; scroll-margin-top: 80px;">
             <div style="max-width: 1000px; margin: 0 auto;">
                 <div class="section-header">
                     <span class="tag-pill" style="background: #e8f5e0; color: #166534;">Schoolreglement</span>
@@ -281,7 +339,7 @@
         </section>
 
         <!-- Documents & Downloads -->
-        <section style="padding: 80px 24px; background: #f9fcf7;">
+        <section id="downloads" style="padding: 80px 24px; background: #f9fcf7; scroll-margin-top: 80px;">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div class="section-header">
                     <span class="tag-pill" style="background: #a8cf8c; color: #000;">Documenten</span>
@@ -427,5 +485,33 @@
 
     <script src="../../assets/js/cms-content.js"></script>
     <script src="../../assets/js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.sub-nav-link');
+
+            function highlightNavigation() {
+                let scrollPosition = window.scrollY + 120; // Offset for sticky header
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + sectionId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightNavigation);
+        });
+    </script>
 </body>
 </html>

@@ -22,11 +22,18 @@
     async function loadContent() {
         const pageSlug = getPageSlug();
         
+        // Fallback timeout - show content after 500ms if CMS hasn't loaded
+        const fallbackTimer = setTimeout(() => {
+            showContent(false);
+        }, 500);
+        
         try {
             const response = await fetch(`${API_BASE}/api/content/${pageSlug}`);
             
             if (!response.ok) {
                 console.log('No CMS content found, using default content');
+                clearTimeout(fallbackTimer);
+                showContent(false);
                 return;
             }
             
@@ -34,9 +41,16 @@
             
             if (result.success && result.content) {
                 applyContent(result.content);
+                clearTimeout(fallbackTimer);
+                showContent(true);
+            } else {
+                clearTimeout(fallbackTimer);
+                showContent(false);
             }
         } catch (error) {
             console.log('CMS content not available, using default content');
+            clearTimeout(fallbackTimer);
+            showContent(false);
         }
     }
     
@@ -56,6 +70,11 @@
                 }
             });
         }
+    }
+    
+    // Show content after loading or fallback
+    function showContent(usedCMS = true) {
+        document.body.classList.add(usedCMS ? 'cms-loaded' : 'cms-fallback');
     }
     
     // Load content when DOM is ready

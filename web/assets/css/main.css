@@ -1249,3 +1249,14 @@ body {
         height: 20px;
     }
 }
+
+/* CMS Content Loading - Prevent Flash */
+[data-cms] {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+body.cms-loaded [data-cms],
+body.cms-fallback [data-cms] {
+    opacity: 1;
+}
