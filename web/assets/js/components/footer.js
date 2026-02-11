@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="footer-bottom-links">
                 <a href="../visie/">Privacybeleid</a>
                 <span class="dot">&bull;</span>
-                <a href="../contact/">Sitemap</a>
+                <a href="../sitemap/">Sitemap</a>
                 <span class="dot">&bull;</span>
                 <a href="../visie/#reglement">Schoolreglement</a>
                 <span class="dot">&bull;</span>
-                <span style="color: #999; font-size: 0.8125rem;">Gemaakt door <a href="https://grafixstudio.be/" target="_blank" style="color: #a8cf8c; font-weight: 600;">Grafix Studio</a></span>
+                <span style="color: #999; font-size: 0.8125rem;">Gemaakt door <a href="https://grafixstudio.io/" target="_blank" style="color: #a8cf8c; font-weight: 600;">Grafix Studio</a></span>
                 <span class="dot">&bull;</span>
                 <a href="https://vbs-de-freres-production.up.railway.app/" target="_blank" class="cms-icon" title="CMS Login">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
