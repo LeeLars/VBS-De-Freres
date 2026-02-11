@@ -70,6 +70,16 @@ app.use('/api', apiAuth, apiRoutes);
 // Admin static files
 app.use('/cms', express.static(path.join(__dirname, 'public')));
 
+// Favicon fallback
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'assets', 'images', 'Favicon-de-freres.png'));
+});
+
+// Robots.txt - block CMS from search engines
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send('User-agent: *\nDisallow: /cms/\nDisallow: /api/\n');
+});
+
 // Root test route
 app.get('/', (req, res) => {
   res.json({ message: 'Grafix CMS starter draait' });

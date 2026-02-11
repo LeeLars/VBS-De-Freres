@@ -3,9 +3,15 @@ import { env } from '../config/env.js';
 // Auth middleware for write operations (PUT, POST, DELETE)
 // GET requests are public (frontend needs to read content)
 // Write requests require Authorization header with Bearer token
+// If CMS_API_TOKEN is not explicitly set, auth is skipped (dev mode)
 export function apiAuth(req, res, next) {
   // Allow GET requests without auth (public content reading)
   if (req.method === 'GET') {
+    return next();
+  }
+  
+  // Skip auth if no custom token is configured (dev mode)
+  if (!process.env.CMS_API_TOKEN) {
     return next();
   }
   
