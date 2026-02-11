@@ -1,4 +1,5 @@
-[service]
-name = "grafix-cms-starter"
-root = "."
-start = "npm start"
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "npm start"
