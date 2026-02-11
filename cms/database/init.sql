@@ -116,3 +116,30 @@ INSERT INTO page_content (page_slug, content_key, content_value, content_type) V
 ('home', 'contact-director-name', 'Inge Versavel', 'text'),
 ('home', 'contact-director-phone', 'Gsm: 0476 90 81 23', 'text')
 ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- Image content slots
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+-- Home page images
+('home', 'home-hero-bg', '', 'image'),
+('home', 'home-visie-img', '', 'image'),
+('home', 'home-gallery-1', '', 'image'),
+('home', 'home-gallery-2', '', 'image'),
+('home', 'home-gallery-3', '', 'image'),
+('home', 'home-gallery-4', '', 'image'),
+('home', 'home-gallery-5', '', 'image'),
+('home', 'home-gallery-6', '', 'image'),
+('home', 'home-gallery-7', '', 'image'),
+('home', 'home-gallery-8', '', 'image'),
+('home', 'home-gallery-9', '', 'image'),
+('home', 'home-gallery-10', '', 'image'),
+
+-- Contact page images
+('contact', 'contact-director-photo', '', 'image'),
+('contact', 'contact-map-embed', '', 'text'),
+
+-- Visie page images
+('visie', 'visie-hero-title', 'Samen bouwen aan een sterke toekomst', 'text'),
+('visie', 'visie-hero-text', 'Bij VBS De Frères geloven we in onderwijs dat verder gaat dan kennis alleen.', 'text'),
+('visie', 'visie-mission-title', 'Elk kind verdient de kans om te groeien en te bloeien', 'text'),
+('visie', 'visie-mission-text', 'Wij bieden een veilige en stimulerende leeromgeving.', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;

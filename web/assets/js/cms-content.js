@@ -64,7 +64,12 @@
             
             elements.forEach(element => {
                 if (element.tagName === 'IMG') {
-                    element.src = value;
+                    if (value && value.trim() !== '') {
+                        element.src = value;
+                    } else {
+                        // Hide images with no CMS value
+                        element.style.display = 'none';
+                    }
                 } else {
                     element.textContent = value;
                 }
