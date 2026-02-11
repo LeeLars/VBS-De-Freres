@@ -328,6 +328,13 @@
         .btn-clear-media:hover {
             background: #ff5252;
         }
+        
+        .field-hint {
+            font-size: 12px;
+            color: #999;
+            margin: 2px 0 6px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -524,6 +531,27 @@
                 };
             }
             
+            // Location hints: where does this image/field appear on the website?
+            const hints = {
+                'home-hero-bg': 'Grote achtergrondafbeelding bovenaan de homepagina, achter de titel en het formulier',
+                'home-visie-img': 'Afbeelding links naast de "Waar wij voor staan" tekst op de homepagina',
+                'home-gallery-1': 'Fotomuur sectie, bovenste rij, positie 1 (links)',
+                'home-gallery-2': 'Fotomuur sectie, bovenste rij, positie 2',
+                'home-gallery-3': 'Fotomuur sectie, bovenste rij, positie 3 (midden)',
+                'home-gallery-4': 'Fotomuur sectie, bovenste rij, positie 4',
+                'home-gallery-5': 'Fotomuur sectie, bovenste rij, positie 5 (rechts)',
+                'home-gallery-6': 'Fotomuur sectie, onderste rij, positie 1 (links)',
+                'home-gallery-7': 'Fotomuur sectie, onderste rij, positie 2',
+                'home-gallery-8': 'Fotomuur sectie, onderste rij, positie 3 (midden)',
+                'home-gallery-9': 'Fotomuur sectie, onderste rij, positie 4',
+                'home-gallery-10': 'Fotomuur sectie, onderste rij, positie 5 (rechts)',
+                'contact-director-photo': 'Foto van de directeur op de contactpagina',
+                'gallery-1': 'Oude galerij slot 1 (wordt vervangen door fotomuur)',
+                'gallery-2': 'Oude galerij slot 2 (wordt vervangen door fotomuur)',
+                'gallery-3': 'Oude galerij slot 3 (wordt vervangen door fotomuur)',
+                'gallery-4': 'Oude galerij slot 4 (wordt vervangen door fotomuur)'
+            };
+            
             const labels = {
                 'hero-title': 'Hoofdtitel',
                 'hero-text': 'Introductie tekst',
@@ -622,8 +650,11 @@
                     const isTextarea = key.includes('text') || key.includes('message');
                     const isImage = key.includes('gallery') || item.type === 'image';
                     
+                    const hint = hints[key] || '';
+                    
                     html += `<div class="content-field">
-                        <label for="${key}">${label}</label>`;
+                        <label for="${key}">${label}</label>
+                        ${hint ? `<div class="field-hint">${hint}</div>` : ''}`;
                         
                     if (isImage) {
                          html += `
