@@ -2,10 +2,10 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY cms/package*.json ./
 RUN npm install --production
 
-COPY . .
+COPY cms/ .
 
 EXPOSE 4000
 

@@ -1,4 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "cms/Dockerfile"
+
 [deploy]
-startCommand = "npm start"
+startCommand = "node cms/server.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
