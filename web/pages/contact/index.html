@@ -118,12 +118,12 @@
                         <form id="visitForm" class="contact-form">
                             <div class="form-group">
                                 <label for="parentName">Naam ouder(s) *</label>
-                                <input type="text" id="parentName" name="parentName" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                                <input type="text" id="parentName" name="parentName" required autocomplete="name" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
                             </div>
 
                             <div class="form-group">
                                 <label for="childBirthYear">Geboortejaar kind *</label>
-                                <select id="childBirthYear" name="childBirthYear" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s; cursor: pointer;">
+                                <select id="childBirthYear" name="childBirthYear" required autocomplete="off" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s; cursor: pointer;">
                                     <option value="">Selecteer een jaar</option>
                                     <option value="2024">2024</option>
                                     <option value="2023">2023</option>
@@ -143,17 +143,17 @@
                             
                             <div class="form-group">
                                 <label for="visitEmail">Email *</label>
-                                <input type="email" id="visitEmail" name="visitEmail" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                                <input type="email" id="visitEmail" name="visitEmail" required autocomplete="email" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
                             </div>
                             
                             <div class="form-group">
                                 <label for="visitPhone">Telefoon *</label>
-                                <input type="tel" id="visitPhone" name="visitPhone" required style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
+                                <input type="tel" id="visitPhone" name="visitPhone" required autocomplete="tel" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s;">
                             </div>
                             
                             <div class="form-group">
                                 <label for="visitMessage">Bericht (optioneel)</label>
-                                <textarea id="visitMessage" name="visitMessage" rows="3" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s; resize: vertical;"></textarea>
+                                <textarea id="visitMessage" name="visitMessage" rows="3" autocomplete="off" style="background: #f9fafb; width: 100%; padding: 12px 16px; border: 2px solid #e8f5e0; border-radius: 12px; font-size: 15px; transition: all 0.3s; resize: vertical;"></textarea>
                             </div>
                             
                             <button type="submit" class="btn-submit" style="width: 100%; background: #a8cf8c; color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(168, 207, 140, 0.3);">Plan een Bezoek</button>
@@ -248,24 +248,24 @@
                     <form id="contactForm" class="contact-form">
                         <div class="form-group">
                             <label for="name">Naam *</label>
-                            <input type="text" id="name" name="name" required style="background: #f9fafb;">
+                            <input type="text" id="name" name="name" required autocomplete="name" style="background: #f9fafb;">
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required style="background: #f9fafb;">
+                                <input type="email" id="email" name="email" required autocomplete="email" style="background: #f9fafb;">
                             </div>
                             
                             <div class="form-group">
                                 <label for="phone">Telefoon</label>
-                                <input type="tel" id="phone" name="phone" style="background: #f9fafb;">
+                                <input type="tel" id="phone" name="phone" autocomplete="tel" style="background: #f9fafb;">
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Bericht *</label>
-                            <textarea id="message" name="message" rows="6" required style="background: #f9fafb;"></textarea>
+                            <textarea id="message" name="message" rows="6" required autocomplete="off" style="background: #f9fafb;"></textarea>
                         </div>
                         
                         <button type="submit" class="btn-submit" style="width: 100%; background: #a8cf8c; color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Verstuur Bericht</button>

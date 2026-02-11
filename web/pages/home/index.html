@@ -57,11 +57,11 @@
                         
                         <form id="enrollmentForm" class="compact-form">
                             <div class="form-group">
-                                <input type="text" id="heroParentName" name="parentName" placeholder="Naam ouder(s)" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
+                                <input type="text" id="heroParentName" name="parentName" placeholder="Naam ouder(s)" required autocomplete="name" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
                             </div>
 
                             <div class="form-group">
-                                <select id="heroChildBirthYear" name="childBirthYear" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                                <select id="heroChildBirthYear" name="childBirthYear" required autocomplete="off" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px; cursor: pointer;">
                                     <option value="">Geboortejaar kind</option>
                                     <option value="2024">2024</option>
                                     <option value="2023">2023</option>
@@ -81,15 +81,15 @@
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="email" id="heroEmail" name="email" placeholder="Email" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
+                                    <input type="email" id="heroEmail" name="email" placeholder="Email" required autocomplete="email" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" id="heroPhone" name="phone" placeholder="Telefoon" required style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
+                                    <input type="tel" id="heroPhone" name="phone" placeholder="Telefoon" required autocomplete="tel" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px;">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <textarea id="heroMessage" name="message" rows="2" placeholder="Bericht (optioneel)" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
+                                <textarea id="heroMessage" name="message" rows="2" placeholder="Bericht (optioneel)" autocomplete="off" style="background: #f9fafb; width: 100%; padding: 10px 12px; border: 2px solid #e8f5e0; border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
                             </div>
 
                             <button type="submit" class="btn-submit btn-playful" style="width: 100%; background: #a8cf8c; color: #000; padding: 12px; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(168, 207, 140, 0.3);">Plan een Bezoek</button>
