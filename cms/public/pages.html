@@ -84,6 +84,30 @@
             font-size: 18px;
             color: #a8cf8c;
             margin-bottom: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+        
+        .content-group h3::after {
+            content: '\25B2';
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .content-group.collapsed h3::after {
+            transform: rotate(180deg);
+        }
+        
+        .content-group-body {
+            transition: max-height 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .content-group.collapsed .content-group-body {
+            display: none;
         }
         
         .content-field {
@@ -352,17 +376,8 @@
                 <a href="/cms/pages.html" class="nav-item active">
                     <span>Pagina's</span>
                 </a>
-                <a href="/cms/dashboard.html#team" class="nav-item">
-                    <span>Team</span>
-                </a>
-                <a href="/cms/dashboard.html#media" class="nav-item">
+                <a href="/cms/media.html" class="nav-item">
                     <span>Media</span>
-                </a>
-                <a href="/cms/dashboard.html#berichten" class="nav-item">
-                    <span>Berichten</span>
-                </a>
-                <a href="/cms/dashboard.html#instellingen" class="nav-item">
-                    <span>Instellingen</span>
                 </a>
             </nav>
             
@@ -391,6 +406,9 @@
                     <button class="editor-tab" data-page="team">Team</button>
                     <button class="editor-tab" data-page="contact">Contact</button>
                     <button class="editor-tab" data-page="opvang">Opvang</button>
+                    <button class="editor-tab" data-page="fotos">Foto's</button>
+                    <button class="editor-tab" data-page="projecten">Projecten</button>
+                    <button class="editor-tab" data-page="kalender">Kalender</button>
                 </div>
                 
                 <div class="editor-content" id="editorContent">
@@ -440,6 +458,7 @@
         // Logout
         function handleLogout() {
             sessionStorage.removeItem('cmsLoggedIn');
+            sessionStorage.removeItem('cmsToken');
             window.location.href = '/cms';
         }
         
@@ -492,38 +511,101 @@
             // Define sections based on page
             let sections = {};
             
+            // ===== SECTIONS PER PAGE =====
+            // Keys here match the database content_key (WITHOUT page prefix).
+            // cms-content.js prepends pageSlug when matching data-cms attributes.
+            
             if (pageSlug === 'home') {
                 sections = {
-                    'Hero Sectie': ['hero-title', 'hero-text'],
-                    'Hero Afbeelding': ['home-hero-bg'],
+                    'Hero Sectie': ['hero-title', 'hero-text', 'hero-bg'],
                     'Aanmeldformulier': ['form-title', 'form-subtitle'],
-                    'Visie Sectie': ['home-visie-img'],
-                    'Spotlight / Verhaal': ['spotlight-title', 'spotlight-subtitle', 'spotlight-text-1', 'spotlight-text-2', 'spotlight-text-3'],
-                    'Fotomuur Rij 1': ['home-gallery-1', 'home-gallery-2', 'home-gallery-3', 'home-gallery-4', 'home-gallery-5'],
-                    'Fotomuur Rij 2': ['home-gallery-6', 'home-gallery-7', 'home-gallery-8', 'home-gallery-9', 'home-gallery-10'],
-                    'Contact Footer': ['contact-title', 'contact-school-name', 'contact-address', 'contact-phone', 'contact-email', 'contact-director-name', 'contact-director-phone']
-                };
-            } else if (pageSlug === 'klassen') {
-                sections = {
-                    'Klassen: Titels': ['classes-title', 'classes-preschool-title', 'classes-primary-title', 'classes-extra-title'],
-                    'Klassen: Kleuter': ['class-toddler', 'class-k1', 'class-k2', 'class-k3'],
-                    'Klassen: Lager': ['class-1a', 'class-2a', 'class-3a', 'class-3b', 'class-4a', 'class-4b', 'class-5a', 'class-6a'],
-                    'Klassen: Extra': ['class-languages', 'class-sport', 'class-care'],
-                    'Klasblogs Info': ['klas-peuterklas-text', 'klas-k1-text', 'klas-k2-text', 'klas-k3-text', 'klas-1a-text', 'klas-2a-text', 'klas-3a-text', 'klas-3b-text', 'klas-4a-text', 'klas-4b-text', 'klas-5a-text', 'klas-6a-text', 'klas-talen-text', 'klas-sport-text']
-                };
-            } else if (pageSlug === 'contact') {
-                sections = {
-                    'Hero': ['contact-hero-title', 'contact-hero-subtitle'],
-                    'Afbeeldingen': ['contact-director-photo'],
-                    'Openingsuren': ['contact-hours-title', 'contact-school-hours', 'contact-office-hours', 'contact-care-hours'],
-                    'Locatie': ['contact-location-title', 'contact-map-embed'],
-                    'CTA': ['contact-cta-title', 'contact-cta-text']
+                    'Visie Sectie': ['visie-img'],
+                    'Fotomuur Rij 1': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5'],
+                    'Fotomuur Rij 2': ['gallery-6', 'gallery-7', 'gallery-8', 'gallery-9', 'gallery-10'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
                 };
             } else if (pageSlug === 'visie') {
                 sections = {
-                    'Hero': ['visie-hero-title', 'visie-hero-text'],
-                    'Missie': ['visie-mission-title', 'visie-mission-text'],
-                    'Aanpak': ['visie-approach-title', 'visie-approach-1-title', 'visie-approach-1-text', 'visie-approach-2-title', 'visie-approach-2-text', 'visie-approach-3-title', 'visie-approach-3-text']
+                    'Hero': ['hero-title', 'hero-text'],
+                    'Missie': ['mission-title', 'mission-text'],
+                    'Aanpak': ['approach-title', 'approach-1-title', 'approach-1-text', 'approach-2-title', 'approach-2-text', 'approach-3-title', 'approach-3-text'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'klassen') {
+                sections = {
+                    'Hero': ['hero-title', 'hero-text'],
+                    'Kleuter Overzicht': ['kleuter-title', 'kleuter-subtitle', 'kleuter-photo', 'kleuter-1-text', 'kleuter-2-text', 'kleuter-3-text'],
+                    'Lager Overzicht': ['lager-title', 'lager-subtitle'],
+                    'Leerjaar Items': ['1-item-1', '1-item-2', '1-item-3', '2-item-1', '2-item-2', '2-item-3', '3-item-1', '3-item-2', '3-item-3', '4-item-1', '4-item-2', '4-item-3', '5-item-1', '5-item-2', '5-item-3', '6-item-1', '6-item-2', '6-item-3'],
+                    'Extra Aanbod': ['extra-title', 'extra-text'],
+                    'Peuterklas': ['peuterklas-text', 'peuterklas-photo', 'peuterklas-teacher-photo', 'peuterklas-teacher-name'],
+                    'Kleuterklas 1': ['k1-text', 'k1-photo', 'k1-teacher-photo'],
+                    'Kleuterklas 2': ['k2-text', 'k2-photo', 'k2-teacher-photo'],
+                    'Kleuterklas 3': ['k3-text', 'k3-photo', 'k3-teacher-photo'],
+                    'Klas 1A': ['1a-text', '1a-photo', '1a-teacher-photo'],
+                    'Klas 2A': ['2a-text', '2a-photo', '2a-teacher-photo'],
+                    'Klas 3A': ['3a-text', '3a-photo', '3a-teacher-photo'],
+                    'Klas 3B': ['3b-text', '3b-photo', '3b-teacher-photo'],
+                    'Klas 4A': ['4a-text', '4a-photo', '4a-teacher-photo'],
+                    'Klas 4B': ['4b-text', '4b-photo', '4b-teacher-photo'],
+                    'Klas 5A': ['5a-text', '5a-photo', '5a-teacher-photo'],
+                    'Klas 6A': ['6a-text', '6a-photo', '6a-teacher-photo'],
+                    'Talen': ['talen-text', 'talen-photo', 'talen-teacher-photo', 'talen-teacher-name'],
+                    'Sport': ['sport-text', 'sport-photo', 'sport-teacher-photo', 'sport-teacher-name'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'team') {
+                sections = {
+                    'Hero': ['hero-title', 'hero-text'],
+                    'Directeur': ['director-bio'],
+                    'Leerkrachten Overzicht': ['teachers-title', 'teachers-subtitle'],
+                    'Teamlid 1': ['member-1-name', 'member-1-role', 'member-1-photo', 'member-1-bio'],
+                    'Teamlid 2': ['member-2-name', 'member-2-role', 'member-2-photo', 'member-2-bio'],
+                    'Teamlid 3': ['member-3-name', 'member-3-role', 'member-3-photo', 'member-3-bio'],
+                    'Teamlid 4': ['member-4-name', 'member-4-role', 'member-4-photo', 'member-4-bio'],
+                    'Teamlid 5': ['member-5-name', 'member-5-role', 'member-5-photo', 'member-5-bio'],
+                    'Teamlid 6': ['member-6-name', 'member-6-role', 'member-6-photo', 'member-6-bio'],
+                    'Ondersteuning': ['support-title', 'support-subtitle', 'support-1-name', 'support-1-bio', 'support-2-name', 'support-2-bio', 'support-3-name', 'support-3-bio'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'contact') {
+                sections = {
+                    'Hero': ['hero-title', 'hero-subtitle'],
+                    'Contactgegevens': ['email', 'director-photo', 'director-name'],
+                    'Formulier': ['form-title', 'form-subtitle'],
+                    'Openingsuren': ['hours-title', 'school-hours', 'office-hours', 'care-hours'],
+                    'Locatie': ['location-title', 'map-embed'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'opvang') {
+                sections = {
+                    'Hero': ['hero-title', 'hero-text'],
+                    'Uurrooster': ['schedule-title', 'schedule-subtitle', 'morning-time', 'morning-text', 'afternoon-time', 'afternoon-text'],
+                    'Activiteiten': ['activities-title', 'activities-subtitle', 'activity-1-title', 'activity-1-text', 'activity-2-title', 'activity-2-text', 'activity-3-title', 'activity-3-text', 'activity-4-title', 'activity-4-text', 'activity-5-title', 'activity-5-text', 'activity-6-title', 'activity-6-text'],
+                    'Praktisch': ['practical-title', 'price-1', 'price-2', 'price-3', 'price-note', 'register-1', 'register-2', 'register-3', 'register-note'],
+                    'Opvangteam': ['team-title', 'team-text'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'fotos') {
+                sections = {
+                    'Hero': ['hero-title', 'hero-text'],
+                    'Galerij': ['gallery-title', 'gallery-subtitle', 'gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9'],
+                    'Facebook': ['facebook-title', 'facebook-text'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'projecten') {
+                sections = {
+                    'Hero': ['hero-title', 'hero-text'],
+                    'Overzicht': ['overview-title', 'overview-subtitle'],
+                    'Tijdlijn': ['timeline-title', 'timeline-subtitle', 'season-1-title', 'season-1-period', 'season-1-text', 'season-2-title', 'season-2-period', 'season-2-text', 'season-3-title', 'season-3-period', 'season-3-text', 'season-4-title', 'season-4-period', 'season-4-text'],
+                    'Aanpak': ['approach-title', 'approach-text'],
+                    'Jaarlijkse Projecten': ['annual-title', 'annual-subtitle', 'annual-1-title', 'annual-1-text', 'annual-2-title', 'annual-2-text', 'annual-3-title', 'annual-3-text', 'annual-4-title', 'annual-4-text', 'annual-5-title', 'annual-5-text', 'annual-6-title', 'annual-6-text'],
+                    'Posters': ['2021-poster', '2022-poster', '2023-poster', '2024-poster'],
+                    'Call-to-Action': ['cta-title', 'cta-text']
+                };
+            } else if (pageSlug === 'kalender') {
+                sections = {
+                    'Live Kalender': ['live-title', 'live-subtitle']
                 };
             } else {
                 sections = {
@@ -531,124 +613,121 @@
                 };
             }
             
-            // Location hints: where does this image/field appear on the website?
+            // Location hints per key
             const hints = {
-                'home-hero-bg': 'Grote achtergrondafbeelding bovenaan de homepagina, achter de titel en het formulier',
-                'home-visie-img': 'Afbeelding links naast de "Waar wij voor staan" tekst op de homepagina',
-                'home-gallery-1': 'Fotomuur sectie, bovenste rij, positie 1 (links)',
-                'home-gallery-2': 'Fotomuur sectie, bovenste rij, positie 2',
-                'home-gallery-3': 'Fotomuur sectie, bovenste rij, positie 3 (midden)',
-                'home-gallery-4': 'Fotomuur sectie, bovenste rij, positie 4',
-                'home-gallery-5': 'Fotomuur sectie, bovenste rij, positie 5 (rechts)',
-                'home-gallery-6': 'Fotomuur sectie, onderste rij, positie 1 (links)',
-                'home-gallery-7': 'Fotomuur sectie, onderste rij, positie 2',
-                'home-gallery-8': 'Fotomuur sectie, onderste rij, positie 3 (midden)',
-                'home-gallery-9': 'Fotomuur sectie, onderste rij, positie 4',
-                'home-gallery-10': 'Fotomuur sectie, onderste rij, positie 5 (rechts)',
-                'contact-director-photo': 'Foto van de directeur op de contactpagina',
-                'gallery-1': 'Oude galerij slot 1 (wordt vervangen door fotomuur)',
-                'gallery-2': 'Oude galerij slot 2 (wordt vervangen door fotomuur)',
-                'gallery-3': 'Oude galerij slot 3 (wordt vervangen door fotomuur)',
-                'gallery-4': 'Oude galerij slot 4 (wordt vervangen door fotomuur)'
+                'hero-bg': 'Grote achtergrondafbeelding bovenaan de pagina',
+                'visie-img': 'Afbeelding links naast de "Waar wij voor staan" tekst',
+                'gallery-1': 'Fotomuur/galerij, positie 1',
+                'gallery-2': 'Fotomuur/galerij, positie 2',
+                'gallery-3': 'Fotomuur/galerij, positie 3',
+                'gallery-4': 'Fotomuur/galerij, positie 4',
+                'gallery-5': 'Fotomuur/galerij, positie 5',
+                'gallery-6': 'Fotomuur/galerij, positie 6',
+                'gallery-7': 'Fotomuur/galerij, positie 7',
+                'gallery-8': 'Fotomuur/galerij, positie 8',
+                'gallery-9': 'Fotomuur/galerij, positie 9',
+                'gallery-10': 'Fotomuur/galerij, positie 10',
+                'director-photo': 'Foto van de directeur',
+                'map-embed': 'Google Maps embed URL (kopieer uit Google Maps)',
+                'peuterklas-photo': 'Klasfoto peuterklas',
+                'peuterklas-teacher-photo': 'Foto leerkracht peuterklas',
+                'k1-photo': 'Klasfoto K1', 'k1-teacher-photo': 'Foto leerkracht K1',
+                'k2-photo': 'Klasfoto K2', 'k2-teacher-photo': 'Foto leerkracht K2',
+                'k3-photo': 'Klasfoto K3', 'k3-teacher-photo': 'Foto leerkracht K3',
+                '1a-photo': 'Klasfoto 1A', '1a-teacher-photo': 'Foto leerkracht 1A',
+                '2a-photo': 'Klasfoto 2A', '2a-teacher-photo': 'Foto leerkracht 2A',
+                '3a-photo': 'Klasfoto 3A', '3a-teacher-photo': 'Foto leerkracht 3A',
+                '3b-photo': 'Klasfoto 3B', '3b-teacher-photo': 'Foto leerkracht 3B',
+                '4a-photo': 'Klasfoto 4A', '4a-teacher-photo': 'Foto leerkracht 4A',
+                '4b-photo': 'Klasfoto 4B', '4b-teacher-photo': 'Foto leerkracht 4B',
+                '5a-photo': 'Klasfoto 5A', '5a-teacher-photo': 'Foto leerkracht 5A',
+                '6a-photo': 'Klasfoto 6A', '6a-teacher-photo': 'Foto leerkracht 6A',
+                'talen-photo': 'Foto talenklas', 'talen-teacher-photo': 'Foto leerkracht talen',
+                'sport-photo': 'Foto sportklas', 'sport-teacher-photo': 'Foto leerkracht sport',
+                'member-1-photo': 'Foto teamlid 1', 'member-2-photo': 'Foto teamlid 2',
+                'member-3-photo': 'Foto teamlid 3', 'member-4-photo': 'Foto teamlid 4',
+                'member-5-photo': 'Foto teamlid 5', 'member-6-photo': 'Foto teamlid 6',
+                '2021-poster': 'Poster schooljaar 2021', '2022-poster': 'Poster schooljaar 2022',
+                '2023-poster': 'Poster schooljaar 2023', '2024-poster': 'Poster schooljaar 2024'
             };
             
             const labels = {
                 'hero-title': 'Hoofdtitel',
                 'hero-text': 'Introductie tekst',
+                'hero-subtitle': 'Ondertitel',
+                'hero-bg': 'Achtergrondafbeelding',
                 'form-title': 'Formulier Titel',
                 'form-subtitle': 'Formulier Ondertitel',
-                
-                'classes-title': 'Hoofdtitel Klassen',
-                'classes-preschool-title': 'Titel Kleuter',
-                'classes-primary-title': 'Titel Lager',
-                'classes-extra-title': 'Titel Extra',
-                
-                'class-toddler': 'Peuterklas',
-                'class-k1': 'Kleuterklas 1',
-                'class-k2': 'Kleuterklas 2',
-                'class-k3': 'Kleuterklas 3',
-                
-                'class-1a': 'Klas 1A',
-                'class-2a': 'Klas 2A',
-                'class-3a': 'Klas 3A',
-                'class-3b': 'Klas 3B',
-                'class-4a': 'Klas 4A',
-                'class-4b': 'Klas 4B',
-                'class-5a': 'Klas 5A',
-                'class-6a': 'Klas 6A',
-                
-                'class-languages': 'Talenklas',
-                'class-sport': 'Sport',
-                'class-care': 'Zorg',
-                
-                'spotlight-title': 'Spotlight Titel',
-                'spotlight-subtitle': 'Spotlight Ondertitel',
-                'spotlight-text-1': 'Paragraaf 1',
-                'spotlight-text-2': 'Paragraaf 2',
-                'spotlight-text-3': 'Paragraaf 3',
-                
-                'home-hero-bg': 'Hero Achtergrond',
-                'home-visie-img': 'Visie Sectie Afbeelding',
-                'home-gallery-1': 'Fotomuur 1',
-                'home-gallery-2': 'Fotomuur 2',
-                'home-gallery-3': 'Fotomuur 3',
-                'home-gallery-4': 'Fotomuur 4',
-                'home-gallery-5': 'Fotomuur 5',
-                'home-gallery-6': 'Fotomuur 6',
-                'home-gallery-7': 'Fotomuur 7',
-                'home-gallery-8': 'Fotomuur 8',
-                'home-gallery-9': 'Fotomuur 9',
-                'home-gallery-10': 'Fotomuur 10',
-                
-                'contact-hero-title': 'Hero Titel',
-                'contact-hero-subtitle': 'Hero Ondertitel',
-                'contact-director-photo': 'Foto Directeur',
-                'contact-hours-title': 'Openingsuren Titel',
-                'contact-school-hours': 'Schooluren',
-                'contact-office-hours': 'Secretariaat Uren',
-                'contact-care-hours': 'Opvang Uren',
-                'contact-location-title': 'Locatie Titel',
-                'contact-map-embed': 'Google Maps Embed URL',
-                'contact-cta-title': 'CTA Titel',
-                'contact-cta-text': 'CTA Tekst',
-                
-                'visie-hero-title': 'Hero Titel',
-                'visie-hero-text': 'Hero Tekst',
-                'visie-mission-title': 'Missie Titel',
-                'visie-mission-text': 'Missie Tekst',
-                'visie-approach-title': 'Aanpak Titel',
-                'visie-approach-1-title': 'Aanpak 1 Titel',
-                'visie-approach-1-text': 'Aanpak 1 Tekst',
-                'visie-approach-2-title': 'Aanpak 2 Titel',
-                'visie-approach-2-text': 'Aanpak 2 Tekst',
-                'visie-approach-3-title': 'Aanpak 3 Titel',
-                'visie-approach-3-text': 'Aanpak 3 Tekst',
-                
-                'gallery-1': 'Afbeelding 1 URL',
-                'gallery-2': 'Afbeelding 2 URL',
-                'gallery-3': 'Afbeelding 3 URL',
-                'gallery-4': 'Afbeelding 4 URL',
-                
-                'contact-title': 'Contact Titel',
-                'contact-school-name': 'School Naam',
-                'contact-address': 'Adres',
-                'contact-phone': 'Telefoon',
-                'contact-email': 'E-mail',
-                'contact-director-name': 'Naam Directeur',
-                'contact-director-phone': 'Tel Directeur'
+                'visie-img': 'Visie Afbeelding',
+                'cta-title': 'CTA Titel',
+                'cta-text': 'CTA Tekst',
+                'mission-title': 'Missie Titel',
+                'mission-text': 'Missie Tekst',
+                'approach-title': 'Aanpak Titel',
+                'approach-text': 'Aanpak Tekst',
+                'approach-1-title': 'Pijler 1 Titel',
+                'approach-1-text': 'Pijler 1 Tekst',
+                'approach-2-title': 'Pijler 2 Titel',
+                'approach-2-text': 'Pijler 2 Tekst',
+                'approach-3-title': 'Pijler 3 Titel',
+                'approach-3-text': 'Pijler 3 Tekst',
+                'email': 'E-mailadres',
+                'director-photo': 'Foto Directeur',
+                'director-name': 'Naam Directeur',
+                'director-bio': 'Bio Directeur',
+                'hours-title': 'Openingsuren Titel',
+                'school-hours': 'Schooluren',
+                'office-hours': 'Secretariaat Uren',
+                'care-hours': 'Opvang Uren',
+                'location-title': 'Locatie Titel',
+                'map-embed': 'Google Maps URL',
+                'kleuter-title': 'Kleuter Titel',
+                'kleuter-subtitle': 'Kleuter Ondertitel',
+                'kleuter-photo': 'Kleuter Foto',
+                'lager-title': 'Lager Titel',
+                'lager-subtitle': 'Lager Ondertitel',
+                'extra-title': 'Extra Titel',
+                'extra-text': 'Extra Tekst',
+                'teachers-title': 'Leerkrachten Titel',
+                'teachers-subtitle': 'Leerkrachten Ondertitel',
+                'support-title': 'Ondersteuning Titel',
+                'support-subtitle': 'Ondersteuning Ondertitel',
+                'schedule-title': 'Uurrooster Titel',
+                'schedule-subtitle': 'Uurrooster Ondertitel',
+                'morning-time': 'Ochtend Tijd',
+                'morning-text': 'Ochtend Beschrijving',
+                'afternoon-time': 'Namiddag Tijd',
+                'afternoon-text': 'Namiddag Beschrijving',
+                'activities-title': 'Activiteiten Titel',
+                'activities-subtitle': 'Activiteiten Ondertitel',
+                'practical-title': 'Praktisch Titel',
+                'team-title': 'Team Titel',
+                'team-text': 'Team Tekst',
+                'gallery-title': 'Galerij Titel',
+                'gallery-subtitle': 'Galerij Ondertitel',
+                'facebook-title': 'Facebook Titel',
+                'facebook-text': 'Facebook Tekst',
+                'overview-title': 'Overzicht Titel',
+                'overview-subtitle': 'Overzicht Ondertitel',
+                'timeline-title': 'Tijdlijn Titel',
+                'timeline-subtitle': 'Tijdlijn Ondertitel',
+                'annual-title': 'Jaarlijks Titel',
+                'annual-subtitle': 'Jaarlijks Ondertitel',
+                'live-title': 'Kalender Titel',
+                'live-subtitle': 'Kalender Ondertitel'
             };
             
             let html = '';
             
             for (const [sectionName, keys] of Object.entries(sections)) {
-                html += `<div class="content-group"><h3>${sectionName}</h3>`;
+                html += `<div class="content-group"><h3 onclick="this.parentElement.classList.toggle('collapsed')">${sectionName}</h3><div class="content-group-body">`;
                 
                 for (const key of keys) {
                     const item = content[key] || { value: '', type: 'text' };
                     const value = item.value || '';
                     const label = labels[key] || key;
                     const isTextarea = key.includes('text') || key.includes('message');
-                    const isImage = key.includes('gallery') || item.type === 'image';
+                    const isImage = item.type === 'image' || key.includes('gallery') || key.includes('photo') || key.includes('poster') || key.includes('-img') || key.includes('-bg');
                     
                     const hint = hints[key] || '';
                     
@@ -658,7 +737,7 @@
                         
                     if (isImage) {
                          html += `
-                            <input type="hidden" id="${key}" data-key="${key}" value="${value}">
+                            <input type="hidden" id="${key}" data-key="${key}" data-type="image" value="${value}">
                             <div style="display: flex; gap: 8px; align-items: center;">
                                 <button type="button" class="btn-pick-media" onclick="openMediaPicker('${key}')">Kies afbeelding</button>
                                 ${value ? `<button type="button" class="btn-clear-media" onclick="clearImage('${key}')">Verwijderen</button>` : ''}
@@ -676,7 +755,7 @@
                     html += `</div>`;
                 }
                 
-                html += '</div>';
+                html += '</div></div>';
             }
             
             editorContent.innerHTML = html;
@@ -713,17 +792,19 @@
             status.className = 'save-status saving';
             btn.disabled = true;
             
-            // Collect all field values
+            // Collect all field values with their types
             const content = {};
             document.querySelectorAll('[data-key]').forEach(field => {
-                content[field.dataset.key] = field.value;
+                const type = field.dataset.type || 'text';
+                content[field.dataset.key] = { value: field.value, type: type };
             });
             
             try {
                 const response = await fetch(`/api/content/${currentPage}`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
                     },
                     body: JSON.stringify({ content })
                 });
@@ -822,7 +903,7 @@
                 const formData = new FormData();
                 formData.append('file', file);
                 try {
-                    await fetch('/api/media/upload', { method: 'POST', body: formData });
+                    await fetch('/api/media/upload', { method: 'POST', body: formData, headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') } });
                 } catch (e) { console.error(e); }
                 completed++;
                 status.textContent = `Uploaden: ${completed}/${files.length}...`;

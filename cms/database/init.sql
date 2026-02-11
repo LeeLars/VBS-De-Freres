@@ -68,78 +68,319 @@ CREATE TABLE IF NOT EXISTS team_members (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert default home page content
+-- =============================================
+-- HOME PAGE
+-- =============================================
 INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
 ('home', 'hero-title', 'Basisschool De Frères Brugge', 'text'),
-('home', 'hero-text', 'Een warme school waar elk kind centraal staat. Wij bieden kwaliteitsonderwijs in een veilige en stimulerende omgeving. Wees welkom!', 'text'),
-('home', 'form-title', 'Schrijf uw kind in', 'text'),
-('home', 'form-subtitle', 'Laat uw gegevens achter voor een kennismaking', 'text'),
-
-('home', 'classes-title', 'Alle klassen', 'text'),
-('home', 'classes-preschool-title', 'Kleuteronderwijs', 'text'),
-('home', 'class-toddler', 'Peuterklas', 'text'),
-('home', 'class-k1', 'Kleuterklas 1 - juf Nele', 'text'),
-('home', 'class-k2', 'Kleuterklas 2 - juf Anaïs', 'text'),
-('home', 'class-k3', 'Kleuterklas 3 - juf Evy', 'text'),
-
-('home', 'classes-primary-title', 'Lager Onderwijs', 'text'),
-('home', 'class-1a', 'Klas 1A - juf Lies/ meester Simon', 'text'),
-('home', 'class-2a', 'Klas 2A - juf Stefanie', 'text'),
-('home', 'class-3a', 'Klas 3A - juf Melissa', 'text'),
-('home', 'class-3b', 'Klas 3B - juf Aurelie', 'text'),
-('home', 'class-4a', 'Klas 4A - juf Emma', 'text'),
-('home', 'class-4b', 'Klas 4B - juf Tine', 'text'),
-('home', 'class-5a', 'Klas 5A - juf Anneke', 'text'),
-('home', 'class-6a', 'Klas 6A - juf Kelly', 'text'),
-
-('home', 'classes-extra-title', 'Extra Zorg & Sport', 'text'),
-('home', 'class-languages', 'Talenklas - uitbreiding/meertaligheid', 'text'),
-('home', 'class-sport', 'Sport op school', 'text'),
-('home', 'class-care', 'Hand in hand', 'text'),
-
-('home', 'spotlight-title', 'Eerste kleuter - juf Nele', 'text'),
-('home', 'spotlight-subtitle', 'Hand in hand', 'text'),
-('home', 'spotlight-text-1', 'Met onze peuters en eerste kleuters zetten we de eerste stapjes in school.', 'text'),
-('home', 'spotlight-text-2', 'Gaan jullie mee op bezoek in onze klas? Knutselen, spelen, turnen, zingen, dansen, ... te veel om op te noemen.', 'text'),
-('home', 'spotlight-text-3', 'Klik gerust verder en geniet mee van onze ontdekkingen, belevenissen en avonturen.', 'text'),
-
+('home', 'hero-text', 'Een warme school waar elk kind centraal staat. Samen ontdekken, leren en groeien met een glimlach.', 'text'),
+('home', 'hero-bg', '', 'image'),
+('home', 'form-title', 'Info en Inschrijven', 'text'),
+('home', 'form-subtitle', 'Kom langs voor een warme rondleiding', 'text'),
+('home', 'visie-img', '', 'image'),
 ('home', 'gallery-1', '', 'image'),
 ('home', 'gallery-2', '', 'image'),
 ('home', 'gallery-3', '', 'image'),
 ('home', 'gallery-4', '', 'image'),
-
-('home', 'contact-title', 'Contacteer ons', 'text'),
-('home', 'contact-school-name', 'Basisschool De Frères', 'text'),
-('home', 'contact-address', 'Nieuwstraat 2 | 8000 Brugge', 'text'),
-('home', 'contact-phone', '050 33 63 47', 'text'),
-('home', 'contact-email', 'info@vbsdefreres.be', 'text'),
-('home', 'contact-director-name', 'Inge Versavel', 'text'),
-('home', 'contact-director-phone', 'Gsm: 0476 90 81 23', 'text')
+('home', 'gallery-5', '', 'image'),
+('home', 'gallery-6', '', 'image'),
+('home', 'gallery-7', '', 'image'),
+('home', 'gallery-8', '', 'image'),
+('home', 'gallery-9', '', 'image'),
+('home', 'gallery-10', '', 'image'),
+('home', 'cta-title', 'Klaar om deel uit te maken van onze school?', 'text'),
+('home', 'cta-text', 'Schrijf je kind in of kom langs voor een rondleiding.', 'text'),
+('home', 'contact-director-name', 'Inge Versavel', 'text')
 ON CONFLICT (page_slug, content_key) DO NOTHING;
 
--- Image content slots
+-- =============================================
+-- CONTACT PAGE
+-- =============================================
 INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
--- Home page images
-('home', 'home-hero-bg', '', 'image'),
-('home', 'home-visie-img', '', 'image'),
-('home', 'home-gallery-1', '', 'image'),
-('home', 'home-gallery-2', '', 'image'),
-('home', 'home-gallery-3', '', 'image'),
-('home', 'home-gallery-4', '', 'image'),
-('home', 'home-gallery-5', '', 'image'),
-('home', 'home-gallery-6', '', 'image'),
-('home', 'home-gallery-7', '', 'image'),
-('home', 'home-gallery-8', '', 'image'),
-('home', 'home-gallery-9', '', 'image'),
-('home', 'home-gallery-10', '', 'image'),
+('contact', 'hero-title', 'Laat ons kennismaken', 'text'),
+('contact', 'hero-subtitle', 'Teken hoe graag jij onze school wil bezoeken', 'text'),
+('contact', 'email', 'info@vbsdefreres.be', 'text'),
+('contact', 'director-photo', '', 'image'),
+('contact', 'director-name', 'Inge Versavel', 'text'),
+('contact', 'form-title', 'Contactformulier', 'text'),
+('contact', 'form-subtitle', 'Vul onderstaand formulier in en we nemen zo snel mogelijk contact met je op', 'text'),
+('contact', 'hours-title', 'Bereikbaarheid', 'text'),
+('contact', 'school-hours', 'Maandag - Vrijdag: 8:30 - 15:30', 'text'),
+('contact', 'office-hours', 'Maandag - Vrijdag: 8:00 - 16:00', 'text'),
+('contact', 'care-hours', 'Maandag - Vrijdag: 7:00 - 18:00', 'text'),
+('contact', 'location-title', 'Vind ons hier', 'text'),
+('contact', 'map-embed', '', 'text'),
+('contact', 'cta-title', 'Kom langs voor een bezoek!', 'text'),
+('contact', 'cta-text', 'Ontdek onze school en ontmoet ons team tijdens een rondleiding.', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
 
--- Contact page images
-('contact', 'contact-director-photo', '', 'image'),
-('contact', 'contact-map-embed', '', 'text'),
+-- =============================================
+-- VISIE PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('visie', 'hero-title', 'Samen bouwen aan een sterke toekomst', 'text'),
+('visie', 'hero-text', 'Bij VBS De Frères geloven we in onderwijs dat verder gaat dan kennis alleen.', 'text'),
+('visie', 'mission-title', 'Elk kind verdient de kans om te groeien en te bloeien', 'text'),
+('visie', 'mission-text', 'Wij bieden een veilige en stimulerende leeromgeving.', 'text'),
+('visie', 'approach-title', 'Hoe we werken', 'text'),
+('visie', 'approach-1-title', 'Eigentijds Onderwijs', 'text'),
+('visie', 'approach-1-text', 'We gebruiken moderne lesmethodes en technologie om kinderen optimaal voor te bereiden op de toekomst.', 'text'),
+('visie', 'approach-2-title', 'Persoonlijke Begeleiding', 'text'),
+('visie', 'approach-2-text', 'Elk kind krijgt de aandacht die het nodig heeft.', 'text'),
+('visie', 'approach-3-title', 'Open Communicatie', 'text'),
+('visie', 'approach-3-text', 'Transparantie en regelmatig contact met ouders.', 'text'),
+('visie', 'cta-title', 'Klaar om deel uit te maken van onze school?', 'text'),
+('visie', 'cta-text', 'Kom kennismaken tijdens een rondleiding.', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
 
--- Visie page images
-('visie', 'visie-hero-title', 'Samen bouwen aan een sterke toekomst', 'text'),
-('visie', 'visie-hero-text', 'Bij VBS De Frères geloven we in onderwijs dat verder gaat dan kennis alleen.', 'text'),
-('visie', 'visie-mission-title', 'Elk kind verdient de kans om te groeien en te bloeien', 'text'),
-('visie', 'visie-mission-text', 'Wij bieden een veilige en stimulerende leeromgeving.', 'text')
+-- =============================================
+-- KLASSEN PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('klassen', 'hero-title', 'Onze Klassen', 'text'),
+('klassen', 'hero-text', 'Ontdek alle klassen van onze school', 'text'),
+('klassen', 'kleuter-title', 'Kleuteronderwijs', 'text'),
+('klassen', 'kleuter-subtitle', 'Van peuter tot derde kleuter', 'text'),
+('klassen', 'kleuter-photo', '', 'image'),
+('klassen', 'kleuter-1-text', '', 'text'),
+('klassen', 'kleuter-2-text', '', 'text'),
+('klassen', 'kleuter-3-text', '', 'text'),
+('klassen', 'lager-title', 'Lager Onderwijs', 'text'),
+('klassen', 'lager-subtitle', 'Van eerste tot zesde leerjaar', 'text'),
+('klassen', 'extra-title', 'Extra Aanbod', 'text'),
+('klassen', 'extra-text', '', 'text'),
+('klassen', '1-item-1', '', 'text'),
+('klassen', '1-item-2', '', 'text'),
+('klassen', '1-item-3', '', 'text'),
+('klassen', '2-item-1', '', 'text'),
+('klassen', '2-item-2', '', 'text'),
+('klassen', '2-item-3', '', 'text'),
+('klassen', '3-item-1', '', 'text'),
+('klassen', '3-item-2', '', 'text'),
+('klassen', '3-item-3', '', 'text'),
+('klassen', '4-item-1', '', 'text'),
+('klassen', '4-item-2', '', 'text'),
+('klassen', '4-item-3', '', 'text'),
+('klassen', '5-item-1', '', 'text'),
+('klassen', '5-item-2', '', 'text'),
+('klassen', '5-item-3', '', 'text'),
+('klassen', '6-item-1', '', 'text'),
+('klassen', '6-item-2', '', 'text'),
+('klassen', '6-item-3', '', 'text'),
+('klassen', 'cta-title', 'Interesse in onze school?', 'text'),
+('klassen', 'cta-text', 'Neem contact op voor meer info.', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- Klassen: individuele klas content
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('klassen', 'peuterklas-text', '', 'text'),
+('klassen', 'peuterklas-photo', '', 'image'),
+('klassen', 'peuterklas-teacher-photo', '', 'image'),
+('klassen', 'peuterklas-teacher-name', '', 'text'),
+('klassen', 'k1-text', '', 'text'),
+('klassen', 'k1-photo', '', 'image'),
+('klassen', 'k1-teacher-photo', '', 'image'),
+('klassen', 'k2-text', '', 'text'),
+('klassen', 'k2-photo', '', 'image'),
+('klassen', 'k2-teacher-photo', '', 'image'),
+('klassen', 'k3-text', '', 'text'),
+('klassen', 'k3-photo', '', 'image'),
+('klassen', 'k3-teacher-photo', '', 'image'),
+('klassen', '1a-text', '', 'text'),
+('klassen', '1a-photo', '', 'image'),
+('klassen', '1a-teacher-photo', '', 'image'),
+('klassen', '2a-text', '', 'text'),
+('klassen', '2a-photo', '', 'image'),
+('klassen', '2a-teacher-photo', '', 'image'),
+('klassen', '3a-text', '', 'text'),
+('klassen', '3a-photo', '', 'image'),
+('klassen', '3a-teacher-photo', '', 'image'),
+('klassen', '3b-text', '', 'text'),
+('klassen', '3b-photo', '', 'image'),
+('klassen', '3b-teacher-photo', '', 'image'),
+('klassen', '4a-text', '', 'text'),
+('klassen', '4a-photo', '', 'image'),
+('klassen', '4a-teacher-photo', '', 'image'),
+('klassen', '4b-text', '', 'text'),
+('klassen', '4b-photo', '', 'image'),
+('klassen', '4b-teacher-photo', '', 'image'),
+('klassen', '5a-text', '', 'text'),
+('klassen', '5a-photo', '', 'image'),
+('klassen', '5a-teacher-photo', '', 'image'),
+('klassen', '6a-text', '', 'text'),
+('klassen', '6a-photo', '', 'image'),
+('klassen', '6a-teacher-photo', '', 'image'),
+('klassen', 'talen-text', '', 'text'),
+('klassen', 'talen-photo', '', 'image'),
+('klassen', 'talen-teacher-photo', '', 'image'),
+('klassen', 'talen-teacher-name', '', 'text'),
+('klassen', 'sport-text', '', 'text'),
+('klassen', 'sport-photo', '', 'image'),
+('klassen', 'sport-teacher-photo', '', 'image'),
+('klassen', 'sport-teacher-name', '', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- =============================================
+-- TEAM PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('team', 'hero-title', 'Ons Team', 'text'),
+('team', 'hero-text', 'Maak kennis met ons team', 'text'),
+('team', 'director-bio', '', 'text'),
+('team', 'teachers-title', 'Leerkrachten', 'text'),
+('team', 'teachers-subtitle', '', 'text'),
+('team', 'member-1-name', '', 'text'),
+('team', 'member-1-role', '', 'text'),
+('team', 'member-1-photo', '', 'image'),
+('team', 'member-1-bio', '', 'text'),
+('team', 'member-2-name', '', 'text'),
+('team', 'member-2-role', '', 'text'),
+('team', 'member-2-photo', '', 'image'),
+('team', 'member-2-bio', '', 'text'),
+('team', 'member-3-name', '', 'text'),
+('team', 'member-3-role', '', 'text'),
+('team', 'member-3-photo', '', 'image'),
+('team', 'member-3-bio', '', 'text'),
+('team', 'member-4-name', '', 'text'),
+('team', 'member-4-role', '', 'text'),
+('team', 'member-4-photo', '', 'image'),
+('team', 'member-4-bio', '', 'text'),
+('team', 'member-5-name', '', 'text'),
+('team', 'member-5-role', '', 'text'),
+('team', 'member-5-photo', '', 'image'),
+('team', 'member-5-bio', '', 'text'),
+('team', 'member-6-name', '', 'text'),
+('team', 'member-6-role', '', 'text'),
+('team', 'member-6-photo', '', 'image'),
+('team', 'member-6-bio', '', 'text'),
+('team', 'support-title', 'Ondersteuning', 'text'),
+('team', 'support-subtitle', '', 'text'),
+('team', 'support-1-name', '', 'text'),
+('team', 'support-1-bio', '', 'text'),
+('team', 'support-2-name', '', 'text'),
+('team', 'support-2-bio', '', 'text'),
+('team', 'support-3-name', '', 'text'),
+('team', 'support-3-bio', '', 'text'),
+('team', 'cta-title', '', 'text'),
+('team', 'cta-text', '', 'text'),
+('team', 'contact-director-name', 'Inge Versavel', 'text'),
+('team', 'contact-director-photo', '', 'image')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- =============================================
+-- OPVANG PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('opvang', 'hero-title', 'Voor- en Naschoolse Opvang', 'text'),
+('opvang', 'hero-text', '', 'text'),
+('opvang', 'schedule-title', 'Uurrooster', 'text'),
+('opvang', 'schedule-subtitle', '', 'text'),
+('opvang', 'morning-time', '7:00 - 8:15', 'text'),
+('opvang', 'morning-text', '', 'text'),
+('opvang', 'afternoon-time', '15:30 - 18:00', 'text'),
+('opvang', 'afternoon-text', '', 'text'),
+('opvang', 'activities-title', 'Activiteiten', 'text'),
+('opvang', 'activities-subtitle', '', 'text'),
+('opvang', 'activity-1-title', '', 'text'),
+('opvang', 'activity-1-text', '', 'text'),
+('opvang', 'activity-2-title', '', 'text'),
+('opvang', 'activity-2-text', '', 'text'),
+('opvang', 'activity-3-title', '', 'text'),
+('opvang', 'activity-3-text', '', 'text'),
+('opvang', 'activity-4-title', '', 'text'),
+('opvang', 'activity-4-text', '', 'text'),
+('opvang', 'activity-5-title', '', 'text'),
+('opvang', 'activity-5-text', '', 'text'),
+('opvang', 'activity-6-title', '', 'text'),
+('opvang', 'activity-6-text', '', 'text'),
+('opvang', 'practical-title', 'Praktisch', 'text'),
+('opvang', 'price-1', '', 'text'),
+('opvang', 'price-2', '', 'text'),
+('opvang', 'price-3', '', 'text'),
+('opvang', 'price-note', '', 'text'),
+('opvang', 'register-1', '', 'text'),
+('opvang', 'register-2', '', 'text'),
+('opvang', 'register-3', '', 'text'),
+('opvang', 'register-note', '', 'text'),
+('opvang', 'team-title', 'Ons Opvangteam', 'text'),
+('opvang', 'team-text', '', 'text'),
+('opvang', 'cta-title', '', 'text'),
+('opvang', 'cta-text', '', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- =============================================
+-- FOTOS PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('fotos', 'hero-title', 'Fotoalbum', 'text'),
+('fotos', 'hero-text', '', 'text'),
+('fotos', 'gallery-title', 'Sfeerbeelden', 'text'),
+('fotos', 'gallery-subtitle', '', 'text'),
+('fotos', 'gallery-1', '', 'image'),
+('fotos', 'gallery-2', '', 'image'),
+('fotos', 'gallery-3', '', 'image'),
+('fotos', 'gallery-4', '', 'image'),
+('fotos', 'gallery-5', '', 'image'),
+('fotos', 'gallery-6', '', 'image'),
+('fotos', 'gallery-7', '', 'image'),
+('fotos', 'gallery-8', '', 'image'),
+('fotos', 'gallery-9', '', 'image'),
+('fotos', 'facebook-title', '', 'text'),
+('fotos', 'facebook-text', '', 'text'),
+('fotos', 'cta-title', '', 'text'),
+('fotos', 'cta-text', '', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- =============================================
+-- PROJECTEN PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('projecten', 'hero-title', 'Projecten', 'text'),
+('projecten', 'hero-text', '', 'text'),
+('projecten', 'overview-title', '', 'text'),
+('projecten', 'overview-subtitle', '', 'text'),
+('projecten', 'timeline-title', '', 'text'),
+('projecten', 'timeline-subtitle', '', 'text'),
+('projecten', 'season-1-title', '', 'text'),
+('projecten', 'season-1-period', '', 'text'),
+('projecten', 'season-1-text', '', 'text'),
+('projecten', 'season-2-title', '', 'text'),
+('projecten', 'season-2-period', '', 'text'),
+('projecten', 'season-2-text', '', 'text'),
+('projecten', 'season-3-title', '', 'text'),
+('projecten', 'season-3-period', '', 'text'),
+('projecten', 'season-3-text', '', 'text'),
+('projecten', 'season-4-title', '', 'text'),
+('projecten', 'season-4-period', '', 'text'),
+('projecten', 'season-4-text', '', 'text'),
+('projecten', 'approach-title', '', 'text'),
+('projecten', 'approach-text', '', 'text'),
+('projecten', 'annual-title', '', 'text'),
+('projecten', 'annual-subtitle', '', 'text'),
+('projecten', 'annual-1-title', '', 'text'),
+('projecten', 'annual-1-text', '', 'text'),
+('projecten', 'annual-2-title', '', 'text'),
+('projecten', 'annual-2-text', '', 'text'),
+('projecten', 'annual-3-title', '', 'text'),
+('projecten', 'annual-3-text', '', 'text'),
+('projecten', 'annual-4-title', '', 'text'),
+('projecten', 'annual-4-text', '', 'text'),
+('projecten', 'annual-5-title', '', 'text'),
+('projecten', 'annual-5-text', '', 'text'),
+('projecten', 'annual-6-title', '', 'text'),
+('projecten', 'annual-6-text', '', 'text'),
+('projecten', '2021-poster', '', 'image'),
+('projecten', '2022-poster', '', 'image'),
+('projecten', '2023-poster', '', 'image'),
+('projecten', '2024-poster', '', 'image'),
+('projecten', 'cta-title', '', 'text'),
+('projecten', 'cta-text', '', 'text')
+ON CONFLICT (page_slug, content_key) DO NOTHING;
+
+-- =============================================
+-- KALENDER PAGE
+-- =============================================
+INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
+('kalender', 'live-title', '', 'text'),
+('kalender', 'live-subtitle', '', 'text')
 ON CONFLICT (page_slug, content_key) DO NOTHING;

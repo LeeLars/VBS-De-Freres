@@ -5,6 +5,7 @@ dotenv.config();
 export const env = {
   port: process.env.PORT || 4000,
   databaseUrl: process.env.DATABASE_URL,
+  cmsApiToken: process.env.CMS_API_TOKEN || 'dev-token-change-me',
   cloudinary: {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.CLOUDINARY_API_KEY,

@@ -4,6 +4,11 @@ import { env } from '../../config/env.js';
 const router = express.Router();
 
 router.get('/config', (req, res) => {
+  // Only allow if auth token is present (even for GET)
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Niet geautoriseerd' });
+  }
   console.log('Debug config endpoint called');
   
   const config = {

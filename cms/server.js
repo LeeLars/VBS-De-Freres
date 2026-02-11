@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { env } from './config/env.js';
 import { requestLogger } from './middleware/logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { apiAuth } from './middleware/auth.js';
 import apiRoutes from './routes/api/index.js';
 import pool from './config/database.js';
 import fs from 'fs';
@@ -52,8 +53,19 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(requestLogger);
 
-// API routes
-app.use('/api', apiRoutes);
+// Login endpoint (no auth required)
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  // Simple credential check - in production use hashed passwords
+  if (username === 'admin' && password === 'test123') {
+    res.json({ success: true, token: env.cmsApiToken });
+  } else {
+    res.status(401).json({ success: false, error: 'Ongeldige inloggegevens' });
+  }
+});
+
+// API routes (auth middleware protects PUT/POST/DELETE, GET is public)
+app.use('/api', apiAuth, apiRoutes);
 
 // Admin static files
 app.use('/cms', express.static(path.join(__dirname, 'public')));

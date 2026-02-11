@@ -40,7 +40,7 @@
             const result = await response.json();
             
             if (result.success && result.content) {
-                applyContent(result.content);
+                applyContent(pageSlug, result.content);
                 clearTimeout(fallbackTimer);
                 showContent(true);
             } else {
@@ -55,20 +55,26 @@
     }
     
     // Apply content to page elements
-    function applyContent(content) {
+    function applyContent(pageSlug, content) {
         for (const [key, data] of Object.entries(content)) {
             const value = data.value || data;
             
-            // Find elements with matching data-cms attribute
-            const elements = document.querySelectorAll(`[data-cms$="${key}"]`);
+            // Try exact match with pageSlug prefix first, then exact key match
+            let elements = document.querySelectorAll(`[data-cms="${pageSlug}-${key}"]`);
+            if (elements.length === 0) {
+                elements = document.querySelectorAll(`[data-cms="${key}"]`);
+            }
             
             elements.forEach(element => {
                 if (element.tagName === 'IMG') {
                     if (value && value.trim() !== '') {
                         element.src = value;
                     } else {
-                        // Hide images with no CMS value
                         element.style.display = 'none';
+                    }
+                } else if (element.tagName === 'IFRAME') {
+                    if (value && value.trim() !== '') {
+                        element.src = value;
                     }
                 } else {
                     element.textContent = value;

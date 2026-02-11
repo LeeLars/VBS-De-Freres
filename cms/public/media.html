@@ -200,17 +200,8 @@
                 <a href="/cms/pages.html" class="nav-item">
                     <span>Pagina's</span>
                 </a>
-                <a href="/cms/dashboard.html#team" class="nav-item">
-                    <span>Team</span>
-                </a>
                 <a href="/cms/media.html" class="nav-item active">
                     <span>Media</span>
-                </a>
-                <a href="/cms/dashboard.html#berichten" class="nav-item">
-                    <span>Berichten</span>
-                </a>
-                <a href="/cms/dashboard.html#instellingen" class="nav-item">
-                    <span>Instellingen</span>
                 </a>
             </nav>
             
@@ -260,13 +251,16 @@
         // Logout
         function handleLogout() {
             sessionStorage.removeItem('cmsLoggedIn');
+            sessionStorage.removeItem('cmsToken');
             window.location.href = '/cms';
         }
         
         // Check Cloudinary config
         async function checkCloudinaryConfig() {
             try {
-                const response = await fetch('/api/debug/config');
+                const response = await fetch('/api/debug/config', {
+                    headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
+                });
                 const result = await response.json();
                 
                 if (result.config.cloudinary.cloudName === 'NOT SET') {
@@ -356,7 +350,8 @@
             
             try {
                 const response = await fetch(`/api/media/${id}`, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
                 });
                 
                 const result = await response.json();
@@ -417,7 +412,8 @@
                 try {
                     const response = await fetch('/api/media/upload', {
                         method: 'POST',
-                        body: formData
+                        body: formData,
+                        headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
                     });
                     
                     const result = await response.json();

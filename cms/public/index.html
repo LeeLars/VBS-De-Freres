@@ -142,35 +142,39 @@
             <button type="submit" class="btn-login">Inloggen</button>
         </form>
         
-        <div class="test-credentials">
-            <h3>Test Credentials:</h3>
-            <p>Gebruikersnaam: <code>admin</code></p>
-            <p>Wachtwoord: <code>test123</code></p>
-        </div>
     </div>
 
     <script>
-        function handleLogin(event) {
+        async function handleLogin(event) {
             event.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
             
-            // Test credentials
-            if (username === 'admin' && password === 'test123') {
-                // Store login state
-                sessionStorage.setItem('cmsLoggedIn', 'true');
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
                 
-                // Redirect to dashboard
-                window.location.href = '/cms/dashboard.html';
-            } else {
-                errorMessage.textContent = 'Ongeldige gebruikersnaam of wachtwoord';
+                const result = await response.json();
+                
+                if (result.success) {
+                    sessionStorage.setItem('cmsLoggedIn', 'true');
+                    sessionStorage.setItem('cmsToken', result.token);
+                    window.location.href = '/cms/dashboard.html';
+                } else {
+                    errorMessage.textContent = result.error || 'Ongeldige inloggegevens';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'Verbindingsfout. Probeer opnieuw.';
                 errorMessage.style.display = 'block';
             }
         }
         
-        // Check if already logged in
         if (sessionStorage.getItem('cmsLoggedIn') === 'true') {
             window.location.href = '/cms/dashboard.html';
         }
