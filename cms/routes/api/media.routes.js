@@ -24,6 +24,24 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
 });
 
+// Diagnostic check
+router.get('/check', async (req, res) => {
+  const checks = {
+    cloudinaryConfigured: !!env.cloudinary.cloudName,
+    cloudinaryCloudName: env.cloudinary.cloudName ? env.cloudinary.cloudName.substring(0, 3) + '...' : 'NOT SET',
+    cloudinaryApiKey: env.cloudinary.apiKey ? 'SET' : 'NOT SET',
+    cloudinaryApiSecret: env.cloudinary.apiSecret ? 'SET' : 'NOT SET',
+    mediaTableExists: false
+  };
+  try {
+    await pool.query('SELECT COUNT(*) FROM media');
+    checks.mediaTableExists = true;
+  } catch (e) {
+    checks.mediaTableError = e.message;
+  }
+  res.json(checks);
+});
+
 // Get all media items
 router.get('/', async (req, res) => {
   try {
