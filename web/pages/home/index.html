@@ -223,137 +223,35 @@
                 <p style="color: #666; font-size: 16px;">Ontdek de levendige sfeer en leuke momenten</p>
             </div>
 
-            <div class="moving-wall-container" style="display: flex; flex-direction: column; gap: 24px; transform: rotate(-3deg); width: 120%; margin-left: -10%;">
-                <!-- Row 1 - Moving Left: 2x full set (1-10) for seamless loop -->
-                <div class="moving-row row-left" style="display: flex; gap: 24px; padding-right: 24px; animation: moveLeft 40s linear infinite;">
+            <div class="moving-wall-container" style="display: flex; flex-direction: column; gap: 24px; transform: rotate(-3deg); width: 120%; margin-left: -10%; overflow: hidden;">
+                <!-- Row 1 - Moving Left -->
+                <div class="moving-row row-left" style="display: flex; gap: 24px; will-change: transform;">
                     <!-- Set 1 -->
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-3">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-4">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-7">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-8">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-9">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-10">
-                    </div>
-                    <!-- Set 2 (Duplicate) -->
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-3">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-4">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-7">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-8">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-9">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-10">
-                    </div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-1"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-2"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-3"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-4"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-5"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-6"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-7"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-8"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-9"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-10"></div>
                 </div>
 
-                <!-- Row 2 - Moving Right: 2x full set (6-10, 1-5) for seamless loop -->
-                <div class="moving-row row-right" style="display: flex; gap: 24px; padding-right: 24px; animation: moveRight 45s linear infinite;">
+                <!-- Row 2 - Moving Right (offset order) -->
+                <div class="moving-row row-right" style="display: flex; gap: 24px; will-change: transform;">
                     <!-- Set 1 (Offset by 5) -->
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-7">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-8">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-9">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-10">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-3">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-4">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
-                    </div>
-                    <!-- Set 2 (Duplicate) -->
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-7">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-8">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-9">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-10">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-3">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-4">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
-                    </div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-6"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-7"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-8"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-9"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-10"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-1"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-2"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-3"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-4"></div>
+                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-5"></div>
                 </div>
             </div>
 
@@ -369,22 +267,66 @@
             </div>
 
             <style>
-                @keyframes moveLeft {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                @keyframes moveRight {
-                    0% { transform: translateX(-50%); }
-                    100% { transform: translateX(0); }
-                }
                 .wall-item {
-                    transition: transform 0.3s ease;
+                    width: 300px;
+                    height: 200px;
+                    border-radius: 16px;
+                    overflow: hidden;
+                    flex-shrink: 0;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
                 }
-                .wall-item:hover {
-                    transform: scale(1.05);
-                    z-index: 2;
+                .wall-item img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
                 }
             </style>
+
+            <script>
+                // Seamless infinite scroll - JS-based for pixel-perfect looping
+                (function() {
+                    function initMovingWall() {
+                        document.querySelectorAll('.moving-row').forEach(function(row) {
+                            var items = row.querySelectorAll('.wall-item');
+                            if (items.length === 0) return;
+
+                            // Clone all items to create seamless loop
+                            var originalHTML = row.innerHTML;
+                            row.innerHTML = originalHTML + originalHTML;
+
+                            // Calculate exact width of one set: 10 items * 300px + 10 gaps * 24px = 3240px
+                            var setWidth = items.length * 300 + items.length * 24;
+                            var speed = row.classList.contains('row-right') ? 0.5 : -0.6;
+                            var pos = row.classList.contains('row-right') ? -setWidth : 0;
+
+                            row.style.transform = 'translateX(' + pos + 'px)';
+
+                            function animate() {
+                                pos += speed;
+
+                                // Reset seamlessly when one full set has scrolled
+                                if (speed < 0 && pos <= -setWidth) {
+                                    pos += setWidth;
+                                } else if (speed > 0 && pos >= 0) {
+                                    pos -= setWidth;
+                                }
+
+                                row.style.transform = 'translateX(' + pos + 'px)';
+                                requestAnimationFrame(animate);
+                            }
+
+                            requestAnimationFrame(animate);
+                        });
+                    }
+
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', initMovingWall);
+                    } else {
+                        initMovingWall();
+                    }
+                })();
+            </script>
         </section>
 
         <!-- CTA Section -->
@@ -412,7 +354,7 @@
         window.API_BASE_URL = 'https://vbs-de-freres-production.up.railway.app';
     </script>
     <script src="../../assets/js/birth-years.js"></script>
-    <script src="../../assets/js/cms-content.js?v=3"></script>
+    <script src="../../assets/js/cms-content.js?v=4"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/pages/home.js"></script>
 </body>

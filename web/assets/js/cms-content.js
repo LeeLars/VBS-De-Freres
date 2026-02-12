@@ -58,22 +58,23 @@
     function optimizeCloudinaryUrl(url, element) {
         if (!url || !url.includes('res.cloudinary.com')) return url;
         
-        // Skip if already transformed
-        if (url.includes('f_auto') || url.includes('q_auto')) return url;
+        // Skip if already transformed (has Cloudinary transform params like w_, f_, q_)
+        var afterUpload = (url.split('/upload/')[1] || '');
+        if (/^[a-z]{1,2}_/.test(afterUpload)) return url;
         
-        // Determine optimal size based on element dimensions
-        const rect = element.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        let w = Math.round((rect.width || 400) * dpr);
-        let h = Math.round((rect.height || 300) * dpr);
+        // Use fixed dimensions based on context
+        const cmsKey = element.getAttribute('data-cms') || '';
+        let w, h;
         
-        // Clamp to reasonable max
-        w = Math.min(w, 800);
-        h = Math.min(h, 600);
+        if (cmsKey.includes('gallery')) {
+            // Gallery items: 300x200 display, serve at 2x
+            w = 600; h = 400;
+        } else {
+            // General images: serve at reasonable size
+            w = 800; h = 600;
+        }
         
-        // Insert transformation params into Cloudinary URL
-        // URL pattern: /upload/v1234567890/folder/file.jpg
-        // Result:      /upload/w_X,h_Y,c_fill,f_auto,q_auto/v1234567890/folder/file.jpg
+        // Insert transformation: f_auto serves WebP/AVIF, q_auto optimizes quality
         const transform = `w_${w},h_${h},c_fill,f_auto,q_auto`;
         return url.replace('/upload/', `/upload/${transform}/`);
     }
