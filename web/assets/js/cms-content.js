@@ -54,6 +54,30 @@
         }
     }
     
+    // Optimize Cloudinary URLs with on-the-fly transformations
+    function optimizeCloudinaryUrl(url, element) {
+        if (!url || !url.includes('res.cloudinary.com')) return url;
+        
+        // Skip if already transformed
+        if (url.includes('f_auto') || url.includes('q_auto')) return url;
+        
+        // Determine optimal size based on element dimensions
+        const rect = element.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let w = Math.round((rect.width || 400) * dpr);
+        let h = Math.round((rect.height || 300) * dpr);
+        
+        // Clamp to reasonable max
+        w = Math.min(w, 800);
+        h = Math.min(h, 600);
+        
+        // Insert transformation params into Cloudinary URL
+        // URL pattern: /upload/v1234567890/folder/file.jpg
+        // Result:      /upload/w_X,h_Y,c_fill,f_auto,q_auto/v1234567890/folder/file.jpg
+        const transform = `w_${w},h_${h},c_fill,f_auto,q_auto`;
+        return url.replace('/upload/', `/upload/${transform}/`);
+    }
+    
     // Apply content to page elements
     function applyContent(pageSlug, content) {
         // First pass: collect best value per data-cms attribute
@@ -101,7 +125,7 @@
             
             elements.forEach(element => {
                 if (element.tagName === 'IMG') {
-                    element.src = value;
+                    element.src = optimizeCloudinaryUrl(value, element);
                     element.style.display = '';
                 } else if (element.tagName === 'IFRAME') {
                     element.src = value;
