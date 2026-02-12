@@ -46,7 +46,7 @@ router.put('/:pageSlug', async (req, res) => {
          VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)
          ON CONFLICT (page_slug, content_key) 
          DO UPDATE SET content_value = $3, updated_at = CURRENT_TIMESTAMP`,
-        [pageSlug, key, value.value || value, value.type || 'text']
+        [pageSlug, key, value && typeof value === 'object' && value.value !== undefined ? value.value : (value || ''), value && typeof value === 'object' && value.type ? value.type : 'text']
       );
     }
     

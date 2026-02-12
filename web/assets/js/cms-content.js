@@ -108,8 +108,17 @@
             
             // Check for "[object Object]" string which indicates corrupted data
             if (value === '[object Object]') {
-                console.warn(`Skipping corrupted "[object Object]" string for key ${key}`);
                 continue;
+            }
+            
+            // Handle corrupted JSON-string values (e.g. '{"value":"url","type":"image"}')
+            if (value.startsWith('{') && value.includes('"value"')) {
+                try {
+                    const parsed = JSON.parse(value);
+                    if (parsed && typeof parsed.value === 'string') {
+                        value = parsed.value;
+                    }
+                } catch(e) {}
             }
             
             if (!value || value.trim() === '') continue;
@@ -142,8 +151,14 @@
             if (key.includes('gallery')) {
                 let val = data;
                 if (data && typeof data === 'object' && data.value !== undefined) val = data.value;
-                if (typeof val === 'string' && val.trim() !== '' && val !== '[object Object]') {
-                    galleryUrls[key] = val;
+                if (typeof val === 'string') {
+                    // Handle corrupted JSON-string values
+                    if (val.startsWith('{') && val.includes('"value"')) {
+                        try { val = JSON.parse(val).value || ''; } catch(e) {}
+                    }
+                    if (val.trim() !== '' && val !== '[object Object]') {
+                        galleryUrls[key] = val;
+                    }
                 }
             }
         }

@@ -658,6 +658,17 @@
                 const result = await response.json();
                 
                 if (result.success) {
+                    // Sanitize corrupted JSON-string values
+                    for (const [k, v] of Object.entries(result.content)) {
+                        if (v && typeof v.value === 'string' && v.value.startsWith('{') && v.value.includes('"value"')) {
+                            try {
+                                const parsed = JSON.parse(v.value);
+                                if (parsed && typeof parsed.value === 'string') {
+                                    v.value = parsed.value;
+                                }
+                            } catch(e) {}
+                        }
+                    }
                     contentData = result.content;
                     renderEditor(pageSlug, contentData);
                 } else {
@@ -892,25 +903,29 @@
                     const filledCount = keys.filter(k => (content[k] || {}).value).length;
                     const emptyCount = keys.length - filledCount;
                     html += `<div class="content-group">
-                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Fotomuur (${keys.length} afbeeldingen)</h3>
+                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Fotomuur (${filledCount}/${keys.length} foto's)</h3>
                         <div class="content-group-body">`;
                     
-                    // Bulk upload zone (only show if there are empty slots)
+                    // Upload zone - only visible when there are empty slots
+                    html += `<div id="uploadZone_${gridId}">`;
                     if (emptyCount > 0) {
                         html += `<div class="gallery-dropzone" id="dropzone_${gridId}" onclick="document.getElementById('bulkInput_${gridId}').click()">
                             <input type="file" id="bulkInput_${gridId}" accept="image/*" multiple hidden data-gallery-grid="${gridId}" data-gallery-keys='${JSON.stringify(keys)}'>
                             <div class="gallery-dropzone-content">
                                 <span style="font-size:32px;">+</span>
-                                <span>Klik of sleep ${emptyCount} afbeelding${emptyCount > 1 ? 'en' : ''} hierheen</span>
-                                <span class="gallery-dropzone-hint">${filledCount}/${keys.length} gevuld</span>
+                                <span>Upload foto's (nog ${emptyCount} plek${emptyCount > 1 ? 'ken' : ''} vrij)</span>
+                                <span class="gallery-dropzone-hint">Klik of sleep afbeeldingen hierheen</span>
                             </div>
                         </div>`;
                     } else {
-                        html += `<div style="background:#e8f5e0;padding:12px 16px;border-radius:8px;margin-bottom:12px;font-size:14px;color:#333;">Alle ${keys.length} posities zijn gevuld. Verwijder een afbeelding om een nieuwe te uploaden.</div>`;
+                        html += `<div style="background:#e8f5e0;padding:16px 20px;border-radius:10px;margin-bottom:16px;font-size:14px;color:#333;text-align:center;">
+                            Alle ${keys.length} posities zijn gevuld. Verwijder een foto hieronder om een nieuwe te kunnen uploaden.
+                        </div>`;
                     }
+                    html += `</div>`;
                     
-                    html += `<p style="font-size:13px;color:#999;margin:0 0 12px;">Sleep afbeeldingen om de volgorde te wijzigen. Klik op een afbeelding om te vervangen.</p>
-                            <div class="gallery-grid" id="${gridId}">`;
+                    // Grid with filled photos + empty numbered slots
+                    html += `<div class="gallery-grid" id="${gridId}">`;
                     for (let i = 0; i < keys.length; i++) {
                         const key = keys[i];
                         const item = content[key] || { value: '', type: 'image' };
@@ -918,9 +933,9 @@
                         html += `<div class="gallery-slot ${value ? 'filled' : 'empty-slot'}" draggable="true" data-gallery-key="${key}" data-gallery-index="${i}">
                             <input type="hidden" id="${key}" data-key="${key}" data-type="image" value="${value}">
                             <div class="gallery-slot-inner" onclick="openMediaPicker('${key}')">
-                                ${value ? `<img src="${value}" alt="Positie ${i+1}">` : `<span class="gallery-slot-number">${i+1}</span>`}
+                                ${value ? `<img src="${value}" alt="Foto ${i+1}">` : `<span class="gallery-slot-number">${i+1}</span>`}
                             </div>
-                            ${value ? `<button type="button" class="gallery-slot-remove" onclick="event.stopPropagation(); clearImage('${key}')">&times;</button>` : ''}
+                            ${value ? `<button type="button" class="gallery-slot-remove" onclick="event.stopPropagation(); removeGalleryPhoto('${key}', '${gridId}')" title="Verwijder deze foto">&times;</button>` : ''}
                             <div class="gallery-slot-label">${i+1}</div>
                         </div>`;
                     }
@@ -1242,7 +1257,9 @@
             // Check if this is a gallery slot
             const gallerySlot = input.closest('.gallery-slot');
             if (gallerySlot) {
-                updateGallerySlot(gallerySlot, url, key);
+                closeMediaPicker();
+                autoSaveField(key, url, 'image').then(() => loadContent(currentPage));
+                return;
             } else {
                 // Regular image field
                 const preview = document.getElementById('preview-' + key);
@@ -1258,6 +1275,15 @@
             
             closeMediaPicker();
             autoSaveField(key, url, 'image');
+        }
+        
+        // Remove a gallery photo: clear, save, and reload to update upload zone
+        async function removeGalleryPhoto(fieldKey, gridId) {
+            const input = document.getElementById(fieldKey);
+            if (input) input.value = '';
+            await autoSaveField(fieldKey, '', 'image');
+            // Reload the entire editor to refresh upload zone state
+            loadContent(currentPage);
         }
         
         function clearImage(fieldKey) {
