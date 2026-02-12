@@ -45,6 +45,7 @@
             color: #666;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
         
         .editor-tab:hover {
@@ -598,15 +599,15 @@
                 </div>
                 
                 <div class="editor-tabs">
-                    <button class="editor-tab active" data-page="home">Home</button>
-                    <button class="editor-tab" data-page="visie">Visie</button>
-                    <button class="editor-tab" data-page="klassen">Klassen</button>
-                    <button class="editor-tab" data-page="team">Team</button>
-                    <button class="editor-tab" data-page="contact">Contact</button>
-                    <button class="editor-tab" data-page="opvang">Opvang</button>
-                    <button class="editor-tab" data-page="fotos">Foto's</button>
-                    <button class="editor-tab" data-page="projecten">Projecten</button>
-                    <button class="editor-tab" data-page="kalender">Kalender</button>
+                    <a href="?page=home" class="editor-tab active" data-page="home">Home</a>
+                    <a href="?page=visie" class="editor-tab" data-page="visie">Visie</a>
+                    <a href="?page=klassen" class="editor-tab" data-page="klassen">Klassen</a>
+                    <a href="?page=team" class="editor-tab" data-page="team">Team</a>
+                    <a href="?page=contact" class="editor-tab" data-page="contact">Contact</a>
+                    <a href="?page=opvang" class="editor-tab" data-page="opvang">Opvang</a>
+                    <a href="?page=fotos" class="editor-tab" data-page="fotos">Foto's</a>
+                    <a href="?page=projecten" class="editor-tab" data-page="projecten">Projecten</a>
+                    <a href="?page=kalender" class="editor-tab" data-page="kalender">Kalender</a>
                 </div>
                 
                 <div class="editor-content" id="editorContent">
@@ -666,7 +667,10 @@
             window.location.href = '/cms';
         }
         
-        let currentPage = 'home';
+        // Read ?page= from URL to auto-select the right tab
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialPage = urlParams.get('page') || 'home';
+        let currentPage = initialPage;
         let contentData = {};
         let saveTimers = {};
         
@@ -719,17 +723,29 @@
             }, 800);
         }
         
-        // Tab switching
+        // Tab switching - use click handler to prevent full page reload, update URL instead
         document.querySelectorAll('.editor-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
                 document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
                 currentPage = tab.dataset.page;
                 document.getElementById('currentPageTitle').textContent = tab.textContent;
+                history.replaceState(null, '', '?page=' + currentPage);
                 loadContent(currentPage);
             });
         });
+        
+        // Activate the correct tab on load based on URL parameter
+        if (initialPage !== 'home') {
+            document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+            const activeTab = document.querySelector('.editor-tab[data-page="' + initialPage + '"]');
+            if (activeTab) {
+                activeTab.classList.add('active');
+                document.getElementById('currentPageTitle').textContent = activeTab.textContent;
+            }
+        }
         
         // Load content
         async function loadContent(pageSlug) {
@@ -1670,7 +1686,7 @@
         });
         
         // Initial load
-        loadContent('home');
+        loadContent(currentPage);
     </script>
 </body>
 </html>
