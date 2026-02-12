@@ -256,19 +256,54 @@
         .media-picker-upload {
             padding: 16px 24px;
             border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            gap: 12px;
-            align-items: center;
         }
         
-        .media-picker-upload .upload-btn {
-            padding: 8px 20px;
+        .media-picker-dropzone {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+        
+        .media-picker-dropzone:hover,
+        .media-picker-dropzone.drag-hover {
+            border-color: #a8cf8c;
+            background: #f5faf0;
+        }
+        
+        .media-picker-dropzone.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .media-picker-dropzone .upload-icon {
+            font-size: 28px;
+            color: #a8cf8c;
+            margin-bottom: 4px;
+        }
+        
+        .media-picker-dropzone .upload-label {
             font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .media-picker-dropzone .upload-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
         }
         
         .media-picker-upload .upload-status {
+            display: block;
             font-size: 13px;
             color: #666;
+            margin-top: 8px;
+            text-align: center;
         }
         
         .media-picker-grid {
@@ -541,8 +576,12 @@
                 <button class="media-picker-close" onclick="closeMediaPicker()">&times;</button>
             </div>
             <div class="media-picker-upload">
-                <input type="file" id="pickerFileInput" accept="image/*" hidden>
-                <button class="upload-btn" onclick="document.getElementById('pickerFileInput').click()">Upload nieuw</button>
+                <input type="file" id="pickerFileInput" accept="image/*" multiple hidden>
+                <div class="media-picker-dropzone" id="pickerDropzone" onclick="document.getElementById('pickerFileInput').click()">
+                    <div class="upload-icon">+</div>
+                    <div class="upload-label">Upload afbeelding</div>
+                    <div class="upload-hint">Klik of sleep bestanden hierheen</div>
+                </div>
                 <span class="upload-status" id="pickerUploadStatus"></span>
             </div>
             <div class="media-picker-grid" id="pickerGrid"></div>
@@ -555,6 +594,20 @@
             pickerUploadFiles(e.target.files);
             this.value = '';
         });
+        
+        // Drag-drop on picker dropzone
+        (function() {
+            const dz = document.getElementById('pickerDropzone');
+            dz.addEventListener('dragover', function(e) { e.preventDefault(); dz.classList.add('drag-hover'); });
+            dz.addEventListener('dragleave', function() { dz.classList.remove('drag-hover'); });
+            dz.addEventListener('drop', function(e) {
+                e.preventDefault();
+                dz.classList.remove('drag-hover');
+                if (dz.classList.contains('disabled')) return;
+                const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+                if (files.length > 0) pickerUploadFiles(files);
+            });
+        })();
         
         // Check login
         if (!sessionStorage.getItem('cmsLoggedIn')) {
@@ -1174,6 +1227,44 @@
             activePickerField = fieldKey;
             const overlay = document.getElementById('mediaPickerOverlay');
             overlay.classList.add('active');
+            
+            // Check if opened from a gallery slot and gallery is full
+            const input = document.getElementById(fieldKey);
+            const dropzone = document.getElementById('pickerDropzone');
+            if (input && dropzone) {
+                const gallerySlot = input.closest('.gallery-slot');
+                if (gallerySlot) {
+                    const grid = gallerySlot.closest('.gallery-grid');
+                    if (grid) {
+                        const total = grid.querySelectorAll('.gallery-slot').length;
+                        const filled = grid.querySelectorAll('.gallery-slot.filled').length;
+                        const currentSlotFilled = gallerySlot.classList.contains('filled');
+                        // If all slots are filled and this slot already has an image,
+                        // uploading a new image would not help (no empty slot to fill)
+                        // But selecting an existing image is fine (it replaces this slot)
+                        // So we only block upload if gallery is full AND current slot is empty
+                        // Actually: the user wants to block upload when gallery is 10/10
+                        if (filled >= total) {
+                            dropzone.classList.add('disabled');
+                            dropzone.querySelector('.upload-label').textContent = 'Fotomuur is vol';
+                            dropzone.querySelector('.upload-hint').textContent = 'Verwijder eerst een foto om een nieuwe te uploaden';
+                        } else {
+                            dropzone.classList.remove('disabled');
+                            dropzone.querySelector('.upload-label').textContent = 'Upload afbeelding';
+                            dropzone.querySelector('.upload-hint').textContent = 'Klik of sleep bestanden hierheen';
+                        }
+                    } else {
+                        dropzone.classList.remove('disabled');
+                        dropzone.querySelector('.upload-label').textContent = 'Upload afbeelding';
+                        dropzone.querySelector('.upload-hint').textContent = 'Klik of sleep bestanden hierheen';
+                    }
+                } else {
+                    dropzone.classList.remove('disabled');
+                    dropzone.querySelector('.upload-label').textContent = 'Upload afbeelding';
+                    dropzone.querySelector('.upload-hint').textContent = 'Klik of sleep bestanden hierheen';
+                }
+            }
+            
             loadPickerMedia();
         }
         
