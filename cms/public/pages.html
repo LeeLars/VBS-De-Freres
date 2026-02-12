@@ -361,6 +361,99 @@
             margin: 2px 0 6px;
             font-style: italic;
         }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        
+        .gallery-slot {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px dashed #ccc;
+            background: #f9f9f9;
+            cursor: grab;
+            transition: all 0.2s;
+        }
+        
+        .gallery-slot:active { cursor: grabbing; }
+        
+        .gallery-slot.filled {
+            border: 2px solid #a8cf8c;
+            background: #fff;
+        }
+        
+        .gallery-slot.drag-over {
+            border-color: #a8cf8c;
+            background: #e8f5e0;
+            transform: scale(1.05);
+        }
+        
+        .gallery-slot.dragging {
+            opacity: 0.4;
+        }
+        
+        .gallery-slot-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .gallery-slot-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-slot-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ccc;
+        }
+        
+        .gallery-slot-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: background 0.2s;
+        }
+        
+        .gallery-slot-remove:hover { background: #ff5252; }
+        
+        .gallery-slot-label {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            z-index: 2;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -556,8 +649,7 @@
                     'Hero Sectie': ['hero-title', 'hero-text', 'hero-bg'],
                     'Aanmeldformulier': ['form-title', 'form-subtitle'],
                     'Visie Sectie': ['visie-img'],
-                    'Fotomuur Rij 1': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5'],
-                    'Fotomuur Rij 2': ['gallery-6', 'gallery-7', 'gallery-8', 'gallery-9', 'gallery-10'],
+                    '__gallery__': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9', 'gallery-10'],
                     'Call-to-Action': ['cta-title', 'cta-text']
                 };
             } else if (pageSlug === 'visie') {
@@ -625,7 +717,8 @@
             } else if (pageSlug === 'fotos') {
                 sections = {
                     'Hero': ['hero-title', 'hero-text'],
-                    'Galerij': ['gallery-title', 'gallery-subtitle', 'gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9'],
+                    'Galerij Tekst': ['gallery-title', 'gallery-subtitle'],
+                    '__gallery_fotos__': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9'],
                     'Facebook': ['facebook-title', 'facebook-text'],
                     'Call-to-Action': ['cta-title', 'cta-text']
                 };
@@ -756,6 +849,31 @@
             let html = '';
             
             for (const [sectionName, keys] of Object.entries(sections)) {
+                // Special gallery grid section
+                if (sectionName.startsWith('__gallery')) {
+                    const gridId = 'galleryGrid_' + sectionName.replace(/_/g, '');
+                    html += `<div class="content-group">
+                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Fotomuur (${keys.length} afbeeldingen verplicht)</h3>
+                        <div class="content-group-body">
+                            <p style="font-size:13px;color:#999;margin:0 0 12px;">Sleep afbeeldingen om de volgorde te wijzigen. Klik op een slot om een afbeelding te kiezen.</p>
+                            <div class="gallery-grid" id="${gridId}">`;
+                    for (let i = 0; i < keys.length; i++) {
+                        const key = keys[i];
+                        const item = content[key] || { value: '', type: 'image' };
+                        const value = item.value || '';
+                        html += `<div class="gallery-slot ${value ? 'filled' : 'empty-slot'}" draggable="true" data-gallery-key="${key}" data-gallery-index="${i}">
+                            <input type="hidden" id="${key}" data-key="${key}" data-type="image" value="${value}">
+                            <div class="gallery-slot-inner" onclick="openMediaPicker('${key}')">
+                                ${value ? `<img src="${value}" alt="Positie ${i+1}">` : `<span class="gallery-slot-number">${i+1}</span>`}
+                            </div>
+                            ${value ? `<button type="button" class="gallery-slot-remove" onclick="event.stopPropagation(); clearImage('${key}')">&times;</button>` : ''}
+                            <div class="gallery-slot-label">${i+1}</div>
+                        </div>`;
+                    }
+                    html += `</div></div></div>`;
+                    continue;
+                }
+                
                 html += `<div class="content-group"><h3 onclick="this.parentElement.classList.toggle('collapsed')">${sectionName}</h3><div class="content-group-body">`;
                 
                 for (const key of keys) {
@@ -795,10 +913,92 @@
             }
             
             editorContent.innerHTML = html;
+            
+            // Init drag-and-drop for gallery grids
+            initGalleryDragDrop();
         }
         
         // markChanged kept as no-op for backwards compat
         function markChanged() {}
+        
+        // ===== Gallery Drag & Drop =====
+        function initGalleryDragDrop() {
+            document.querySelectorAll('.gallery-grid').forEach(grid => {
+                let dragSlot = null;
+                
+                grid.querySelectorAll('.gallery-slot').forEach(slot => {
+                    slot.addEventListener('dragstart', (e) => {
+                        dragSlot = slot;
+                        slot.classList.add('dragging');
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+                    
+                    slot.addEventListener('dragend', () => {
+                        slot.classList.remove('dragging');
+                        grid.querySelectorAll('.gallery-slot').forEach(s => s.classList.remove('drag-over'));
+                        dragSlot = null;
+                    });
+                    
+                    slot.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                        if (slot !== dragSlot) {
+                            slot.classList.add('drag-over');
+                        }
+                    });
+                    
+                    slot.addEventListener('dragleave', () => {
+                        slot.classList.remove('drag-over');
+                    });
+                    
+                    slot.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        slot.classList.remove('drag-over');
+                        if (!dragSlot || dragSlot === slot) return;
+                        
+                        const fromInput = dragSlot.querySelector('input[type="hidden"]');
+                        const toInput = slot.querySelector('input[type="hidden"]');
+                        const fromKey = fromInput.dataset.key;
+                        const toKey = toInput.dataset.key;
+                        const fromVal = fromInput.value;
+                        const toVal = toInput.value;
+                        
+                        fromInput.value = toVal;
+                        toInput.value = fromVal;
+                        
+                        updateGallerySlot(dragSlot, toVal, fromKey);
+                        updateGallerySlot(slot, fromVal, toKey);
+                        
+                        autoSaveField(fromKey, toVal, 'image');
+                        autoSaveField(toKey, fromVal, 'image');
+                    });
+                });
+            });
+        }
+        
+        function updateGallerySlot(slot, value, key) {
+            const inner = slot.querySelector('.gallery-slot-inner');
+            const idx = slot.dataset.galleryIndex;
+            const removeBtn = slot.querySelector('.gallery-slot-remove');
+            
+            if (value) {
+                slot.classList.add('filled');
+                slot.classList.remove('empty-slot');
+                inner.innerHTML = `<img src="${value}" alt="Positie ${parseInt(idx)+1}">`;
+                inner.setAttribute('onclick', `openMediaPicker('${key}')`);
+                if (!removeBtn) {
+                    slot.insertAdjacentHTML('beforeend', `<button type="button" class="gallery-slot-remove" onclick="event.stopPropagation(); clearImage('${key}')">&times;</button>`);
+                } else {
+                    removeBtn.setAttribute('onclick', `event.stopPropagation(); clearImage('${key}')`);
+                }
+            } else {
+                slot.classList.remove('filled');
+                slot.classList.add('empty-slot');
+                inner.innerHTML = `<span class="gallery-slot-number">${parseInt(idx)+1}</span>`;
+                inner.setAttribute('onclick', `openMediaPicker('${key}')`);
+                if (removeBtn) removeBtn.remove();
+            }
+        }
         
         // ===== Media Picker =====
         let activePickerField = null;
@@ -845,14 +1045,21 @@
             const input = document.getElementById(key);
             input.value = url;
             
-            const preview = document.getElementById('preview-' + key);
-            preview.className = 'image-field-preview';
-            preview.innerHTML = `<img src="${url}">`;
-            
-            // Add remove button if not present
-            const btnContainer = input.nextElementSibling;
-            if (btnContainer && !btnContainer.querySelector('.btn-clear-media')) {
-                btnContainer.insertAdjacentHTML('beforeend', `<button type="button" class="btn-clear-media" onclick="clearImage('${key}')">Verwijderen</button>`);
+            // Check if this is a gallery slot
+            const gallerySlot = input.closest('.gallery-slot');
+            if (gallerySlot) {
+                updateGallerySlot(gallerySlot, url, key);
+            } else {
+                // Regular image field
+                const preview = document.getElementById('preview-' + key);
+                if (preview) {
+                    preview.className = 'image-field-preview';
+                    preview.innerHTML = `<img src="${url}">`;
+                }
+                const btnContainer = input.nextElementSibling;
+                if (btnContainer && !btnContainer.querySelector('.btn-clear-media')) {
+                    btnContainer.insertAdjacentHTML('beforeend', `<button type="button" class="btn-clear-media" onclick="clearImage('${key}')">Verwijderen</button>`);
+                }
             }
             
             closeMediaPicker();
@@ -863,14 +1070,21 @@
             const input = document.getElementById(fieldKey);
             input.value = '';
             
-            const preview = document.getElementById('preview-' + fieldKey);
-            preview.className = 'image-field-preview empty';
-            preview.innerHTML = 'Geen afbeelding geselecteerd';
-            
-            // Remove the clear button
-            const btnContainer = input.nextElementSibling;
-            const clearBtn = btnContainer ? btnContainer.querySelector('.btn-clear-media') : null;
-            if (clearBtn) clearBtn.remove();
+            // Check if this is a gallery slot
+            const gallerySlot = input.closest('.gallery-slot');
+            if (gallerySlot) {
+                updateGallerySlot(gallerySlot, '', fieldKey);
+            } else {
+                // Regular image field
+                const preview = document.getElementById('preview-' + fieldKey);
+                if (preview) {
+                    preview.className = 'image-field-preview empty';
+                    preview.innerHTML = 'Geen afbeelding geselecteerd';
+                }
+                const btnContainer = input.nextElementSibling;
+                const clearBtn = btnContainer ? btnContainer.querySelector('.btn-clear-media') : null;
+                if (clearBtn) clearBtn.remove();
+            }
             
             autoSaveField(fieldKey, '', 'image');
         }
