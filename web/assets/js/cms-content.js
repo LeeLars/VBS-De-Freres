@@ -56,26 +56,31 @@
     
     // Apply content to page elements
     function applyContent(pageSlug, content) {
+        // First pass: collect best value per data-cms attribute
+        // Prefixed keys (e.g. gallery-1 under home) match data-cms="home-gallery-1"
+        // Skip empty values so they don't override filled ones
+        const applied = {};
+        
         for (const [key, data] of Object.entries(content)) {
             const value = data.value || data;
+            if (!value || (typeof value === 'string' && value.trim() === '')) continue;
             
-            // Try exact match with pageSlug prefix first, then exact key match
-            let elements = document.querySelectorAll(`[data-cms="${pageSlug}-${key}"]`);
+            // Try exact match with pageSlug prefix first
+            let selector = `[data-cms="${pageSlug}-${key}"]`;
+            let elements = document.querySelectorAll(selector);
+            
+            // Fallback: exact key match
             if (elements.length === 0) {
-                elements = document.querySelectorAll(`[data-cms="${key}"]`);
+                selector = `[data-cms="${key}"]`;
+                elements = document.querySelectorAll(selector);
             }
             
             elements.forEach(element => {
                 if (element.tagName === 'IMG') {
-                    if (value && value.trim() !== '') {
-                        element.src = value;
-                    } else {
-                        element.style.display = 'none';
-                    }
+                    element.src = value;
+                    element.style.display = '';
                 } else if (element.tagName === 'IFRAME') {
-                    if (value && value.trim() !== '') {
-                        element.src = value;
-                    }
+                    element.src = value;
                 } else {
                     element.textContent = value;
                 }
