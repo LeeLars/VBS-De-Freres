@@ -452,41 +452,8 @@
             z-index: 2;
         }
         
-        .gallery-dropzone {
-            border: 3px dashed #a8cf8c;
-            border-radius: 12px;
-            padding: 32px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 16px;
-            background: #f9fdf6;
-            transition: all 0.2s;
-        }
-        
-        .gallery-dropzone:hover, .gallery-dropzone.drag-hover {
-            background: #e8f5e0;
-            border-color: #7ab55c;
-        }
-        
-        .gallery-dropzone-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            color: #666;
-            font-size: 15px;
-        }
-        
-        .gallery-dropzone-hint {
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .gallery-dropzone-progress {
-            margin-top: 12px;
-            font-size: 14px;
-            color: #a8cf8c;
-            font-weight: 600;
+        .gallery-upload-bar .upload-btn {
+            white-space: nowrap;
         }
         
         @media (max-width: 768px) {
@@ -906,23 +873,12 @@
                         <h3 onclick="this.parentElement.classList.toggle('collapsed')">Fotomuur (${filledCount}/${keys.length} foto's)</h3>
                         <div class="content-group-body">`;
                     
-                    // Upload zone - only visible when there are empty slots
-                    html += `<div id="uploadZone_${gridId}">`;
-                    if (emptyCount > 0) {
-                        html += `<div class="gallery-dropzone" id="dropzone_${gridId}" onclick="document.getElementById('bulkInput_${gridId}').click()">
-                            <input type="file" id="bulkInput_${gridId}" accept="image/*" multiple hidden data-gallery-grid="${gridId}" data-gallery-keys='${JSON.stringify(keys)}'>
-                            <div class="gallery-dropzone-content">
-                                <span style="font-size:32px;">+</span>
-                                <span>Upload foto's (nog ${emptyCount} plek${emptyCount > 1 ? 'ken' : ''} vrij)</span>
-                                <span class="gallery-dropzone-hint">Klik of sleep afbeeldingen hierheen</span>
-                            </div>
-                        </div>`;
-                    } else {
-                        html += `<div style="background:#e8f5e0;padding:16px 20px;border-radius:10px;margin-bottom:16px;font-size:14px;color:#333;text-align:center;">
-                            Alle ${keys.length} posities zijn gevuld. Verwijder een foto hieronder om een nieuwe te kunnen uploaden.
-                        </div>`;
-                    }
-                    html += `</div>`;
+                    // Upload bar - always visible
+                    html += `<div id="uploadZone_${gridId}" class="gallery-upload-bar" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+                        <input type="file" id="bulkInput_${gridId}" accept="image/*" multiple hidden data-gallery-grid="${gridId}" data-gallery-keys='${JSON.stringify(keys)}'>
+                        <button type="button" class="upload-btn" onclick="document.getElementById('bulkInput_${gridId}').click()" ${emptyCount === 0 ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>Upload foto's</button>
+                        <span style="font-size:13px;color:#666;" id="uploadStatus_${gridId}">${emptyCount > 0 ? `${filledCount}/${keys.length} gevuld — nog ${emptyCount} plek${emptyCount > 1 ? 'ken' : ''} vrij` : `Alle ${keys.length} posities gevuld — verwijder een foto om te uploaden`}</span>
+                    </div>`;
                     
                     // Grid with filled photos + empty numbered slots
                     html += `<div class="gallery-grid" id="${gridId}">`;
@@ -1072,34 +1028,12 @@
         
         // ===== Gallery Bulk Upload =====
         function initGalleryBulkUpload() {
-            // File input change handlers
             document.querySelectorAll('input[data-gallery-grid]').forEach(input => {
                 input.addEventListener('change', (e) => {
                     const gridId = input.dataset.galleryGrid;
                     const keys = JSON.parse(input.dataset.galleryKeys);
                     handleGalleryBulkUpload(Array.from(e.target.files), gridId, keys);
                     input.value = '';
-                });
-            });
-            
-            // Drag-drop on dropzones
-            document.querySelectorAll('.gallery-dropzone').forEach(zone => {
-                zone.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    zone.classList.add('drag-hover');
-                });
-                zone.addEventListener('dragleave', () => {
-                    zone.classList.remove('drag-hover');
-                });
-                zone.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    zone.classList.remove('drag-hover');
-                    const input = zone.querySelector('input[data-gallery-grid]');
-                    if (!input) return;
-                    const gridId = input.dataset.galleryGrid;
-                    const keys = JSON.parse(input.dataset.galleryKeys);
-                    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-                    if (files.length > 0) handleGalleryBulkUpload(files, gridId, keys);
                 });
             });
         }
@@ -1148,12 +1082,8 @@
                 alert(`Er zijn maar ${emptyKeys.length} lege posities. De eerste ${emptyKeys.length} van ${files.length} afbeeldingen worden geupload.`);
             }
             
-            const dropzone = document.getElementById('dropzone_' + gridId);
-            if (dropzone) {
-                dropzone.innerHTML = `<div class="gallery-dropzone-content">
-                    <span class="gallery-dropzone-progress">Afbeeldingen verkleinen en uploaden (${toUpload.length})...</span>
-                </div>`;
-            }
+            const statusEl = document.getElementById('uploadStatus_' + gridId);
+            if (statusEl) statusEl.textContent = `Verkleinen en uploaden (${toUpload.length})...`;
             showStatus(`Uploaden ${toUpload.length} afbeeldingen...`, 'saving');
             
             // Resize all images first (parallel)
@@ -1190,11 +1120,7 @@
                     console.error('Upload error:', e);
                 }
                 done++;
-                if (dropzone) {
-                    dropzone.innerHTML = `<div class="gallery-dropzone-content">
-                        <span class="gallery-dropzone-progress">${done}/${resized.length} klaar</span>
-                    </div>`;
-                }
+                if (statusEl) statusEl.textContent = `${done}/${resized.length} geupload...`;
                 showStatus(`${done}/${resized.length} geupload...`, 'saving');
             };
             
@@ -1206,7 +1132,8 @@
                 showStatus(`${done} afbeeldingen geupload`, 'saved');
             }
             
-            loadContent(currentPage);
+            // Update upload bar locally (no scroll reset)
+            refreshGalleryUploadBar(gridId);
         }
         
         // ===== Media Picker =====
@@ -1257,8 +1184,11 @@
             // Check if this is a gallery slot
             const gallerySlot = input.closest('.gallery-slot');
             if (gallerySlot) {
+                updateGallerySlot(gallerySlot, url, key);
+                const grid = gallerySlot.closest('.gallery-grid');
+                if (grid) refreshGalleryUploadBar(grid.id);
                 closeMediaPicker();
-                autoSaveField(key, url, 'image').then(() => loadContent(currentPage));
+                autoSaveField(key, url, 'image');
                 return;
             } else {
                 // Regular image field
@@ -1277,13 +1207,48 @@
             autoSaveField(key, url, 'image');
         }
         
-        // Remove a gallery photo: clear, save, and reload to update upload zone
+        // Refresh the upload bar status and button for a gallery grid
+        function refreshGalleryUploadBar(gridId) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            const allSlots = grid.querySelectorAll('.gallery-slot');
+            const total = allSlots.length;
+            const filled = grid.querySelectorAll('.gallery-slot.filled').length;
+            const empty = total - filled;
+            
+            const statusEl = document.getElementById('uploadStatus_' + gridId);
+            if (statusEl) {
+                statusEl.textContent = empty > 0
+                    ? `${filled}/${total} gevuld — nog ${empty} plek${empty > 1 ? 'ken' : ''} vrij`
+                    : `Alle ${total} posities gevuld — verwijder een foto om te uploaden`;
+            }
+            
+            const uploadZone = document.getElementById('uploadZone_' + gridId);
+            if (uploadZone) {
+                const btn = uploadZone.querySelector('.upload-btn');
+                if (btn) {
+                    btn.disabled = empty === 0;
+                    btn.style.opacity = empty === 0 ? '0.5' : '';
+                    btn.style.cursor = empty === 0 ? 'not-allowed' : '';
+                }
+            }
+            
+            // Update the section header count
+            const contentGroup = grid.closest('.content-group');
+            if (contentGroup) {
+                const h3 = contentGroup.querySelector('h3');
+                if (h3) h3.textContent = `Fotomuur (${filled}/${total} foto's)`;
+            }
+        }
+        
+        // Remove a gallery photo: clear, save, update DOM locally (no scroll reset)
         async function removeGalleryPhoto(fieldKey, gridId) {
             const input = document.getElementById(fieldKey);
             if (input) input.value = '';
+            const slot = input ? input.closest('.gallery-slot') : null;
+            if (slot) updateGallerySlot(slot, '', fieldKey);
+            refreshGalleryUploadBar(gridId);
             await autoSaveField(fieldKey, '', 'image');
-            // Reload the entire editor to refresh upload zone state
-            loadContent(currentPage);
         }
         
         function clearImage(fieldKey) {
