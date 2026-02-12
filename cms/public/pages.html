@@ -451,6 +451,43 @@
             z-index: 2;
         }
         
+        .gallery-dropzone {
+            border: 3px dashed #a8cf8c;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 16px;
+            background: #f9fdf6;
+            transition: all 0.2s;
+        }
+        
+        .gallery-dropzone:hover, .gallery-dropzone.drag-hover {
+            background: #e8f5e0;
+            border-color: #7ab55c;
+        }
+        
+        .gallery-dropzone-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .gallery-dropzone-hint {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .gallery-dropzone-progress {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #a8cf8c;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
             .gallery-grid { grid-template-columns: repeat(3, 1fr); }
         }
@@ -852,10 +889,27 @@
                 // Special gallery grid section
                 if (sectionName.startsWith('__gallery')) {
                     const gridId = 'galleryGrid_' + sectionName.replace(/_/g, '');
+                    const filledCount = keys.filter(k => (content[k] || {}).value).length;
+                    const emptyCount = keys.length - filledCount;
                     html += `<div class="content-group">
-                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Fotomuur (${keys.length} afbeeldingen verplicht)</h3>
-                        <div class="content-group-body">
-                            <p style="font-size:13px;color:#999;margin:0 0 12px;">Sleep afbeeldingen om de volgorde te wijzigen. Klik op een slot om een afbeelding te kiezen.</p>
+                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Fotomuur (${keys.length} afbeeldingen)</h3>
+                        <div class="content-group-body">`;
+                    
+                    // Bulk upload zone (only show if there are empty slots)
+                    if (emptyCount > 0) {
+                        html += `<div class="gallery-dropzone" id="dropzone_${gridId}" onclick="document.getElementById('bulkInput_${gridId}').click()">
+                            <input type="file" id="bulkInput_${gridId}" accept="image/*" multiple hidden data-gallery-grid="${gridId}" data-gallery-keys='${JSON.stringify(keys)}'>
+                            <div class="gallery-dropzone-content">
+                                <span style="font-size:32px;">+</span>
+                                <span>Klik of sleep ${emptyCount} afbeelding${emptyCount > 1 ? 'en' : ''} hierheen</span>
+                                <span class="gallery-dropzone-hint">${filledCount}/${keys.length} gevuld</span>
+                            </div>
+                        </div>`;
+                    } else {
+                        html += `<div style="background:#e8f5e0;padding:12px 16px;border-radius:8px;margin-bottom:12px;font-size:14px;color:#333;">Alle ${keys.length} posities zijn gevuld. Verwijder een afbeelding om een nieuwe te uploaden.</div>`;
+                    }
+                    
+                    html += `<p style="font-size:13px;color:#999;margin:0 0 12px;">Sleep afbeeldingen om de volgorde te wijzigen. Klik op een afbeelding om te vervangen.</p>
                             <div class="gallery-grid" id="${gridId}">`;
                     for (let i = 0; i < keys.length; i++) {
                         const key = keys[i];
@@ -916,6 +970,7 @@
             
             // Init drag-and-drop for gallery grids
             initGalleryDragDrop();
+            initGalleryBulkUpload();
         }
         
         // markChanged kept as no-op for backwards compat
@@ -998,6 +1053,109 @@
                 inner.setAttribute('onclick', `openMediaPicker('${key}')`);
                 if (removeBtn) removeBtn.remove();
             }
+        }
+        
+        // ===== Gallery Bulk Upload =====
+        function initGalleryBulkUpload() {
+            // File input change handlers
+            document.querySelectorAll('input[data-gallery-grid]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const gridId = input.dataset.galleryGrid;
+                    const keys = JSON.parse(input.dataset.galleryKeys);
+                    handleGalleryBulkUpload(Array.from(e.target.files), gridId, keys);
+                    input.value = '';
+                });
+            });
+            
+            // Drag-drop on dropzones
+            document.querySelectorAll('.gallery-dropzone').forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-hover');
+                });
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-hover');
+                });
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-hover');
+                    const input = zone.querySelector('input[data-gallery-grid]');
+                    if (!input) return;
+                    const gridId = input.dataset.galleryGrid;
+                    const keys = JSON.parse(input.dataset.galleryKeys);
+                    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+                    if (files.length > 0) handleGalleryBulkUpload(files, gridId, keys);
+                });
+            });
+        }
+        
+        async function handleGalleryBulkUpload(files, gridId, allKeys) {
+            // Find empty slots
+            const emptyKeys = allKeys.filter(k => {
+                const input = document.getElementById(k);
+                return input && !input.value;
+            });
+            
+            if (emptyKeys.length === 0) {
+                alert('Alle posities zijn al gevuld. Verwijder eerst een afbeelding.');
+                return;
+            }
+            
+            const toUpload = files.slice(0, emptyKeys.length);
+            if (files.length > emptyKeys.length) {
+                alert(`Er zijn maar ${emptyKeys.length} lege posities. De eerste ${emptyKeys.length} van ${files.length} afbeeldingen worden geupload.`);
+            }
+            
+            // Show progress on dropzone
+            const dropzone = document.getElementById('dropzone_' + gridId);
+            const originalContent = dropzone ? dropzone.innerHTML : '';
+            
+            for (let i = 0; i < toUpload.length; i++) {
+                const file = toUpload[i];
+                const targetKey = emptyKeys[i];
+                
+                if (dropzone) {
+                    dropzone.innerHTML = `<div class="gallery-dropzone-content">
+                        <span class="gallery-dropzone-progress">Uploaden ${i+1}/${toUpload.length}...</span>
+                        <span style="font-size:13px;color:#999;">${file.name}</span>
+                    </div>`;
+                }
+                showStatus(`Uploaden ${i+1}/${toUpload.length}...`, 'saving');
+                
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                try {
+                    const response = await fetch('/api/media/upload', {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
+                    });
+                    const result = await response.json();
+                    
+                    if (result.success && result.media) {
+                        const url = result.media.url;
+                        const input = document.getElementById(targetKey);
+                        input.value = url;
+                        
+                        const slot = input.closest('.gallery-slot');
+                        if (slot) updateGallerySlot(slot, url, targetKey);
+                        
+                        await autoSaveField(targetKey, url, 'image');
+                    } else {
+                        console.error('Upload failed:', result.error);
+                        showStatus(`Fout bij ${file.name}: ${result.error || 'Upload mislukt'}`, 'error');
+                    }
+                } catch (e) {
+                    console.error('Upload error:', e);
+                    showStatus(`Fout bij ${file.name}`, 'error');
+                }
+            }
+            
+            showStatus(`${toUpload.length} afbeelding${toUpload.length > 1 ? 'en' : ''} geupload`, 'saved');
+            
+            // Re-render to update dropzone count
+            loadContent(currentPage);
         }
         
         // ===== Media Picker =====
