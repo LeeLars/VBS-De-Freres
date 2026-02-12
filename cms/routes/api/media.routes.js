@@ -39,15 +39,22 @@ router.get('/', async (req, res) => {
 
 // Upload new media
 router.post('/upload', upload.single('file'), async (req, res) => {
+  console.log('[UPLOAD] Request received');
+  
   if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+    console.log('[UPLOAD] No file in request');
+    return res.status(400).json({ success: false, error: 'No file uploaded' });
   }
 
+  console.log(`[UPLOAD] File: ${req.file.originalname}, size: ${req.file.size}, type: ${req.file.mimetype}`);
+
   if (!env.cloudinary.cloudName) {
-    return res.status(500).json({ error: 'Cloudinary not configured' });
+    console.log('[UPLOAD] Cloudinary not configured');
+    return res.status(500).json({ success: false, error: 'Cloudinary niet geconfigureerd. Voeg CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY en CLOUDINARY_API_SECRET toe in Railway.' });
   }
 
   try {
+    console.log('[UPLOAD] Uploading to Cloudinary...');
     // Upload to Cloudinary
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
@@ -56,14 +63,20 @@ router.post('/upload', upload.single('file'), async (req, res) => {
           resource_type: 'auto'
         },
         (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
+          if (error) {
+            console.error('[UPLOAD] Cloudinary error:', error);
+            reject(error);
+          } else {
+            console.log('[UPLOAD] Cloudinary success:', result.secure_url);
+            resolve(result);
+          }
         }
       );
       uploadStream.end(req.file.buffer);
     });
 
     // Save to database
+    console.log('[UPLOAD] Saving to database...');
     const dbResult = await pool.query(
       `INSERT INTO media (filename, url, public_id, width, height, format, size_bytes)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -79,14 +92,15 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       ]
     );
 
+    console.log('[UPLOAD] Complete, id:', dbResult.rows[0].id);
     res.json({ 
       success: true, 
       media: dbResult.rows[0],
       message: 'File uploaded successfully'
     });
   } catch (error) {
-    console.error('Upload error:', error);
-    res.status(500).json({ error: 'Failed to upload file' });
+    console.error('[UPLOAD] Error:', error.message || error);
+    res.status(500).json({ success: false, error: error.message || 'Failed to upload file' });
   }
 });
 
