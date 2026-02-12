@@ -21,7 +21,7 @@ if (env.cloudinary.cloudName) {
 // Configure multer for memory storage
 const upload = multer({ 
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+  limits: { fileSize: 15 * 1024 * 1024 } // 15MB limit
 });
 
 // Diagnostic check
@@ -141,7 +141,8 @@ router.delete('/:id', async (req, res) => {
 
     // Delete from Cloudinary
     if (media.public_id && env.cloudinary.cloudName) {
-      await cloudinary.uploader.destroy(media.public_id);
+      const isPdf = media.format === 'pdf' || (media.url && media.url.endsWith('.pdf'));
+      await cloudinary.uploader.destroy(media.public_id, { resource_type: isPdf ? 'raw' : 'image' });
     }
 
     // Delete from database

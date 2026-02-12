@@ -502,6 +502,58 @@
             white-space: nowrap;
         }
         
+        .pdf-dropzone {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+        
+        .pdf-dropzone:hover,
+        .pdf-dropzone.drag-hover {
+            border-color: #a8cf8c;
+            background: #f5faf0;
+        }
+        
+        .pdf-dropzone .upload-icon { margin-bottom: 4px; }
+        .pdf-dropzone .upload-label { font-size: 14px; font-weight: 600; color: #333; }
+        .pdf-dropzone .upload-hint { font-size: 12px; color: #999; margin-top: 2px; }
+        
+        .pdf-upload-status {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-top: 6px;
+            text-align: center;
+        }
+        
+        .pdf-current {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: #f5faf0;
+            border: 1px solid #d4e8c4;
+            border-radius: 8px;
+        }
+        
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #333;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .pdf-link:hover { color: #7ab55c; }
+        
         @media (max-width: 768px) {
             .gallery-grid { grid-template-columns: repeat(3, 1fr); }
         }
@@ -991,6 +1043,7 @@
                     const label = labels[key] || key;
                     const isTextarea = key.includes('text') || key.includes('message');
                     const isImage = item.type === 'image' || key.includes('gallery') || key.includes('photo') || key.includes('poster') || key.includes('-img') || key.includes('-bg');
+                    const isPdfField = key.includes('doc-') && key.endsWith('-link');
                     
                     const hint = hints[key] || '';
                     
@@ -998,7 +1051,29 @@
                         <label for="${key}">${label}</label>
                         ${hint ? `<div class="field-hint">${hint}</div>` : ''}`;
                         
-                    if (isImage) {
+                    if (isPdfField) {
+                        html += `
+                            <input type="hidden" id="${key}" data-key="${key}" data-type="text" value="${value}">
+                            <div class="pdf-upload-zone" id="pdfZone-${key}">
+                                <input type="file" id="pdfInput-${key}" accept=".pdf,application/pdf" hidden data-field-key="${key}">
+                                <div class="pdf-dropzone" id="pdfDrop-${key}" onclick="document.getElementById('pdfInput-${key}').click()">
+                                    <div class="upload-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    </div>
+                                    <div class="upload-label">Upload PDF</div>
+                                    <div class="upload-hint">Klik of sleep een PDF hierheen (max 15MB)</div>
+                                </div>
+                                <span class="pdf-upload-status" id="pdfStatus-${key}"></span>
+                            </div>
+                            <div class="pdf-current" id="pdfCurrent-${key}" style="${value ? '' : 'display:none;'}">
+                                <a href="${value}" target="_blank" class="pdf-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <span id="pdfName-${key}">${value ? decodeURIComponent(value.split('/').pop()) : ''}</span>
+                                </a>
+                                <button type="button" class="btn-clear-media" onclick="clearPdf('${key}')">Verwijderen</button>
+                            </div>
+                         `;
+                    } else if (isImage) {
                          html += `
                             <input type="hidden" id="${key}" data-key="${key}" data-type="image" value="${value}">
                             <div style="display: flex; gap: 8px; align-items: center;">
@@ -1026,6 +1101,7 @@
             // Init drag-and-drop for gallery grids
             initGalleryDragDrop();
             initGalleryBulkUpload();
+            initPdfUploads();
         }
         
         // markChanged kept as no-op for backwards compat
@@ -1120,6 +1196,94 @@
                     input.value = '';
                 });
             });
+        }
+        
+        // ===== PDF Upload =====
+        function initPdfUploads() {
+            document.querySelectorAll('input[data-field-key]').forEach(input => {
+                if (!input.accept || !input.accept.includes('pdf')) return;
+                const fieldKey = input.dataset.fieldKey;
+                
+                input.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) uploadPdf(e.target.files[0], fieldKey);
+                    input.value = '';
+                });
+                
+                const dropzone = document.getElementById('pdfDrop-' + fieldKey);
+                if (dropzone) {
+                    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-hover'); });
+                    dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('drag-hover'); });
+                    dropzone.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        dropzone.classList.remove('drag-hover');
+                        const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
+                        if (files.length > 0) uploadPdf(files[0], fieldKey);
+                    });
+                }
+            });
+        }
+        
+        async function uploadPdf(file, fieldKey) {
+            if (file.size > 15 * 1024 * 1024) {
+                alert('Dit bestand is te groot (max 15MB).');
+                return;
+            }
+            if (file.type !== 'application/pdf' && !file.name.endsWith('.pdf')) {
+                alert('Alleen PDF-bestanden zijn toegestaan.');
+                return;
+            }
+            
+            const status = document.getElementById('pdfStatus-' + fieldKey);
+            if (status) status.textContent = 'Uploaden...';
+            showStatus('PDF uploaden...', 'saving');
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('/api/media/upload', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
+                });
+                const result = await response.json();
+                
+                if (result.success && result.media) {
+                    const url = result.media.url;
+                    const input = document.getElementById(fieldKey);
+                    if (input) input.value = url;
+                    
+                    const currentDiv = document.getElementById('pdfCurrent-' + fieldKey);
+                    if (currentDiv) {
+                        currentDiv.style.display = '';
+                        const link = currentDiv.querySelector('.pdf-link');
+                        if (link) link.href = url;
+                        const nameSpan = document.getElementById('pdfName-' + fieldKey);
+                        if (nameSpan) nameSpan.textContent = file.name;
+                    }
+                    
+                    if (status) status.textContent = 'Upload voltooid!';
+                    showStatus('PDF opgeslagen', 'saved');
+                    autoSaveField(fieldKey, url, 'text');
+                } else {
+                    if (status) status.textContent = 'Fout: ' + (result.error || 'Upload mislukt');
+                    showStatus('PDF upload mislukt', 'error');
+                }
+            } catch (e) {
+                console.error('PDF upload error:', e);
+                if (status) status.textContent = 'Fout: ' + e.message;
+                showStatus('PDF upload mislukt', 'error');
+            }
+            
+            setTimeout(() => { if (status) status.textContent = ''; }, 3000);
+        }
+        
+        function clearPdf(fieldKey) {
+            const input = document.getElementById(fieldKey);
+            if (input) input.value = '';
+            const currentDiv = document.getElementById('pdfCurrent-' + fieldKey);
+            if (currentDiv) currentDiv.style.display = 'none';
+            autoSaveField(fieldKey, '', 'text');
         }
         
         // Resize image client-side before upload (max 2000px, JPEG 80%)
