@@ -26,7 +26,21 @@ async function initDatabase() {
     console.log('Initializing database...');
     const sqlPath = path.join(__dirname, 'database', 'init.sql');
     const sql = fs.readFileSync(sqlPath, 'utf8');
-    await pool.query(sql);
+    
+    // Split into individual statements and run each separately
+    // so a failing INSERT doesn't prevent CREATE TABLE from running
+    const statements = sql.split(';').map(s => s.trim()).filter(s => s.length > 0);
+    for (const stmt of statements) {
+      try {
+        await pool.query(stmt);
+      } catch (err) {
+        // Only log non-duplicate errors
+        if (!err.message.includes('duplicate') && !err.message.includes('already exists')) {
+          console.error('SQL statement error:', err.message);
+          console.error('Statement:', stmt.substring(0, 100) + '...');
+        }
+      }
+    }
     console.log('Database initialized successfully');
   } catch (error) {
     console.error('Database initialization error:', error.message);
