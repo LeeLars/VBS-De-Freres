@@ -62,8 +62,26 @@
         const applied = {};
         
         for (const [key, data] of Object.entries(content)) {
-            const value = data.value || data;
-            if (!value || (typeof value === 'string' && value.trim() === '')) continue;
+            // Handle different data structures
+            let value = data;
+            
+            // If data is an object with a 'value' property, use that
+            if (data && typeof data === 'object' && data.value !== undefined) {
+                value = data.value;
+            }
+            
+            // If value is still an object (e.g. nested), try to extract a string or skip
+            if (value && typeof value === 'object') {
+                console.warn(`Skipping object value for key ${key}`, value);
+                continue;
+            }
+            
+            // Ensure value is a string
+            if (typeof value !== 'string') {
+                value = String(value || '');
+            }
+            
+            if (!value || value.trim() === '') continue;
             
             // Try exact match with pageSlug prefix first
             let selector = `[data-cms="${pageSlug}-${key}"]`;
