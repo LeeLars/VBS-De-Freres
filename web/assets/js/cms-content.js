@@ -135,6 +135,22 @@
                 }
             });
         }
+        
+        // Collect gallery image URLs and dispatch event for gallery scripts
+        const galleryUrls = {};
+        for (const [key, data] of Object.entries(content)) {
+            if (key.includes('gallery')) {
+                let val = data;
+                if (data && typeof data === 'object' && data.value !== undefined) val = data.value;
+                if (typeof val === 'string' && val.trim() !== '' && val !== '[object Object]') {
+                    galleryUrls[key] = val;
+                }
+            }
+        }
+        if (Object.keys(galleryUrls).length > 0) {
+            window._cmsGalleryUrls = galleryUrls;
+            document.dispatchEvent(new CustomEvent('cms-gallery-ready', { detail: galleryUrls }));
+        }
     }
     
     // Show content after loading or fallback

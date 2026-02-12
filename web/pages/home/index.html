@@ -224,35 +224,10 @@
             </div>
 
             <div class="moving-wall-container" style="display: flex; flex-direction: column; gap: 24px; transform: rotate(-3deg); width: 120%; margin-left: -10%; overflow: hidden;">
-                <!-- Row 1 - Moving Left -->
-                <div class="moving-row row-left" style="display: flex; gap: 24px; will-change: transform;">
-                    <!-- Set 1 -->
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-1"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-2"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-3"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-4"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-5"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-6"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-7"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-8"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-9"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-10"></div>
-                </div>
-
-                <!-- Row 2 - Moving Right (offset order) -->
-                <div class="moving-row row-right" style="display: flex; gap: 24px; will-change: transform;">
-                    <!-- Set 1 (Offset by 5) -->
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-6"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-7"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-8"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-9"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-10"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-1"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-2"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-3"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-4"></div>
-                    <div class="wall-item"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" data-cms="home-gallery-5"></div>
-                </div>
+                <!-- Row 1 - CMS order, moving left -->
+                <div id="gallery-row-1" class="moving-row row-left" style="display: flex; gap: 24px; will-change: transform;"></div>
+                <!-- Row 2 - Shuffled, moving right -->
+                <div id="gallery-row-2" class="moving-row row-right" style="display: flex; gap: 24px; will-change: transform;"></div>
             </div>
 
             <div style="text-align: center; margin-top: 48px; position: relative; z-index: 1;">
@@ -284,46 +259,103 @@
             </style>
 
             <script>
-                // Seamless infinite scroll - JS-based for pixel-perfect looping
                 (function() {
-                    function initMovingWall() {
-                        document.querySelectorAll('.moving-row').forEach(function(row) {
-                            var items = row.querySelectorAll('.wall-item');
-                            if (items.length === 0) return;
+                    var ITEM_W = 300, GAP = 24;
 
-                            // Clone all items to create seamless loop
-                            var originalHTML = row.innerHTML;
-                            row.innerHTML = originalHTML + originalHTML;
-
-                            // Calculate exact width of one set: 10 items * 300px + 10 gaps * 24px = 3240px
-                            var setWidth = items.length * 300 + items.length * 24;
-                            var speed = row.classList.contains('row-right') ? 0.5 : -0.6;
-                            var pos = row.classList.contains('row-right') ? -setWidth : 0;
-
-                            row.style.transform = 'translateX(' + pos + 'px)';
-
-                            function animate() {
-                                pos += speed;
-
-                                // Reset seamlessly when one full set has scrolled
-                                if (speed < 0 && pos <= -setWidth) {
-                                    pos += setWidth;
-                                } else if (speed > 0 && pos >= 0) {
-                                    pos -= setWidth;
-                                }
-
-                                row.style.transform = 'translateX(' + pos + 'px)';
-                                requestAnimationFrame(animate);
-                            }
-
-                            requestAnimationFrame(animate);
-                        });
+                    function optimizeUrl(url) {
+                        if (!url || url.indexOf('res.cloudinary.com') === -1) return url;
+                        var after = (url.split('/upload/')[1] || '');
+                        if (/^[a-z]{1,2}_/.test(after)) return url;
+                        return url.replace('/upload/', '/upload/w_600,h_400,c_fill,f_auto,q_auto/');
                     }
 
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', initMovingWall);
-                    } else {
-                        initMovingWall();
+                    function createItem(src) {
+                        var div = document.createElement('div');
+                        div.className = 'wall-item';
+                        var img = document.createElement('img');
+                        img.src = optimizeUrl(src);
+                        img.alt = 'Schoolfoto';
+                        img.loading = 'eager';
+                        div.appendChild(img);
+                        return div;
+                    }
+
+                    function shuffle(arr) {
+                        var a = arr.slice();
+                        for (var i = a.length - 1; i > 0; i--) {
+                            var j = Math.floor(Math.random() * (i + 1));
+                            var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+                        }
+                        return a;
+                    }
+
+                    function buildGallery(galleryUrls) {
+                        // Sort keys numerically: gallery-1, gallery-2, ... gallery-10
+                        var keys = Object.keys(galleryUrls).sort(function(a, b) {
+                            var na = parseInt(a.replace(/\D/g, '')) || 0;
+                            var nb = parseInt(b.replace(/\D/g, '')) || 0;
+                            return na - nb;
+                        });
+
+                        // Collect valid URLs in CMS order
+                        var urls = [];
+                        keys.forEach(function(k) {
+                            var u = galleryUrls[k];
+                            if (u && u.trim() !== '') urls.push(u);
+                        });
+
+                        if (urls.length === 0) return;
+
+                        var row1 = document.getElementById('gallery-row-1');
+                        var row2 = document.getElementById('gallery-row-2');
+                        if (!row1 || !row2) return;
+
+                        // Row 1: CMS order
+                        urls.forEach(function(u) { row1.appendChild(createItem(u)); });
+
+                        // Row 2: shuffled
+                        var shuffled = shuffle(urls);
+                        shuffled.forEach(function(u) { row2.appendChild(createItem(u)); });
+
+                        // Clone both rows for seamless loop
+                        row1.innerHTML += row1.innerHTML;
+                        row2.innerHTML += row2.innerHTML;
+
+                        // Start animations
+                        startAnimation(row1, urls.length, -0.6);
+                        startAnimation(row2, shuffled.length, 0.5);
+                    }
+
+                    function startAnimation(row, itemCount, speed) {
+                        var setWidth = itemCount * (ITEM_W + GAP);
+                        var pos = speed > 0 ? -setWidth : 0;
+                        row.style.transform = 'translateX(' + pos + 'px)';
+
+                        function tick() {
+                            pos += speed;
+                            if (speed < 0 && pos <= -setWidth) pos += setWidth;
+                            else if (speed > 0 && pos >= 0) pos -= setWidth;
+                            row.style.transform = 'translateX(' + pos + 'px)';
+                            requestAnimationFrame(tick);
+                        }
+                        requestAnimationFrame(tick);
+                    }
+
+                    var built = false;
+                    function tryBuild(data) {
+                        if (built) return;
+                        built = true;
+                        buildGallery(data);
+                    }
+
+                    // Listen for CMS gallery data
+                    document.addEventListener('cms-gallery-ready', function(e) {
+                        tryBuild(e.detail);
+                    });
+
+                    // Fallback: if CMS already loaded before this script ran
+                    if (window._cmsGalleryUrls) {
+                        tryBuild(window._cmsGalleryUrls);
                     }
                 })();
             </script>
@@ -354,7 +386,7 @@
         window.API_BASE_URL = 'https://vbs-de-freres-production.up.railway.app';
     </script>
     <script src="../../assets/js/birth-years.js"></script>
-    <script src="../../assets/js/cms-content.js?v=4"></script>
+    <script src="../../assets/js/cms-content.js?v=5"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/pages/home.js"></script>
 </body>
