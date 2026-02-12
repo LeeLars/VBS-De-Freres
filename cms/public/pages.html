@@ -1082,8 +1082,35 @@
             });
         }
         
+        // Resize image client-side before upload (max 2000px, JPEG 80%)
+        function resizeImage(file, maxSize) {
+            return new Promise((resolve) => {
+                // Skip non-image or small files
+                if (!file.type.startsWith('image/') || file.size < 500000) {
+                    resolve(file);
+                    return;
+                }
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = () => {
+                    URL.revokeObjectURL(url);
+                    let w = img.width, h = img.height;
+                    if (w <= maxSize && h <= maxSize) { resolve(file); return; }
+                    if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
+                    else { w = Math.round(w * maxSize / h); h = maxSize; }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    canvas.toBlob((blob) => {
+                        resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                    }, 'image/jpeg', 0.80);
+                };
+                img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+                img.src = url;
+            });
+        }
+        
         async function handleGalleryBulkUpload(files, gridId, allKeys) {
-            // Find empty slots
             const emptyKeys = allKeys.filter(k => {
                 const input = document.getElementById(k);
                 return input && !input.value;
@@ -1099,55 +1126,64 @@
                 alert(`Er zijn maar ${emptyKeys.length} lege posities. De eerste ${emptyKeys.length} van ${files.length} afbeeldingen worden geupload.`);
             }
             
-            // Show progress on dropzone
             const dropzone = document.getElementById('dropzone_' + gridId);
-            const originalContent = dropzone ? dropzone.innerHTML : '';
+            if (dropzone) {
+                dropzone.innerHTML = `<div class="gallery-dropzone-content">
+                    <span class="gallery-dropzone-progress">Afbeeldingen verkleinen en uploaden (${toUpload.length})...</span>
+                </div>`;
+            }
+            showStatus(`Uploaden ${toUpload.length} afbeeldingen...`, 'saving');
             
-            for (let i = 0; i < toUpload.length; i++) {
-                const file = toUpload[i];
-                const targetKey = emptyKeys[i];
-                
-                if (dropzone) {
-                    dropzone.innerHTML = `<div class="gallery-dropzone-content">
-                        <span class="gallery-dropzone-progress">Uploaden ${i+1}/${toUpload.length}...</span>
-                        <span style="font-size:13px;color:#999;">${file.name}</span>
-                    </div>`;
-                }
-                showStatus(`Uploaden ${i+1}/${toUpload.length}...`, 'saving');
-                
+            // Resize all images first (parallel)
+            const resized = await Promise.all(toUpload.map(f => resizeImage(f, 2000)));
+            
+            // Upload all in parallel
+            let done = 0;
+            let errors = 0;
+            const token = sessionStorage.getItem('cmsToken') || '';
+            
+            const uploadOne = async (file, targetKey, idx) => {
                 const formData = new FormData();
                 formData.append('file', file);
-                
                 try {
                     const response = await fetch('/api/media/upload', {
                         method: 'POST',
                         body: formData,
-                        headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
+                        headers: { 'Authorization': 'Bearer ' + token }
                     });
                     const result = await response.json();
-                    
                     if (result.success && result.media) {
                         const url = result.media.url;
                         const input = document.getElementById(targetKey);
                         input.value = url;
-                        
                         const slot = input.closest('.gallery-slot');
                         if (slot) updateGallerySlot(slot, url, targetKey);
-                        
-                        await autoSaveField(targetKey, url, 'image');
+                        autoSaveField(targetKey, url, 'image');
                     } else {
+                        errors++;
                         console.error('Upload failed:', result.error);
-                        showStatus(`Fout bij ${file.name}: ${result.error || 'Upload mislukt'}`, 'error');
                     }
                 } catch (e) {
+                    errors++;
                     console.error('Upload error:', e);
-                    showStatus(`Fout bij ${file.name}`, 'error');
                 }
+                done++;
+                if (dropzone) {
+                    dropzone.innerHTML = `<div class="gallery-dropzone-content">
+                        <span class="gallery-dropzone-progress">${done}/${resized.length} klaar</span>
+                    </div>`;
+                }
+                showStatus(`${done}/${resized.length} geupload...`, 'saving');
+            };
+            
+            await Promise.all(resized.map((file, i) => uploadOne(file, emptyKeys[i], i)));
+            
+            if (errors > 0) {
+                showStatus(`${done - errors} geupload, ${errors} mislukt`, 'error');
+            } else {
+                showStatus(`${done} afbeeldingen geupload`, 'saved');
             }
             
-            showStatus(`${toUpload.length} afbeelding${toUpload.length > 1 ? 'en' : ''} geupload`, 'saved');
-            
-            // Re-render to update dropzone count
             loadContent(currentPage);
         }
         
