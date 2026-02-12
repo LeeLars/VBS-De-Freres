@@ -16,6 +16,8 @@
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
 
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="hero-bg-img" alt="Visie sfeerbeeld" data-cms="visie-hero-bg">
+
             <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
                 <span class="tag-pill" style="background: #a8cf8c; color: #000;">Onze Visie</span>
                 <h1 style="font-size: 48px; margin: 24px 0; line-height: 1.2;" data-cms="visie-hero-title">
@@ -188,8 +190,30 @@
             </style>
         </section>
 
+        <!-- Photo Break Section -->
+        <section style="padding: 80px 24px; background: #f9fcf7;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch;">
+                    <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); min-height: 350px;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Sfeerbeeld school" style="width: 100%; height: 100%; object-fit: cover; display: block;" data-cms="visie-sfeer-img-1">
+                    </div>
+                    <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); min-height: 350px;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Sfeerbeeld school" style="width: 100%; height: 100%; object-fit: cover; display: block;" data-cms="visie-sfeer-img-2">
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @media (max-width: 768px) {
+                    section > div > div[style*="grid-template-columns: 1fr 1fr"][style*="align-items: stretch"] {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+        </section>
+
         <!-- Educational Approach -->
-        <section id="aanpak" style="padding: 100px 24px; background: #f9fcf7;">
+        <section id="aanpak" style="padding: 100px 24px; background: #fff;">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div class="section-header" style="margin-bottom: 64px;">
                     <span class="tag-pill" style="background: #a8cf8c; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">ONZE AANPAK</span>
@@ -197,43 +221,66 @@
                     <p style="color: #666; font-size: 18px; max-width: 700px; margin: 0 auto;">Drie pijlers die onze onderwijsvisie vormgeven</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; margin-top: 48px;">
-                    <!-- Approach 1 -->
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                            </svg>
-                        </div>
-                        <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="visie-approach-1-title">Eigentijds Onderwijs</h3>
-                        <p style="color: #666; line-height: 1.6;" data-cms="visie-approach-1-text">We gebruiken moderne lesmethodes en technologie om kinderen optimaal voor te bereiden op de toekomst.</p>
+                <div class="approach-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 48px;">
+                    <!-- Image Column -->
+                    <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Onze aanpak" style="width: 100%; height: 100%; object-fit: cover; min-height: 500px; display: block;" data-cms="visie-approach-img">
                     </div>
 
-                    <!-- Approach 2 -->
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
+                    <!-- Pillars Column -->
+                    <div style="display: flex; flex-direction: column; gap: 32px;">
+                        <!-- Approach 1 -->
+                        <div style="display: flex; gap: 20px; align-items: start;">
+                            <div style="flex-shrink: 0; width: 56px; height: 56px; background: #e8f5e0; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 20px; margin: 0 0 8px 0;" data-cms="visie-approach-1-title">Eigentijds Onderwijs</h3>
+                                <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="visie-approach-1-text">We gebruiken moderne lesmethodes en technologie om kinderen optimaal voor te bereiden op de toekomst.</p>
+                            </div>
                         </div>
-                        <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="visie-approach-2-title">Persoonlijke Begeleiding</h3>
-                        <p style="color: #666; line-height: 1.6;" data-cms="visie-approach-2-text">Elk kind krijgt de aandacht die het nodig heeft. We werken met kleine klassen voor optimale begeleiding.</p>
-                    </div>
 
-                    <!-- Approach 3 -->
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            </svg>
+                        <!-- Approach 2 -->
+                        <div style="display: flex; gap: 20px; align-items: start;">
+                            <div style="flex-shrink: 0; width: 56px; height: 56px; background: #e8f5e0; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 20px; margin: 0 0 8px 0;" data-cms="visie-approach-2-title">Persoonlijke Begeleiding</h3>
+                                <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="visie-approach-2-text">Elk kind krijgt de aandacht die het nodig heeft. We werken met kleine klassen voor optimale begeleiding.</p>
+                            </div>
                         </div>
-                        <h3 style="font-size: 22px; margin-bottom: 12px;" data-cms="visie-approach-3-title">Open Communicatie</h3>
-                        <p style="color: #666; line-height: 1.6;" data-cms="visie-approach-3-text">Transparantie en regelmatig contact met ouders zorgen voor een sterke driehoek kind-ouder-school.</p>
+
+                        <!-- Approach 3 -->
+                        <div style="display: flex; gap: 20px; align-items: start;">
+                            <div style="flex-shrink: 0; width: 56px; height: 56px; background: #e8f5e0; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 20px; margin: 0 0 8px 0;" data-cms="visie-approach-3-title">Open Communicatie</h3>
+                                <p style="color: #666; line-height: 1.6; margin: 0;" data-cms="visie-approach-3-text">Transparantie en regelmatig contact met ouders zorgen voor een sterke driehoek kind-ouder-school.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <style>
+                @media (max-width: 768px) {
+                    .approach-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 32px !important;
+                    }
+                }
+            </style>
         </section>
 
         <!-- School Regulations -->
@@ -445,7 +492,7 @@
         <script src="../../assets/js/components/footer.js"></script>
     </main>
 
-    <script src="../../assets/js/cms-content.js"></script>
+    <script src="../../assets/js/cms-content.js?v=2"></script>
     <script src="../../assets/js/main.js"></script>
 </body>
 </html>

@@ -122,9 +122,13 @@ ON CONFLICT (page_slug, content_key) DO NOTHING;
 INSERT INTO page_content (page_slug, content_key, content_value, content_type) VALUES
 ('visie', 'hero-title', 'Samen bouwen aan een sterke toekomst', 'text'),
 ('visie', 'hero-text', 'Bij VBS De Frères geloven we in onderwijs dat verder gaat dan kennis alleen. We vormen kinderen tot zelfstandige, creatieve en sociale mensen.', 'text'),
+('visie', 'hero-bg', '', 'image'),
 ('visie', 'mission-title', 'Elk kind verdient de kans om te groeien en te bloeien', 'text'),
 ('visie', 'mission-text', 'Wij bieden een veilige en stimulerende leeromgeving waar kinderen zich kunnen ontwikkelen op hun eigen tempo. Met aandacht voor individuele talenten en noden, bereiden we hen voor op een succesvolle toekomst.', 'text'),
 ('visie', 'mission-img', '', 'image'),
+('visie', 'sfeer-img-1', '', 'image'),
+('visie', 'sfeer-img-2', '', 'image'),
+('visie', 'approach-img', '', 'image'),
 ('visie', 'approach-1-title', 'Eigentijds Onderwijs', 'text'),
 ('visie', 'approach-1-text', 'We gebruiken moderne lesmethodes en technologie om kinderen optimaal voor te bereiden op de toekomst.', 'text'),
 ('visie', 'approach-2-title', 'Persoonlijke Begeleiding', 'text'),
