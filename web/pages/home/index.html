@@ -224,8 +224,8 @@
             </div>
 
             <div class="moving-wall-container" style="display: flex; flex-direction: column; gap: 24px; transform: rotate(-3deg); width: 120%; margin-left: -10%;">
-                <!-- Row 1 - Moving Left -->
-                <div class="moving-row row-left" style="display: flex; gap: 24px; animation: moveLeft 40s linear infinite;">
+                <!-- Row 1 - Moving Left: all 10 photos in order 1-10 -->
+                <div class="moving-row row-left" style="display: flex; gap: 24px; animation: moveLeft 20s linear infinite;">
                     <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
                     </div>
@@ -241,17 +241,6 @@
                     <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
                     </div>
-                    <!-- Duplicates for seamless loop -->
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
-                    </div>
-                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
-                    </div>
-                </div>
-
-                <!-- Row 2 - Moving Right -->
-                <div class="moving-row row-right" style="display: flex; gap: 24px; animation: moveRight 45s linear infinite;">
                     <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
                     </div>
@@ -269,10 +258,69 @@
                     </div>
                     <!-- Duplicates for seamless loop -->
                     <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-3">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-4">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
+                    </div>
+                </div>
+
+                <!-- Row 2 - Moving Right: same 10 photos but offset by 5 (starts at 6) -->
+                <div class="moving-row row-right" style="display: flex; gap: 24px; animation: moveRight 25s linear infinite;">
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
                     </div>
                     <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-7">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-8">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-9">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-10">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-1">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-2">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-3">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-4">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-5">
+                    </div>
+                    <!-- Duplicates for seamless loop -->
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-6">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-7">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-8">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-9">
+                    </div>
+                    <div class="wall-item" style="width: 300px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Schoolfoto" style="width: 100%; height: 100%; object-fit: cover;" data-cms="home-gallery-10">
                     </div>
                 </div>
             </div>
