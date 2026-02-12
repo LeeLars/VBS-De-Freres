@@ -33,21 +33,38 @@
             </div>
         </section>
 
-        <!-- Mission Statement -->
-        <section style="padding: 80px 24px; background: #fffffb;">
-            <div style="max-width: 1000px; margin: 0 auto;">
-                <div class="quote-card">
-                    <div style="text-align: center;">
-                        <span class="tag-pill" style="background: #f5f5f5; color: #666; font-size: 10px;">ONZE MISSIE</span>
+        <!-- Mission Section - Image & Text -->
+        <section style="padding: 80px 24px; background: #fff;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+                    <!-- Content Column -->
+                    <div>
+                        <span class="tag-pill" style="background: #a8cf8c; color: #000; margin-bottom: 16px; display: inline-block;">ONZE MISSIE</span>
+                        <h2 style="font-size: 42px; margin-bottom: 24px; line-height: 1.2;" data-cms="visie-mission-title">Elk kind verdient de kans om te groeien en te bloeien</h2>
+                        <p style="color: #666; font-size: 18px; line-height: 1.7; margin-bottom: 32px;" data-cms="visie-mission-text">
+                            Wij bieden een veilige en stimulerende leeromgeving waar kinderen zich kunnen ontwikkelen op hun eigen tempo. Met aandacht voor individuele talenten en noden, bereiden we hen voor op een succesvolle toekomst.
+                        </p>
                     </div>
-                    <h2 style="font-size: 36px; line-height: 1.4; margin: 24px 0; text-align: center;" data-cms="visie-mission-title">
-                        Elk kind verdient de kans om te <span style="color: #a8cf8c;">groeien</span> en te <span style="color: #a8cf8c;">bloeien</span>
-                    </h2>
-                    <p style="font-size: 18px; color: #666; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;" data-cms="visie-mission-text">
-                        Wij bieden een veilige en stimulerende leeromgeving waar kinderen zich kunnen ontwikkelen op hun eigen tempo. Met aandacht voor individuele talenten en noden, bereiden we hen voor op een succesvolle toekomst.
-                    </p>
+
+                    <!-- Image Column -->
+                    <div style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Onze Missie" style="width: 100%; height: 100%; object-fit: cover; min-height: 400px;" data-cms="visie-mission-img">
+                    </div>
                 </div>
             </div>
+
+            <style>
+                @media (max-width: 768px) {
+                    section > div > div[style*="grid-template-columns: 1fr 1fr"] {
+                        grid-template-columns: 1fr !important;
+                        gap: 32px !important;
+                    }
+                    /* Reorder on mobile: image first */
+                    section > div > div[style*="grid-template-columns: 1fr 1fr"] > div:nth-child(2) {
+                        order: -1;
+                    }
+                }
+            </style>
         </section>
 
         <!-- Vision Points -->
