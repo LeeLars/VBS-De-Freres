@@ -143,6 +143,17 @@
                     element.textContent = value;
                 }
             });
+            
+            // Also check for data-cms-href (sets href on anchor tags)
+            let hrefSelector = `[data-cms-href="${pageSlug}-${key}"]`;
+            let hrefElements = document.querySelectorAll(hrefSelector);
+            if (hrefElements.length === 0) {
+                hrefSelector = `[data-cms-href="${key}"]`;
+                hrefElements = document.querySelectorAll(hrefSelector);
+            }
+            hrefElements.forEach(el => {
+                el.href = value;
+            });
         }
         
         // Collect gallery image URLs and dispatch event for gallery scripts
