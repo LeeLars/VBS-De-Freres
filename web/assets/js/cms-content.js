@@ -81,6 +81,12 @@
                 value = String(value || '');
             }
             
+            // Check for "[object Object]" string which indicates corrupted data
+            if (value === '[object Object]') {
+                console.warn(`Skipping corrupted "[object Object]" string for key ${key}`);
+                continue;
+            }
+            
             if (!value || value.trim() === '') continue;
             
             // Try exact match with pageSlug prefix first
