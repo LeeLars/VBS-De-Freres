@@ -78,6 +78,8 @@ INSERT INTO page_content (page_slug, content_key, content_value, content_type) V
 ('home', 'form-title', 'Info en Inschrijven', 'text'),
 ('home', 'form-subtitle', 'Kom langs voor een warme rondleiding', 'text'),
 ('home', 'visie-img', '', 'image'),
+('home', 'visie-title', 'Waar wij voor staan', 'text'),
+('home', 'visie-text', 'Een school met een duidelijk leerklimaat en doelen. We streven naar kwaliteit, aandacht voor individuele noden, en een sterke kennisbasis. Met kleine klassen en een holistische aanpak ontwikkelen we hoofd, hart en handen van elk kind.', 'text'),
 ('home', 'gallery-1', '', 'image'),
 ('home', 'gallery-2', '', 'image'),
 ('home', 'gallery-3', '', 'image'),

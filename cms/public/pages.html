@@ -683,18 +683,16 @@
             
             if (pageSlug === 'home') {
                 sections = {
-                    'Hero Sectie': ['hero-title', 'hero-text', 'hero-bg'],
+                    'Hero Sectie': ['hero-title', 'hero-text'],
                     'Aanmeldformulier': ['form-title', 'form-subtitle'],
-                    'Visie Sectie': ['visie-img'],
-                    '__gallery__': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9', 'gallery-10'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Visie Sectie': ['visie-img', 'visie-title', 'visie-text'],
+                    '__gallery__': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9', 'gallery-10']
                 };
             } else if (pageSlug === 'visie') {
                 sections = {
                     'Hero': ['hero-title', 'hero-text'],
                     'Missie': ['mission-title', 'mission-text'],
-                    'Aanpak': ['approach-title', 'approach-1-title', 'approach-1-text', 'approach-2-title', 'approach-2-text', 'approach-3-title', 'approach-3-text'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Aanpak': ['approach-title', 'approach-1-title', 'approach-1-text', 'approach-2-title', 'approach-2-text', 'approach-3-title', 'approach-3-text']
                 };
             } else if (pageSlug === 'klassen') {
                 sections = {
@@ -716,8 +714,7 @@
                     'Klas 5A': ['5a-text', '5a-photo', '5a-teacher-photo'],
                     'Klas 6A': ['6a-text', '6a-photo', '6a-teacher-photo'],
                     'Talen': ['talen-text', 'talen-photo', 'talen-teacher-photo', 'talen-teacher-name'],
-                    'Sport': ['sport-text', 'sport-photo', 'sport-teacher-photo', 'sport-teacher-name'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Sport': ['sport-text', 'sport-photo', 'sport-teacher-photo', 'sport-teacher-name']
                 };
             } else if (pageSlug === 'team') {
                 sections = {
@@ -730,8 +727,7 @@
                     'Teamlid 4': ['member-4-name', 'member-4-role', 'member-4-photo', 'member-4-bio'],
                     'Teamlid 5': ['member-5-name', 'member-5-role', 'member-5-photo', 'member-5-bio'],
                     'Teamlid 6': ['member-6-name', 'member-6-role', 'member-6-photo', 'member-6-bio'],
-                    'Ondersteuning': ['support-title', 'support-subtitle', 'support-1-name', 'support-1-bio', 'support-2-name', 'support-2-bio', 'support-3-name', 'support-3-bio'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Ondersteuning': ['support-title', 'support-subtitle', 'support-1-name', 'support-1-bio', 'support-2-name', 'support-2-bio', 'support-3-name', 'support-3-bio']
                 };
             } else if (pageSlug === 'contact') {
                 sections = {
@@ -739,8 +735,7 @@
                     'Contactgegevens': ['email', 'director-photo', 'director-name'],
                     'Formulier': ['form-title', 'form-subtitle'],
                     'Openingsuren': ['hours-title', 'school-hours', 'office-hours', 'care-hours'],
-                    'Locatie': ['location-title', 'map-embed'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Locatie': ['location-title', 'map-embed']
                 };
             } else if (pageSlug === 'opvang') {
                 sections = {
@@ -748,16 +743,14 @@
                     'Uurrooster': ['schedule-title', 'schedule-subtitle', 'morning-time', 'morning-text', 'afternoon-time', 'afternoon-text'],
                     'Activiteiten': ['activities-title', 'activities-subtitle', 'activity-1-title', 'activity-1-text', 'activity-2-title', 'activity-2-text', 'activity-3-title', 'activity-3-text', 'activity-4-title', 'activity-4-text', 'activity-5-title', 'activity-5-text', 'activity-6-title', 'activity-6-text'],
                     'Praktisch': ['practical-title', 'price-1', 'price-2', 'price-3', 'price-note', 'register-1', 'register-2', 'register-3', 'register-note'],
-                    'Opvangteam': ['team-title', 'team-text'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Opvangteam': ['team-title', 'team-text']
                 };
             } else if (pageSlug === 'fotos') {
                 sections = {
                     'Hero': ['hero-title', 'hero-text'],
                     'Galerij Tekst': ['gallery-title', 'gallery-subtitle'],
                     '__gallery_fotos__': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9'],
-                    'Facebook': ['facebook-title', 'facebook-text'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Facebook': ['facebook-title', 'facebook-text']
                 };
             } else if (pageSlug === 'projecten') {
                 sections = {
@@ -766,8 +759,7 @@
                     'Tijdlijn': ['timeline-title', 'timeline-subtitle', 'season-1-title', 'season-1-period', 'season-1-text', 'season-2-title', 'season-2-period', 'season-2-text', 'season-3-title', 'season-3-period', 'season-3-text', 'season-4-title', 'season-4-period', 'season-4-text'],
                     'Aanpak': ['approach-title', 'approach-text'],
                     'Jaarlijkse Projecten': ['annual-title', 'annual-subtitle', 'annual-1-title', 'annual-1-text', 'annual-2-title', 'annual-2-text', 'annual-3-title', 'annual-3-text', 'annual-4-title', 'annual-4-text', 'annual-5-title', 'annual-5-text', 'annual-6-title', 'annual-6-text'],
-                    'Posters': ['2021-poster', '2022-poster', '2023-poster', '2024-poster'],
-                    'Call-to-Action': ['cta-title', 'cta-text']
+                    'Posters': ['2021-poster', '2022-poster', '2023-poster', '2024-poster']
                 };
             } else if (pageSlug === 'kalender') {
                 sections = {
@@ -783,6 +775,8 @@
             const hints = {
                 'hero-bg': 'Grote achtergrondafbeelding bovenaan de pagina',
                 'visie-img': 'Afbeelding links naast de "Waar wij voor staan" tekst',
+                'visie-title': 'Titel rechts naast de visie afbeelding',
+                'visie-text': 'Beschrijving rechts naast de visie afbeelding',
                 'gallery-1': 'Fotomuur/galerij, positie 1',
                 'gallery-2': 'Fotomuur/galerij, positie 2',
                 'gallery-3': 'Fotomuur/galerij, positie 3',
@@ -821,12 +815,11 @@
                 'hero-title': 'Hoofdtitel',
                 'hero-text': 'Introductie tekst',
                 'hero-subtitle': 'Ondertitel',
-                'hero-bg': 'Achtergrondafbeelding',
                 'form-title': 'Formulier Titel',
                 'form-subtitle': 'Formulier Ondertitel',
                 'visie-img': 'Visie Afbeelding',
-                'cta-title': 'CTA Titel',
-                'cta-text': 'CTA Tekst',
+                'visie-title': 'Visie Titel',
+                'visie-text': 'Visie Tekst',
                 'mission-title': 'Missie Titel',
                 'mission-text': 'Missie Tekst',
                 'approach-title': 'Aanpak Titel',
