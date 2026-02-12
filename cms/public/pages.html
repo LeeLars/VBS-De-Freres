@@ -418,8 +418,7 @@
                 </div>
                 
                 <div class="save-bar">
-                    <span class="save-status" id="saveStatus">Geen wijzigingen</span>
-                    <button class="btn-save" id="saveBtn" onclick="saveContent()">Opslaan</button>
+                    <span class="save-status saved" id="saveStatus">Alle wijzigingen opgeslagen</span>
                 </div>
             </div>
         </main>
@@ -433,7 +432,7 @@
                 <button class="media-picker-close" onclick="closeMediaPicker()">&times;</button>
             </div>
             <div class="media-picker-upload">
-                <input type="file" id="pickerFileInput" accept="image/*" multiple hidden>
+                <input type="file" id="pickerFileInput" accept="image/*" hidden>
                 <button class="upload-btn" onclick="document.getElementById('pickerFileInput').click()">Upload nieuw</button>
                 <span class="upload-status" id="pickerUploadStatus"></span>
             </div>
@@ -455,7 +454,7 @@
         
         let currentPage = 'home';
         let contentData = {};
-        let hasChanges = false;
+        let saveTimers = {};
         
         // Logout
         function handleLogout() {
@@ -464,15 +463,51 @@
             window.location.href = '/cms';
         }
         
+        // Show save status
+        function showStatus(msg, type) {
+            const el = document.getElementById('saveStatus');
+            el.textContent = msg;
+            el.className = 'save-status ' + (type || '');
+        }
+        
+        // Auto-save a single field to the server
+        async function autoSaveField(key, value, type) {
+            showStatus('Opslaan...', 'saving');
+            try {
+                const content = {};
+                content[key] = { value, type: type || 'text' };
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Opgeslagen', 'saved');
+                } else {
+                    showStatus('Fout bij opslaan', 'error');
+                }
+            } catch (e) {
+                console.error('Auto-save error:', e);
+                showStatus('Fout bij opslaan', 'error');
+            }
+        }
+        
+        // Debounced auto-save for text fields (800ms after last keystroke)
+        function scheduleAutoSave(key, value, type) {
+            if (saveTimers[key]) clearTimeout(saveTimers[key]);
+            showStatus('Aan het typen...', '');
+            saveTimers[key] = setTimeout(() => {
+                autoSaveField(key, value, type);
+            }, 800);
+        }
+        
         // Tab switching
         document.querySelectorAll('.editor-tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                if (hasChanges) {
-                    if (!confirm('Je hebt onopgeslagen wijzigingen. Wil je doorgaan zonder op te slaan?')) {
-                        return;
-                    }
-                }
-                
                 document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
@@ -502,8 +537,7 @@
                 editorContent.innerHTML = '<div class="loading">Fout bij laden van content.</div>';
             }
             
-            hasChanges = false;
-            updateSaveStatus();
+            showStatus('Alle wijzigingen opgeslagen', 'saved');
         }
         
         // Render editor fields
@@ -749,9 +783,9 @@
                             </div>
                          `;
                     } else if (isTextarea) {
-                        html += `<textarea id="${key}" data-key="${key}" onchange="markChanged()">${value}</textarea>`;
+                        html += `<textarea id="${key}" data-key="${key}" oninput="scheduleAutoSave('${key}', this.value, 'text')">${value}</textarea>`;
                     } else {
-                        html += `<input type="text" id="${key}" data-key="${key}" value="${value}" onchange="markChanged()">`;
+                        html += `<input type="text" id="${key}" data-key="${key}" value="${value}" oninput="scheduleAutoSave('${key}', this.value, 'text')">`;
                     }
                     
                     html += `</div>`;
@@ -763,76 +797,8 @@
             editorContent.innerHTML = html;
         }
         
-        // Mark as changed
-        function markChanged() {
-            hasChanges = true;
-            updateSaveStatus();
-        }
-        
-        // Update save status
-        function updateSaveStatus() {
-            const status = document.getElementById('saveStatus');
-            const btn = document.getElementById('saveBtn');
-            
-            if (hasChanges) {
-                status.textContent = 'Niet opgeslagen wijzigingen';
-                status.className = 'save-status';
-                btn.disabled = false;
-            } else {
-                status.textContent = 'Alle wijzigingen opgeslagen';
-                status.className = 'save-status saved';
-                btn.disabled = true;
-            }
-        }
-        
-        // Save content
-        async function saveContent() {
-            const status = document.getElementById('saveStatus');
-            const btn = document.getElementById('saveBtn');
-            
-            status.textContent = 'Opslaan...';
-            status.className = 'save-status saving';
-            btn.disabled = true;
-            
-            // Collect all field values with their types
-            const content = {};
-            document.querySelectorAll('[data-key]').forEach(field => {
-                const type = field.dataset.type || 'text';
-                content[field.dataset.key] = { value: field.value, type: type };
-            });
-            
-            try {
-                const response = await fetch(`/api/content/${currentPage}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
-                    },
-                    body: JSON.stringify({ content })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    hasChanges = false;
-                    status.textContent = 'Opgeslagen!';
-                    status.className = 'save-status saved';
-                    
-                    setTimeout(() => {
-                        updateSaveStatus();
-                    }, 2000);
-                } else {
-                    status.textContent = 'Fout bij opslaan';
-                    status.className = 'save-status error';
-                    btn.disabled = false;
-                }
-            } catch (error) {
-                console.error('Error saving content:', error);
-                status.textContent = 'Fout bij opslaan';
-                status.className = 'save-status error';
-                btn.disabled = false;
-            }
-        }
+        // markChanged kept as no-op for backwards compat
+        function markChanged() {}
         
         // ===== Media Picker =====
         let activePickerField = null;
@@ -859,8 +825,9 @@
                 
                 if (result.success && result.media.length > 0) {
                     grid.innerHTML = result.media.map(item => `
-                        <div class="media-picker-item" onclick="selectMedia('${item.url}')">
-                            <img src="${item.url}" alt="${item.filename}">
+                        <div class="media-picker-item" style="position:relative;">
+                            <img src="${item.url}" alt="${item.filename}" onclick="selectMedia('${item.url}')">
+                            <button type="button" onclick="event.stopPropagation(); deleteMedia(${item.id})" style="position:absolute;top:4px;right:4px;background:#ff6b6b;color:#fff;border:none;border-radius:50%;width:24px;height:24px;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>
                         </div>
                     `).join('');
                 } else {
@@ -873,16 +840,23 @@
         
         function selectMedia(url) {
             if (!activePickerField) return;
+            const key = activePickerField;
             
-            const input = document.getElementById(activePickerField);
+            const input = document.getElementById(key);
             input.value = url;
             
-            const preview = document.getElementById('preview-' + activePickerField);
+            const preview = document.getElementById('preview-' + key);
             preview.className = 'image-field-preview';
             preview.innerHTML = `<img src="${url}">`;
             
-            markChanged();
+            // Add remove button if not present
+            const btnContainer = input.nextElementSibling;
+            if (btnContainer && !btnContainer.querySelector('.btn-clear-media')) {
+                btnContainer.insertAdjacentHTML('beforeend', `<button type="button" class="btn-clear-media" onclick="clearImage('${key}')">Verwijderen</button>`);
+            }
+            
             closeMediaPicker();
+            autoSaveField(key, url, 'image');
         }
         
         function clearImage(fieldKey) {
@@ -893,7 +867,31 @@
             preview.className = 'image-field-preview empty';
             preview.innerHTML = 'Geen afbeelding geselecteerd';
             
-            markChanged();
+            // Remove the clear button
+            const btnContainer = input.nextElementSibling;
+            const clearBtn = btnContainer ? btnContainer.querySelector('.btn-clear-media') : null;
+            if (clearBtn) clearBtn.remove();
+            
+            autoSaveField(fieldKey, '', 'image');
+        }
+        
+        async function deleteMedia(id) {
+            if (!confirm('Afbeelding verwijderen uit de mediabibliotheek?')) return;
+            try {
+                const response = await fetch('/api/media/' + id, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '') }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    loadPickerMedia();
+                } else {
+                    alert('Verwijderen mislukt: ' + (result.error || 'Onbekende fout'));
+                }
+            } catch (e) {
+                console.error('Delete error:', e);
+                alert('Verwijderen mislukt');
+            }
         }
         
         async function pickerUploadFiles(files) {
