@@ -68,7 +68,7 @@
         
         /* ===== Editor Content Area ===== */
         .editor-content {
-            padding: 20px 24px;
+            padding: 12px 16px;
             background: #fafafa;
         }
         
@@ -77,9 +77,9 @@
         
         /* ===== Content Groups (Sections) ===== */
         .content-group {
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             background: #fff;
-            border-radius: 12px;
+            border-radius: 10px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.04);
             border: 1px solid rgba(0,0,0,0.06);
             overflow: hidden;
@@ -88,10 +88,10 @@
         .content-group:last-child { margin-bottom: 0; }
         
         .content-group h3 {
-            font-size: 13px;
+            font-size: 12px;
             color: #1a1a1a;
             margin: 0;
-            padding: 14px 20px;
+            padding: 10px 16px;
             background: #fff;
             cursor: pointer;
             display: flex;
@@ -123,7 +123,7 @@
         .content-group-body {
             display: flex;
             flex-direction: column;
-            padding: 4px 0;
+            padding: 2px 0;
             border-top: 1px solid #f0f0f0;
         }
         
@@ -133,16 +133,16 @@
         
         /* ===== Content Fields ===== */
         .content-field {
-            padding: 10px 20px;
+            padding: 6px 16px;
             margin: 0;
         }
         
         .content-field label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: 600;
             color: #888;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -157,10 +157,10 @@
         .content-field input[type="text"],
         .content-field textarea {
             width: 100%;
-            padding: 10px 14px;
+            padding: 7px 10px;
             border: 1.5px solid #e8e8e8;
-            border-radius: 10px;
-            font-size: 14px;
+            border-radius: 8px;
+            font-size: 13px;
             font-family: inherit;
             transition: all 0.15s;
             background: #fafafa;
@@ -182,9 +182,9 @@
         }
         
         .content-field textarea {
-            min-height: 80px;
+            min-height: 56px;
             resize: vertical;
-            line-height: 1.6;
+            line-height: 1.5;
         }
         
         /* Gallery and upload bars */
@@ -192,7 +192,7 @@
         .content-group-body > .gallery-grid,
         .content-group-body > div[id$="List"],
         .content-group-body > div[style*="dashed"] {
-            padding: 10px 20px;
+            padding: 6px 16px;
         }
         
         /* ===== Save Bar ===== */
@@ -240,7 +240,7 @@
         
         .image-field-preview img {
             display: block;
-            max-height: 100px;
+            max-height: 64px;
             max-width: 100%;
             object-fit: contain;
         }
@@ -249,8 +249,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 44px;
-            padding: 0 20px;
+            height: 32px;
+            padding: 0 14px;
             background: #f5f5f5;
             color: #bbb;
             font-size: 13px;
@@ -459,6 +459,44 @@
             pointer-events: none;
             opacity: 0.3;
             transition: opacity 0.3s;
+        }
+        
+        /* ===== Collapsible Klas/Team Items ===== */
+        .klas-item, .team-lid-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            background: #fafafa;
+            overflow: hidden;
+            transition: border-color 0.15s;
+        }
+        
+        .klas-item:hover, .team-lid-item:hover {
+            border-color: #ddd;
+        }
+        
+        .klas-item-header, .team-lid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .klas-item-header:hover, .team-lid-header:hover {
+            background: #f5f5f5;
+        }
+        
+        .klas-item-body, .team-lid-body {
+            display: none;
+            padding: 8px 12px 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .klas-item.open .klas-item-body,
+        .team-lid-item.open .team-lid-body {
+            display: block;
         }
         
         /* ===== Gallery Grid ===== */
@@ -1299,57 +1337,64 @@
                         const blogVal = (content[`klas-${slug}-blog`] || {}).value || '';
                         const orderVal = (content[`klas-${slug}-order`] || {}).value || String(i + 1);
                         
-                        html += `<div class="klas-item" data-klas-slug="${slug}" draggable="true" ondragstart="onKlasDragStart(event)" ondragover="onKlasDragOver(event)" ondragend="onKlasDragEnd(event)" ondrop="onKlasDrop(event)" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 8px; background: #fafafa; cursor: grab; transition: opacity 0.2s, border-color 0.2s;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <span style="color: #aaa; font-size: 18px; cursor: grab; user-select: none;" title="Versleep om te herordenen">&#x2630;</span>
-                                    <strong id="klas-title-${slug}" style="font-size: 15px;">${nameVal || slug}</strong>
+                        html += `<div class="klas-item" data-klas-slug="${slug}" draggable="true" ondragstart="onKlasDragStart(event)" ondragover="onKlasDragOver(event)" ondragend="onKlasDragEnd(event)" ondrop="onKlasDrop(event)">
+                            <div class="klas-item-header" onclick="this.parentElement.classList.toggle('open')">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #ccc; font-size: 14px; cursor: grab;" title="Versleep">&#x2630;</span>
+                                    <strong id="klas-title-${slug}" style="font-size: 13px;">${nameVal || slug}</strong>
+                                    <span style="color: #aaa; font-size: 12px;">${teacherVal ? '- ' + teacherVal : ''}</span>
                                 </div>
-                                <button type="button" onclick="removeKlas('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
-                            </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                <div class="content-field">
-                                    <label>Klasnaam</label>
-                                    <input type="text" id="klas-${slug}-name" data-key="klas-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('klas-${slug}-name', this.value, 'text'); document.getElementById('klas-title-${slug}').textContent = this.value || '${slug}';" placeholder="bv. Klas 1A">
-                                </div>
-                                <div class="content-field">
-                                    <label>Leerkracht</label>
-                                    <input type="text" id="klas-${slug}-teacher" data-key="klas-${slug}-teacher" value="${teacherVal}" oninput="scheduleAutoSave('klas-${slug}-teacher', this.value, 'text')" placeholder="bv. juf Lies">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <button type="button" onclick="event.stopPropagation(); removeKlas('${slug}')" style="background: #fef2f2; color: #dc4444; border: none; border-radius: 6px; padding: 4px 10px; font-size: 11px; cursor: pointer; font-weight: 600;">Verwijder</button>
                                 </div>
                             </div>
-                            <div class="content-field" style="margin-top: 12px;">
-                                <label>Beschrijving</label>
-                                <textarea id="klas-${slug}-text" data-key="klas-${slug}-text" oninput="scheduleAutoSave('klas-${slug}-text', this.value, 'text')" rows="3">${textVal}</textarea>
-                            </div>
-                            <div class="content-field" style="margin-top: 12px;">
-                                <label>Klasblog URL</label>
-                                <input type="text" id="klas-${slug}-blog" data-key="klas-${slug}-blog" value="${blogVal}" oninput="scheduleAutoSave('klas-${slug}-blog', this.value, 'text')" placeholder="bv. /nl/klas-1a">
-                            </div>
-                            ${slug === 'talen' ? `<div class="content-field" style="margin-top: 12px;">
-                                <label>Klasblog URL 2</label>
-                                <input type="text" id="klas-${slug}-blog2" data-key="klas-${slug}-blog2" value="${(content['klas-talen-blog2'] || {}).value || ''}" oninput="scheduleAutoSave('klas-${slug}-blog2', this.value, 'text')" placeholder="bv. /nl/talenklas-2">
-                            </div>` : ''}
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
-                                <div class="content-field">
-                                    <label>Klasfoto</label>
-                                    <input type="hidden" id="klas-${slug}-photo" data-key="klas-${slug}-photo" data-type="image" value="${photoVal}">
-                                    <div style="display: flex; gap: 8px; align-items: center;">
-                                        <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-photo')">Kies afbeelding</button>
-                                        ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-photo')">Verwijderen</button>` : ''}
+                            <div class="klas-item-body">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                    <div class="content-field">
+                                        <label>Klasnaam</label>
+                                        <input type="text" id="klas-${slug}-name" data-key="klas-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('klas-${slug}-name', this.value, 'text'); document.getElementById('klas-title-${slug}').textContent = this.value || '${slug}';" placeholder="bv. Klas 1A">
                                     </div>
-                                    <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-klas-${slug}-photo" onclick="if(this.classList.contains('empty')) openMediaPicker('klas-${slug}-photo')">
-                                        ${photoVal ? `<img src="${photoVal}">` : 'Geen afbeelding'}
+                                    <div class="content-field">
+                                        <label>Leerkracht</label>
+                                        <input type="text" id="klas-${slug}-teacher" data-key="klas-${slug}-teacher" value="${teacherVal}" oninput="scheduleAutoSave('klas-${slug}-teacher', this.value, 'text')" placeholder="bv. juf Lies">
                                     </div>
                                 </div>
-                                <div class="content-field">
-                                    <label>Leerkracht foto</label>
-                                    <input type="hidden" id="klas-${slug}-tphoto" data-key="klas-${slug}-tphoto" data-type="image" value="${tphotoVal}">
-                                    <div style="display: flex; gap: 8px; align-items: center;">
-                                        <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-tphoto')">Kies afbeelding</button>
-                                        ${tphotoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-tphoto')">Verwijderen</button>` : ''}
+                                <div class="content-field" style="margin-top: 6px;">
+                                    <label>Beschrijving</label>
+                                    <textarea id="klas-${slug}-text" data-key="klas-${slug}-text" oninput="scheduleAutoSave('klas-${slug}-text', this.value, 'text')" rows="2">${textVal}</textarea>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;">
+                                    <div class="content-field">
+                                        <label>Klasblog URL</label>
+                                        <input type="text" id="klas-${slug}-blog" data-key="klas-${slug}-blog" value="${blogVal}" oninput="scheduleAutoSave('klas-${slug}-blog', this.value, 'text')" placeholder="/nl/klas-1a">
                                     </div>
-                                    <div class="image-field-preview ${tphotoVal ? '' : 'empty'}" id="preview-klas-${slug}-tphoto" onclick="if(this.classList.contains('empty')) openMediaPicker('klas-${slug}-tphoto')">
-                                        ${tphotoVal ? `<img src="${tphotoVal}">` : 'Geen afbeelding'}
+                                    ${slug === 'talen' ? `<div class="content-field">
+                                        <label>Klasblog URL 2</label>
+                                        <input type="text" id="klas-${slug}-blog2" data-key="klas-${slug}-blog2" value="${(content['klas-talen-blog2'] || {}).value || ''}" oninput="scheduleAutoSave('klas-${slug}-blog2', this.value, 'text')" placeholder="/nl/talenklas-2">
+                                    </div>` : '<div></div>'}
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;">
+                                    <div class="content-field">
+                                        <label>Klasfoto</label>
+                                        <input type="hidden" id="klas-${slug}-photo" data-key="klas-${slug}-photo" data-type="image" value="${photoVal}">
+                                        <div style="display: flex; gap: 6px; align-items: center;">
+                                            <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-photo')">Kies</button>
+                                            ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-photo')">Wis</button>` : ''}
+                                        </div>
+                                        <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-klas-${slug}-photo" onclick="if(this.classList.contains('empty')) openMediaPicker('klas-${slug}-photo')">
+                                            ${photoVal ? `<img src="${photoVal}">` : 'Geen foto'}
+                                        </div>
+                                    </div>
+                                    <div class="content-field">
+                                        <label>Leerkracht foto</label>
+                                        <input type="hidden" id="klas-${slug}-tphoto" data-key="klas-${slug}-tphoto" data-type="image" value="${tphotoVal}">
+                                        <div style="display: flex; gap: 6px; align-items: center;">
+                                            <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-tphoto')">Kies</button>
+                                            ${tphotoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-tphoto')">Wis</button>` : ''}
+                                        </div>
+                                        <div class="image-field-preview ${tphotoVal ? '' : 'empty'}" id="preview-klas-${slug}-tphoto" onclick="if(this.classList.contains('empty')) openMediaPicker('klas-${slug}-tphoto')">
+                                            ${tphotoVal ? `<img src="${tphotoVal}">` : 'Geen foto'}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1357,12 +1402,12 @@
                     }
                     
                     html += `</div>
-                        <div style="border: 2px dashed #d0d0d0; border-radius: 12px; padding: 16px; margin-top: 12px; background: #f5f5f5;">
-                            <strong style="font-size: 14px; display: block; margin-bottom: 10px;">Nieuwe klas toevoegen</strong>
-                            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                                <input type="text" id="newKlasSlug" placeholder="Slug (bv. 2b)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 100px;">
-                                <input type="text" id="newKlasName" placeholder="Naam (bv. Klas 2B)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 160px;">
-                                <select id="newKlasPosition" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; background: #fff;">
+                        <div style="border: 1.5px dashed #ddd; border-radius: 8px; padding: 10px 12px; margin-top: 8px; background: #f8f8f8;">
+                            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                                <span style="font-size: 12px; font-weight: 600; color: #888;">Nieuwe klas:</span>
+                                <input type="text" id="newKlasSlug" placeholder="Slug" style="padding: 5px 8px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 12px; width: 70px;">
+                                <input type="text" id="newKlasName" placeholder="Naam" style="padding: 5px 8px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 12px; width: 120px;">
+                                <select id="newKlasPosition" style="padding: 5px 8px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 12px; background: #fff;">
                                     <option value="end">Onderaan</option>
                                     <option value="start">Bovenaan</option>`;
                     for (let i = 0; i < klasSlugs.length; i++) {
@@ -1371,7 +1416,7 @@
                         html += `<option value="after-${s}">Na ${n}</option>`;
                     }
                     html += `</select>
-                                <button type="button" onclick="addKlas()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
+                                <button type="button" onclick="addKlas()" style="background: #a8cf8c; color: #000; border: none; border-radius: 6px; padding: 5px 14px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
                             </div>
                         </div>
                         </div></div>`;
@@ -1403,49 +1448,52 @@
                         const bioVal = (content[`lid-${slug}-bio`] || {}).value || '';
                         const photoVal = (content[`lid-${slug}-photo`] || {}).value || '';
                         
-                        html += `<div class="team-item" data-team-slug="${slug}" draggable="true" ondragstart="onTeamDragStart(event)" ondragover="onTeamDragOver(event)" ondragend="onTeamDragEnd(event)" ondrop="onTeamDrop(event)" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 8px; background: #fafafa; cursor: grab; transition: opacity 0.2s, border-color 0.2s;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <span style="color: #aaa; font-size: 18px; cursor: grab; user-select: none;" title="Versleep om te herordenen">&#x2630;</span>
-                                    <strong id="lid-title-${slug}" style="font-size: 15px;">${nameVal || slug}</strong>
+                        html += `<div class="klas-item" data-team-slug="${slug}" draggable="true" ondragstart="onTeamDragStart(event)" ondragover="onTeamDragOver(event)" ondragend="onTeamDragEnd(event)" ondrop="onTeamDrop(event)">
+                            <div class="klas-item-header" onclick="this.parentElement.classList.toggle('open')">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #ccc; font-size: 14px; cursor: grab;" title="Versleep">&#x2630;</span>
+                                    <strong id="lid-title-${slug}" style="font-size: 13px;">${nameVal || slug}</strong>
+                                    <span style="color: #aaa; font-size: 12px;">${roleVal ? '- ' + roleVal : ''}</span>
                                 </div>
-                                <button type="button" onclick="removeTeamLid('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
+                                <button type="button" onclick="event.stopPropagation(); removeTeamLid('${slug}')" style="background: #fef2f2; color: #dc4444; border: none; border-radius: 6px; padding: 4px 10px; font-size: 11px; cursor: pointer; font-weight: 600;">Verwijder</button>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                <div class="content-field">
-                                    <label>Naam</label>
-                                    <input type="text" id="lid-${slug}-name" data-key="lid-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('lid-${slug}-name', this.value, 'text'); document.getElementById('lid-title-${slug}').textContent = this.value || '${slug}';" placeholder="bv. Juf Lies">
+                            <div class="klas-item-body">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                    <div class="content-field">
+                                        <label>Naam</label>
+                                        <input type="text" id="lid-${slug}-name" data-key="lid-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('lid-${slug}-name', this.value, 'text'); document.getElementById('lid-title-${slug}').textContent = this.value || '${slug}';" placeholder="bv. Juf Lies">
+                                    </div>
+                                    <div class="content-field">
+                                        <label>Rol / Klas</label>
+                                        <input type="text" id="lid-${slug}-role" data-key="lid-${slug}-role" value="${roleVal}" oninput="scheduleAutoSave('lid-${slug}-role', this.value, 'text')" placeholder="bv. Klas 1A">
+                                    </div>
                                 </div>
-                                <div class="content-field">
-                                    <label>Rol / Klas</label>
-                                    <input type="text" id="lid-${slug}-role" data-key="lid-${slug}-role" value="${roleVal}" oninput="scheduleAutoSave('lid-${slug}-role', this.value, 'text')" placeholder="bv. Klas 1A">
+                                <div class="content-field" style="margin-top: 6px;">
+                                    <label>Bio</label>
+                                    <textarea id="lid-${slug}-bio" data-key="lid-${slug}-bio" oninput="scheduleAutoSave('lid-${slug}-bio', this.value, 'text')" rows="2">${bioVal}</textarea>
                                 </div>
-                            </div>
-                            <div class="content-field" style="margin-top: 12px;">
-                                <label>Bio</label>
-                                <textarea id="lid-${slug}-bio" data-key="lid-${slug}-bio" oninput="scheduleAutoSave('lid-${slug}-bio', this.value, 'text')" rows="2">${bioVal}</textarea>
-                            </div>
-                            <div class="content-field" style="margin-top: 12px;">
-                                <label>Foto</label>
-                                <input type="hidden" id="lid-${slug}-photo" data-key="lid-${slug}-photo" data-type="image" value="${photoVal}">
-                                <div style="display: flex; gap: 8px; align-items: center;">
-                                    <button type="button" class="btn-pick-media" onclick="openMediaPicker('lid-${slug}-photo')">Kies afbeelding</button>
-                                    ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('lid-${slug}-photo')">Verwijderen</button>` : ''}
-                                </div>
-                                <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-lid-${slug}-photo" onclick="if(this.classList.contains('empty')) openMediaPicker('lid-${slug}-photo')">
-                                    ${photoVal ? `<img src="${photoVal}">` : 'Geen afbeelding'}
+                                <div class="content-field" style="margin-top: 6px;">
+                                    <label>Foto</label>
+                                    <input type="hidden" id="lid-${slug}-photo" data-key="lid-${slug}-photo" data-type="image" value="${photoVal}">
+                                    <div style="display: flex; gap: 6px; align-items: center;">
+                                        <button type="button" class="btn-pick-media" onclick="openMediaPicker('lid-${slug}-photo')">Kies</button>
+                                        ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('lid-${slug}-photo')">Wis</button>` : ''}
+                                    </div>
+                                    <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-lid-${slug}-photo" onclick="if(this.classList.contains('empty')) openMediaPicker('lid-${slug}-photo')">
+                                        ${photoVal ? `<img src="${photoVal}">` : 'Geen foto'}
+                                    </div>
                                 </div>
                             </div>
                         </div>`;
                     }
                     
                     html += `</div>
-                        <div style="border: 2px dashed #d0d0d0; border-radius: 12px; padding: 16px; margin-top: 12px; background: #f5f5f5;">
-                            <strong style="font-size: 14px; display: block; margin-bottom: 10px;">Nieuw teamlid toevoegen</strong>
-                            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                                <input type="text" id="newTeamSlug" placeholder="Slug (bv. lies)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 100px;">
-                                <input type="text" id="newTeamName" placeholder="Naam (bv. Juf Lies)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 160px;">
-                                <select id="newTeamPosition" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; background: #fff;">
+                        <div style="border: 1.5px dashed #ddd; border-radius: 8px; padding: 10px 12px; margin-top: 8px; background: #f8f8f8;">
+                            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                                <span style="font-size: 12px; font-weight: 600; color: #888;">Nieuw lid:</span>
+                                <input type="text" id="newTeamSlug" placeholder="Slug" style="padding: 5px 8px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 12px; width: 70px;">
+                                <input type="text" id="newTeamName" placeholder="Naam" style="padding: 5px 8px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 12px; width: 120px;">
+                                <select id="newTeamPosition" style="padding: 5px 8px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 12px; background: #fff;">
                                     <option value="end">Onderaan</option>
                                     <option value="start">Bovenaan</option>`;
                     for (let i = 0; i < teamSlugs.length; i++) {
@@ -1454,7 +1502,7 @@
                         html += `<option value="after-${s}">Na ${n}</option>`;
                     }
                     html += `</select>
-                                <button type="button" onclick="addTeamLid()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
+                                <button type="button" onclick="addTeamLid()" style="background: #a8cf8c; color: #000; border: none; border-radius: 6px; padding: 5px 14px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
                             </div>
                         </div>
                         </div></div>`;
