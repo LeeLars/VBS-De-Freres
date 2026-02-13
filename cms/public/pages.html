@@ -310,8 +310,9 @@
         .media-picker-grid {
             padding: 24px;
             overflow-y: auto;
-            flex: 1;
+            flex: 1 1 0;
             min-height: 0;
+            max-height: calc(80vh - 200px);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 12px;
@@ -796,7 +797,7 @@
                 sections = {
                     'Hero Sectie': ['hero-title', 'hero-text'],
                     'Aanmeldformulier': ['form-title', 'form-subtitle'],
-                    'Visie Sectie': ['visie-img', 'visie-title', 'visie-text'],
+                    'Visie Sectie': ['visie-title', 'visie-text', 'visie-img'],
                     '__gallery__': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9', 'gallery-10']
                 };
             } else if (pageSlug === 'visie') {
