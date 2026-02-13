@@ -2433,9 +2433,11 @@
             
             let completed = 0;
             let errors = 0;
+            let lastUploadedUrl = null;
             for (const file of files) {
+                const resized = await resizeImage(file, 2000);
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append('file', resized);
                 try {
                     const response = await fetch('/api/media/upload', { 
                         method: 'POST', 
@@ -2447,6 +2449,8 @@
                         console.error('Upload failed:', result.error || result);
                         errors++;
                         status.textContent = `Fout: ${result.error || 'Upload mislukt'}`;
+                    } else if (result.media && result.media.url) {
+                        lastUploadedUrl = result.media.url;
                     }
                 } catch (e) { 
                     console.error('Upload error:', e); 
@@ -2463,7 +2467,13 @@
                 status.textContent = 'Upload voltooid!';
             }
             setTimeout(() => { status.textContent = ''; }, 3000);
-            loadPickerMedia();
+            
+            // Auto-select if single file uploaded and a field is waiting
+            if (files.length === 1 && lastUploadedUrl && activePickerField) {
+                selectMedia(lastUploadedUrl);
+            } else {
+                loadPickerMedia();
+            }
         }
         
         // Close picker on overlay click
