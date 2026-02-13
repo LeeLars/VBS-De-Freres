@@ -1338,92 +1338,134 @@ body {
 
 /* ===== Scroll Reveal Animations ===== */
 
-/* Base state: hidden */
+/* Default: slide up */
 [data-animate] {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Visible state */
 [data-animate].is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    filter: none;
+}
+
+/* Fade only -- no movement */
+[data-animate="fade"] {
+    transform: none;
 }
 
 /* Slide from left */
 [data-animate="slide-left"] {
-    transform: translateX(-32px);
-}
-[data-animate="slide-left"].is-visible {
-    transform: translateX(0);
+    transform: translateX(-40px);
 }
 
 /* Slide from right */
 [data-animate="slide-right"] {
-    transform: translateX(32px);
-}
-[data-animate="slide-right"].is-visible {
-    transform: translateX(0);
+    transform: translateX(40px);
 }
 
 /* Scale up */
 [data-animate="scale"] {
-    transform: scale(0.95);
-}
-[data-animate="scale"].is-visible {
-    transform: scale(1);
+    transform: scale(0.92);
 }
 
-/* Stagger children: each child gets a small delay */
-[data-stagger] > [data-animate] {
-    transition-delay: calc(var(--stagger-index, 0) * 80ms);
+/* Blur in -- element starts blurred and fades sharp */
+[data-animate="blur"] {
+    transform: none;
+    filter: blur(8px);
 }
 
-/* Smooth image zoom on hover for gallery/story cards */
+/* Clip up -- content reveals upward like a curtain */
+[data-animate="clip"] {
+    transform: none;
+    clip-path: inset(100% 0 0 0);
+}
+[data-animate="clip"].is-visible {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Stagger children */
+[data-stagger] > * {
+    transition-delay: calc(var(--stagger-index, 0) * 100ms);
+}
+
+/* ===== Hover Micro-interactions ===== */
+
+/* Cards lift on hover */
+.card-loose {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-loose:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Image zoom on hover */
 .gallery-item img,
 .story-card-large img,
 .story-card-small img {
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gallery-item:hover img {
     transform: scale(1.05);
 }
 
-/* Subtle lift for tag pills */
+/* Quote card subtle glow */
+.quote-card {
+    transition: box-shadow 0.4s ease;
+}
+
+.quote-card:hover {
+    box-shadow: 0 12px 40px rgba(168, 207, 140, 0.12);
+}
+
+/* Tag pill lift */
 .tag-pill {
-    transition: transform 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .tag-pill:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* Section headers get a subtle entrance */
-.section-header h2 {
-    transition: color 0.3s ease;
-}
-
-/* Smooth link underline grow */
+/* Smooth button transitions */
 a[style*="border-radius: 50px"] {
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Reduce motion for users who prefer it */
+/* Parallax layer -- moves slower on scroll (controlled by JS) */
+[data-parallax] {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* ===== Reduce motion ===== */
 @media (prefers-reduced-motion: reduce) {
     [data-animate] {
         opacity: 1;
         transform: none;
+        filter: none;
+        clip-path: none;
         transition: none;
     }
     [data-animate].is-visible {
         transform: none;
     }
     .card-loose,
+    .quote-card,
     .value-card,
-    .story-bg-img {
+    .story-bg-img,
+    [data-parallax] {
         transition: none;
+        transform: none !important;
     }
 }
 

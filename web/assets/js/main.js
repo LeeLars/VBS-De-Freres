@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const animElements = document.querySelectorAll('[data-animate]');
     if (!animElements.length) return;
-    
-    // Assign stagger indices to children of [data-stagger] containers
+
+    // Assign stagger indices to direct children of [data-stagger] containers
     document.querySelectorAll('[data-stagger]').forEach(container => {
-        container.querySelectorAll('[data-animate]').forEach((child, i) => {
+        Array.from(container.children).forEach((child, i) => {
             child.style.setProperty('--stagger-index', i);
         });
     });
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -46,12 +46,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px'
     });
-    
+
     animElements.forEach(el => observer.observe(el));
 });
+
+// Subtle parallax on scroll for [data-parallax] elements
+(function() {
+    let ticking = false;
+    const parallaxEls = () => document.querySelectorAll('[data-parallax]');
+
+    function updateParallax() {
+        const scrollY = window.pageYOffset;
+        parallaxEls().forEach(el => {
+            const speed = parseFloat(el.dataset.parallax) || 0.15;
+            const rect = el.getBoundingClientRect();
+            const center = rect.top + rect.height / 2;
+            const offset = (center - window.innerHeight / 2) * speed;
+            el.style.transform = 'translateY(' + offset + 'px)';
+        });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+})();
 
 // Scroll to Top Button
 document.addEventListener('DOMContentLoaded', () => {
