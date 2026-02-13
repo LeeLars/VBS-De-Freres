@@ -26,6 +26,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Scroll Reveal Animations (IntersectionObserver)
+document.addEventListener('DOMContentLoaded', () => {
+    const animElements = document.querySelectorAll('[data-animate]');
+    if (!animElements.length) return;
+    
+    // Assign stagger indices to children of [data-stagger] containers
+    document.querySelectorAll('[data-stagger]').forEach(container => {
+        container.querySelectorAll('[data-animate]').forEach((child, i) => {
+            child.style.setProperty('--stagger-index', i);
+        });
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+    });
+    
+    animElements.forEach(el => observer.observe(el));
+});
+
 // Scroll to Top Button
 document.addEventListener('DOMContentLoaded', () => {
     const scrollBtn = document.querySelector('.scroll-to-top');
