@@ -414,6 +414,8 @@ INSERT INTO page_content (page_slug, content_key, content_value, content_type) V
 ('opvang', 'register-note', '', 'text'),
 ('opvang', 'team-title', 'Ons Opvangteam', 'text'),
 ('opvang', 'team-text', '', 'text'),
+('opvang', 'sfeer-img-1', '', 'image'),
+('opvang', 'sfeer-img-2', '', 'image'),
 ('opvang', 'cta-title', '', 'text'),
 ('opvang', 'cta-text', '', 'text')
 ON CONFLICT (page_slug, content_key) DO NOTHING;
