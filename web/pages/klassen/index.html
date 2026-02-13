@@ -147,8 +147,15 @@
                 html += '<div style="font-size: 18px; font-weight: 700;">' + k.teacher + '</div>';
                 html += '</div></div></div>';
             }
-            if (k.blog) {
-                html += '<a href="' + k.blog + '" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform=\'translateY(-2px)\'; this.style.backgroundColor=\'#96bb7a\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.backgroundColor=\'#a8cf8c\'">Bezoek Klasblog</a>';
+            if (k.blog || k.blog2) {
+                html += '<div style="display: flex; gap: 12px; flex-wrap: wrap;">';
+                if (k.blog) {
+                    html += '<a href="' + k.blog + '" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform=\'translateY(-2px)\'; this.style.backgroundColor=\'#96bb7a\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.backgroundColor=\'#a8cf8c\'">Bezoek Klasblog</a>';
+                }
+                if (k.blog2) {
+                    html += '<a href="' + k.blog2 + '" style="background: #fff; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s; border: 2px solid #a8cf8c;" onmouseover="this.style.transform=\'translateY(-2px)\'; this.style.backgroundColor=\'#a8cf8c\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.backgroundColor=\'#fff\'">Bezoek Klasblog 2</a>';
+                }
+                html += '</div>';
             }
             html += '</div>';
             html += '<div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">';

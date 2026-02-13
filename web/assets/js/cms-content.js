@@ -175,7 +175,7 @@
         // Collect klassen data and dispatch event for klassen rendering
         const klassen = {};
         for (const [key, data] of Object.entries(content)) {
-            const klasMatch = key.match(/^klas-(.+)-(name|teacher|text|photo|tphoto|blog|order)$/);
+            const klasMatch = key.match(/^klas-(.+)-(name|teacher|text|photo|tphoto|blog|blog2|order)$/);
             if (klasMatch) {
                 let val = data;
                 if (data && typeof data === 'object' && data.value !== undefined) val = data.value;

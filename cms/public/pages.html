@@ -1319,6 +1319,10 @@
                                 <label>Klasblog URL</label>
                                 <input type="text" id="klas-${slug}-blog" data-key="klas-${slug}-blog" value="${blogVal}" oninput="scheduleAutoSave('klas-${slug}-blog', this.value, 'text')" placeholder="bv. /nl/klas-1a">
                             </div>
+                            ${slug === 'talen' ? `<div class="content-field" style="margin-top: 12px;">
+                                <label>Klasblog URL 2</label>
+                                <input type="text" id="klas-${slug}-blog2" data-key="klas-${slug}-blog2" value="${(content['klas-talen-blog2'] || {}).value || ''}" oninput="scheduleAutoSave('klas-${slug}-blog2', this.value, 'text')" placeholder="bv. /nl/talenklas-2">
+                            </div>` : ''}
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
                                 <div class="content-field">
                                     <label>Klasfoto</label>

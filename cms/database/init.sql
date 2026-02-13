@@ -320,6 +320,7 @@ INSERT INTO page_content (page_slug, content_key, content_value, content_type) V
 ('klassen', 'klas-talen-photo', '', 'image'),
 ('klassen', 'klas-talen-tphoto', '', 'image'),
 ('klassen', 'klas-talen-blog', '/nl/talenklas', 'text'),
+('klassen', 'klas-talen-blog2', '', 'text'),
 ('klassen', 'klas-talen-order', '9', 'text'),
 ('klassen', 'klas-sport-name', 'Sport', 'text'),
 ('klassen', 'klas-sport-teacher', 'Sportteam', 'text'),
