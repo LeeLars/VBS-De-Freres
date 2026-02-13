@@ -680,6 +680,13 @@
                 <a href="/cms/media.html" class="nav-item">
                     <span>Media</span>
                 </a>
+                
+                <div style="border-top: 1px solid rgba(255,255,255,0.08); margin: 10px 0; padding-top: 10px;">
+                    <span style="font-size: 10px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 14px; letter-spacing: 0.5px; font-weight: 600;">Snelkoppelingen</span>
+                </div>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); goToRestaurantMenu();" style="font-size: 13px;">
+                    <span>Restaurantmenu</span>
+                </a>
             </nav>
             
             <div class="cms-user">
@@ -776,6 +783,35 @@
         let contentData = {};
         let saveTimers = {};
         
+        // Shortcut: go to restaurant menu document
+        async function goToRestaurantMenu() {
+            currentPage = 'visie';
+            document.querySelectorAll('.page-tab').forEach(t => {
+                t.classList.toggle('active', t.dataset.page === 'visie');
+            });
+            document.getElementById('currentPageTitle').textContent = 'Visie';
+            
+            await loadContent('visie');
+            
+            setTimeout(() => {
+                const docItems = document.querySelectorAll('.document-item');
+                for (const item of docItems) {
+                    const titleInput = item.querySelector('input[id*="doc-"][id$="-title"]');
+                    if (titleInput && (titleInput.value.toLowerCase().includes('menu') || titleInput.value.toLowerCase().includes('restaurant'))) {
+                        item.style.border = '2px solid #a8cf8c';
+                        item.style.boxShadow = '0 0 12px rgba(168, 207, 140, 0.4)';
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        setTimeout(() => {
+                            item.style.border = '';
+                            item.style.boxShadow = '';
+                        }, 3000);
+                        return;
+                    }
+                }
+                const docSection = document.querySelector('[id*="document"]') || document.querySelector('.document-item');
+                if (docSection) docSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        }
         
         // Logout
         function handleLogout() {
