@@ -1,4 +1,4 @@
-/* VBS De Frères CMS Styles */
+/* VBS De Freres CMS */
 
 * {
     box-sizing: border-box;
@@ -7,79 +7,95 @@
 }
 
 body {
-    font-family: 'ABeeZee', system-ui, sans-serif;
-    background: #f5f5f5;
-    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #f8f8f8;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* ===== Layout ===== */
 .cms-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* Sidebar */
+/* ===== Sidebar ===== */
 .cms-sidebar {
-    width: 260px;
-    background: #000;
-    color: #fffffb;
+    width: 240px;
+    background: #111;
+    color: #fff;
     display: flex;
     flex-direction: column;
     position: fixed;
     height: 100vh;
     left: 0;
     top: 0;
+    z-index: 100;
 }
 
 .cms-logo {
-    padding: 24px 20px;
-    border-bottom: 1px solid #333;
+    padding: 20px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .cms-logo h2 {
     color: #a8cf8c;
-    font-size: 20px;
-    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: -0.02em;
 }
 
 .cms-logo p {
-    font-size: 12px;
-    color: #999;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
 }
 
 .cms-nav {
     flex: 1;
-    padding: 16px 0;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .nav-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    color: #fffffb;
+    gap: 10px;
+    padding: 9px 12px;
+    color: rgba(255,255,255,0.65);
     text-decoration: none;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
+    transition: all 0.12s;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border-left: none;
 }
 
 .nav-item:hover {
-    background: #1a1a1a;
-    border-left-color: #a8cf8c;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
 }
 
 .nav-item.active {
-    background: #1a1a1a;
-    border-left-color: #a8cf8c;
+    background: rgba(168,207,140,0.15);
     color: #a8cf8c;
 }
 
 .nav-item .icon {
-    font-size: 20px;
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+.nav-item.active .icon {
+    opacity: 1;
 }
 
 .cms-user {
-    padding: 20px;
-    border-top: 1px solid #333;
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .user-info {
@@ -89,387 +105,448 @@ body {
 }
 
 .user-name {
-    font-size: 14px;
-    color: #a8cf8c;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
 }
 
 .btn-logout-small {
-    background: transparent;
-    border: 1px solid #a8cf8c;
-    color: #a8cf8c;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 12px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: rgba(255,255,255,0.5);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.12s;
+    font-weight: 500;
 }
 
 .btn-logout-small:hover {
-    background: #a8cf8c;
-    color: #000;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
 }
 
-/* Main Content */
+/* ===== Main Content ===== */
 .cms-main {
-    margin-left: 260px;
+    margin-left: 240px;
     flex: 1;
-    padding: 32px;
-    max-width: calc(100% - 260px);
+    padding: 24px;
+    max-width: calc(100% - 240px);
 }
 
 .cms-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .cms-header h1 {
-    font-size: 32px;
-    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
 }
 
-/* Buttons */
+/* ===== Buttons ===== */
 .btn-primary {
     background: #a8cf8c;
-    color: #000;
+    color: #1a1a1a;
     border: none;
-    padding: 12px 24px;
+    padding: 9px 20px;
     border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.12s;
 }
 
 .btn-primary:hover {
     background: #96bb7a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(168, 207, 140, 0.4);
 }
 
 .btn-edit {
-    background: #a8cf8c;
-    color: #000;
+    background: #f0f7eb;
+    color: #5a8a3c;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.12s;
 }
 
 .btn-edit:hover {
-    background: #96bb7a;
+    background: #a8cf8c;
+    color: #1a1a1a;
 }
 
 .btn-view {
     background: transparent;
-    color: #a8cf8c;
-    border: 1px solid #a8cf8c;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
+    color: #666;
+    border: 1.5px solid #e0e0e0;
+    padding: 6px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.12s;
 }
 
 .btn-view:hover {
-    background: #a8cf8c;
-    color: #000;
+    border-color: #a8cf8c;
+    color: #5a8a3c;
 }
 
 .btn-delete {
-    background: #ff6b6b;
-    color: #fff;
+    background: #fef2f2;
+    color: #dc4444;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.12s;
 }
 
 .btn-delete:hover {
-    background: #ff5252;
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
 .btn-small {
-    background: #e0e0e0;
-    color: #000;
+    background: #f0f0f0;
+    color: #555;
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
     cursor: pointer;
+    font-weight: 500;
+    transition: all 0.12s;
+}
+
+.btn-small:hover {
+    background: #e5e5e5;
 }
 
 .btn-delete-small {
-    background: #ff6b6b;
-    color: #fff;
+    background: #fef2f2;
+    color: #dc4444;
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.12s;
 }
 
-/* Sections */
-.cms-section {
-    display: none;
+.btn-delete-small:hover {
+    background: #fee2e2;
 }
 
-.cms-section.active {
-    display: block;
-}
+/* ===== Sections ===== */
+.cms-section { display: none; }
+.cms-section.active { display: block; }
 
-/* Content Grid */
+/* ===== Content Grid ===== */
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
 }
 
 .content-card {
-    background: #fffffb;
-    padding: 24px;
+    background: #fff;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: border-color 0.12s;
 }
 
 .content-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0,0,0,0.12);
 }
 
 .content-card h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
-    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #1a1a1a;
 }
 
 .content-card p {
-    color: #666;
-    margin-bottom: 16px;
-    font-size: 14px;
+    color: #888;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.4;
 }
 
 .card-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
 }
 
-/* Team Grid */
+/* ===== Team Grid ===== */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
 }
 
 .team-card {
-    background: #fffffb;
-    padding: 24px;
+    background: #fff;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     text-align: center;
 }
 
 .team-image-placeholder {
-    width: 120px;
-    height: 120px;
-    background: #e0e0e0;
+    width: 80px;
+    height: 80px;
+    background: #f5f5f5;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 48px;
+    margin: 0 auto 12px;
+    font-size: 32px;
+    color: #ccc;
 }
 
 .team-card h3 {
-    font-size: 18px;
-    margin-bottom: 4px;
-    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: #1a1a1a;
 }
 
 .team-role {
-    color: #a8cf8c;
-    font-size: 14px;
-    margin-bottom: 8px;
+    color: #7ab55c;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .team-contact {
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 16px;
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 12px;
 }
 
-/* Media Section */
+/* ===== Media Section ===== */
 .media-upload-area {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .upload-box {
-    background: #fffffb;
-    border: 2px dashed #a8cf8c;
+    background: #fff;
+    border: 1.5px dashed #ddd;
     border-radius: 12px;
-    padding: 48px;
+    padding: 32px;
     text-align: center;
+    transition: all 0.12s;
+    cursor: pointer;
+}
+
+.upload-box:hover {
+    border-color: #a8cf8c;
+    background: #f8faf6;
 }
 
 .upload-icon {
-    font-size: 48px;
+    font-size: 32px;
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    color: #a8cf8c;
 }
 
 .upload-box h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
-    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #1a1a1a;
 }
 
 .upload-box p {
-    color: #666;
-    margin-bottom: 16px;
+    color: #999;
+    margin-bottom: 12px;
+    font-size: 13px;
 }
 
 .media-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
 }
 
 .media-item {
-    background: #fffffb;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: border-color 0.12s;
+}
+
+.media-item:hover {
+    border-color: rgba(0,0,0,0.12);
 }
 
 .media-thumbnail {
     width: 100%;
-    height: 120px;
-    background: #e0e0e0;
+    height: 100px;
+    background: #f5f5f5;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
-    font-size: 32px;
+    margin-bottom: 8px;
+    font-size: 24px;
+    color: #ccc;
+    overflow: hidden;
+}
+
+.media-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .media-name {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 8px;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 6px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: 500;
 }
 
 .media-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     justify-content: space-between;
 }
 
-/* Messages */
+/* ===== Messages ===== */
 .messages-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 }
 
 .message-card {
-    background: #fffffb;
-    padding: 24px;
+    background: #fff;
+    padding: 18px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
 
 .message-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .message-header h3 {
-    font-size: 18px;
-    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
 .message-date {
-    font-size: 13px;
-    color: #999;
+    font-size: 12px;
+    color: #aaa;
 }
 
 .message-body {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .message-body p {
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #333;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
 }
 
 .message-body strong {
-    color: #000;
+    color: #1a1a1a;
 }
 
 .message-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
 }
 
-/* Settings Form */
+/* ===== Settings Form ===== */
 .settings-form {
-    background: #fffffb;
-    padding: 32px;
+    background: #fff;
+    padding: 24px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    max-width: 520px;
 }
 
 .settings-form h2 {
-    font-size: 24px;
-    margin-bottom: 24px;
-    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a1a1a;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #000;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .form-input {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
+    padding: 9px 12px;
+    border: 1.5px solid #e8e8e8;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 13px;
     font-family: inherit;
-    transition: border-color 0.3s;
+    transition: all 0.12s;
+    background: #fafafa;
+    color: #1a1a1a;
+}
+
+.form-input:hover {
+    border-color: #ccc;
+    background: #fff;
 }
 
 .form-input:focus {
     outline: none;
     border-color: #a8cf8c;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(168,207,140,0.12);
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
     .cms-sidebar {
         width: 200px;
@@ -477,7 +554,7 @@ body {
     
     .cms-main {
         margin-left: 200px;
-        padding: 16px;
+        padding: 12px;
     }
     
     .content-grid,
