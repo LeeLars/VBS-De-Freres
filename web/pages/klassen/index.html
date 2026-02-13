@@ -28,55 +28,46 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
-                    <!-- Kleuter -->
-                    <a href="#klasblogs" class="hero-nav-card" data-target-class="peuterklas" style="text-decoration: none; color: inherit;">
+                    <!-- Card 1 -->
+                    <a href="#klasblogs" class="hero-nav-card" data-target-class="peuterklas" data-cms-href="klassen-card1-link" style="text-decoration: none; color: inherit;">
                         <div class="card-loose" style="padding: 32px; text-align: center; height: 100%; transition: transform 0.3s; background: #fff;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
                             <div style="height: 200px; background: #f9fcf7; border-radius: 16px; margin-bottom: 24px; overflow: hidden; position: relative;">
-                                <img src="../../assets/images/static/kleuter.jpg" alt="Kleuteronderwijs" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
-                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(168, 207, 140, 0.1);">
-                                    <span style="font-size: 64px;">🎨</span>
-                                </div>
+                                <img data-cms="klassen-card1-img" src="../../assets/images/static/kleuter.jpg" alt="Card 1" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
                             </div>
-                            <h3 style="font-size: 24px; margin-bottom: 12px;">Kleuter</h3>
-                            <p style="color: #666; margin-bottom: 16px;">2,5 tot 6 jaar</p>
+                            <h3 style="font-size: 24px; margin-bottom: 12px;" data-cms="klassen-card1-title">Kleuter</h3>
+                            <p style="color: #666; margin-bottom: 16px;" data-cms="klassen-card1-subtitle">2,5 tot 6 jaar</p>
                             <span style="color: #166534; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
-                                Ontdekken
+                                <span data-cms="klassen-card1-linktext">Ontdekken</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </span>
                         </div>
                     </a>
 
-                    <!-- Lager -->
-                    <a href="#klasblogs" class="hero-nav-card" data-target-class="1a" style="text-decoration: none; color: inherit;">
+                    <!-- Card 2 -->
+                    <a href="#klasblogs" class="hero-nav-card" data-target-class="dyn-1a" data-cms-href="klassen-card2-link" style="text-decoration: none; color: inherit;">
                         <div class="card-loose" style="padding: 32px; text-align: center; height: 100%; transition: transform 0.3s; background: #fff;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
                             <div style="height: 200px; background: #f0f9ff; border-radius: 16px; margin-bottom: 24px; overflow: hidden; position: relative;">
-                                <img src="../../assets/images/static/lager.jpg" alt="Lager onderwijs" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
-                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.1);">
-                                    <span style="font-size: 64px;">📚</span>
-                                </div>
+                                <img data-cms="klassen-card2-img" src="../../assets/images/static/lager.jpg" alt="Card 2" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
                             </div>
-                            <h3 style="font-size: 24px; margin-bottom: 12px;">Lager</h3>
-                            <p style="color: #666; margin-bottom: 16px;">6 tot 12 jaar</p>
+                            <h3 style="font-size: 24px; margin-bottom: 12px;" data-cms="klassen-card2-title">Lager</h3>
+                            <p style="color: #666; margin-bottom: 16px;" data-cms="klassen-card2-subtitle">6 tot 12 jaar</p>
                             <span style="color: #166534; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
-                                Ontdekken
+                                <span data-cms="klassen-card2-linktext">Ontdekken</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </span>
                         </div>
                     </a>
 
-                    <!-- Middelbaar -->
-                    <a href="https://sfxbrugge.be/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+                    <!-- Card 3 -->
+                    <a href="https://sfxbrugge.be/" target="_blank" rel="noopener noreferrer" data-cms-href="klassen-card3-link" style="text-decoration: none; color: inherit;">
                         <div class="card-loose" style="padding: 32px; text-align: center; height: 100%; transition: transform 0.3s; background: #fff;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
                             <div style="height: 200px; background: #fff7ed; border-radius: 16px; margin-bottom: 24px; overflow: hidden; position: relative;">
-                                <img src="../../assets/images/static/middelbaar.jpg" alt="Middelbaar onderwijs" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
-                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(249, 115, 22, 0.1);">
-                                    <span style="font-size: 64px;">🎓</span>
-                                </div>
+                                <img data-cms="klassen-card3-img" src="../../assets/images/static/middelbaar.jpg" alt="Card 3" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
                             </div>
-                            <h3 style="font-size: 24px; margin-bottom: 12px;">Middelbaar</h3>
-                            <p style="color: #666; margin-bottom: 16px;">12 tot 18 jaar</p>
+                            <h3 style="font-size: 24px; margin-bottom: 12px;" data-cms="klassen-card3-title">Middelbaar</h3>
+                            <p style="color: #666; margin-bottom: 16px;" data-cms="klassen-card3-subtitle">12 tot 18 jaar</p>
                             <span style="color: #166534; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
-                                Naar website
+                                <span data-cms="klassen-card3-linktext">Naar website</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             </span>
                         </div>
