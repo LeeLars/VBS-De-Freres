@@ -298,8 +298,8 @@
                                     linkUrl = apiBase + linkUrl;
                                 }
                                 
-                                html += '<a href="' + linkUrl + '" ' + (hasLink ? 'target="_blank"' : '') + ' style="text-decoration: none;">';
-                                html += '<div class="card-loose" style="padding: 24px; transition: transform 0.3s;" onmouseover="this.style.transform=\'translateY(-4px)\'" onmouseout="this.style.transform=\'translateY(0)\'">';
+                                html += '<a href="' + linkUrl + '" ' + (hasLink ? 'target="_blank"' : '') + ' style="text-decoration: none; height: 100%;">';
+                                html += '<div class="card-loose" style="padding: 24px; transition: transform 0.3s; height: 100%; box-sizing: border-box;" onmouseover="this.style.transform=\'translateY(-4px)\'" onmouseout="this.style.transform=\'translateY(0)\'">';
                                 html += '<div style="display: flex; align-items: center; gap: 16px;">';
                                 html += '<div style="width: 48px; height: 48px; background: #f5f9f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">' + docIcon + '</div>';
                                 html += '<div>';
