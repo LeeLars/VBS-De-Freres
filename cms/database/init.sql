@@ -150,6 +150,7 @@ INSERT INTO page_content (page_slug, content_key, content_value, content_type) V
 ('visie', 'doc-5-title', 'Restaurantmenu', 'text'),
 ('visie', 'doc-5-desc', 'Week Februari 2025', 'text'),
 ('visie', 'doc-5-link', '', 'text'),
+('visie', 'reglement-pdf', '', 'text'),
 ('visie', 'cta-title', 'Klaar om deel uit te maken van onze school?', 'text'),
 ('visie', 'cta-text', 'Kom kennismaken tijdens een rondleiding.', 'text')
 ON CONFLICT (page_slug, content_key) DO NOTHING;

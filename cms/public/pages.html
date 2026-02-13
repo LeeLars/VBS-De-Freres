@@ -806,6 +806,7 @@
                     'Missie': ['mission-title', 'mission-text', 'mission-img'],
                     'Sfeerbeelden': ['sfeer-img-1', 'sfeer-img-2'],
                     'Aanpak': ['approach-title', 'approach-img', 'approach-1-title', 'approach-1-text', 'approach-2-title', 'approach-2-text', 'approach-3-title', 'approach-3-text'],
+                    'Schoolreglement': ['reglement-pdf'],
                     '__documents__': []
                 };
             } else if (pageSlug === 'klassen') {
@@ -1029,6 +1030,7 @@
                 'talen-teacher-name': 'Naam leerkracht talen',
                 'sport-text': 'Sport beschrijving',
                 'sport-teacher-name': 'Naam leerkracht sport',
+                'reglement-pdf': 'Schoolreglement PDF',
                 'cta-title': 'CTA Titel',
                 'cta-text': 'CTA Tekst',
                 'teachers-title': 'Leerkrachten Titel',
@@ -1175,7 +1177,7 @@
                     const label = labels[key] || key;
                     const isTextarea = key.includes('text') || key.includes('message');
                     const isImage = item.type === 'image' || key.includes('gallery') || key.includes('photo') || key.includes('poster') || key.includes('-img') || key.includes('-bg');
-                    const isPdfField = key.includes('doc-') && key.endsWith('-link');
+                    const isPdfField = (key.includes('doc-') && key.endsWith('-link')) || key.endsWith('-pdf');
                     
                     const hint = hints[key] || '';
                     
