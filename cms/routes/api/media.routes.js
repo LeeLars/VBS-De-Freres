@@ -72,13 +72,17 @@ router.post('/upload', upload.single('file'), async (req, res) => {
   }
 
   try {
-    console.log('[UPLOAD] Uploading to Cloudinary...');
+    // Determine resource type: PDFs must be uploaded as 'raw' to get a working URL
+    const isPdf = req.file.mimetype === 'application/pdf' || req.file.originalname.endsWith('.pdf');
+    const resourceType = isPdf ? 'raw' : 'auto';
+    console.log(`[UPLOAD] Uploading to Cloudinary as ${resourceType}...`);
+    
     // Upload to Cloudinary
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
           folder: 'vbs-de-freres',
-          resource_type: 'auto'
+          resource_type: resourceType
         },
         (error, result) => {
           if (error) {
@@ -93,12 +97,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       uploadStream.end(req.file.buffer);
     });
 
-    // Fix PDF URLs: Cloudinary returns /image/upload/ but PDFs need /raw/upload/
     let finalUrl = result.secure_url;
-    if (result.format === 'pdf' || req.file.mimetype === 'application/pdf') {
-      finalUrl = finalUrl.replace('/image/upload/', '/raw/upload/');
-      console.log('[UPLOAD] Fixed PDF URL:', finalUrl);
-    }
 
     // Save to database
     console.log('[UPLOAD] Saving to database...');

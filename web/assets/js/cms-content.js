@@ -159,10 +159,10 @@
                 hrefElements = document.querySelectorAll(hrefSelector);
             }
             hrefElements.forEach(el => {
-                // Fix Cloudinary PDF URLs: /image/upload/ -> /raw/upload/
+                // For Cloudinary PDFs stored as image resource, add fl_attachment so browser downloads them
                 let hrefVal = value;
-                if (hrefVal.includes('res.cloudinary.com') && hrefVal.endsWith('.pdf')) {
-                    hrefVal = hrefVal.replace('/image/upload/', '/raw/upload/');
+                if (hrefVal.includes('res.cloudinary.com') && hrefVal.endsWith('.pdf') && hrefVal.includes('/image/upload/')) {
+                    hrefVal = hrefVal.replace('/image/upload/', '/image/upload/fl_attachment/');
                 }
                 el.href = hrefVal;
             });
