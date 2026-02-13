@@ -159,7 +159,12 @@
                 hrefElements = document.querySelectorAll(hrefSelector);
             }
             hrefElements.forEach(el => {
-                el.href = value;
+                // Fix Cloudinary PDF URLs: /image/upload/ -> /raw/upload/
+                let hrefVal = value;
+                if (hrefVal.includes('res.cloudinary.com') && hrefVal.endsWith('.pdf')) {
+                    hrefVal = hrefVal.replace('/image/upload/', '/raw/upload/');
+                }
+                el.href = hrefVal;
             });
         }
         

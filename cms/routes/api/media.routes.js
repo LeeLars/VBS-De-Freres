@@ -93,6 +93,13 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       uploadStream.end(req.file.buffer);
     });
 
+    // Fix PDF URLs: Cloudinary returns /image/upload/ but PDFs need /raw/upload/
+    let finalUrl = result.secure_url;
+    if (result.format === 'pdf' || req.file.mimetype === 'application/pdf') {
+      finalUrl = finalUrl.replace('/image/upload/', '/raw/upload/');
+      console.log('[UPLOAD] Fixed PDF URL:', finalUrl);
+    }
+
     // Save to database
     console.log('[UPLOAD] Saving to database...');
     const dbResult = await pool.query(
@@ -101,7 +108,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
        RETURNING *`,
       [
         req.file.originalname,
-        result.secure_url,
+        finalUrl,
         result.public_id,
         result.width,
         result.height,
