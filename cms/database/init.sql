@@ -380,7 +380,10 @@ INSERT INTO page_content (page_slug, content_key, content_value, content_type) V
 ('team', 'cta-title', '', 'text'),
 ('team', 'cta-text', '', 'text'),
 ('team', 'contact-director-name', 'Inge Versavel', 'text'),
-('team', 'contact-director-photo', '', 'image')
+('team', 'contact-director-photo', '', 'image'),
+('team', 'brugfiguur-title', 'Onze brugfiguur', 'text'),
+('team', 'brugfiguur-text', 'Hallo! Ik ben Annelies, de brugfiguur van De Frères. Ik ben elke dinsdag aanwezig op school om ouders te helpen. Heb je vragen rond schoolfacturen/financiën, brieven, hobby''s... dan kan ik je helpen! We spreken eens af op school of bij jou thuis om samen een antwoord op jouw vragen te zoeken. Als ik op school ben, spreek me gerust aan!', 'text'),
+('team', 'brugfiguur-photo', '', 'image')
 ON CONFLICT (page_slug, content_key) DO NOTHING;
 
 -- =============================================
