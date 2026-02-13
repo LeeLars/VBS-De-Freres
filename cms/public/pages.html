@@ -455,6 +455,12 @@
         
         .media-picker-item:hover .media-delete-btn { opacity: 1; }
         
+        .media-picker-item.media-loading {
+            pointer-events: none;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        
         /* ===== Gallery Grid ===== */
         .gallery-grid {
             display: grid;
@@ -2293,6 +2299,7 @@
         
         function openMediaPicker(fieldKey) {
             activePickerField = fieldKey;
+            pickerItemsEnabled = false;
             const overlay = document.getElementById('mediaPickerOverlay');
             overlay.classList.add('active');
             
@@ -2343,7 +2350,7 @@
         
         async function loadPickerMedia() {
             const grid = document.getElementById('pickerGrid');
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 24px;">Laden...</div>';
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #999; padding: 40px;">Afbeeldingen laden...</div>';
             
             try {
                 const response = await fetch('/api/media');
@@ -2352,21 +2359,54 @@
                 if (result.success && result.media.length > 0) {
                     const images = result.media.filter(item => item.format !== 'pdf' && !item.filename.endsWith('.pdf'));
                     if (images.length > 0) {
+                    // Render items as non-interactive (pointer-events:none, dimmed)
                     grid.innerHTML = images.map(item => `
-                        <div class="media-picker-item" onclick="selectMedia('${item.url}')">
+                        <div class="media-picker-item media-loading" style="pointer-events:none;opacity:0.4;" data-select-url="${item.url}" data-delete-id="${item.id}">
                             <img src="${item.url}" alt="${item.filename}">
                             <button type="button" class="media-delete-btn" onclick="event.stopPropagation(); deleteMedia(${item.id})">&times;</button>
                         </div>
                     `).join('');
+                    
+                    // Wait for all images to load, then enable clicking
+                    const imgs = grid.querySelectorAll('.media-picker-item img');
+                    let loaded = 0;
+                    const total = imgs.length;
+                    function onImgReady() {
+                        loaded++;
+                        if (loaded >= total) enablePickerItems();
+                    }
+                    imgs.forEach(img => {
+                        if (img.complete) { onImgReady(); }
+                        else {
+                            img.addEventListener('load', onImgReady, { once: true });
+                            img.addEventListener('error', onImgReady, { once: true });
+                        }
+                    });
+                    // Fallback: enable after 3s max even if some images are slow
+                    setTimeout(enablePickerItems, 3000);
                     } else {
-                        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 24px;">Geen afbeeldingen. Upload eerst via de knop hierboven.</div>';
+                        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #999; padding: 40px;">Geen afbeeldingen. Upload eerst via de knop hierboven.</div>';
                     }
                 } else {
-                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 24px;">Geen afbeeldingen. Upload eerst via de knop hierboven.</div>';
+                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #999; padding: 40px;">Geen afbeeldingen. Upload eerst via de knop hierboven.</div>';
                 }
             } catch (error) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #ff6b6b; padding: 24px;">Fout bij laden van media.</div>';
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #e74c3c; padding: 40px;">Fout bij laden van media.</div>';
             }
+        }
+        
+        let pickerItemsEnabled = false;
+        function enablePickerItems() {
+            if (pickerItemsEnabled) return;
+            pickerItemsEnabled = true;
+            const items = document.querySelectorAll('.media-picker-item.media-loading');
+            items.forEach(item => {
+                item.classList.remove('media-loading');
+                item.style.pointerEvents = '';
+                item.style.opacity = '';
+                const url = item.getAttribute('data-select-url');
+                if (url) item.setAttribute('onclick', "selectMedia('" + url + "')");
+            });
         }
         
         function selectMedia(url) {
