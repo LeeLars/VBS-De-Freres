@@ -94,6 +94,16 @@ body {
     width: 100%;
 }
 
+.nav-links a.active {
+    color: #166534;
+    font-weight: 600;
+}
+
+.nav-links a.active::after {
+    width: 100%;
+    background-color: #a8cf8c;
+}
+
 .nav-cta {
     background-color: #a8cf8c;
     color: #000;
