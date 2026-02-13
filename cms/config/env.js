@@ -11,12 +11,6 @@ export const env = {
     apiKey: process.env.CLOUDINARY_API_KEY,
     apiSecret: process.env.CLOUDINARY_SECRET || process.env.CLOUDINARY_API_SECRET
   },
-  github: {
-    token: process.env.GITHUB_TOKEN,
-    repo: process.env.GITHUB_REPO || 'LeeLars/VBS-De-Freres',
-    branch: process.env.GITHUB_BRANCH || 'main',
-    pdfPath: process.env.GITHUB_PDF_PATH || 'web/assets/pdfs'
-  },
   smtpHost: process.env.SMTP_HOST,
   smtpPort: parseInt(process.env.SMTP_PORT || '587'),
   smtpSecure: process.env.SMTP_SECURE === 'true',

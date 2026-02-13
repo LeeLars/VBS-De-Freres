@@ -39,6 +39,17 @@ CREATE TABLE IF NOT EXISTS contact_messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- PDF Files Table (stored directly in database, served via /api/pdf/:slug)
+CREATE TABLE IF NOT EXISTS pdf_files (
+    id SERIAL PRIMARY KEY,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    filename VARCHAR(255) NOT NULL,
+    data BYTEA NOT NULL,
+    mime_type VARCHAR(100) DEFAULT 'application/pdf',
+    size_bytes INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Media Library Table
 CREATE TABLE IF NOT EXISTS media (
     id SERIAL PRIMARY KEY,

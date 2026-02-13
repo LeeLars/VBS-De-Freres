@@ -55,56 +55,24 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Upload PDF to GitHub repo
-async function uploadPdfToGitHub(fileBuffer, filename) {
-  const { token, repo, branch, pdfPath } = env.github;
-  if (!token) throw new Error('GITHUB_TOKEN niet geconfigureerd in Railway.');
-  
-  // Sanitize filename: lowercase, replace spaces with hyphens, keep only safe chars
-  const safeName = filename.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9._-]/g, '');
-  const filePath = `${pdfPath}/${safeName}`;
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
-  
-  // Check if file already exists (we need the sha to overwrite)
-  let existingSha = null;
+// Serve PDF from database (public, no auth needed)
+router.get('/pdf/:slug', async (req, res) => {
   try {
-    const checkRes = await fetch(apiUrl, {
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    const result = await pool.query('SELECT * FROM pdf_files WHERE slug = $1', [req.params.slug]);
+    if (result.rows.length === 0) return res.status(404).send('PDF niet gevonden');
+    const pdf = result.rows[0];
+    res.set({
+      'Content-Type': pdf.mime_type || 'application/pdf',
+      'Content-Disposition': `inline; filename="${pdf.filename}"`,
+      'Content-Length': pdf.data.length,
+      'Cache-Control': 'public, max-age=86400'
     });
-    if (checkRes.ok) {
-      const existing = await checkRes.json();
-      existingSha = existing.sha;
-    }
-  } catch (e) { /* file doesn't exist, that's fine */ }
-  
-  // Upload via GitHub API
-  const body = {
-    message: `Upload PDF: ${safeName}`,
-    content: fileBuffer.toString('base64'),
-    branch: branch
-  };
-  if (existingSha) body.sha = existingSha;
-  
-  const uploadRes = await fetch(apiUrl, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${token}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-  
-  if (!uploadRes.ok) {
-    const err = await uploadRes.json();
-    throw new Error(`GitHub API error: ${err.message || uploadRes.statusText}`);
+    res.send(pdf.data);
+  } catch (error) {
+    console.error('PDF serve error:', error);
+    res.status(500).send('Fout bij ophalen PDF');
   }
-  
-  const result = await uploadRes.json();
-  // Return the GitHub Pages URL
-  const pagesUrl = `https://leelars.github.io/VBS-De-Freres/${filePath}`;
-  return { url: pagesUrl, path: filePath, sha: result.content.sha, safeName };
-}
+});
 
 // Upload new media
 router.post('/upload', upload.single('file'), async (req, res) => {
@@ -123,19 +91,25 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     let finalUrl, publicId, width, height, format, sizeBytes;
 
     if (isPdf) {
-      // Upload PDF to GitHub
-      console.log('[UPLOAD] Uploading PDF to GitHub...');
-      if (!env.github.token) {
-        return res.status(500).json({ success: false, error: 'GITHUB_TOKEN niet geconfigureerd. Voeg GITHUB_TOKEN toe in Railway.' });
-      }
-      const ghResult = await uploadPdfToGitHub(req.file.buffer, req.file.originalname);
-      finalUrl = ghResult.url;
-      publicId = `github:${ghResult.path}`;
+      // Store PDF in database, serve via /api/media/pdf/:slug
+      const safeName = req.file.originalname.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9._-]/g, '');
+      const slug = safeName.replace(/\.pdf$/, '');
+      console.log(`[UPLOAD] Storing PDF in database as slug: ${slug}`);
+      
+      await pool.query(
+        `INSERT INTO pdf_files (slug, filename, data, mime_type, size_bytes)
+         VALUES ($1, $2, $3, $4, $5)
+         ON CONFLICT (slug) DO UPDATE SET data = $3, filename = $2, size_bytes = $5`,
+        [slug, req.file.originalname, req.file.buffer, 'application/pdf', req.file.size]
+      );
+      
+      finalUrl = `/api/media/pdf/${slug}`;
+      publicId = `pdf:${slug}`;
       width = 0;
       height = 0;
       format = 'pdf';
       sizeBytes = req.file.size;
-      console.log('[UPLOAD] GitHub upload success:', finalUrl);
+      console.log('[UPLOAD] PDF stored in database, URL:', finalUrl);
     } else {
       // Upload image to Cloudinary
       if (!env.cloudinary.cloudName) {
@@ -160,8 +134,8 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       sizeBytes = result.bytes;
     }
 
-    // Save to database
-    console.log('[UPLOAD] Saving to database...');
+    // Save to media library
+    console.log('[UPLOAD] Saving to media library...');
     const dbResult = await pool.query(
       `INSERT INTO media (filename, url, public_id, width, height, format, size_bytes)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -186,12 +160,7 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Get media item
-    const mediaResult = await pool.query(
-      'SELECT * FROM media WHERE id = $1',
-      [id]
-    );
-
+    const mediaResult = await pool.query('SELECT * FROM media WHERE id = $1', [id]);
     if (mediaResult.rows.length === 0) {
       return res.status(404).json({ error: 'Media not found' });
     }
@@ -199,39 +168,16 @@ router.delete('/:id', async (req, res) => {
     const media = mediaResult.rows[0];
 
     // Delete from storage
-    if (media.public_id && media.public_id.startsWith('github:')) {
-      // Delete from GitHub
-      const ghPath = media.public_id.replace('github:', '');
-      const apiUrl = `https://api.github.com/repos/${env.github.repo}/contents/${ghPath}`;
-      if (env.github.token) {
-        try {
-          const getRes = await fetch(apiUrl, {
-            headers: { 'Authorization': `token ${env.github.token}`, 'Accept': 'application/vnd.github.v3+json' }
-          });
-          if (getRes.ok) {
-            const fileData = await getRes.json();
-            await fetch(apiUrl, {
-              method: 'DELETE',
-              headers: {
-                'Authorization': `token ${env.github.token}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                message: `Delete PDF: ${ghPath.split('/').pop()}`,
-                sha: fileData.sha,
-                branch: env.github.branch
-              })
-            });
-          }
-        } catch (e) { console.error('GitHub delete error:', e.message); }
-      }
+    if (media.public_id && media.public_id.startsWith('pdf:')) {
+      // Delete PDF from database
+      const slug = media.public_id.replace('pdf:', '');
+      await pool.query('DELETE FROM pdf_files WHERE slug = $1', [slug]);
     } else if (media.public_id && env.cloudinary.cloudName) {
       // Delete from Cloudinary
       await cloudinary.uploader.destroy(media.public_id, { resource_type: 'image' });
     }
 
-    // Delete from database
+    // Delete from media library
     await pool.query('DELETE FROM media WHERE id = $1', [id]);
 
     res.json({ success: true, message: 'Media deleted successfully' });

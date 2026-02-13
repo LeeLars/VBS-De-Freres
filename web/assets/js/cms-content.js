@@ -130,6 +130,11 @@
             
             if (!value || value.trim() === '') continue;
             
+            // Convert relative PDF URLs to absolute CMS server URLs
+            if (value.startsWith('/api/media/pdf/')) {
+                value = API_BASE + value;
+            }
+            
             // Try exact match with pageSlug prefix first
             let selector = `[data-cms="${pageSlug}-${key}"]`;
             let elements = document.querySelectorAll(selector);
@@ -159,7 +164,11 @@
                 hrefElements = document.querySelectorAll(hrefSelector);
             }
             hrefElements.forEach(el => {
-                el.href = value;
+                let hrefVal = value;
+                if (hrefVal.startsWith('/api/media/pdf/')) {
+                    hrefVal = API_BASE + hrefVal;
+                }
+                el.href = hrefVal;
             });
         }
         
