@@ -1,6 +1,13 @@
 // CMS Content Loader
 // Loads dynamic content from the CMS API and updates page elements
 
+// Inject critical CSS immediately to hide content until CMS loads (prevents fallback text flash)
+(function() {
+    var s = document.createElement('style');
+    s.textContent = 'main{opacity:0;transition:opacity .3s ease}body.cms-loaded main,body.cms-fallback main{opacity:1}';
+    document.head.appendChild(s);
+})();
+
 (function() {
     const API_BASE = window.API_BASE_URL || 'https://vbs-de-freres-production.up.railway.app';
     

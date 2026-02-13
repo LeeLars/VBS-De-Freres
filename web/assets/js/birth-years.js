@@ -17,21 +17,19 @@
     const years = [];
 
     // Peuter (nieuwste eerst)
-    years.push({ value: schoolYearStart - 2, label: (schoolYearStart - 2) + ' (peuter)' });
-    years.push({ value: schoolYearStart - 3, label: (schoolYearStart - 3) + ' (peuter)' });
+    years.push({ value: schoolYearStart - 2, label: String(schoolYearStart - 2) });
+    years.push({ value: schoolYearStart - 3, label: String(schoolYearStart - 3) });
 
     // Kleuter K1-K3
     for (let i = 4; i <= 6; i++) {
         const y = schoolYearStart - i;
-        const klas = 'K' + (i - 3);
-        years.push({ value: y, label: y + ' (' + klas + ')' });
+        years.push({ value: y, label: String(y) });
     }
 
     // Lagere school 1ste-6de
     for (let i = 7; i <= 12; i++) {
         const y = schoolYearStart - i;
-        const leerjaar = (i - 6) + 'de leerjaar';
-        years.push({ value: y, label: y + ' (' + leerjaar + ')' });
+        years.push({ value: y, label: String(y) });
     }
 
     // Populate all selects with class "birth-year-select"
