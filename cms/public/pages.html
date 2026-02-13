@@ -311,6 +311,7 @@
         
         .media-picker-grid {
             padding: 16px;
+            overflow-x: hidden;
             overflow-y: auto;
             flex: 1;
             min-height: 0;
@@ -327,6 +328,8 @@
             cursor: pointer;
             border: 3px solid transparent;
             transition: all 0.2s ease;
+            min-width: 0;
+            max-width: 100%;
         }
         
         .media-picker-item:hover {
