@@ -1202,9 +1202,12 @@
                         const blogVal = (content[`klas-${slug}-blog`] || {}).value || '';
                         const orderVal = (content[`klas-${slug}-order`] || {}).value || String(i + 1);
                         
-                        html += `<div class="klas-item" data-klas-slug="${slug}" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 16px; background: #fafafa;">
+                        html += `<div class="klas-item" data-klas-slug="${slug}" draggable="true" ondragstart="onKlasDragStart(event)" ondragover="onKlasDragOver(event)" ondragend="onKlasDragEnd(event)" ondrop="onKlasDrop(event)" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 8px; background: #fafafa; cursor: grab; transition: opacity 0.2s, border-color 0.2s;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <strong id="klas-title-${slug}" style="font-size: 15px;">${nameVal || slug}</strong>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="color: #aaa; font-size: 18px; cursor: grab; user-select: none;" title="Versleep om te herordenen">&#x2630;</span>
+                                    <strong id="klas-title-${slug}" style="font-size: 15px;">${nameVal || slug}</strong>
+                                </div>
                                 <button type="button" onclick="removeKlas('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
@@ -1253,10 +1256,22 @@
                     }
                     
                     html += `</div>
-                        <div style="display: flex; gap: 12px; margin-top: 8px; align-items: center;">
-                            <input type="text" id="newKlasSlug" placeholder="Slug (bv. 2b)" style="padding: 10px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 120px;">
-                            <input type="text" id="newKlasName" placeholder="Naam (bv. Klas 2B)" style="padding: 10px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; flex: 1;">
-                            <button type="button" onclick="addKlas()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Klas toevoegen</button>
+                        <div style="border: 2px dashed #d0d0d0; border-radius: 12px; padding: 16px; margin-top: 12px; background: #f5f5f5;">
+                            <strong style="font-size: 14px; display: block; margin-bottom: 10px;">Nieuwe klas toevoegen</strong>
+                            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                                <input type="text" id="newKlasSlug" placeholder="Slug (bv. 2b)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 100px;">
+                                <input type="text" id="newKlasName" placeholder="Naam (bv. Klas 2B)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 160px;">
+                                <select id="newKlasPosition" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; background: #fff;">
+                                    <option value="end">Onderaan</option>
+                                    <option value="start">Bovenaan</option>`;
+                    for (let i = 0; i < klasSlugs.length; i++) {
+                        const s = klasSlugs[i];
+                        const n = (content[`klas-${s}-name`] || {}).value || s;
+                        html += `<option value="after-${s}">Na ${n}</option>`;
+                    }
+                    html += `</select>
+                                <button type="button" onclick="addKlas()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
+                            </div>
                         </div>
                         </div></div>`;
                     continue;
@@ -1614,32 +1629,145 @@
         }
         
         // ===== Dynamic Klassen =====
+        
+        // Get ordered list of klas slugs from contentData
+        function getOrderedKlasSlugs() {
+            const slugs = [];
+            for (const k of Object.keys(contentData)) {
+                const m = k.match(/^klas-(.+)-name$/);
+                if (m && (contentData[k] || {}).value) slugs.push(m[1]);
+            }
+            slugs.sort((a, b) => {
+                const oa = parseInt((contentData[`klas-${a}-order`] || {}).value) || 999;
+                const ob = parseInt((contentData[`klas-${b}-order`] || {}).value) || 999;
+                return oa - ob;
+            });
+            return slugs;
+        }
+        
+        // Save order values for all klassen based on DOM order
+        async function saveKlassenOrder() {
+            const items = document.querySelectorAll('#klassenList .klas-item');
+            const updates = {};
+            items.forEach((item, i) => {
+                const slug = item.dataset.klasSlug;
+                const orderKey = `klas-${slug}-order`;
+                const newOrder = String(i + 1);
+                updates[orderKey] = { value: newOrder, type: 'text' };
+                if (contentData[orderKey]) contentData[orderKey].value = newOrder;
+                else contentData[orderKey] = { value: newOrder, type: 'text' };
+            });
+            
+            showStatus('Volgorde opslaan...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: updates })
+                });
+                const result = await response.json();
+                if (result.success) showStatus('Volgorde opgeslagen', 'saved');
+                else showStatus('Fout bij opslaan volgorde', 'error');
+            } catch (e) {
+                showStatus('Fout bij opslaan volgorde', 'error');
+            }
+        }
+        
+        // Drag and drop for klassen reordering
+        let klasDragItem = null;
+        
+        function onKlasDragStart(e) {
+            klasDragItem = e.target.closest('.klas-item');
+            klasDragItem.style.opacity = '0.4';
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', klasDragItem.dataset.klasSlug);
+        }
+        
+        function onKlasDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const target = e.target.closest('.klas-item');
+            if (!target || target === klasDragItem) return;
+            target.style.borderColor = '#a8cf8c';
+        }
+        
+        function onKlasDragEnd(e) {
+            if (klasDragItem) klasDragItem.style.opacity = '1';
+            document.querySelectorAll('#klassenList .klas-item').forEach(el => {
+                el.style.borderColor = '#e0e0e0';
+            });
+            klasDragItem = null;
+        }
+        
+        function onKlasDrop(e) {
+            e.preventDefault();
+            const target = e.target.closest('.klas-item');
+            if (!target || !klasDragItem || target === klasDragItem) return;
+            
+            const list = document.getElementById('klassenList');
+            const items = [...list.querySelectorAll('.klas-item')];
+            const dragIdx = items.indexOf(klasDragItem);
+            const dropIdx = items.indexOf(target);
+            
+            if (dragIdx < dropIdx) {
+                target.after(klasDragItem);
+            } else {
+                target.before(klasDragItem);
+            }
+            
+            klasDragItem.style.opacity = '1';
+            document.querySelectorAll('#klassenList .klas-item').forEach(el => {
+                el.style.borderColor = '#e0e0e0';
+            });
+            
+            saveKlassenOrder();
+            klasDragItem = null;
+        }
+        
         async function addKlas() {
             const slugInput = document.getElementById('newKlasSlug');
             const nameInput = document.getElementById('newKlasName');
+            const posSelect = document.getElementById('newKlasPosition');
             const slug = (slugInput.value || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
             const name = (nameInput.value || '').trim();
+            const position = posSelect ? posSelect.value : 'end';
             
             if (!slug) { alert('Vul een slug in (bv. 2b)'); return; }
             if (!name) { alert('Vul een naam in (bv. Klas 2B)'); return; }
             if (contentData[`klas-${slug}-name`]) { alert('Deze slug bestaat al!'); return; }
             
-            // Find max order
-            let maxOrder = 0;
-            for (const k of Object.keys(contentData)) {
-                const m = k.match(/^klas-(.+)-order$/);
-                if (m) maxOrder = Math.max(maxOrder, parseInt((contentData[k] || {}).value) || 0);
+            // Calculate order based on position
+            const orderedSlugs = getOrderedKlasSlugs();
+            let insertIdx;
+            if (position === 'start') {
+                insertIdx = 0;
+            } else if (position === 'end') {
+                insertIdx = orderedSlugs.length;
+            } else if (position.startsWith('after-')) {
+                const afterSlug = position.replace('after-', '');
+                insertIdx = orderedSlugs.indexOf(afterSlug) + 1;
+                if (insertIdx === 0) insertIdx = orderedSlugs.length;
+            } else {
+                insertIdx = orderedSlugs.length;
             }
             
-            const newKeys = {
-                [`klas-${slug}-name`]: { value: name, type: 'text' },
-                [`klas-${slug}-teacher`]: { value: '', type: 'text' },
-                [`klas-${slug}-text`]: { value: '', type: 'text' },
-                [`klas-${slug}-photo`]: { value: '', type: 'image' },
-                [`klas-${slug}-tphoto`]: { value: '', type: 'image' },
-                [`klas-${slug}-blog`]: { value: '', type: 'text' },
-                [`klas-${slug}-order`]: { value: String(maxOrder + 1), type: 'text' }
-            };
+            // Rebuild all order values with the new klas inserted
+            orderedSlugs.splice(insertIdx, 0, slug);
+            const updates = {};
+            for (let i = 0; i < orderedSlugs.length; i++) {
+                updates[`klas-${orderedSlugs[i]}-order`] = { value: String(i + 1), type: 'text' };
+            }
+            
+            // Add new klas fields
+            updates[`klas-${slug}-name`] = { value: name, type: 'text' };
+            updates[`klas-${slug}-teacher`] = { value: '', type: 'text' };
+            updates[`klas-${slug}-text`] = { value: '', type: 'text' };
+            updates[`klas-${slug}-photo`] = { value: '', type: 'image' };
+            updates[`klas-${slug}-tphoto`] = { value: '', type: 'image' };
+            updates[`klas-${slug}-blog`] = { value: '', type: 'text' };
             
             showStatus('Klas toevoegen...', 'saving');
             try {
@@ -1649,12 +1777,12 @@
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
                     },
-                    body: JSON.stringify({ content: newKeys })
+                    body: JSON.stringify({ content: updates })
                 });
                 const result = await response.json();
                 if (result.success) {
                     showStatus('Klas toegevoegd', 'saved');
-                    Object.assign(contentData, newKeys);
+                    Object.assign(contentData, updates);
                     renderEditor(currentPage, contentData);
                 } else {
                     showStatus('Fout bij toevoegen', 'error');
