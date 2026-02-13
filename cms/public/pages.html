@@ -867,12 +867,7 @@
                     'Hero': ['hero-title', 'hero-text'],
                     'Directeur': ['director-bio'],
                     'Leerkrachten Overzicht': ['teachers-title', 'teachers-subtitle'],
-                    'Teamlid 1': ['member-1-name', 'member-1-role', 'member-1-photo', 'member-1-bio'],
-                    'Teamlid 2': ['member-2-name', 'member-2-role', 'member-2-photo', 'member-2-bio'],
-                    'Teamlid 3': ['member-3-name', 'member-3-role', 'member-3-photo', 'member-3-bio'],
-                    'Teamlid 4': ['member-4-name', 'member-4-role', 'member-4-photo', 'member-4-bio'],
-                    'Teamlid 5': ['member-5-name', 'member-5-role', 'member-5-photo', 'member-5-bio'],
-                    'Teamlid 6': ['member-6-name', 'member-6-role', 'member-6-photo', 'member-6-bio'],
+                    '__team__': [],
                     'Ondersteuning': ['support-title', 'support-subtitle', 'support-1-name', 'support-1-bio', 'support-2-name', 'support-2-bio', 'support-3-name', 'support-3-bio']
                 };
             } else if (pageSlug === 'contact') {
@@ -1310,6 +1305,89 @@
                     }
                     html += `</select>
                                 <button type="button" onclick="addKlas()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
+                            </div>
+                        </div>
+                        </div></div>`;
+                    continue;
+                }
+                
+                // Dynamic team members section
+                if (sectionName === '__team__') {
+                    const teamSlugs = [];
+                    for (const k of Object.keys(content)) {
+                        const m = k.match(/^lid-(.+)-name$/);
+                        if (m) teamSlugs.push(m[1]);
+                    }
+                    teamSlugs.sort((a, b) => {
+                        const oa = parseInt((content[`lid-${a}-order`] || {}).value) || 999;
+                        const ob = parseInt((content[`lid-${b}-order`] || {}).value) || 999;
+                        return oa - ob;
+                    });
+                    
+                    html += `<div class="content-group" id="teamSection">
+                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Teamleden (${teamSlugs.length})</h3>
+                        <div class="content-group-body">
+                        <div id="teamList">`;
+                    
+                    for (let i = 0; i < teamSlugs.length; i++) {
+                        const slug = teamSlugs[i];
+                        const nameVal = (content[`lid-${slug}-name`] || {}).value || '';
+                        const roleVal = (content[`lid-${slug}-role`] || {}).value || '';
+                        const bioVal = (content[`lid-${slug}-bio`] || {}).value || '';
+                        const photoVal = (content[`lid-${slug}-photo`] || {}).value || '';
+                        
+                        html += `<div class="team-item" data-team-slug="${slug}" draggable="true" ondragstart="onTeamDragStart(event)" ondragover="onTeamDragOver(event)" ondragend="onTeamDragEnd(event)" ondrop="onTeamDrop(event)" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 8px; background: #fafafa; cursor: grab; transition: opacity 0.2s, border-color 0.2s;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="color: #aaa; font-size: 18px; cursor: grab; user-select: none;" title="Versleep om te herordenen">&#x2630;</span>
+                                    <strong id="lid-title-${slug}" style="font-size: 15px;">${nameVal || slug}</strong>
+                                </div>
+                                <button type="button" onclick="removeTeamLid('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <div class="content-field">
+                                    <label>Naam</label>
+                                    <input type="text" id="lid-${slug}-name" data-key="lid-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('lid-${slug}-name', this.value, 'text'); document.getElementById('lid-title-${slug}').textContent = this.value || '${slug}';" placeholder="bv. Juf Lies">
+                                </div>
+                                <div class="content-field">
+                                    <label>Rol / Klas</label>
+                                    <input type="text" id="lid-${slug}-role" data-key="lid-${slug}-role" value="${roleVal}" oninput="scheduleAutoSave('lid-${slug}-role', this.value, 'text')" placeholder="bv. Klas 1A">
+                                </div>
+                            </div>
+                            <div class="content-field" style="margin-top: 12px;">
+                                <label>Bio</label>
+                                <textarea id="lid-${slug}-bio" data-key="lid-${slug}-bio" oninput="scheduleAutoSave('lid-${slug}-bio', this.value, 'text')" rows="2">${bioVal}</textarea>
+                            </div>
+                            <div class="content-field" style="margin-top: 12px;">
+                                <label>Foto</label>
+                                <input type="hidden" id="lid-${slug}-photo" data-key="lid-${slug}-photo" data-type="image" value="${photoVal}">
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <button type="button" class="btn-pick-media" onclick="openMediaPicker('lid-${slug}-photo')">Kies afbeelding</button>
+                                    ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('lid-${slug}-photo')">Verwijderen</button>` : ''}
+                                </div>
+                                <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-lid-${slug}-photo">
+                                    ${photoVal ? `<img src="${photoVal}">` : 'Geen afbeelding'}
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                    
+                    html += `</div>
+                        <div style="border: 2px dashed #d0d0d0; border-radius: 12px; padding: 16px; margin-top: 12px; background: #f5f5f5;">
+                            <strong style="font-size: 14px; display: block; margin-bottom: 10px;">Nieuw teamlid toevoegen</strong>
+                            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                                <input type="text" id="newTeamSlug" placeholder="Slug (bv. lies)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 100px;">
+                                <input type="text" id="newTeamName" placeholder="Naam (bv. Juf Lies)" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 160px;">
+                                <select id="newTeamPosition" style="padding: 8px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; background: #fff;">
+                                    <option value="end">Onderaan</option>
+                                    <option value="start">Bovenaan</option>`;
+                    for (let i = 0; i < teamSlugs.length; i++) {
+                        const s = teamSlugs[i];
+                        const n = (content[`lid-${s}-name`] || {}).value || s;
+                        html += `<option value="after-${s}">Na ${n}</option>`;
+                    }
+                    html += `</select>
+                                <button type="button" onclick="addTeamLid()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Toevoegen</button>
                             </div>
                         </div>
                         </div></div>`;
@@ -1854,6 +1932,194 @@
                 const result = await response.json();
                 if (result.success) {
                     showStatus('Klas verwijderd', 'saved');
+                    loadContent(currentPage);
+                } else {
+                    showStatus('Fout bij verwijderen', 'error');
+                }
+            } catch (e) {
+                showStatus('Fout bij verwijderen', 'error');
+            }
+        }
+        
+        // ===== Dynamic Team Members =====
+        
+        function getOrderedTeamSlugs() {
+            const slugs = [];
+            for (const k of Object.keys(contentData)) {
+                const m = k.match(/^lid-(.+)-name$/);
+                if (m && (contentData[k] || {}).value) slugs.push(m[1]);
+            }
+            slugs.sort((a, b) => {
+                const oa = parseInt((contentData[`lid-${a}-order`] || {}).value) || 999;
+                const ob = parseInt((contentData[`lid-${b}-order`] || {}).value) || 999;
+                return oa - ob;
+            });
+            return slugs;
+        }
+        
+        async function saveTeamOrder() {
+            const items = document.querySelectorAll('#teamList .team-item');
+            const updates = {};
+            items.forEach((item, i) => {
+                const slug = item.dataset.teamSlug;
+                const orderKey = `lid-${slug}-order`;
+                const newOrder = String(i + 1);
+                updates[orderKey] = { value: newOrder, type: 'text' };
+                if (contentData[orderKey]) contentData[orderKey].value = newOrder;
+                else contentData[orderKey] = { value: newOrder, type: 'text' };
+            });
+            
+            showStatus('Volgorde opslaan...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: updates })
+                });
+                const result = await response.json();
+                if (result.success) showStatus('Volgorde opgeslagen', 'saved');
+                else showStatus('Fout bij opslaan volgorde', 'error');
+            } catch (e) {
+                showStatus('Fout bij opslaan volgorde', 'error');
+            }
+        }
+        
+        let teamDragItem = null;
+        
+        function onTeamDragStart(e) {
+            teamDragItem = e.target.closest('.team-item');
+            teamDragItem.style.opacity = '0.4';
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', teamDragItem.dataset.teamSlug);
+        }
+        
+        function onTeamDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const target = e.target.closest('.team-item');
+            if (!target || target === teamDragItem) return;
+            target.style.borderColor = '#a8cf8c';
+        }
+        
+        function onTeamDragEnd(e) {
+            if (teamDragItem) teamDragItem.style.opacity = '1';
+            document.querySelectorAll('#teamList .team-item').forEach(el => {
+                el.style.borderColor = '#e0e0e0';
+            });
+            teamDragItem = null;
+        }
+        
+        function onTeamDrop(e) {
+            e.preventDefault();
+            const target = e.target.closest('.team-item');
+            if (!target || !teamDragItem || target === teamDragItem) return;
+            
+            const list = document.getElementById('teamList');
+            const items = [...list.querySelectorAll('.team-item')];
+            const dragIdx = items.indexOf(teamDragItem);
+            const dropIdx = items.indexOf(target);
+            
+            if (dragIdx < dropIdx) {
+                target.after(teamDragItem);
+            } else {
+                target.before(teamDragItem);
+            }
+            
+            teamDragItem.style.opacity = '1';
+            document.querySelectorAll('#teamList .team-item').forEach(el => {
+                el.style.borderColor = '#e0e0e0';
+            });
+            
+            saveTeamOrder();
+            teamDragItem = null;
+        }
+        
+        async function addTeamLid() {
+            const slugInput = document.getElementById('newTeamSlug');
+            const nameInput = document.getElementById('newTeamName');
+            const posSelect = document.getElementById('newTeamPosition');
+            const slug = (slugInput.value || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+            const name = (nameInput.value || '').trim();
+            const position = posSelect ? posSelect.value : 'end';
+            
+            if (!slug) { alert('Vul een slug in (bv. lies)'); return; }
+            if (!name) { alert('Vul een naam in (bv. Juf Lies)'); return; }
+            if (contentData[`lid-${slug}-name`]) { alert('Deze slug bestaat al!'); return; }
+            
+            const orderedSlugs = getOrderedTeamSlugs();
+            let insertIdx;
+            if (position === 'start') {
+                insertIdx = 0;
+            } else if (position === 'end') {
+                insertIdx = orderedSlugs.length;
+            } else if (position.startsWith('after-')) {
+                const afterSlug = position.replace('after-', '');
+                insertIdx = orderedSlugs.indexOf(afterSlug) + 1;
+                if (insertIdx === 0) insertIdx = orderedSlugs.length;
+            } else {
+                insertIdx = orderedSlugs.length;
+            }
+            
+            orderedSlugs.splice(insertIdx, 0, slug);
+            const updates = {};
+            for (let i = 0; i < orderedSlugs.length; i++) {
+                updates[`lid-${orderedSlugs[i]}-order`] = { value: String(i + 1), type: 'text' };
+            }
+            
+            updates[`lid-${slug}-name`] = { value: name, type: 'text' };
+            updates[`lid-${slug}-role`] = { value: '', type: 'text' };
+            updates[`lid-${slug}-bio`] = { value: '', type: 'text' };
+            updates[`lid-${slug}-photo`] = { value: '', type: 'image' };
+            
+            showStatus('Teamlid toevoegen...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: updates })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Teamlid toegevoegd', 'saved');
+                    Object.assign(contentData, updates);
+                    renderEditor(currentPage, contentData);
+                } else {
+                    showStatus('Fout bij toevoegen', 'error');
+                }
+            } catch (e) {
+                showStatus('Fout bij toevoegen', 'error');
+            }
+        }
+        
+        async function removeTeamLid(slug) {
+            const name = (contentData[`lid-${slug}-name`] || {}).value || slug;
+            if (!confirm(`"${name}" verwijderen?`)) return;
+            
+            const keysToRemove = [`lid-${slug}-name`, `lid-${slug}-role`, `lid-${slug}-bio`, `lid-${slug}-photo`, `lid-${slug}-order`];
+            const updates = {};
+            for (const k of keysToRemove) {
+                updates[k] = { value: '', type: 'text' };
+            }
+            
+            showStatus('Teamlid verwijderen...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: updates })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Teamlid verwijderd', 'saved');
                     loadContent(currentPage);
                 } else {
                     showStatus('Fout bij verwijderen', 'error');

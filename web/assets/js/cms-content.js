@@ -192,6 +192,26 @@
             document.dispatchEvent(new CustomEvent('cms-klassen-ready', { detail: klassen }));
         }
         
+        // Collect team member data and dispatch event for team rendering
+        const teamleden = {};
+        for (const [key, data] of Object.entries(content)) {
+            const lidMatch = key.match(/^lid-(.+)-(name|role|bio|photo|order)$/);
+            if (lidMatch) {
+                let val = data;
+                if (data && typeof data === 'object' && data.value !== undefined) val = data.value;
+                if (typeof val === 'string' && val.trim() !== '' && val !== '[object Object]') {
+                    const slug = lidMatch[1];
+                    const field = lidMatch[2];
+                    if (!teamleden[slug]) teamleden[slug] = {};
+                    teamleden[slug][field] = val;
+                }
+            }
+        }
+        if (Object.keys(teamleden).length > 0) {
+            window._cmsTeam = teamleden;
+            document.dispatchEvent(new CustomEvent('cms-team-ready', { detail: teamleden }));
+        }
+        
         // Collect document data and dispatch event for document rendering
         const documents = {};
         for (const [key, data] of Object.entries(content)) {
