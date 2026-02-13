@@ -1204,17 +1204,13 @@
                         
                         html += `<div class="klas-item" data-klas-slug="${slug}" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 16px; background: #fafafa;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <strong style="font-size: 15px;">${nameVal || slug}</strong>
-                                <div style="display: flex; gap: 8px; align-items: center;">
-                                    <label style="font-size: 12px; color: #666;">Volgorde:</label>
-                                    <input type="number" value="${orderVal}" style="width: 50px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px;" oninput="scheduleAutoSave('klas-${slug}-order', this.value, 'text')">
-                                    <button type="button" onclick="removeKlas('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
-                                </div>
+                                <strong id="klas-title-${slug}" style="font-size: 15px;">${nameVal || slug}</strong>
+                                <button type="button" onclick="removeKlas('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                                 <div class="content-field">
                                     <label>Klasnaam</label>
-                                    <input type="text" id="klas-${slug}-name" data-key="klas-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('klas-${slug}-name', this.value, 'text')" placeholder="bv. Klas 1A">
+                                    <input type="text" id="klas-${slug}-name" data-key="klas-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('klas-${slug}-name', this.value, 'text'); document.getElementById('klas-title-${slug}').textContent = this.value || '${slug}';" placeholder="bv. Klas 1A">
                                 </div>
                                 <div class="content-field">
                                     <label>Leerkracht</label>
