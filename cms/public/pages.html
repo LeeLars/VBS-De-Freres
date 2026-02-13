@@ -806,11 +806,7 @@
                     'Missie': ['mission-title', 'mission-text', 'mission-img'],
                     'Sfeerbeelden': ['sfeer-img-1', 'sfeer-img-2'],
                     'Aanpak': ['approach-title', 'approach-img', 'approach-1-title', 'approach-1-text', 'approach-2-title', 'approach-2-text', 'approach-3-title', 'approach-3-text'],
-                    'Document 1': ['doc-1-title', 'doc-1-desc', 'doc-1-link'],
-                    'Document 2': ['doc-2-title', 'doc-2-desc', 'doc-2-link'],
-                    'Document 3': ['doc-3-title', 'doc-3-desc', 'doc-3-link'],
-                    'Document 4': ['doc-4-title', 'doc-4-desc', 'doc-4-link'],
-                    'Document 5': ['doc-5-title', 'doc-5-desc', 'doc-5-link']
+                    '__documents__': []
                 };
             } else if (pageSlug === 'klassen') {
                 sections = {
@@ -1102,6 +1098,75 @@
                     continue;
                 }
                 
+                // Dynamic documents section
+                if (sectionName === '__documents__') {
+                    // Count existing documents by scanning content keys
+                    let docCount = 0;
+                    for (const k of Object.keys(content)) {
+                        const m = k.match(/^doc-(\d+)-title$/);
+                        if (m) {
+                            const n = parseInt(m[1]);
+                            if (n > docCount) docCount = n;
+                        }
+                    }
+                    
+                    html += `<div class="content-group" id="documentsSection">
+                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Documenten (${docCount})</h3>
+                        <div class="content-group-body">
+                        <div id="documentsList">`;
+                    
+                    for (let i = 1; i <= docCount; i++) {
+                        const titleKey = `doc-${i}-title`;
+                        const descKey = `doc-${i}-desc`;
+                        const linkKey = `doc-${i}-link`;
+                        const titleVal = (content[titleKey] || {}).value || '';
+                        const descVal = (content[descKey] || {}).value || '';
+                        const linkVal = (content[linkKey] || {}).value || '';
+                        
+                        html += `<div class="document-item" data-doc-index="${i}" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 16px; background: #fafafa;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <strong style="font-size: 15px;">Document ${i}</strong>
+                                <button type="button" onclick="removeDocument(${i})" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
+                            </div>
+                            <div class="content-field" style="margin-bottom: 12px;">
+                                <label for="${titleKey}">Titel</label>
+                                <input type="text" id="${titleKey}" data-key="${titleKey}" value="${titleVal}" oninput="scheduleAutoSave('${titleKey}', this.value, 'text')">
+                            </div>
+                            <div class="content-field" style="margin-bottom: 12px;">
+                                <label for="${descKey}">Beschrijving</label>
+                                <input type="text" id="${descKey}" data-key="${descKey}" value="${descVal}" oninput="scheduleAutoSave('${descKey}', this.value, 'text')">
+                            </div>
+                            <div class="content-field">
+                                <label for="${linkKey}">PDF Bestand</label>
+                                <input type="hidden" id="${linkKey}" data-key="${linkKey}" data-type="text" value="${linkVal}">
+                                <div class="pdf-upload-zone" id="pdfZone-${linkKey}">
+                                    <input type="file" id="pdfInput-${linkKey}" accept=".pdf,application/pdf" hidden data-field-key="${linkKey}">
+                                    <div class="pdf-dropzone" id="pdfDrop-${linkKey}" onclick="document.getElementById('pdfInput-${linkKey}').click()">
+                                        <div class="upload-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a8cf8c" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        </div>
+                                        <div class="upload-label">Upload PDF</div>
+                                        <div class="upload-hint">Klik of sleep een PDF hierheen</div>
+                                    </div>
+                                    <span class="pdf-upload-status" id="pdfStatus-${linkKey}"></span>
+                                </div>
+                                <div class="pdf-current" id="pdfCurrent-${linkKey}" style="${linkVal ? '' : 'display:none;'}">
+                                    <a href="${linkVal}" target="_blank" class="pdf-link">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        <span id="pdfName-${linkKey}">${linkVal ? decodeURIComponent(linkVal.split('/').pop()) : ''}</span>
+                                    </a>
+                                    <button type="button" class="btn-clear-media" onclick="clearPdf('${linkKey}')">Verwijderen</button>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                    
+                    html += `</div>
+                        <button type="button" onclick="addDocument()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; margin-top: 8px;">+ Document toevoegen</button>
+                        </div></div>`;
+                    continue;
+                }
+                
                 html += `<div class="content-group"><h3 onclick="this.parentElement.classList.toggle('collapsed')">${sectionName}</h3><div class="content-group-body">`;
                 
                 for (const key of keys) {
@@ -1351,6 +1416,106 @@
             const currentDiv = document.getElementById('pdfCurrent-' + fieldKey);
             if (currentDiv) currentDiv.style.display = 'none';
             autoSaveField(fieldKey, '', 'text');
+        }
+        
+        // ===== Dynamic Documents =====
+        async function addDocument() {
+            // Find next available doc number
+            let maxDoc = 0;
+            for (const k of Object.keys(contentData)) {
+                const m = k.match(/^doc-(\d+)-title$/);
+                if (m) maxDoc = Math.max(maxDoc, parseInt(m[1]));
+            }
+            const newNum = maxDoc + 1;
+            
+            // Save empty keys to backend
+            const newKeys = {
+                [`doc-${newNum}-title`]: { value: 'Nieuw document', type: 'text' },
+                [`doc-${newNum}-desc`]: { value: 'Beschrijving', type: 'text' },
+                [`doc-${newNum}-link`]: { value: '', type: 'text' }
+            };
+            
+            showStatus('Document toevoegen...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: newKeys })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Document toegevoegd', 'saved');
+                    // Update local data and re-render
+                    Object.assign(contentData, newKeys);
+                    renderEditor(currentPage, contentData);
+                } else {
+                    showStatus('Fout bij toevoegen', 'error');
+                }
+            } catch (e) {
+                showStatus('Fout bij toevoegen', 'error');
+            }
+        }
+        
+        async function removeDocument(docNum) {
+            if (!confirm(`Document ${docNum} verwijderen?`)) return;
+            
+            // Find all doc numbers
+            const docNums = [];
+            for (const k of Object.keys(contentData)) {
+                const m = k.match(/^doc-(\d+)-title$/);
+                if (m) docNums.push(parseInt(m[1]));
+            }
+            docNums.sort((a, b) => a - b);
+            
+            // Remove the target doc keys by setting them empty, then shift higher docs down
+            showStatus('Document verwijderen...', 'saving');
+            try {
+                const updates = {};
+                
+                // Clear the removed doc
+                updates[`doc-${docNum}-title`] = { value: '', type: 'text' };
+                updates[`doc-${docNum}-desc`] = { value: '', type: 'text' };
+                updates[`doc-${docNum}-link`] = { value: '', type: 'text' };
+                
+                // Shift all docs above docNum down by 1
+                const higherDocs = docNums.filter(n => n > docNum).sort((a, b) => a - b);
+                for (const n of higherDocs) {
+                    const newN = n - 1;
+                    updates[`doc-${newN}-title`] = { value: (contentData[`doc-${n}-title`] || {}).value || '', type: 'text' };
+                    updates[`doc-${newN}-desc`] = { value: (contentData[`doc-${n}-desc`] || {}).value || '', type: 'text' };
+                    updates[`doc-${newN}-link`] = { value: (contentData[`doc-${n}-link`] || {}).value || '', type: 'text' };
+                }
+                
+                // Clear the last doc slot (now empty after shift)
+                const lastNum = Math.max(...docNums);
+                if (higherDocs.length > 0) {
+                    updates[`doc-${lastNum}-title`] = { value: '', type: 'text' };
+                    updates[`doc-${lastNum}-desc`] = { value: '', type: 'text' };
+                    updates[`doc-${lastNum}-link`] = { value: '', type: 'text' };
+                }
+                
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: updates })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Document verwijderd', 'saved');
+                    // Reload content to get fresh state
+                    loadContent(currentPage);
+                } else {
+                    showStatus('Fout bij verwijderen', 'error');
+                }
+            } catch (e) {
+                showStatus('Fout bij verwijderen', 'error');
+            }
         }
         
         // Resize image client-side before upload (max 2000px, JPEG 80%)

@@ -156,6 +156,26 @@
             });
         }
         
+        // Collect document data and dispatch event for document rendering
+        const documents = {};
+        for (const [key, data] of Object.entries(content)) {
+            const docMatch = key.match(/^doc-(\d+)-(title|desc|link)$/);
+            if (docMatch) {
+                let val = data;
+                if (data && typeof data === 'object' && data.value !== undefined) val = data.value;
+                if (typeof val === 'string' && val.trim() !== '' && val !== '[object Object]') {
+                    const num = docMatch[1];
+                    const field = docMatch[2];
+                    if (!documents[num]) documents[num] = {};
+                    documents[num][field] = val;
+                }
+            }
+        }
+        if (Object.keys(documents).length > 0) {
+            window._cmsDocuments = documents;
+            document.dispatchEvent(new CustomEvent('cms-documents-ready', { detail: documents }));
+        }
+        
         // Collect gallery image URLs and dispatch event for gallery scripts
         const galleryUrls = {};
         for (const [key, data] of Object.entries(content)) {
