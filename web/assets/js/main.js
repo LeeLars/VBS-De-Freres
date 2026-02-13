@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Contact CTA active state
     const ctaLink = document.querySelector('.nav-cta');
     if (ctaLink && path.includes('/contact/')) {
-        ctaLink.style.background = '#166534';
+        ctaLink.style.background = '#a8cf8c';
         ctaLink.style.color = '#fff';
     }
 });
