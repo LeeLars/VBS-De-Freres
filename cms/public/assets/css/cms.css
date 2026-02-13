@@ -40,7 +40,7 @@ body {
 
 .cms-logo h2 {
     color: #a8cf8c;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     margin-bottom: 2px;
     letter-spacing: -0.02em;
@@ -64,12 +64,12 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 9px 12px;
+    padding: 10px 14px;
     color: rgba(255,255,255,0.65);
     text-decoration: none;
     transition: all 0.12s;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     border-left: none;
 }
@@ -143,7 +143,7 @@ body {
 }
 
 .cms-header h1 {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     color: #1a1a1a;
     letter-spacing: -0.02em;
@@ -154,9 +154,9 @@ body {
     background: #a8cf8c;
     color: #1a1a1a;
     border: none;
-    padding: 9px 20px;
+    padding: 10px 22px;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.12s;
@@ -170,9 +170,9 @@ body {
     background: #f0f7eb;
     color: #5a8a3c;
     border: none;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 7px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.12s;
@@ -187,9 +187,9 @@ body {
     background: transparent;
     color: #666;
     border: 1.5px solid #e0e0e0;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 7px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.12s;
@@ -274,7 +274,7 @@ body {
 }
 
 .content-card h3 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 4px;
     color: #1a1a1a;
@@ -283,7 +283,7 @@ body {
 .content-card p {
     color: #888;
     margin-bottom: 14px;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.4;
 }
 
@@ -369,7 +369,7 @@ body {
 }
 
 .upload-box h3 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 4px;
     color: #1a1a1a;
@@ -515,7 +515,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 6px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #666;
     text-transform: uppercase;
@@ -524,10 +524,10 @@ body {
 
 .form-input {
     width: 100%;
-    padding: 9px 12px;
+    padding: 10px 14px;
     border: 1.5px solid #e8e8e8;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-family: inherit;
     transition: all 0.12s;
     background: #fafafa;
