@@ -365,25 +365,54 @@
         }
         
         .media-picker-item {
+            position: relative;
             aspect-ratio: 1;
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
             border: 3px solid transparent;
-            transition: all 0.2s ease;
+            transition: border-color 0.2s ease;
             min-width: 0;
             max-width: 100%;
         }
         
         .media-picker-item:hover {
             border-color: #a8cf8c;
-            transform: scale(1.03);
         }
         
         .media-picker-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
+        }
+        
+        .media-picker-item .media-delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 13px;
+            cursor: pointer;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .media-picker-item:hover .media-delete-btn {
+            opacity: 1;
         }
         
         .image-field-preview {
@@ -418,6 +447,14 @@
             font-size: 12px;
             font-style: italic;
             border-style: dashed;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .image-field-preview.empty:hover {
+            border-color: #a8cf8c;
+            color: #a8cf8c;
+            background: #f5faf0;
         }
         
         .btn-pick-media {
@@ -1322,7 +1359,7 @@
                                         <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-photo')">Kies afbeelding</button>
                                         ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-photo')">Verwijderen</button>` : ''}
                                     </div>
-                                    <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-klas-${slug}-photo">
+                                    <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-klas-${slug}-photo" onclick="if(this.classList.contains('empty')) openMediaPicker('klas-${slug}-photo')">
                                         ${photoVal ? `<img src="${photoVal}">` : 'Geen afbeelding'}
                                     </div>
                                 </div>
@@ -1333,7 +1370,7 @@
                                         <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-tphoto')">Kies afbeelding</button>
                                         ${tphotoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-tphoto')">Verwijderen</button>` : ''}
                                     </div>
-                                    <div class="image-field-preview ${tphotoVal ? '' : 'empty'}" id="preview-klas-${slug}-tphoto">
+                                    <div class="image-field-preview ${tphotoVal ? '' : 'empty'}" id="preview-klas-${slug}-tphoto" onclick="if(this.classList.contains('empty')) openMediaPicker('klas-${slug}-tphoto')">
                                         ${tphotoVal ? `<img src="${tphotoVal}">` : 'Geen afbeelding'}
                                     </div>
                                 </div>
@@ -1417,7 +1454,7 @@
                                     <button type="button" class="btn-pick-media" onclick="openMediaPicker('lid-${slug}-photo')">Kies afbeelding</button>
                                     ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('lid-${slug}-photo')">Verwijderen</button>` : ''}
                                 </div>
-                                <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-lid-${slug}-photo">
+                                <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-lid-${slug}-photo" onclick="if(this.classList.contains('empty')) openMediaPicker('lid-${slug}-photo')">
                                     ${photoVal ? `<img src="${photoVal}">` : 'Geen afbeelding'}
                                 </div>
                             </div>
@@ -1491,7 +1528,7 @@
                                 <button type="button" class="btn-pick-media" onclick="openMediaPicker('${key}')">Kies afbeelding</button>
                                 ${value ? `<button type="button" class="btn-clear-media" onclick="clearImage('${key}')">Verwijderen</button>` : ''}
                             </div>
-                            <div class="image-field-preview ${value ? '' : 'empty'}" id="preview-${key}">
+                            <div class="image-field-preview ${value ? '' : 'empty'}" id="preview-${key}" onclick="if(this.classList.contains('empty')) openMediaPicker('${key}')">
                                 ${value ? `<img src="${value}">` : 'Geen afbeelding geselecteerd'}
                             </div>
                          `;
@@ -2344,9 +2381,9 @@
                     const images = result.media.filter(item => item.format !== 'pdf' && !item.filename.endsWith('.pdf'));
                     if (images.length > 0) {
                     grid.innerHTML = images.map(item => `
-                        <div class="media-picker-item" style="position:relative;">
-                            <img src="${item.url}" alt="${item.filename}" onclick="selectMedia('${item.url}')">
-                            <button type="button" onclick="event.stopPropagation(); deleteMedia(${item.id})" style="position:absolute;top:4px;right:4px;background:#ff6b6b;color:#fff;border:none;border-radius:50%;width:24px;height:24px;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>
+                        <div class="media-picker-item" onclick="selectMedia('${item.url}')">
+                            <img src="${item.url}" alt="${item.filename}">
+                            <button type="button" class="media-delete-btn" onclick="event.stopPropagation(); deleteMedia(${item.id})">&times;</button>
                         </div>
                     `).join('');
                     } else {
@@ -2451,6 +2488,7 @@
                 if (preview) {
                     preview.className = 'image-field-preview empty';
                     preview.innerHTML = 'Geen afbeelding geselecteerd';
+                    preview.onclick = function() { if (this.classList.contains('empty')) openMediaPicker(fieldKey); };
                 }
                 const btnContainer = input.nextElementSibling;
                 const clearBtn = btnContainer ? btnContainer.querySelector('.btn-clear-media') : null;
