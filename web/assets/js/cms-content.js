@@ -168,6 +168,26 @@
             });
         }
         
+        // Collect klassen data and dispatch event for klassen rendering
+        const klassen = {};
+        for (const [key, data] of Object.entries(content)) {
+            const klasMatch = key.match(/^klas-(.+)-(name|teacher|text|photo|tphoto|blog|order)$/);
+            if (klasMatch) {
+                let val = data;
+                if (data && typeof data === 'object' && data.value !== undefined) val = data.value;
+                if (typeof val === 'string' && val.trim() !== '' && val !== '[object Object]') {
+                    const slug = klasMatch[1];
+                    const field = klasMatch[2];
+                    if (!klassen[slug]) klassen[slug] = {};
+                    klassen[slug][field] = val;
+                }
+            }
+        }
+        if (Object.keys(klassen).length > 0) {
+            window._cmsKlassen = klassen;
+            document.dispatchEvent(new CustomEvent('cms-klassen-ready', { detail: klassen }));
+        }
+        
         // Collect document data and dispatch event for document rendering
         const documents = {};
         for (const [key, data] of Object.entries(content)) {

@@ -813,23 +813,8 @@
                 sections = {
                     'Hero': ['hero-title', 'hero-text'],
                     'Lager Overzicht': ['lager-title', 'lager-subtitle'],
-                    '1ste Leerjaar': ['1-item-1', '1-item-2', '1-item-3'],
-                    '2de Leerjaar': ['2-item-1', '2-item-2', '2-item-3'],
-                    '3de Leerjaar': ['3-item-1', '3-item-2', '3-item-3'],
-                    '4de Leerjaar': ['4-item-1', '4-item-2', '4-item-3'],
-                    '5de Leerjaar': ['5-item-1', '5-item-2', '5-item-3'],
-                    '6de Leerjaar': ['6-item-1', '6-item-2', '6-item-3'],
                     'Extra Aanbod': ['extra-title', 'extra-text'],
-                    'Klas 1A': ['1a-teacher-name', '1a-text', '1a-photo', '1a-teacher-photo'],
-                    'Klas 2A': ['2a-teacher-name', '2a-text', '2a-photo', '2a-teacher-photo'],
-                    'Klas 3A': ['3a-teacher-name', '3a-text', '3a-photo', '3a-teacher-photo'],
-                    'Klas 3B': ['3b-teacher-name', '3b-text', '3b-photo', '3b-teacher-photo'],
-                    'Klas 4A': ['4a-teacher-name', '4a-text', '4a-photo', '4a-teacher-photo'],
-                    'Klas 4B': ['4b-teacher-name', '4b-text', '4b-photo', '4b-teacher-photo'],
-                    'Klas 5A': ['5a-teacher-name', '5a-text', '5a-photo', '5a-teacher-photo'],
-                    'Klas 6A': ['6a-teacher-name', '6a-text', '6a-photo', '6a-teacher-photo'],
-                    'Talenklas': ['talen-teacher-name', 'talen-text', 'talen-photo', 'talen-teacher-photo'],
-                    'Sport': ['sport-teacher-name', 'sport-text', 'sport-photo', 'sport-teacher-photo'],
+                    '__klassen__': [],
                     'CTA Sectie': ['cta-title', 'cta-text']
                 };
             } else if (pageSlug === 'team') {
@@ -1164,6 +1149,100 @@
                     
                     html += `</div>
                         <button type="button" onclick="addDocument()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; margin-top: 8px;">+ Document toevoegen</button>
+                        </div></div>`;
+                    continue;
+                }
+                
+                // Dynamic klassen section
+                if (sectionName === '__klassen__') {
+                    // Discover klassen by scanning for klas-{slug}-name keys
+                    const klasSlugs = [];
+                    for (const k of Object.keys(content)) {
+                        const m = k.match(/^klas-(.+)-name$/);
+                        if (m) klasSlugs.push(m[1]);
+                    }
+                    // Sort by order key if present, otherwise alphabetically
+                    klasSlugs.sort((a, b) => {
+                        const oa = parseInt((content[`klas-${a}-order`] || {}).value) || 999;
+                        const ob = parseInt((content[`klas-${b}-order`] || {}).value) || 999;
+                        return oa - ob;
+                    });
+                    
+                    html += `<div class="content-group" id="klassenSection">
+                        <h3 onclick="this.parentElement.classList.toggle('collapsed')">Klassen (${klasSlugs.length})</h3>
+                        <div class="content-group-body">
+                        <div id="klassenList">`;
+                    
+                    for (let i = 0; i < klasSlugs.length; i++) {
+                        const slug = klasSlugs[i];
+                        const nameVal = (content[`klas-${slug}-name`] || {}).value || '';
+                        const teacherVal = (content[`klas-${slug}-teacher`] || {}).value || '';
+                        const textVal = (content[`klas-${slug}-text`] || {}).value || '';
+                        const photoVal = (content[`klas-${slug}-photo`] || {}).value || '';
+                        const tphotoVal = (content[`klas-${slug}-tphoto`] || {}).value || '';
+                        const blogVal = (content[`klas-${slug}-blog`] || {}).value || '';
+                        const orderVal = (content[`klas-${slug}-order`] || {}).value || String(i + 1);
+                        
+                        html += `<div class="klas-item" data-klas-slug="${slug}" style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 16px; background: #fafafa;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <strong style="font-size: 15px;">${nameVal || slug}</strong>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <label style="font-size: 12px; color: #666;">Volgorde:</label>
+                                    <input type="number" value="${orderVal}" style="width: 50px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px;" oninput="scheduleAutoSave('klas-${slug}-order', this.value, 'text')">
+                                    <button type="button" onclick="removeKlas('${slug}')" style="background: #ff6b6b; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-weight: 600;">Verwijderen</button>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <div class="content-field">
+                                    <label>Klasnaam</label>
+                                    <input type="text" id="klas-${slug}-name" data-key="klas-${slug}-name" value="${nameVal}" oninput="scheduleAutoSave('klas-${slug}-name', this.value, 'text')" placeholder="bv. Klas 1A">
+                                </div>
+                                <div class="content-field">
+                                    <label>Leerkracht</label>
+                                    <input type="text" id="klas-${slug}-teacher" data-key="klas-${slug}-teacher" value="${teacherVal}" oninput="scheduleAutoSave('klas-${slug}-teacher', this.value, 'text')" placeholder="bv. juf Lies">
+                                </div>
+                            </div>
+                            <div class="content-field" style="margin-top: 12px;">
+                                <label>Beschrijving</label>
+                                <textarea id="klas-${slug}-text" data-key="klas-${slug}-text" oninput="scheduleAutoSave('klas-${slug}-text', this.value, 'text')" rows="3">${textVal}</textarea>
+                            </div>
+                            <div class="content-field" style="margin-top: 12px;">
+                                <label>Klasblog URL</label>
+                                <input type="text" id="klas-${slug}-blog" data-key="klas-${slug}-blog" value="${blogVal}" oninput="scheduleAutoSave('klas-${slug}-blog', this.value, 'text')" placeholder="bv. /nl/klas-1a">
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+                                <div class="content-field">
+                                    <label>Klasfoto</label>
+                                    <input type="hidden" id="klas-${slug}-photo" data-key="klas-${slug}-photo" data-type="image" value="${photoVal}">
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-photo')">Kies afbeelding</button>
+                                        ${photoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-photo')">Verwijderen</button>` : ''}
+                                    </div>
+                                    <div class="image-field-preview ${photoVal ? '' : 'empty'}" id="preview-klas-${slug}-photo">
+                                        ${photoVal ? `<img src="${photoVal}">` : 'Geen afbeelding'}
+                                    </div>
+                                </div>
+                                <div class="content-field">
+                                    <label>Leerkracht foto</label>
+                                    <input type="hidden" id="klas-${slug}-tphoto" data-key="klas-${slug}-tphoto" data-type="image" value="${tphotoVal}">
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <button type="button" class="btn-pick-media" onclick="openMediaPicker('klas-${slug}-tphoto')">Kies afbeelding</button>
+                                        ${tphotoVal ? `<button type="button" class="btn-clear-media" onclick="clearImage('klas-${slug}-tphoto')">Verwijderen</button>` : ''}
+                                    </div>
+                                    <div class="image-field-preview ${tphotoVal ? '' : 'empty'}" id="preview-klas-${slug}-tphoto">
+                                        ${tphotoVal ? `<img src="${tphotoVal}">` : 'Geen afbeelding'}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                    
+                    html += `</div>
+                        <div style="display: flex; gap: 12px; margin-top: 8px; align-items: center;">
+                            <input type="text" id="newKlasSlug" placeholder="Slug (bv. 2b)" style="padding: 10px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 120px;">
+                            <input type="text" id="newKlasName" placeholder="Naam (bv. Klas 2B)" style="padding: 10px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; flex: 1;">
+                            <button type="button" onclick="addKlas()" style="background: #a8cf8c; color: #000; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;">+ Klas toevoegen</button>
+                        </div>
                         </div></div>`;
                     continue;
                 }
@@ -1510,6 +1589,89 @@
                 if (result.success) {
                     showStatus('Document verwijderd', 'saved');
                     // Reload content to get fresh state
+                    loadContent(currentPage);
+                } else {
+                    showStatus('Fout bij verwijderen', 'error');
+                }
+            } catch (e) {
+                showStatus('Fout bij verwijderen', 'error');
+            }
+        }
+        
+        // ===== Dynamic Klassen =====
+        async function addKlas() {
+            const slugInput = document.getElementById('newKlasSlug');
+            const nameInput = document.getElementById('newKlasName');
+            const slug = (slugInput.value || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+            const name = (nameInput.value || '').trim();
+            
+            if (!slug) { alert('Vul een slug in (bv. 2b)'); return; }
+            if (!name) { alert('Vul een naam in (bv. Klas 2B)'); return; }
+            if (contentData[`klas-${slug}-name`]) { alert('Deze slug bestaat al!'); return; }
+            
+            // Find max order
+            let maxOrder = 0;
+            for (const k of Object.keys(contentData)) {
+                const m = k.match(/^klas-(.+)-order$/);
+                if (m) maxOrder = Math.max(maxOrder, parseInt((contentData[k] || {}).value) || 0);
+            }
+            
+            const newKeys = {
+                [`klas-${slug}-name`]: { value: name, type: 'text' },
+                [`klas-${slug}-teacher`]: { value: '', type: 'text' },
+                [`klas-${slug}-text`]: { value: '', type: 'text' },
+                [`klas-${slug}-photo`]: { value: '', type: 'image' },
+                [`klas-${slug}-tphoto`]: { value: '', type: 'image' },
+                [`klas-${slug}-blog`]: { value: '', type: 'text' },
+                [`klas-${slug}-order`]: { value: String(maxOrder + 1), type: 'text' }
+            };
+            
+            showStatus('Klas toevoegen...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: newKeys })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Klas toegevoegd', 'saved');
+                    Object.assign(contentData, newKeys);
+                    renderEditor(currentPage, contentData);
+                } else {
+                    showStatus('Fout bij toevoegen', 'error');
+                }
+            } catch (e) {
+                showStatus('Fout bij toevoegen', 'error');
+            }
+        }
+        
+        async function removeKlas(slug) {
+            const name = (contentData[`klas-${slug}-name`] || {}).value || slug;
+            if (!confirm(`"${name}" verwijderen?`)) return;
+            
+            const keysToRemove = [`klas-${slug}-name`, `klas-${slug}-teacher`, `klas-${slug}-text`, `klas-${slug}-photo`, `klas-${slug}-tphoto`, `klas-${slug}-blog`, `klas-${slug}-order`];
+            const updates = {};
+            for (const k of keysToRemove) {
+                updates[k] = { value: '', type: 'text' };
+            }
+            
+            showStatus('Klas verwijderen...', 'saving');
+            try {
+                const response = await fetch(`/api/content/${currentPage}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + (sessionStorage.getItem('cmsToken') || '')
+                    },
+                    body: JSON.stringify({ content: updates })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showStatus('Klas verwijderd', 'saved');
                     loadContent(currentPage);
                 } else {
                     showStatus('Fout bij verwijderen', 'error');

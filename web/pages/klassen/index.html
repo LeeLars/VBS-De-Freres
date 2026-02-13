@@ -117,27 +117,10 @@
                             </ul>
                         </div>
 
-                        <!-- Lager Onderwijs -->
-                        <div style="margin-bottom: 32px;">
+                        <!-- Lager Onderwijs (dynamisch) -->
+                        <div id="dynamicKlassenNav" style="margin-bottom: 32px;">
                             <h4 style="font-size: 14px; font-weight: 600; color: #666; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">Lager Onderwijs</h4>
-                            <ul class="class-nav-list" style="list-style: none; margin: 0; padding: 0;">
-                                <li><a href="#" class="class-nav-link" data-class="1a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 1A - juf Lies / meester Simon</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="2a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 2A - juf Stefanie</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="3a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 3A - juf Melissa</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="3b" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 3B - juf Aurelie</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="4a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 4A - juf Emma</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="4b" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 4B - juf Tine</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="5a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 5A - juf Anneke</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="6a" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Klas 6A - juf Kelly</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Extra -->
-                        <div>
-                            <h4 style="font-size: 14px; font-weight: 600; color: #666; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">Extra</h4>
-                            <ul class="class-nav-list" style="list-style: none; margin: 0; padding: 0;">
-                                <li><a href="#" class="class-nav-link" data-class="talen" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Talenklas</a></li>
-                                <li><a href="#" class="class-nav-link" data-class="sport" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">Sport</a></li>
+                            <ul class="class-nav-list" id="lagerNavList" style="list-style: none; margin: 0; padding: 0;">
                             </ul>
                         </div>
                     </aside>
@@ -271,341 +254,91 @@
                         </div>
                     </div>
 
-                    <!-- Klas 1A Details -->
-                    <div class="class-detail" data-class="1a" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 1A - juf Lies / meester Simon</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-1a-text">
-                                        Het eerste leerjaar! Een spannend jaar vol nieuwe ontdekkingen. Leren lezen, schrijven en rekenen. Juf Lies en meester Simon begeleiden de kinderen met veel enthousiasme.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-1a-teacher-photo" src="" alt="juf Lies / meester Simon" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-1a-teacher-name">juf Lies / meester Simon</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <!-- Dynamic klassen detail cards (rendered by JS) -->
+                    <div id="dynamicKlassenDetails"></div>
 
-                                    <a href="/nl/klas-1a" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-1a-photo" src="" alt="Klas 1A" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 2A Details -->
-                    <div class="class-detail" data-class="2a" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 2A - juf Stefanie</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-2a-text">
-                                        In het tweede leerjaar bouwen we verder op de basis. Lezen wordt vlotter, rekenen uitdagender en de kinderen worden steeds zelfstandiger. Juf Stefanie zorgt voor een fijne leeromgeving.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-2a-teacher-photo" src="" alt="juf Stefanie" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-2a-teacher-name">juf Stefanie</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-2b" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-2a-photo" src="" alt="Klas 2A" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 3A Details -->
-                    <div class="class-detail" data-class="3a" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 3A - juf Melissa</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-3a-text">
-                                        Het derde leerjaar brengt nieuwe uitdagingen. Meer zelfstandig werken, complexere opdrachten en nieuwe vakken. Juf Melissa begeleidt de kinderen met veel passie.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-3a-teacher-photo" src="" alt="juf Melissa" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-3a-teacher-name">juf Melissa</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-1a-2" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-3a-photo" src="" alt="Klas 3A" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 3B Details -->
-                    <div class="class-detail" data-class="3b" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 3B - juf Aurelie</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-3b-text">
-                                        In klas 3B leren de kinderen steeds meer zelfstandig te werken. Projecten, groepswerk en nieuwe leerstof maken het een uitdagend jaar. Juf Aurelie stimuleert elk kind om het beste uit zichzelf te halen.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-3b-teacher-photo" src="" alt="juf Aurelie" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-3b-teacher-name">juf Aurelie</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-2a" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-3b-photo" src="" alt="Klas 3B" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 4A Details -->
-                    <div class="class-detail" data-class="4a" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 4A - juf Emma</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-4a-text">
-                                        Het vierde leerjaar is een belangrijk jaar. De kinderen worden voorbereid op de bovenbouw en leren steeds meer verantwoordelijkheid te nemen. Juf Emma daagt hen uit om verder te groeien.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-4a-teacher-photo" src="" alt="juf Emma" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-4a-teacher-name">juf Emma</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-4a" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-4a-photo" src="" alt="Klas 4A" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 4B Details -->
-                    <div class="class-detail" data-class="4b" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 4B - juf Tine</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-4b-text">
-                                        In klas 4B werken we aan zelfstandigheid en kritisch denken. De kinderen leren complexe problemen op te lossen en samen te werken. Juf Tine creëert een stimulerende leeromgeving.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-4b-teacher-photo" src="" alt="juf Tine" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-4b-teacher-name">juf Tine</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-3b" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-4b-photo" src="" alt="Klas 4B" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 5A Details -->
-                    <div class="class-detail" data-class="5a" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 5A - juf Anneke</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-5a-text">
-                                        Het vijfde leerjaar! De kinderen worden voorbereid op het laatste jaar van de lagere school. Meer verantwoordelijkheid, uitdagende projecten en voorbereiding op het secundair. Juf Anneke begeleidt hen met expertise.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-5a-teacher-photo" src="" alt="juf Anneke" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-5a-teacher-name">juf Anneke</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-6a" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-5a-photo" src="" alt="Klas 5A" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Klas 6A Details -->
-                    <div class="class-detail" data-class="6a" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Klas 6A - juf Kelly</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-6a-text">
-                                        Het laatste jaar van de lagere school! Een bijzonder jaar vol mooie momenten en voorbereiding op het secundair onderwijs. Juf Kelly maakt er samen met de kinderen een onvergetelijk jaar van.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-6a-teacher-photo" src="" alt="juf Kelly" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-6a-teacher-name">juf Kelly</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/klas-6b" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-6a-photo" src="" alt="Klas 6A" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Talenklas Details -->
-                    <div class="class-detail" data-class="talen" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Talenklas</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-talen-text">
-                                        In onze talenklas krijgen kinderen extra ondersteuning in meertaligheid. We werken aan taaluitbreiding en taalverrijking in een stimulerende omgeving waar diversiteit centraal staat.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-talen-teacher-photo" src="" alt="Talenklas leerkracht" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-talen-teacher-name">Talenklas team</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/talenklas" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-talen-photo" src="" alt="Talenklas" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sport Details -->
-                    <div class="class-detail" data-class="sport" style="display: none;">
-                        <div class="card-loose" style="padding: 48px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-                                <div>
-                                    <h3 style="font-size: 32px; margin-bottom: 16px;">Sport op school</h3>
-                                    <p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;" data-cms="klassen-sport-text">
-                                        Beweging is belangrijk! In onze sportlessen leren kinderen niet alleen sportieve vaardigheden, maar ook samenwerken, doorzetten en plezier hebben in bewegen. Van klassieke sporten tot vernieuwende bewegingsspelen.
-                                    </p>
-                                    
-                                    <div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
-                                        <div style="display: flex; align-items: center; gap: 16px;">
-                                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">
-                                                <img data-cms="klassen-sport-teacher-photo" src="" alt="Sportleerkracht" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <div>
-                                                <div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>
-                                                <div style="font-size: 18px; font-weight: 700;" data-cms="klassen-sport-teacher-name">Sportteam</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="/nl/sport" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.backgroundColor='#96bb7a'" onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#a8cf8c'">Bezoek Klasblog</a>
-                                </div>
-                                <div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">
-                                    <img data-cms="klassen-sport-photo" src="" alt="Sport op school" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 </div>
             </div>
         </section>
 
         <script>
-        // Sidebar navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.class-nav-link');
-            const classDetails = document.querySelectorAll('.class-detail');
-
-            navLinks.forEach(link => {
+        function renderDynamicKlassen(data) {
+            var navList = document.getElementById('lagerNavList');
+            var detailsContainer = document.getElementById('dynamicKlassenDetails');
+            if (!navList || !detailsContainer || !data) return;
+            
+            // Sort by order
+            var slugs = Object.keys(data).filter(function(s) { return data[s].name; });
+            slugs.sort(function(a, b) {
+                return (parseInt(data[a].order) || 999) - (parseInt(data[b].order) || 999);
+            });
+            
+            // Build sidebar nav
+            var navHtml = '';
+            for (var i = 0; i < slugs.length; i++) {
+                var s = slugs[i];
+                var k = data[s];
+                var label = k.name + (k.teacher ? ' - ' + k.teacher : '');
+                navHtml += '<li><a href="#" class="class-nav-link" data-class="dyn-' + s + '" style="display: block; padding: 10px 16px; border-radius: 12px; text-decoration: none; color: #000; font-size: 15px; transition: all 0.3s; margin-bottom: 4px;">' + label + '</a></li>';
+            }
+            navList.innerHTML = navHtml;
+            
+            // Build detail cards
+            var detHtml = '';
+            for (var i = 0; i < slugs.length; i++) {
+                var s = slugs[i];
+                var k = data[s];
+                var title = k.name + (k.teacher ? ' - ' + k.teacher : '');
+                detHtml += '<div class="class-detail" data-class="dyn-' + s + '" style="display: none;">';
+                detHtml += '<div class="card-loose" style="padding: 48px;">';
+                detHtml += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">';
+                detHtml += '<div>';
+                detHtml += '<h3 style="font-size: 32px; margin-bottom: 16px;">' + title + '</h3>';
+                if (k.text) detHtml += '<p style="font-size: 18px; color: #666; line-height: 1.8; margin-bottom: 24px;">' + k.text + '</p>';
+                if (k.teacher) {
+                    detHtml += '<div style="background: #f9fcf7; padding: 24px; border-radius: 16px; margin-bottom: 24px;">';
+                    detHtml += '<div style="display: flex; align-items: center; gap: 16px;">';
+                    detHtml += '<div style="width: 80px; height: 80px; border-radius: 50%; background: #f5f5f5; overflow: hidden;">';
+                    if (k.tphoto) detHtml += '<img src="' + k.tphoto + '" alt="' + k.teacher + '" style="width: 100%; height: 100%; object-fit: cover;">';
+                    detHtml += '</div>';
+                    detHtml += '<div>';
+                    detHtml += '<div style="font-size: 14px; color: #a8cf8c; font-weight: 600; margin-bottom: 4px;">LEERKRACHT</div>';
+                    detHtml += '<div style="font-size: 18px; font-weight: 700;">' + k.teacher + '</div>';
+                    detHtml += '</div></div></div>';
+                }
+                if (k.blog) {
+                    detHtml += '<a href="' + k.blog + '" style="background: #a8cf8c; color: #000; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform=\'translateY(-2px)\'; this.style.backgroundColor=\'#96bb7a\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.backgroundColor=\'#a8cf8c\'">Bezoek Klasblog</a>';
+                }
+                detHtml += '</div>';
+                detHtml += '<div style="border-radius: 24px; overflow: hidden; height: 400px; background: #f5f5f5;">';
+                if (k.photo) detHtml += '<img src="' + k.photo + '" alt="' + k.name + '" style="width: 100%; height: 100%; object-fit: cover;">';
+                detHtml += '</div>';
+                detHtml += '</div></div></div>';
+            }
+            detailsContainer.innerHTML = detHtml;
+            
+            // Re-bind navigation
+            bindClassNav();
+        }
+        
+        function bindClassNav() {
+            var navLinks = document.querySelectorAll('.class-nav-link');
+            var classDetails = document.querySelectorAll('.class-detail');
+            
+            navLinks.forEach(function(link) {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const targetClass = this.getAttribute('data-class');
+                    var targetClass = this.getAttribute('data-class');
                     
-                    // Update link styles
-                    navLinks.forEach(l => {
+                    document.querySelectorAll('.class-nav-link').forEach(function(l) {
                         l.classList.remove('active');
                         l.style.background = 'transparent';
                     });
                     this.classList.add('active');
                     this.style.background = '#a8cf8c';
                     
-                    // Show/hide class details
-                    classDetails.forEach(detail => {
+                    document.querySelectorAll('.class-detail').forEach(function(detail) {
                         if (detail.getAttribute('data-class') === targetClass) {
                             detail.style.display = 'block';
                             detail.classList.add('active');
@@ -614,32 +347,35 @@
                             detail.classList.remove('active');
                         }
                     });
-
-                    // Smooth scroll to content
-                    document.getElementById('classDetails').scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'nearest' 
-                    });
+                    
+                    document.getElementById('classDetails').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 });
             });
-
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            bindClassNav();
+            
             // Hero card navigation
-            const heroCards = document.querySelectorAll('.hero-nav-card');
-            heroCards.forEach(card => {
+            var heroCards = document.querySelectorAll('.hero-nav-card');
+            heroCards.forEach(function(card) {
                 card.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const targetClass = this.getAttribute('data-target-class');
-                    
-                    // Find and click the corresponding sidebar link
+                    var targetClass = this.getAttribute('data-target-class');
                     setTimeout(function() {
-                        const targetLink = document.querySelector('.class-nav-link[data-class="' + targetClass + '"]');
-                        if (targetLink) {
-                            targetLink.click();
-                        }
+                        var targetLink = document.querySelector('.class-nav-link[data-class="' + targetClass + '"]');
+                        if (targetLink) targetLink.click();
                     }, 100);
                 });
             });
         });
+        
+        document.addEventListener('cms-klassen-ready', function(e) {
+            renderDynamicKlassen(e.detail);
+        });
+        if (window._cmsKlassen) {
+            renderDynamicKlassen(window._cmsKlassen);
+        }
         </script>
 
         <style>
