@@ -220,7 +220,7 @@
             border-radius: 16px;
             width: 90%;
             max-width: 900px;
-            max-height: 80vh;
+            max-height: 90vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -312,7 +312,7 @@
             overflow-y: auto;
             flex: 1 1 0;
             min-height: 0;
-            max-height: calc(80vh - 200px);
+            max-height: calc(90vh - 180px);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 12px;
@@ -1680,12 +1680,17 @@
                 const result = await response.json();
                 
                 if (result.success && result.media.length > 0) {
-                    grid.innerHTML = result.media.map(item => `
+                    const images = result.media.filter(item => item.format !== 'pdf' && !item.filename.endsWith('.pdf'));
+                    if (images.length > 0) {
+                    grid.innerHTML = images.map(item => `
                         <div class="media-picker-item" style="position:relative;">
                             <img src="${item.url}" alt="${item.filename}" onclick="selectMedia('${item.url}')">
                             <button type="button" onclick="event.stopPropagation(); deleteMedia(${item.id})" style="position:absolute;top:4px;right:4px;background:#ff6b6b;color:#fff;border:none;border-radius:50%;width:24px;height:24px;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>
                         </div>
                     `).join('');
+                    } else {
+                        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 24px;">Geen afbeeldingen. Upload eerst via de knop hierboven.</div>';
+                    }
                 } else {
                     grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 24px;">Geen afbeeldingen. Upload eerst via de knop hierboven.</div>';
                 }
