@@ -680,13 +680,6 @@
                 <a href="/cms/media.html" class="nav-item">
                     <span>Media</span>
                 </a>
-                
-                <div style="border-top: 1px solid rgba(255,255,255,0.1); margin: 12px 0; padding-top: 12px;">
-                    <span style="font-size: 11px; text-transform: uppercase; color: rgba(255,255,255,0.4); padding: 0 16px; letter-spacing: 1px;">Snelkoppelingen</span>
-                </div>
-                <a href="#" class="nav-item" onclick="event.preventDefault(); goToRestaurantMenu();" style="font-size: 13px;">
-                    <span>Restaurantmenu</span>
-                </a>
             </nav>
             
             <div class="cms-user">
@@ -783,39 +776,6 @@
         let contentData = {};
         let saveTimers = {};
         
-        // Shortcut: go to restaurant menu document
-        async function goToRestaurantMenu() {
-            // Switch to visie page
-            currentPage = 'visie';
-            document.querySelectorAll('.page-tab').forEach(t => {
-                t.classList.toggle('active', t.dataset.page === 'visie');
-            });
-            document.getElementById('currentPageTitle').textContent = 'Visie';
-            
-            await loadContent('visie');
-            
-            // Find the document that contains "menu" or "restaurant" in its title
-            setTimeout(() => {
-                const docItems = document.querySelectorAll('.document-item');
-                for (const item of docItems) {
-                    const titleInput = item.querySelector('input[id*="doc-"][id$="-title"]');
-                    if (titleInput && (titleInput.value.toLowerCase().includes('menu') || titleInput.value.toLowerCase().includes('restaurant'))) {
-                        item.style.border = '2px solid #a8cf8c';
-                        item.style.boxShadow = '0 0 12px rgba(168, 207, 140, 0.4)';
-                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        // Flash effect
-                        setTimeout(() => {
-                            item.style.border = '1px solid #e0e0e0';
-                            item.style.boxShadow = 'none';
-                        }, 3000);
-                        return;
-                    }
-                }
-                // If not found, scroll to documents section
-                const docSection = document.querySelector('[id*="document"]') || document.querySelector('.document-item');
-                if (docSection) docSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 200);
-        }
         
         // Logout
         function handleLogout() {
