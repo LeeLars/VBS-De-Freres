@@ -389,9 +389,6 @@
                             
                             var hasLink = doc.link && doc.link.trim() !== '';
                             var linkUrl = doc.link || '';
-                            if (linkUrl.includes('res.cloudinary.com') && linkUrl.endsWith('.pdf') && linkUrl.includes('/image/upload/')) {
-                                linkUrl = linkUrl.replace('/image/upload/', '/image/upload/fl_attachment/');
-                            }
                             
                             html += '<div class="card-loose" style="padding: 32px; text-align: center; background: #fff; transition: transform 0.3s;" onmouseover="this.style.transform=\'translateY(-4px)\'" onmouseout="this.style.transform=\'translateY(0)\'">';
                             html += '<div style="width: 64px; height: 64px; background: #e8f5e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">' + docIcon + '</div>';
